@@ -99,7 +99,7 @@
   margin-bottom: 4vh;
 }
 .card img {
-  height: 60%;
+  height: 80%;
   object-fit: scale-down;
 }
 
@@ -125,7 +125,7 @@
     font-size: 3vh;
   }
   .card img {
-    width: 53%;
+    width: 63%;
   }
 }
 @media (max-width: 860px) {
@@ -140,6 +140,9 @@
   }
   .input img {
     width: 60%;
+  }
+  .card h2 {
+    font-size: 2.4vh;
   }
 }
 @media (max-width: 460px) {
@@ -167,7 +170,7 @@
     font-size: 2.7vh;
   }
   .card img {
-    height: 70%;
+    height: 75%;
   }
   .input img {
     width: 60%;

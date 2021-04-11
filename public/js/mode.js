@@ -168,18 +168,22 @@ let load = () => {
 
 let imgs = document.querySelectorAll("img:not(img[data-speed])");
 
-for (let img of imgs) {
-  img.onload = function () {
-    imgsLoaded++;
-  };
-}
-
-let loadinv = setInterval(() => {
-  if (imgsLoaded > Math.ceil(imgs.length / 2)) {
-    load();
-    clearInterval(loadinv);
+if (!imgs.length == 0) {
+  for (let img of imgs) {
+    img.onload = function () {
+      imgsLoaded++;
+    };
   }
-}, 1);
+
+  let loadinv = setInterval(() => {
+    if (imgsLoaded > Math.ceil(imgs.length / 2)) {
+      load();
+      clearInterval(loadinv);
+    }
+  }, 1);
+} else {
+  load();
+}
 
 // FOR INPS
 let inps = document.querySelectorAll("input");
