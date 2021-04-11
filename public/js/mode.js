@@ -44,6 +44,7 @@ btn.addEventListener("click", () => {
 });
 
 // LOADING
+let imgsLoaded = 0;
 var h = 0;
 var g = 9.8 * -1;
 var u = 51;
@@ -165,4 +166,25 @@ let load = () => {
   setTimeout(theTrans, 2);
 };
 
-$(window).on("load", load);
+let imgs = document.querySelectorAll("img:not(img[data-speed])");
+
+for (let img of imgs) {
+  img.onload = function () {
+    imgsLoaded++;
+  };
+}
+
+let loadinv = setInterval(() => {
+  if (imgsLoaded > Math.ceil(imgs.length / 2)) {
+    load();
+    clearInterval(loadinv);
+  }
+}, 1);
+
+// FOR INPS
+let inps = document.querySelectorAll("input");
+if (inps) {
+  for (let inp of inps) {
+    inp.setAttribute("autocomplete", "off");
+  }
+}
