@@ -586,7 +586,7 @@
             let years = document.querySelectorAll(".year");
 
             for (let year of years) {
-              if (sort == year.textContent.slice(0, 4)) {
+              if (sort == year.textContent.trim().slice(0, 4)) {
                 let cardss = document.querySelectorAll(".cards");
                 let headers = document.querySelectorAll(".header");
                 for (let cards of cardss) {
