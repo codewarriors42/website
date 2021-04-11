@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000;
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
-const dbURI = `mongodb+srv://kevin:${process.env.DB_PASSWORD}@cw.ppcfx.mongodb.net/CW?retryWrites=true&w=majority`;
+const dbURI = process.env.DB_URL;
 const Grid = require("gridfs-stream");
 
 // DB CONNECTION
