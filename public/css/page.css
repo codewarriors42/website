@@ -1,0 +1,92 @@
+/* PAGINATION */
+.page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3vh 0;
+}
+.arrows {
+  display: flex;
+  margin-bottom: 3vh;
+}
+.arrows button {
+  background: none;
+  border: none;
+}
+.arrows i {
+  margin: 0 1vw;
+  font-size: 2vh;
+  width: 5.6vh;
+  height: 5.6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px var(--borderWhite) solid;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.arrows i:hover {
+  background: var(--white);
+  color: var(--black);
+}
+.nums {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.nums button {
+  border: none;
+  background: var(--scrolly);
+  padding: 1vh 0.8vw;
+  border-radius: 5px;
+  font-size: 1.8vh;
+  margin: 0 0.5vw;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nums button:hover {
+  background: var(--sBlack);
+}
+.nums .pageActive {
+  background: var(--white);
+  color: var(--black);
+}
+.nums span {
+  height: 100%;
+  font-size: 2vh;
+  transform: translate(0, 70%);
+  letter-spacing: 0.2vw;
+}
+@media (max-width: 1030px) {
+  .nums button {
+    padding: 1.2vh 1.6vw;
+    margin: 0 0.8vw;
+  }
+}
+@media (max-width: 800px) {
+  .nums button {
+    font-size: 1.6vh;
+  }
+  .arrows i {
+    width: 4.6vh;
+    height: 4.6vh;
+    font-size: 1.6vh;
+  }
+}
+@media (max-width: 550px) {
+  .arrows i {
+    width: 4vh;
+    height: 4vh;
+    font-size: 1.4vh;
+    margin: 0 3vw;
+  }
+  .nums button {
+    font-size: 1.5vh;
+    padding: 1vh 3vw;
+    margin: 0 1.8vw;
+  }
+}

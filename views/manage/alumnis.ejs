@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CW - Admin - Alumnis</title>
+</head>
+<body>
+    <h1>Alumnis</h1>
+    <% for (let alumni of alumnis) { %>
+        <hr>
+        <h3><%= alumni.name %></h3>
+        <% if (user.isSupreme) { %>
+            <a href="/admin/delete-alumni/<%= alumni._id %>">Delete</a>
+            <a href="/admin/edit-alumni/<%= alumni._id %>">Edit</a>
+        <% } %>
+        <hr>
+    <% } %>
+    <hr>
+    <% if (user.isSupreme) { %>
+        <a href="/admin/add-alumni">Add Alumni</a>
+    <% } %>
+</body>
+</html>
