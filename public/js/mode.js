@@ -182,7 +182,7 @@ if (!imgs.length == 0) {
     }
   }, 1);
 } else {
-  load();
+  $(window).on("load", load);
 }
 
 // FOR INPS

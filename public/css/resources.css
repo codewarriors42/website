@@ -31,14 +31,14 @@
 }
 .input {
   display: flex;
-  width: 20vw;
+  width: 22vw;
   margin-top: 6vh;
   border: 1px var(--borderWhite) solid;
   border-radius: 5px;
   position: relative;
 }
 .input img {
-  width: 100%;
+  width: 80%;
 }
 #searchBar {
   background: transparent;
@@ -127,6 +127,9 @@
   .card img {
     width: 63%;
   }
+  .input img {
+    width: 40%;
+  }
 }
 @media (max-width: 860px) {
   .heroContent {
@@ -163,8 +166,9 @@
     padding: 1.8vh 5vw;
   }
   .card {
-    width: 80%;
+    width: 76%;
     margin-top: 4.5vh;
+    padding: 6.2vh 0;
   }
   .card h2 {
     font-size: 2.7vh;
@@ -173,6 +177,6 @@
     height: 75%;
   }
   .input img {
-    width: 60%;
+    width: 40%;
   }
 }
