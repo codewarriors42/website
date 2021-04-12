@@ -16,9 +16,6 @@ const uuid = require("uuid");
 const sharp = require("sharp");
 const fs = require("fs");
 
-// SETTINGS
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
 router.use(methodOverride("_method"));
 
 // GRIDFS SETTINGS

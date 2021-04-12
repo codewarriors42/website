@@ -12,9 +12,6 @@ const sharp = require("sharp");
 const fs = require("fs");
 const Comp = require("../../models/comp");
 
-// SETTINGS
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
 router.use(methodOverride("_method"));
 
 // GRIDFS SETTINGS

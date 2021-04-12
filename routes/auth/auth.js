@@ -5,10 +5,6 @@ const User = require("../../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// SETTINGS
-router.use(express.json());
-router.use(express.urlencoded({ extended: false }));
-
 // ROUTES
 // Login
 router.get("/login", (req, res) => {
