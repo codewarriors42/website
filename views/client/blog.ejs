@@ -18,25 +18,15 @@
       type="font/ttf"
       crossorigin
     />
-    <link
-      rel="preload"
-      href="../fonts/AirbnbCerealLight.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="../fonts/AirbnbCerealMedium.ttf"
-      as="font"
-      type="font/ttf"
-      crossorigin
-    />
     <link rel="stylesheet" href="../css/all.css" />
     <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/blog.css" />
     <link rel="stylesheet" href="../css/page.css" />
-    <link rel="stylesheet" href="../css/light.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    
   </head>
   <body class="dark loading">
       <div class="loader">
@@ -146,12 +136,24 @@
     <main>
       <form class="page" action="/blogs">
         <div class="arrows">
-          <button name="page" type="submit" value="prev">
-            <i class="fas fa-arrow-left"></i>
-          </button>
-          <button name="page" type="submit" value="next">
-            <i class="fas fa-arrow-right"></i>
-          </button>
+          <% if (activePage == 1) { %>
+            <button name="page" type="submit" value="<%= activePage %>">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+          <% } else { %>
+            <button name="page" type="submit" value="<%= activePage - 1 %>">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+          <% } %>
+          <% if (activePage + 1 > pages) { %>
+            <button name="page" type="submit" value="<%= activePage %>">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          <% } else { %>
+            <button name="page" type="submit" value="<%= activePage + 1 %>">
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          <% } %>
         </div>
         <div class="nums">
           <% for (let i = 1; i <= pages; i++) { %> <% if (i == activePage) { %>

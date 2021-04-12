@@ -534,3 +534,9 @@
     margin: 0 1.8vw;
   }
 }
+.light h3,
+.light p,
+.light .btn,
+.light {
+  font-family: reg;
+}

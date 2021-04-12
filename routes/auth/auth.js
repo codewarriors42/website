@@ -25,7 +25,9 @@ router.post("/login", async (req, res) => {
       id: userFound._id,
     };
     if (await bcrypt.compare(body.password, userFound.password)) {
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "24h",
+      });
       res
         .cookie("auth-token", accessToken, { maxAge: 2592000000 })
         .redirect("/admin");

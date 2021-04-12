@@ -410,3 +410,9 @@
     font-size: 5vh;
   }
 }
+.light h3,
+.light p,
+.light .btn,
+.light {
+  font-family: reg;
+}

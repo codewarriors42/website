@@ -68,21 +68,9 @@ router.get("/archives/:category", async (req, res) => {
   if (req.query.page) {
     if (parseInt(req.query.page)) {
       archivePage = parseInt(req.query.page);
-    } else {
-      if (req.query.page == "prev") {
-        if (archivePage == 1) {
-          console.log("no prev");
-        } else {
-          archivePage--;
-        }
-      } else {
-        if (archivePage + 1 > pages) {
-          console.log("no next");
-        } else {
-          archivePage++;
-        }
-      }
     }
+  } else {
+    archivePage = 1;
   }
 
   let comps = allComps.skip(2 * archivePage - 2).limit(2);
@@ -140,19 +128,9 @@ router.get("/blogs", async (req, res) => {
   if (req.query.page) {
     if (parseInt(req.query.page)) {
       blogPage = parseInt(req.query.page);
-    } else if (req.query.page == "prev") {
-      if (blogPage == 1) {
-        console.log("no prev");
-      } else {
-        blogPage -= 1;
-      }
-    } else {
-      if (blogPage + 1 > pages) {
-        console.log("no next");
-      } else {
-        blogPage += 1;
-      }
     }
+  } else {
+    blogPage = 1;
   }
 
   blogs = await Blog.find()

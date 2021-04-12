@@ -178,11 +178,17 @@ if (!imgs.length == 0) {
   let loadinv = setInterval(() => {
     if (imgsLoaded > Math.ceil(imgs.length / 2)) {
       load();
+      setTimeout(() => {
+        document.querySelector(".loaded").remove();
+      }, 1000);
       clearInterval(loadinv);
     }
   }, 1);
 } else {
   $(window).on("load", load);
+  setTimeout(() => {
+    document.querySelector(".loaded").remove();
+  }, 1000);
 }
 
 // FOR INPS
@@ -192,3 +198,26 @@ if (inps) {
     inp.setAttribute("autocomplete", "off");
   }
 }
+
+// HOVER
+const ENABLE_HOVER_DELAY = 500;
+let timer;
+window.addEventListener(
+  "scroll",
+  function () {
+    const bodyClassList = document.body.classList;
+    // clear previous timeout function
+    clearTimeout(timer);
+
+    if (!bodyClassList.contains("disable-hover")) {
+      // add the disable-hover class to the body element
+      bodyClassList.add("disable-hover");
+    }
+
+    timer = setTimeout(function () {
+      // remove the disable-hover class after a timeout of 500 millis
+      bodyClassList.remove("disable-hover");
+    }, ENABLE_HOVER_DELAY);
+  },
+  false
+);

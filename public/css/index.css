@@ -573,3 +573,9 @@
     height: 170%;
   }
 }
+.light h3,
+.light p,
+.light .btn,
+.light {
+  font-family: reg;
+}
