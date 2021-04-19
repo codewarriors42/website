@@ -4,6 +4,7 @@ const cursor = document.getElementById("cursor");
 const textArray = [
   "We are the warriors that built this town",
   "soBig wasn't so big this year",
+  "Once a warrior, always a warrior.",
   "We build cool stuff and pwn at events",
 ];
 const typingDelay = 60;
@@ -59,7 +60,6 @@ let charIndex2 = 0;
 const textArray2 = [
   "The code killed even the experts",
   "soBig wasn't so big this year",
-  "Once a warrior, always a warrior.",
   "We build cool stuff and pwn at events",
 ];
 
