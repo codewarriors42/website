@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Home</title>
+    <link
+      rel="preload"
+      href="../fonts/Jokerman-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="../fonts/AirbnbCerealBook.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link rel="stylesheet" href="../css/all.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/blog.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    
+  </head>
+  <body class="dark loading">
+    <div class="loader">
+      <svg>
+        <rect
+          x="135"
+          y="-30"
+          width="30"
+          height="30"
+          rx="0"
+          transform="translate(0 -0)"
+          id="ball"
+          fill="var(--white)"
+        />
+        <path
+          d="M 0 0 C 150 0, 150 0, 300 0"
+          id="tramp"
+          style="stroke: var(--white); stroke-width: 2"
+          fill="none"
+          style="transform-origin: center"
+        />
+      </svg>
+    </div>
+    <main>
+      <nav>
+            <div class="navLeft">
+                <a class="navBtn" href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect">Join Discord</a>
+                <a class="navLink" href="/blogs">Blog</a>
+                <a class="navLink" href="/archives/Creative Work">Archive</a>
+                <a class="navLink" href="/resources">Resources</a>
+                <div class="ham">
+                    <div class="hamLine"></div>
+                </div>
+            </div>
+            <a href="/" class="navMid">CW</a>
+            <div class="navRight">
+                <a class="navLink" href="/">Home</a>
+                <a class="navLink" href="/members">Members</a>
+                <a class="navLink" href="/contacts">Contact</a>
+                <a class="navLink" href="/alumni">Alumni</a>
+                <i class="fas fa-lightbulb"></i>
+            </div>
+        </nav>
+        
+        <div class="side">
+            <a style="--navD: 0.4s" class="navBtn" href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect">Join Discord</a>
+            <a style="--navD: 0.44s" class="navLink" href="/">Home</a>
+            <a style="--navD: 0.48s" class="navLink" href="/blogs">Blog</a>
+            <a style="--navD: 0.52s" class="navLink" href="/archives/Creative Work">Archive</a>
+            <a style="--navD: 0.56s" class="navLink" href="/resources">Resources</a>
+            <a style="--navD: 0.6s" class="navLink" href="/members">Members</a>
+            <a style="--navD: 0.64s" class="navLink" href="/contacts">Contact</a>
+            <a style="--navD: 0.68s" class="navLink" href="/alumni">Alumni</a>
+        </div> 
+    </main>
+
+    <section class="container">
+      <div class="input-container">
+        <div class="input">
+          <input id="searchBar" type="text" placeholder="Search" />
+          <button>
+              <img class="darkR" src="../assets/search.svg" alt="" /><img
+                class="lightR"
+                src="../assets/search2.svg"
+                alt=""
+              />
+            </button>
+        </div>
+      </div>
+
+      <div class="items">
+        <div class="item" id="item1">
+          <h1><%= blog.title %></h1>
+          <h3>Posted on <%= blog.updatedAt.getDate() %>/<%= blog.updatedAt.getMonth() %>/<%= blog.updatedAt.getFullYear() %></h3> <span>By <%= blog.author %></span></h3>
+          <img class="images" src="/img/<%= blog.image %>" />
+          <p><%= blog.content %></p>
+        </div>
+      </div>
+
+      <div class="titles">
+        <% for (let i = 0; i < Object.keys(titles).length; i++) { %>
+        <div class="unit">
+          <h1><%= Object.keys(titles)[i] %></h1>
+          <a href="/blog/<%= Object.values(titles)[i] %>">Go to Blog</a>
+        </div>
+        <% } %>
+    </section>
+
+    <footer>
+      <p>
+        <span id="titleF"></span
+        ><span id="cursorF" class="cursor footcur"></span>
+      </p>
+      <div class="footSocial">
+        <a href="#">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="#">
+          <i class="fab fa-behance"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="../js/mode.js"></script>
+    <script src="../js/blog.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CW - Admin - Edit Archive</title>
+  </head>
+  <body>
+    <h1>Edit Archive</h1>
+    <form
+      action="/admin/archives/edit/<%= archive._id %>?_method=PUT"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      <input type="text" name="title" required value="<%= archive.title %>" />
+      <input type="text" name="event" required value="<%= archive.event %>" />
+      <input type="number" name="year" required value="<%= archive.year %>" />
+
+      <select name="competition">
+        <option value="<%= archive.competition %>">
+          <%= archive.competition %>
+        </option>
+        <option value="">None</option>
+        <% for (let comp of comps) { %>
+        <option value="<%= comp.name %>"><%= comp.name %></option>
+        <% } %>
+      </select>
+
+      <select name="category">
+        <option value="<%= archive.category %>"><%= archive.category %></option>
+        <option value="Creative Work">Creative Work</option>
+        <option value="Creative Prompts">Creative Prompts</option>
+        <option value="Quizzes">Quizzes</option>
+        <option value="Crosswords">Crosswords</option>
+        <option value="Techathlon">Techathlon</option>
+      </select>
+
+      <input
+        type="text"
+        name="contributors"
+        value="<%= archive.contributors %>"
+        required
+      />
+
+      <input type="file" name="img" accept="image/*" />
+
+      <div class="socials">
+        <% for (let i = 0; i < archive.links.length; i++) { %>
+        <div class="social">
+          <input
+            value="<%= archive.links[i].platform %>"
+            type="text"
+            name="linkPlatform"
+          />
+          <input
+            value="<%= archive.links[i].URL %>"
+            type="text"
+            name="linkURL"
+          />
+        </div>
+        <% } %>
+      </div>
+
+      <h3 style="cursor: pointer" id="addSocial">Add Link</h3>
+      <h3 style="cursor: pointer" id="remSocial">Remove Link</h3>
+
+      <button type="submit">Submit</button>
+    </form>
+    <img width="400px" src="/img/<%= archive.image %>" alt="some" />
+
+    <script>
+      let btn = document.querySelector("#addSocial");
+      let socials = document.querySelector(".socials");
+
+      btn.addEventListener("click", () => {
+        let social = document.createElement("DIV");
+        social.classList.add("social");
+
+        let sPlatform = document.createElement("INPUT");
+        sPlatform.setAttribute("placeholder", "Link Platform");
+        sPlatform.setAttribute("type", "text");
+        sPlatform.setAttribute("name", "linkPlatform");
+
+        let sURL = document.createElement("INPUT");
+        sURL.setAttribute("placeholder", "Link URL");
+        sURL.setAttribute("type", "text");
+        sURL.setAttribute("name", "linkURL");
+
+        social.appendChild(sPlatform);
+        social.appendChild(sURL);
+
+        socials.appendChild(social);
+      });
+
+      let rem = document.querySelector("#remSocial");
+      rem.addEventListener("click", () => {
+        document.querySelector(".social:last-of-type").remove();
+      });
+    </script>
+  </body>
+</html>
