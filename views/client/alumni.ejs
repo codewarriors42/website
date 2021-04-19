@@ -24,10 +24,22 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link rel="icon" href="../assets/cw-logo.png" />
   </head>
 
-  <body class="dark loading">
-    <div class="loader">
+  <body class="dark">
+    <script>
+      let theme = localStorage.getItem("theme");
+
+      if (theme == "light") {
+        document.body.classList.add("light");
+        theme = localStorage.setItem("theme", "light");
+      } else {
+        document.body.classList.remove("light");
+        theme = localStorage.setItem("theme", "dark");
+      }
+    </script>
+    <!-- <div class="loader">
       <svg>
         <rect
           x="135"
@@ -47,14 +59,12 @@
           style="transform-origin: center"
         />
       </svg>
-    </div>
+    </div> -->
 
     <main>
       <nav>
         <div class="navLeft">
-          <a
-            class="navBtn"
-            href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+          <a class="navBtn" target="_blank" href="https://discord.gg/aztyaceuY2"
             >Join Discord</a
           >
           <a class="navLink" href="/blogs">Blog</a>
@@ -78,7 +88,8 @@
         <a
           style="--navD: 0.4s"
           class="navBtn"
-          href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+          href="https://discord.gg/aztyaceuY2"
+          target="_blank"
           >Join Discord</a
         >
         <a style="--navD: 0.44s" class="navLink" href="/">Home</a>
@@ -94,11 +105,10 @@
 
       <section class="hero">
         <div class="heroContent">
-          <h1>The Team</h1>
+          <h1>The Alumni</h1>
           <h3>
-            We're the Code Warriors, the computer club of DPS Vasant Kunj. We're
-            a team of technology addicts, and our skills range from gaming to
-            designing
+            These are the warriors who left the arena but never dropped their
+            weapons.
           </h3>
           <div class="transparent">
             <div data-depth="0.2" class="dShapes">

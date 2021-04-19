@@ -48,7 +48,7 @@
 }
 .input {
   display: flex;
-  width: 20vw;
+  width: 80%;
   border: 1px var(--borderWhite) solid;
   border-radius: 5px;
   position: relative;
@@ -257,12 +257,6 @@
   #searchBar {
     padding: 1.6vh 2.6vw;
   }
-  .sort {
-    width: 100%;
-  }
-  .input img {
-    width: 100%;
-  }
   .card {
     width: 100%;
     padding: 4vh 7vw;
@@ -276,17 +270,8 @@
   }
 }
 @media (max-height: 1360px) {
-  .input {
-    width: 24vw;
-  }
   #searchBar {
     padding: 1.8vh 2vw;
-  }
-  .input img {
-    width: 80%;
-  }
-  .sort {
-    width: 70%;
   }
   .card {
     width: 47%;

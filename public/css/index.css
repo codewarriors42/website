@@ -223,22 +223,6 @@
   margin-top: 4vh;
   width: 18%;
 }
-
-.light .soBig {
-  background: rgba(37, 37, 37, 0.9);
-}
-.light .soBig h1,
-.light .soBig p,
-.light .soBig a {
-  color: var(--black);
-}
-.light #soBtn {
-  border: 1px solid #fefdf8;
-}
-.light #soBtn:hover {
-  background: #fefdf8;
-  color: #252525;
-}
 /* FAQ */
 .faq {
   margin-top: 10vh;

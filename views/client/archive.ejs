@@ -25,10 +25,22 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link rel="icon" href="../assets/cw-logo.png" />
     
   </head>
-  <body class="dark loading">
-    <div class="loader">
+  <body class="dark">
+    <script>
+      let theme = localStorage.getItem("theme");
+
+      if (theme == "light") {
+        document.body.classList.add("light");
+        theme = localStorage.setItem("theme", "light");
+      } else {
+        document.body.classList.remove("light");
+        theme = localStorage.setItem("theme", "dark");
+      }
+    </script>
+    <!-- <div class="loader">
       <svg>
         <rect
           x="135"
@@ -48,14 +60,14 @@
           style="transform-origin: center"
         />
       </svg>
-    </div>
+    </div> -->
 
     <main>
       <nav>
         <div class="navLeft">
           <a
             class="navBtn"
-            href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+            href="https://discord.gg/aztyaceuY2"
             >Join Discord</a
           >
           <a class="navLink" href="/blogs">Blog</a>
@@ -79,7 +91,8 @@
         <a
           style="--navD: 0.4s"
           class="navBtn"
-          href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+          href="https://discord.gg/aztyaceuY2"
+          target="_blank"
           >Join Discord</a
         >
         <a style="--navD: 0.44s" class="navLink" href="/">Home</a>
@@ -114,11 +127,6 @@
           <% } else { %>
             <a href="/archives/Crosswords" class="tab activeTab">Crosswords</a>
           <% } %>
-          <% if (category !== "Techathlon") { %>
-            <a href="/archives/Techathlon" class="tab">Techathlon</a>
-          <% } else { %>
-            <a href="/archives/Techathlon" class="tab activeTab">Techathlon</a>
-          <% } %>
         </div>
 
         <% for (let i = 0; i < Object.keys(obj).length; i++) { %>
@@ -145,13 +153,13 @@
             </div>
 
             <div class="sort">
-              <div class="by">Sort by Event</div>
+              <div class="by">Sort by Category</div>
               <div class="buttn">
                 <i class="fas fa-sort-down"></i>
               </div>
               <div class="options">
-                <% for (let comp of comps) { %>
-                  <div class="option"><%= comp %></div>
+                <% for (let event of events) { %>
+                  <div class="option"><%= event %></div>
                 <% } %>
                 <div class="option allAdd">All</div>
               </div>
@@ -182,7 +190,7 @@
             </div>
             <div class="bottom">
               <h2 class="cardTitle"><%= archive.title %></h2>
-              <h3 class="cardSubtitle"><%= archive.event %></h3>
+              <h3 class="cardSubtitle"><%= archive.competition %></h3>
             </div>
             <div class="bottom bottom2">
               <h2 class="cardTitle">Contributors:</h2>
@@ -195,43 +203,6 @@
           </div>
         </div>
         <% } %>
-
-      <form class="page" action="/archives/<%= category %>">
-        <div class="arrows">
-          <% if (activePage == 1) { %>
-            <button name="page" type="submit" value="<%= activePage %>">
-              <i class="fas fa-arrow-left"></i>
-            </button>
-          <% } else { %>
-            <button name="page" type="submit" value="<%= activePage - 1 %>">
-              <i class="fas fa-arrow-left"></i>
-            </button>
-          <% } %>
-          <% if (activePage + 1 > pages) { %>
-            <button name="page" type="submit" value="<%= activePage %>">
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          <% } else { %>
-            <button name="page" type="submit" value="<%= activePage + 1 %>">
-              <i class="fas fa-arrow-right"></i>
-            </button>
-          <% } %>
-        </div>
-        <div class="nums">
-          <% for (let i = 1; i <= pages; i++) { %> <% if (i == activePage) { %>
-          <button
-            name="page act"
-            type="submit"
-            class="pageActive"
-            value="<%= i %>"
-          >
-            <%= i %>
-          </button>
-          <% } else { %>
-          <button name="page" type="submit" value="<%= i %>"><%= i %></button>
-          <% } %> <% } %>
-        </div>
-      </form>
     </main>
 
     <footer>

@@ -12,9 +12,9 @@ const Alumni = require("../../models/alumni");
 const Archive = require("../../models/archive");
 const Blog = require("../../models/blog");
 const Faq = require("../../models/faq");
+const Events = require("../../models/event");
 
 let blogPage = 1;
-let archivePage = 1;
 
 // FUNCTIONS
 function limit(c) {
@@ -56,38 +56,34 @@ router.get("/archives/:category", async (req, res) => {
     year: -1,
   });
 
-  let allComps = [];
-  for (let archive of allArchives) {
-    if (!allComps.includes(archive.competition)) {
-      allComps.push(archive.competition);
+  let allEvents = [];
+  let prEvents = [];
+  let getEvents = await Events.find();
+  for (let event of getEvents) {
+    prEvents.push(event.name);
+  }
+
+  for (let event of prEvents) {
+    for (let archive of allArchives) {
+      if (archive.event == event) {
+        if (!allEvents.includes(event)) allEvents.push(event);
+      }
     }
   }
 
-  let pages = Math.ceil(allComps.length / 2);
-
-  if (req.query.page) {
-    if (parseInt(req.query.page)) {
-      archivePage = parseInt(req.query.page);
-    }
-  } else {
-    archivePage = 1;
-  }
-
-  let comps = allComps.skip(2 * archivePage - 2).limit(2);
+  let events = allEvents;
   let obj = {};
-  for (let comp of comps) {
+  for (let event of events) {
     let archivesForComp = await Archive.find({
-      competition: comp,
+      event: event,
       category: req.params.category,
-    });
-    obj[comp] = archivesForComp;
+    }).sort({ year: -1 });
+    obj[event.toString()] = archivesForComp;
   }
 
   res.render("client/archive", {
-    pages: pages,
-    activePage: archivePage,
     obj: obj,
-    comps: comps,
+    events: events,
     category: req.params.category,
   });
 });
@@ -117,6 +113,10 @@ router.get("/blog/:id", async (req, res) => {
 
 router.get("/blogs", async (req, res) => {
   let allBlogs = await Blog.find();
+  let noBlog = false;
+  if (allBlogs.length == 0) {
+    noBlog = true;
+  }
   let blogs;
   let titles = {};
   for (let blog of allBlogs) {
@@ -151,6 +151,7 @@ router.get("/blogs", async (req, res) => {
     pages: pages,
     activePage: blogPage,
     years: years,
+    noBlog: noBlog,
   });
 });
 

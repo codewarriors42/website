@@ -16,17 +16,16 @@
       <br />
       <input
         type="text"
-        name="event"
+        name="competition"
         required
-        placeholder="Event (eg. Web Dev, etc.)"
+        placeholder="Competition"
       />
       <br />
       <input type="number" name="year" required placeholder="Year" />
       <br />
-      <select name="competition">
-        <option value="">None</option>
-        <% for (let comp of comps) { %>
-        <option value="<%= comp.name %>"><%= comp.name %></option>
+      <select name="event">
+        <% for (let event of events) { %>
+        <option value="<%= event.name %>"><%= event.name %></option>
         <% } %>
       </select>
       <br />
@@ -35,7 +34,6 @@
         <option value="Creative Prompts">Creative Prompts</option>
         <option value="Quizzes">Quizzes</option>
         <option value="Crosswords">Crosswords</option>
-        <option value="Techathlon">Techathlon</option>
       </select>
       <br />
       <input

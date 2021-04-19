@@ -25,9 +25,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
+    <link rel="icon" href="../assets/cw-logo.png" />
   </head>
-  <body class="dark loading">
-    <div class="loader">
+  <body class="dark">
+    <script>
+      let theme = localStorage.getItem("theme");
+
+      if (theme == "light") {
+        document.body.classList.add("light");
+        theme = localStorage.setItem("theme", "light");
+      } else {
+        document.body.classList.remove("light");
+        theme = localStorage.setItem("theme", "dark");
+      }
+    </script>
+    <!-- <div class="loader">
       <svg>
         <rect
           x="135"
@@ -47,13 +59,11 @@
           style="transform-origin: center"
         />
       </svg>
-    </div>
+    </div> -->
     <main>
       <nav>
         <div class="navLeft">
-          <a
-            class="navBtn"
-            href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+          <a class="navBtn" target="_blank" href="https://discord.gg/aztyaceuY2"
             >Join Discord</a
           >
           <a class="navLink" href="/blogs">Blog</a>
@@ -77,7 +87,8 @@
         <a
           style="--navD: 0.4s"
           class="navBtn"
-          href="https://discord.com/invite/jS6A7UZ3?utm_source=Discord%20Widget&utm_medium=Connect"
+          href="https://discord.gg/aztyaceuY2"
+          target="_blank"
           >Join Discord</a
         >
         <a style="--navD: 0.44s" class="navLink active" href="/">Home</a>
@@ -101,9 +112,9 @@
           <h3 class="upAOSin">
             We're the Code Warriors, the computer club of DPS Vasant Kunj. We're
             a team of technology addicts, and our skills range from gaming to
-            designing
+            designing.
           </h3>
-          <a class="btn upAOSin upAOSinD" href="#">Learn More</a>
+          <a class="btn upAOSin upAOSinD" href="#toBig">Learn More</a>
           <div class="transparent">
             <div data-depth="0.2" class="dShapes">
               <div class="l1">
@@ -483,7 +494,7 @@
       </div>
 
       <section class="big">
-        <div class="write">
+        <div id="toBig" class="write">
           <div class="writeLeft">
             <h1>How it began</h1>
             <img class="tabImg" src="../assets/sample.jpg" alt="" />
@@ -604,8 +615,13 @@
         </div>
         <div class="write">
           <div class="writeRight" id="rr">
-            <img id="diss" class="mainImg" src="../assets/sample.jpg" alt="" />
-            <img class="tabImg" src="../assets/sample.jpg" alt="" />
+            <img
+              id="diss"
+              class="mainImg"
+              src="../assets/sample2.jpeg"
+              alt=""
+            />
+            <img class="tabImg" src="../assets/sample2.jpeg" alt="" />
             <div
               style="left: -10%; transform: rotate(180deg)"
               class="transparent"
@@ -718,7 +734,7 @@
               are N-crypt It, Map Builder, Canon, Graphics, and Digital
               Messenger, among others. In their twenty glorious years of
               existence, the Code Warriors have won more than 950 individual
-              awards, and more than 50 overall trophies
+              awards, and more than 50 overall trophies.
             </p>
           </div>
         </div>
@@ -726,17 +742,20 @@
           <div class="writeLeft">
             <h1>Join our Discord<br />Server</h1>
             <p>
-              We're the Code Warriors, the computer club of DPS Vasant Kunj.
-              We're a team of technology addicts, and our skills range from
-              gaming to designing
+              Join our discord server to get notified about upcoming events. We
+              also help and assist dipsites interested in the fields of
+              expertise covered by our club.
             </p>
-            <a class="btn" href="#">Join Server</a>
+            <a class="btn" target="_blank" href="https://discord.gg/dtbn2cbgea"
+              >Join Server</a
+            >
           </div>
           <div class="writeRight">
             <div class="dD">
               <iframe
-                class="mainImg"
                 src="https://discord.com/widget?id=706096517244518460&theme=dark"
+                width="350"
+                height="500"
                 allowtransparency="true"
                 frameborder="0"
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
@@ -744,8 +763,9 @@
             </div>
             <div class="lD">
               <iframe
-                class="mainImg"
                 src="https://discord.com/widget?id=706096517244518460&theme=light"
+                width="350"
+                height="500"
                 allowtransparency="true"
                 frameborder="0"
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
@@ -869,7 +889,7 @@
           8 diverse events, including hackathon, crossword and gaming among
           others. The overall was bagged by Amity Sector 46.
         </p>
-        <a class="btn" id="soBtn" href="#">Learn More</a>
+        <a class="btn" id="soBtn" href="/blogs">Learn More</a>
       </main>
     </section>
 
@@ -878,13 +898,13 @@
         <div style="pointer-events: all" class="write">
           <div class="writeLeft">
             <h1>The Team</h1>
-            <img class="mainImg tabImg" src="../assets/sample.jpg" alt="" />
+            <img class="mainImg tabImg" src="../assets/sample3.png" alt="" />
             <p>
               Our team consists of highly skilled tech enthusiasts who dominate
               their field of expertise and have been consistently bagging
-              podiums in prestigious events across the years
+              podiums in prestigious events across the years.
             </p>
-            <a class="btn" href="#">Members</a>
+            <a class="btn" href="/members">Members</a>
           </div>
           <div class="writeRight">
             <img id="diss" class="mainImg" src="../assets/sample.jpg" alt="" />

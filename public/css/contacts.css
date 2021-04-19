@@ -47,10 +47,8 @@
 
 .container-wrap {
   /* background-color: pink; */
-  width: 55%;
   display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
   margin-top: 3vh;
   text-align: center;
@@ -61,12 +59,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 0.15vh solid var(--borderWhite);
+  border: 1.4px solid var(--borderWhite);
   padding: 2.5vw 4.5vw;
-  width: 43%;
+  width: 50%;
   margin-bottom: 7vh;
   border-radius: 0.5vh;
-  height: 35vh;
 }
 
 .card:nth-of-type(odd) {
@@ -78,11 +75,11 @@
 }
 
 .card h1 {
-  font-size: 3.5vh;
+  font-size: 2.6vh;
 }
 
 .card p {
-  font-size: 2.3vh;
+  font-size: 2vh;
   margin-bottom: 5.9vh;
   margin-top: 3vh;
 }
@@ -138,6 +135,7 @@ footer {
   .container-wrap {
     width: 85%;
     justify-content: space-around;
+    flex-wrap: wrap;
   }
   .card {
     /* width: 70%; */
@@ -163,6 +161,9 @@ footer {
   .hero {
     margin-bottom: 0;
   }
+  .mailBtn {
+    padding: 1.4vh 5vw;
+  }
 }
 
 @media (max-width: 750px) {
@@ -178,11 +179,17 @@ footer {
   .card p {
     margin-bottom: 5vh;
   }
+  .mailBtn {
+    padding: 1.4vh 7vw;
+  }
 }
 
 @media (max-width: 400px) {
   .container-wrap {
     width: 70%;
+  }
+  .mailBtn {
+    padding: 1.4vh 8vw;
   }
 }
 .light h3,

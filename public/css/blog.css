@@ -240,6 +240,9 @@ span.year {
   .titles {
     padding: 0 10%;
   }
+  .item img {
+    height: 45vh;
+  }
 }
 @media (max-width: 500px) {
   .container {
@@ -275,6 +278,9 @@ span.year {
   }
   .buttn {
     padding: 1.8vh;
+  }
+  .item img {
+    height: 30vh;
   }
 }
 .light h3,

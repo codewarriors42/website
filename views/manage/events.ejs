@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CW - Admin - FAQs</title>
+    <title>CW - Admin - Events</title>
   </head>
   <body>
-    <h1>FAQ</h1>
-    <% for (let faq of faqs) { %>
-    <h3><%= faq.question %></h3>
+    <h1>Events</h1>
+    <p>This is for grouping archives</p>
+    <% for (let event of events) { %>
+    <h3><%= event.name %></h3>
     <% if (user.isSupreme) { %>
-    <a href="/admin/edit-faq/<%= faq._id %>">Edit</a>
-    <a href="/admin/delete-faq/<%= faq._id %>">Delete</a>
+    <a href="/admin/edit-event/<%= event._id %>">Edit</a>
+    <a href="/admin/delete-event/<%= event._id %>">Delete</a>
     <% } %> <% } %>
     <hr />
     <% if (user.isSupreme) { %>
-    <a href="/admin/add-faq">Add a new faq</a>
+    <a href="/admin/add-event">Add a new Event</a>
     <% } %>
   </body>
 </html>

@@ -164,6 +164,9 @@ a {
   background: var(--white);
   color: var(--black);
 }
+.btn:active {
+  transform: scale(0.9);
+}
 
 /* Head anim ------------------------------- */
 @keyframes shapes {
@@ -342,6 +345,9 @@ nav a {
 .navBtn:hover {
   color: var(--black);
   background: var(--white);
+}
+.navBtn:active {
+  transform: scale(0.9);
 }
 nav i {
   font-size: 2.6vh;

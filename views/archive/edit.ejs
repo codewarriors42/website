@@ -13,16 +13,18 @@
       method="POST"
     >
       <input type="text" name="title" required value="<%= archive.title %>" />
-      <input type="text" name="event" required value="<%= archive.event %>" />
+      <input
+        type="text"
+        name="competition"
+        required
+        value="<%= archive.competition %>"
+      />
       <input type="number" name="year" required value="<%= archive.year %>" />
 
-      <select name="competition">
-        <option value="<%= archive.competition %>">
-          <%= archive.competition %>
-        </option>
-        <option value="">None</option>
-        <% for (let comp of comps) { %>
-        <option value="<%= comp.name %>"><%= comp.name %></option>
+      <select name="event">
+        <option value="<%= archive.event %>"><%= archive.event %></option>
+        <% for (let event of events) { %>
+        <option value="<%= event.name %>"><%= event.name %></option>
         <% } %>
       </select>
 
@@ -32,7 +34,6 @@
         <option value="Creative Prompts">Creative Prompts</option>
         <option value="Quizzes">Quizzes</option>
         <option value="Crosswords">Crosswords</option>
-        <option value="Techathlon">Techathlon</option>
       </select>
 
       <input

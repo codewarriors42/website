@@ -161,6 +161,13 @@ for (let option of options) {
 // See all
 let sas = document.querySelectorAll(".see h4");
 
+// CHECKS
+for (let sa of sas) {
+  if (sa.parentElement.parentElement.children.length == 2) {
+    sa.parentElement.style.display = "none";
+  }
+}
+
 for (let sa of sas) {
   sa.addEventListener("click", () => {
     if (sa.textContent == "See Less") {

@@ -3,7 +3,6 @@ const cursor = document.getElementById("cursor");
 
 const textArray = [
   "We are the warriors that built this town",
-  "President Vedanta is now president.",
   "soBig wasn't so big this year",
   "We build cool stuff and pwn at events",
 ];
@@ -59,8 +58,8 @@ let charIndex2 = 0;
 
 const textArray2 = [
   "The code killed even the experts",
-  "President Vedanta is now president Vedanta",
   "soBig wasn't so big this year",
+  "Once a warrior, always a warrior.",
   "We build cool stuff and pwn at events",
 ];
 

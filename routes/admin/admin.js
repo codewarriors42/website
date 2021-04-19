@@ -6,14 +6,15 @@ const Member = require("../../models/member");
 const Alumni = require("../../models/alumni");
 const Contact = require("../../models/contact");
 const Faq = require("../../models/faq");
-const Comp = require("../../models/comp");
+const Event = require("../../models/event");
 const methodOverride = require("method-override");
 const multer = require("multer");
 const Grid = require("gridfs-stream");
 const path = require("path");
 const mongoose = require("mongoose");
 const uuid = require("uuid");
-const sharp = require("sharp");
+const tinify = require("tinify");
+tinify.key = "g0n8WvvQ9w2vZp0kXChwcGHgK4z5B0bQ";
 const fs = require("fs");
 
 router.use(methodOverride("_method"));
@@ -74,10 +75,10 @@ router.get("/faq", async (req, res) => {
   let user = await User.findById(req.user.id);
   res.render("manage/faqs", { faqs: faqs, user: user });
 });
-router.get("/comps", async (req, res) => {
-  let comps = await Comp.find();
+router.get("/events", async (req, res) => {
+  let events = await Event.find();
   let user = await User.findById(req.user.id);
-  res.render("manage/comps", { comps: comps, user: user });
+  res.render("manage/events", { events: events, user: user });
 });
 
 // ADD
@@ -118,10 +119,8 @@ router.post(
   async (req, res) => {
     // Compress
     try {
-      await sharp(req.file.filename)
-        .toFormat("jpeg")
-        .jpeg({ quality: 40, force: true })
-        .toFile("toConvert.jpg");
+      let source = tinify.fromFile(req.file.filename);
+      await source.toFile("toConvert.jpg");
       let filename = `${uuid.v4()}-${Date.now()}.jpg`;
       const writeStream = gfs.createWriteStream(filename);
       await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
@@ -189,10 +188,8 @@ router.post(
   async (req, res) => {
     // Compress
     try {
-      await sharp(req.file.filename)
-        .toFormat("jpeg")
-        .jpeg({ quality: 40, force: true })
-        .toFile("toConvert.jpg");
+      let source = tinify.fromFile(req.file.filename);
+      await source.toFile("toConvert.jpg");
       let filename = `${uuid.v4()}-${Date.now()}.jpg`;
       const writeStream = gfs.createWriteStream(filename);
       await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
@@ -288,17 +285,17 @@ router.post("/add-faq", checkSupreme, async (req, res) => {
   }
 });
 
-router.get("/add-comp", checkSupreme, (req, res) => {
-  res.render("add/add-comp");
+router.get("/add-event", checkSupreme, (req, res) => {
+  res.render("add/add-event");
 });
-router.post("/add-comp", checkSupreme, async (req, res) => {
-  let comp = new Comp({
+router.post("/add-event", checkSupreme, async (req, res) => {
+  let event = new Event({
     name: req.body.name,
   });
 
   try {
-    comp.save();
-    res.redirect("/admin/comps");
+    event.save();
+    res.redirect("/admin/events");
   } catch (err) {
     res.send(err);
   }
@@ -339,9 +336,9 @@ router.get("/delete-faq/:id", checkSupreme, async (req, res) => {
   await Faq.deleteOne({ _id: req.params.id });
   res.redirect("/admin/faq");
 });
-router.get("/delete-comp/:id", checkSupreme, async (req, res) => {
-  await Comp.deleteOne({ _id: req.params.id });
-  res.redirect("/admin/comps");
+router.get("/delete-event/:id", checkSupreme, async (req, res) => {
+  await Event.deleteOne({ _id: req.params.id });
+  res.redirect("/admin/events");
 });
 
 // EDIT
@@ -455,10 +452,8 @@ router.put(
     try {
       if (req.file) {
         // Compress
-        await sharp(req.file.filename)
-          .toFormat("jpeg")
-          .jpeg({ quality: 40, force: true })
-          .toFile("toConvert.jpg");
+        let source = tinify.fromFile(req.file.filename);
+        await source.toFile("toConvert.jpg");
         let filename = `${uuid.v4()}-${Date.now()}.jpg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
@@ -552,10 +547,8 @@ router.put(
     try {
       if (req.file) {
         // Compress
-        await sharp(req.file.filename)
-          .toFormat("jpeg")
-          .jpeg({ quality: 40, force: true })
-          .toFile("toConvert.jpg");
+        let source = tinify.fromFile(req.file.filename);
+        await source.toFile("toConvert.jpg");
         let filename = `${uuid.v4()}-${Date.now()}.jpg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
@@ -650,12 +643,12 @@ router.put("/edit-faq/:id", checkSupreme, async (req, res) => {
   res.redirect("/admin/faq");
 });
 
-router.get("/edit-comp/:id", checkSupreme, async (req, res) => {
-  let comp = await Comp.findById(req.params.id);
-  res.render("edit/edit-comp", { comp: comp });
+router.get("/edit-event/:id", checkSupreme, async (req, res) => {
+  let event = await Event.findById(req.params.id);
+  res.render("edit/edit-event", { event: event });
 });
-router.put("/edit-comp/:id", checkSupreme, async (req, res) => {
-  await Comp.updateOne(
+router.put("/edit-event/:id", checkSupreme, async (req, res) => {
+  await Event.updateOne(
     { _id: req.params.id },
     {
       $set: {
@@ -663,7 +656,7 @@ router.put("/edit-comp/:id", checkSupreme, async (req, res) => {
       },
     }
   );
-  res.redirect("/admin/comps");
+  res.redirect("/admin/events");
 });
 
 // MIDDLEWARE

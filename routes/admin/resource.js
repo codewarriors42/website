@@ -8,7 +8,8 @@ const Grid = require("gridfs-stream");
 const path = require("path");
 const mongoose = require("mongoose");
 const uuid = require("uuid");
-const sharp = require("sharp");
+const tinify = require("tinify");
+tinify.key = "g0n8WvvQ9w2vZp0kXChwcGHgK4z5B0bQ";
 const fs = require("fs");
 
 router.use(methodOverride("_method"));
@@ -51,7 +52,8 @@ router.post("/add", checkSupreme, upload.array("img", 2), async (req, res) => {
 
     // Compress
     for (let file of req.files) {
-      await sharp(file.filename).toFile("toConvert.svg");
+      let source = tinify.fromFile(file.filename);
+      source.toFile("toConvert.svg");
       let filename = `${uuid.v4()}-${Date.now()}.svg`;
       filenames.push(filename);
       const writeStream = gfs.createWriteStream(filename);
@@ -154,7 +156,8 @@ router.put(
 
         // Compress
         for (let key of Object.keys(req.files)) {
-          await sharp(req.files[key][0].filename).toFile("toConvert.svg");
+          let source = tinify.fromFile(req.files[key][0].filename);
+          await source.toFile("toConvert.svg");
           let filename = `${uuid.v4()}-${Date.now()}.svg`;
           filenames.push(filename);
           const writeStream = gfs.createWriteStream(filename);
@@ -188,7 +191,8 @@ router.put(
         }
         let file = req.files.dark ? req.files.dark[0] : req.files.light[0];
         // Compress
-        await sharp(file.filename).toFile("toConvert.svg");
+        let source = tinify.fromFile(file.filename);
+        await source.toFile("toConvert.svg");
         let filename = `${uuid.v4()}-${Date.now()}.svg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.svg`).pipe(writeStream);

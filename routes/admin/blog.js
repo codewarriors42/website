@@ -8,7 +8,8 @@ const Grid = require("gridfs-stream");
 const path = require("path");
 const mongoose = require("mongoose");
 const uuid = require("uuid");
-const sharp = require("sharp");
+const tinify = require("tinify");
+tinify.key = "g0n8WvvQ9w2vZp0kXChwcGHgK4z5B0bQ";
 const fs = require("fs");
 
 router.use(methodOverride("_method"));
@@ -52,10 +53,8 @@ router.get("/add", checkSupreme, (req, res) => {
 router.post("/add", checkSupreme, upload.single("img"), async (req, res) => {
   // Compress
   try {
-    await sharp(req.file.filename)
-      .toFormat("jpeg")
-      .jpeg({ quality: 40, force: true })
-      .toFile("toConvert.jpg");
+    let source = tinify.fromFile(req.file.filename);
+    await source.toFile("toConvert.jpg");
     let filename = `${uuid.v4()}-${Date.now()}.jpg`;
     const writeStream = gfs.createWriteStream(filename);
     await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
@@ -114,10 +113,8 @@ router.put(
     try {
       if (req.file) {
         // Compress
-        await sharp(req.file.filename)
-          .toFormat("jpeg")
-          .jpeg({ quality: 40, force: true })
-          .toFile("toConvert.jpg");
+        let source = tinify.fromFile(req.file.filename);
+        await source.toFile("toConvert.jpg");
         let filename = `${uuid.v4()}-${Date.now()}.jpg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);

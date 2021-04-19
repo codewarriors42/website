@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CW - Admin - Edit Competition</title>
+    <title>CW - Admin - Add Field</title>
   </head>
   <body>
-    <h1>Edit Competition</h1>
-    <form action="/admin/edit-comp/<%= comp._id %>?_method=PUT" method="POST">
-      <input type="text" name="name" value="<%= comp.name %>" />
+    <h1>Add Field</h1>
+    <form action="/admin/add-event" method="POST">
+      <input required type="text" name="name" placeholder="Field Name" />
       <button type="submit">Submit</button>
     </form>
   </body>
