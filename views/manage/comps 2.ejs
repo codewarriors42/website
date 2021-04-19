@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CW - Admin - Competitions</title>
+  </head>
+  <body>
+    <h1>Competitions</h1>
+    <h2>
+      Has CW participated in any new competitions?<br />Add them here for
+      archives then!
+    </h2>
+    <% for (let comp of comps) { %>
+    <h3><%= comp.name %></h3>
+    <% if (user.isSupreme) { %>
+    <a href="/admin/edit-comp/<%= comp._id %>">Edit</a>
+    <a href="/admin/delete-comp/<%= comp._id %>">Delete</a>
+    <% } %> <% } %>
+    <hr />
+    <% if (user.isSupreme) { %>
+    <a href="/admin/add-comp">Add a new Competition</a>
+    <% } %>
+  </body>
+</html>
