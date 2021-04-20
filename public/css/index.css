@@ -28,6 +28,7 @@
   margin-bottom: 2vh;
   width: 110%;
   height: 16vh;
+  overflow-y: hidden;
 }
 .hero h3 {
   font-weight: 100;
@@ -311,6 +312,7 @@
   .heroContent {
     width: 68%;
     padding: 0;
+    height: 65%;
   }
   .hero {
     height: 80vh;
@@ -363,6 +365,7 @@
   .heroContent {
     width: 90%;
     padding: 0;
+    height: 55%;
   }
   .hero .btn {
     margin-top: 5vh;
@@ -371,7 +374,7 @@
   .hero h1 {
     font-size: 4vh;
     width: 80%;
-    min-height: 8vh;
+    min-height: 6vh;
     margin-bottom: 6vh;
   }
   .hero h3 {

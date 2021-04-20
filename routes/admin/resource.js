@@ -25,11 +25,7 @@ conn.once("open", () => {
 const storage = multer.diskStorage({
   destination: ".",
   filename: (req, file, cb) => {
-    if (file.mimetype == "image/svg" || file.mimetype == "image/svg+xml") {
-      cb(null, `${uuid.v4()}-${Date.now()}` + path.extname(file.originalname));
-    } else {
-      cb(null, "no file");
-    }
+    cb(null, `${uuid.v4()}-${Date.now()}` + path.extname(file.originalname));
   },
 });
 const upload = multer({ storage: storage, limits: { fileSize: 4194304 } });
@@ -57,7 +53,7 @@ router.post("/add", checkSupreme, upload.array("img", 2), async (req, res) => {
       let filename = `${uuid.v4()}-${Date.now()}.svg`;
       filenames.push(filename);
       const writeStream = gfs.createWriteStream(filename);
-      await fs.createReadStream(`./toConvert.svg`).pipe(writeStream);
+      await fs.createReadStream(`toConvert.svg`).pipe(writeStream);
       fs.unlink("toConvert.svg", (err) => {
         if (err) {
           res.send(err);
@@ -81,7 +77,6 @@ router.post("/add", checkSupreme, upload.array("img", 2), async (req, res) => {
     res.redirect("/admin/resources");
   } catch (err) {
     res.redirect("/err");
-    fs.unlink("no file", (err) => {});
   }
 });
 
@@ -161,7 +156,7 @@ router.put(
           let filename = `${uuid.v4()}-${Date.now()}.svg`;
           filenames.push(filename);
           const writeStream = gfs.createWriteStream(filename);
-          await fs.createReadStream(`./toConvert.svg`).pipe(writeStream);
+          await fs.createReadStream(`toConvert.svg`).pipe(writeStream);
           fs.unlink("toConvert.svg", (err) => {
             if (err) {
               res.send(err);
@@ -195,7 +190,7 @@ router.put(
         await source.toFile("toConvert.svg");
         let filename = `${uuid.v4()}-${Date.now()}.svg`;
         const writeStream = gfs.createWriteStream(filename);
-        await fs.createReadStream(`./toConvert.svg`).pipe(writeStream);
+        await fs.createReadStream(`toConvert.svg`).pipe(writeStream);
         fs.unlink("toConvert.svg", (err) => {
           if (err) {
             res.send(err);
@@ -250,7 +245,6 @@ router.put(
       res.redirect("/admin/resources");
     } catch (err) {
       res.redirect("/err");
-      fs.unlink("no file", (err) => {});
     }
   }
 );
