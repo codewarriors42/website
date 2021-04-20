@@ -95,16 +95,17 @@
 }
 .card h2 {
   font-family: bold;
-  font-size: 2.6vh;
+  font-size: 2.3vh;
   margin-bottom: 4vh;
+  padding: 0 1vw;
 }
 .card img {
-  height: 80%;
+  height: 68%;
   object-fit: scale-down;
 }
 
 /* MEDIAS */
-@media (max-width: 1100px) {
+@media (max-width: 1025px) {
   .heroContent {
     width: 60%;
   }
@@ -120,9 +121,6 @@
   }
   .cards {
     padding: 0;
-  }
-  .card h2 {
-    font-size: 3vh;
   }
   .card img {
     width: 63%;
