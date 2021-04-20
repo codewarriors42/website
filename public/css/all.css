@@ -231,7 +231,7 @@ a {
 main {
   padding: 0 10vw;
   width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 /* Footer ------------------------------------------- */
 footer {

@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: column;
   width: 40%;
-  height: 70%;
+  height: 90%;
   justify-content: space-between;
   align-items: center;
   text-align: center;
@@ -27,7 +27,7 @@
   font-family: bold;
   margin-bottom: 2vh;
   width: 110%;
-  min-height: 14vh;
+  height: 16vh;
 }
 .hero h3 {
   font-weight: 100;

@@ -4,7 +4,7 @@
 }
 .main h1 {
   font-size: 5vh;
-  font-family: med;
+  font-family: bold;
 }
 .tabs {
   display: flex;
@@ -68,6 +68,7 @@
 .header h2 {
   font-size: 4vh;
   position: relative;
+  font-family: med;
 }
 .input {
   display: flex;
