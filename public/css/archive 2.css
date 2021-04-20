@@ -1,0 +1,502 @@
+.main {
+  padding: 5vh 6vw;
+  overflow: hidden;
+}
+.main h1 {
+  font-size: 5vh;
+  font-family: med;
+}
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 3vh 0;
+  margin-bottom: 10vh;
+}
+.tab {
+  cursor: pointer;
+  padding: 1.5vh 0;
+  position: relative;
+  color: var(--dull);
+  transition: all 0.3s;
+  font-size: 2.3vh;
+}
+.tab::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: all 0.3s;
+  background: var(--white);
+}
+.tab:hover:before {
+  width: 25%;
+}
+.activeTab {
+  color: var(--white);
+}
+.activeTab::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 25%;
+  width: 50%;
+  height: 2px;
+  background: var(--white);
+}
+/* HEADER */
+.header {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1vh;
+}
+.fH {
+  margin-bottom: 6vh;
+}
+.headerLeft,
+.headerRight {
+  width: 50%;
+  height: 3.6vh;
+  display: flex;
+  align-items: center;
+}
+.headerRight {
+  justify-content: space-between;
+}
+.header h2 {
+  font-size: 4vh;
+  position: relative;
+}
+.header h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: 3px;
+  border-radius: 4px;
+  background: var(--dull);
+}
+.input {
+  display: flex;
+  width: 55%;
+  border: 1px var(--borderWhite) solid;
+  border-radius: 5px;
+  position: relative;
+}
+#searchBar {
+  background: transparent;
+  width: 80%;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  padding: 1.8vh 1.6vw;
+  transition: all 0.3s;
+  font-size: 1.8vh;
+  font-family: light;
+}
+#searchBar::placeholder {
+  color: var(--white);
+  font-family: light;
+}
+.input button {
+  background: transparent;
+  cursor: pointer;
+  width: 20%;
+  font-size: 2.4vh;
+  padding: 1vh 1.3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-family: light;
+}
+.input img {
+  width: 120%;
+}
+.sort {
+  width: 35%;
+  display: flex;
+  border: 1px var(--borderWhite) solid;
+  border-radius: 5px;
+  position: relative;
+}
+.by,
+.buttn {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.8vh;
+  font-family: light;
+  padding: 1.8vh 0;
+}
+.by {
+  width: 80%;
+  border-right: 1px var(--white) solid;
+}
+.buttn {
+  width: 20%;
+}
+.options {
+  position: absolute;
+  top: 100%;
+  left: -0.5%;
+  width: 101%;
+  z-index: 10;
+  border-radius: 0 0 5px 5px;
+  background: var(--black);
+  border: 1px solid var(--borderWhite);
+  opacity: 0;
+  transform-origin: top;
+  transform: scaleY(0.8);
+  pointer-events: none;
+  transition: all 0.26s;
+}
+.option {
+  padding: 1.6vh 1vw;
+  border-bottom: 1px solid var(--white);
+  cursor: pointer;
+  font-size: 1.8vh;
+  transition: all 0.2s;
+  font-family: light;
+}
+.option:hover {
+  background: var(--white);
+  color: var(--black);
+}
+.option:last-child {
+  border: none;
+}
+.allAdd {
+  display: none;
+}
+.allAddActive {
+  display: block;
+}
+.sortActive {
+  border-radius: 5px 5px 0 0;
+}
+.optsActive {
+  opacity: 1;
+  pointer-events: all;
+  transform: scaleY(1);
+}
+/* CARDS */
+.cards {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 4vh 0;
+}
+.card {
+  width: 47%;
+  height: 44vh;
+  margin-bottom: 7vh;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.3s;
+  overflow: hidden;
+  box-shadow: -7px -99px 56px -19px rgba(37, 37, 37, 0.9) inset;
+  -webkit-box-shadow: -7px -99px 56px -19px rgba(37, 37, 37, 0.9) inset;
+  -moz-box-shadow: -7px -99px 56px -19px rgba(37, 37, 37, 0.9) inset;
+}
+.card img {
+  position: absolute;
+  top: 0;
+  border-radius: inherit;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s;
+}
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2vh 2vw;
+  transition: all 0.5s;
+}
+.bottom2 {
+  transform: translate(0, 100%);
+}
+.card h2 {
+  font-size: 3vh;
+  font-family: reg;
+  color: #fefdf8;
+}
+.card h3 {
+  font-size: 2vh;
+  font-family: light;
+  margin-top: 0.6vh;
+  color: #fefdf8;
+}
+.bottom2 h2,
+.bottom2 h3 {
+  font-family: light;
+}
+.see {
+  width: 100%;
+  text-align: right;
+  margin-top: 2vh;
+  padding-right: 3vw;
+  display: none;
+}
+.see h4 {
+  position: relative;
+  display: inline-block;
+  font-family: light;
+  cursor: pointer;
+}
+.see h4::after {
+  content: "";
+  position: absolute;
+  bottom: -15%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  height: 1px;
+  background: var(--white);
+}
+.cardSocial {
+  position: absolute;
+  top: 0;
+  right: -100%;
+  transition: all 0.5s ease-in-out;
+  padding: 2vh 1vw;
+  display: flex;
+}
+.cardSocial a {
+  width: 5vh;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5vw;
+  font-size: 2.6vh;
+  border-radius: 50%;
+  border: 2px #fefdf8 solid;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px #252525;
+  background: #fefdf8;
+}
+.cardSocial i {
+  transition: all 0.3s;
+  color: #252525;
+}
+.cardSocial a:hover {
+  transform: scale(1.1);
+}
+.cardSocial a:active {
+  transform: scale(0.9);
+}
+.card:hover .cardSocial {
+  right: 0;
+}
+.card:hover .bottom {
+  transform: translate(0, 100%);
+}
+.card:hover .bottom2 {
+  transform: translate(0);
+}
+/* MEDIAS */
+@media (max-width: 1400px) {
+  #searchBar,
+  .by,
+  .buttn,
+  .option {
+    font-size: 1.7vh;
+  }
+  .main {
+    padding: 4vh 5vw;
+  }
+}
+@media (max-width: 1100px) {
+  .main {
+    padding: 2.6vh 0;
+  }
+  .main h1 {
+    font-size: 4vh;
+  }
+  .tab {
+    font-size: 1.5vh;
+    padding: 1vh 0;
+  }
+  .fH {
+    margin-bottom: 3vh;
+  }
+  .headerLeft {
+    width: 35%;
+  }
+  .header h2 {
+    font-size: 3.2vh;
+  }
+  .headerRight {
+    width: 65%;
+  }
+  #searchBar,
+  .by,
+  .buttn,
+  .option {
+    font-size: 1.2vh;
+  }
+  #searchBar {
+    padding: 1.2vh 2vw;
+  }
+  .input img {
+    width: 70%;
+  }
+  .by,
+  .buttn {
+    padding: 1.2vh 0;
+  }
+  .option {
+    padding: 1vh 1vw;
+  }
+  .input {
+    width: 60%;
+  }
+  .sort {
+    width: 34%;
+  }
+  .cards {
+    padding: 3.3vh 0;
+  }
+  .card {
+    width: 47%;
+    height: 30vh;
+    margin-bottom: 4vh;
+  }
+}
+@media (max-width: 1030px) {
+  .input img {
+    width: 50%;
+  }
+  .nums button {
+    padding: 1.2vh 1.6vw;
+    margin: 0 0.8vw;
+  }
+}
+@media (max-width: 800px) {
+  .nums button {
+    font-size: 1.6vh;
+  }
+  .arrows i {
+    width: 4.6vh;
+    height: 4.6vh;
+    font-size: 1.6vh;
+  }
+}
+@media (max-width: 650px) {
+  .cardSocial a {
+    margin: 0 1vw;
+  }
+  .card .cardSocial {
+    right: 0;
+  }
+  .card:active .bottom {
+    transform: translate(0, 100%);
+  }
+  .card:active .bottom2 {
+    transform: translate(0);
+  }
+}
+@media (max-width: 550px) {
+  .main {
+    padding: 1vh 0;
+  }
+  .main h1 {
+    text-align: center;
+    font-size: 3vh;
+    margin-bottom: 3.5vh;
+  }
+  .tabs {
+    flex-wrap: wrap;
+    margin: 0;
+    margin-bottom: 6vh;
+    justify-content: space-around;
+    padding: 0 6%;
+  }
+  .tab {
+    margin: 0.6vh 2.4vw;
+    font-size: 1.8vh;
+  }
+  .header {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+  .headerLeft,
+  .headerRight {
+    width: 100%;
+    justify-content: center;
+  }
+  .fH .headerLeft {
+    margin-top: 5vh;
+  }
+  .header,
+  .fH {
+    margin: 0;
+  }
+  .sort {
+    display: none;
+  }
+  .input {
+    width: 90%;
+  }
+  .input img {
+    width: 45%;
+  }
+  .input button {
+    width: 17%;
+  }
+  #searchBar {
+    font-size: 1.5vh;
+    width: 83%;
+    padding: 1.4vh 4vw;
+  }
+  .cards {
+    padding: 2vh 0;
+    padding-bottom: 4vh;
+    justify-content: center;
+  }
+  .card {
+    display: none;
+    width: 95%;
+    height: 25vh;
+    margin-bottom: 2.3vh;
+  }
+  .card h2 {
+    font-size: 2vh;
+  }
+  .card h3 {
+    font-size: 1vh;
+  }
+  .bottom {
+    padding: 2vh 5vw;
+  }
+  .cards > .card:first-child {
+    display: inline-block;
+  }
+  .see {
+    display: block;
+  }
+  .arrows i {
+    width: 4vh;
+    height: 4vh;
+    font-size: 1.4vh;
+    margin: 0 3vw;
+  }
+}
+.light h3,
+.light p,
+.light .btn,
+.light {
+  font-family: reg;
+}

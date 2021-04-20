@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CW - Admin - Edit FAQ</title>
+  </head>
+  <body>
+    <h1>Edit FAQ</h1>
+    <form action="/admin/edit-faq/<%= faq._id %>?_method=PUT" method="POST">
+      <input type="text" name="question" value="<%= faq.question %>" />
+      <br />
+      <textarea name="answer" cols="30" rows="10"><%= faq.answer %></textarea>
+      <br />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
