@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CW - Admin - Edit Alumni</title>
+  </head>
+  <body>
+    <h1>Edit Alumni</h1>
+    <form
+      action="/admin/edit-alumni/<%= alumni._id %>?_method=PUT"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      <input type="text" name="name" value="<%= alumni.name %>" />
+      <input type="text" name="post" value="<%= alumni.post %>" />
+      <input type="number" name="year" value="<%= alumni.year %>" />
+      <textarea name="current" cols="30" rows="10">
+<%= alumni.current %></textarea
+      >
+      <div class="socials">
+        <% for (let i=0; i < alumni.socials.length; i++) { %>
+        <div class="social">
+          <input
+            value="<%= alumni.socials[i].platform %>"
+            type="text"
+            name="socialPlatform"
+          />
+          <input
+            value="<%= alumni.socials[i].URL %>"
+            type="text"
+            name="socialURL"
+          />
+        </div>
+        <% } %>
+      </div>
+      <img width="400px" src="/img/<%= alumni.image %>" alt="" />
+      <input type="file" name="img" accept="image/*" />
+      <h3 style="cursor: pointer" id="remSocial">Remove Social</h3>
+      <h3 style="cursor: pointer" id="addSocial">Add Social</h3>
+      <button type="submit">Done</button>
+    </form>
+
+    <script>
+      let btn = document.querySelector("#addSocial");
+      let socials = document.querySelector(".socials");
+
+      btn.addEventListener("click", () => {
+        let social = document.createElement("DIV");
+        social.classList.add("social");
+
+        let sPlatform = document.createElement("INPUT");
+        sPlatform.setAttribute("placeholder", "Social Platform");
+        sPlatform.setAttribute("type", "text");
+        sPlatform.setAttribute("name", "socialPlatform");
+
+        let sURL = document.createElement("INPUT");
+        sURL.setAttribute("placeholder", "Social URL");
+        sURL.setAttribute("type", "text");
+        sURL.setAttribute("name", "socialURL");
+
+        social.appendChild(sPlatform);
+        social.appendChild(sURL);
+
+        socials.appendChild(social);
+      });
+
+      let rem = document.querySelector("#remSocial");
+      rem.addEventListener("click", () => {
+        document.querySelector(".social:last-of-type").remove();
+      });
+    </script>
+  </body>
+</html>
