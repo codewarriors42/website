@@ -49,7 +49,7 @@ router.post("/add", checkSupreme, upload.array("img", 2), async (req, res) => {
     // Compress
     for (let file of req.files) {
       let source = tinify.fromFile(file.filename);
-      source.toFile("toConvert.svg");
+      await source.toFile("toConvert.svg");
       let filename = `${uuid.v4()}-${Date.now()}.svg`;
       filenames.push(filename);
       const writeStream = gfs.createWriteStream(filename);
@@ -76,7 +76,8 @@ router.post("/add", checkSupreme, upload.array("img", 2), async (req, res) => {
     await resource.save();
     res.redirect("/admin/resources");
   } catch (err) {
-    res.redirect("/err");
+    console.log(err);
+    // res.redirect("/err");
   }
 });
 
