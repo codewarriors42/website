@@ -383,6 +383,12 @@
     padding: 1.2vh 1.6vw;
     margin: 0 0.8vw;
   }
+  #searchBar,
+  .by,
+  .buttn,
+  .option {
+    font-size: 1.1vh;
+  }
 }
 @media (max-width: 800px) {
   .nums button {

@@ -21,6 +21,17 @@ let search = document.querySelector("#searchBar");
 let cards = document.querySelectorAll(".card");
 let headers = document.querySelectorAll(".header");
 
+const showCard = (card) => {
+  card.style.display = "flex";
+  card.parentElement.previousElementSibling.style.display = "flex";
+  if (
+    document.querySelector(".header") ==
+    card.parentElement.previousElementSibling
+  ) {
+    document.querySelector(".headerLeft").style.visibility = "visible";
+  }
+};
+
 let titles = [];
 for (let card of cards) {
   let h2 = card.children[2].children[0].textContent.toLowerCase();
@@ -63,39 +74,15 @@ search.addEventListener("keyup", () => {
         document.querySelector(".cards").style.paddingBottom = "4vh";
         for (let card of cards) {
           if (card.children[2].children[0].textContent.toLowerCase() == title) {
-            card.style.display = "flex";
-            card.parentElement.previousElementSibling.style.display = "flex";
-            if (
-              document.querySelector(".header") ==
-              card.parentElement.previousElementSibling
-            ) {
-              document.querySelector(".headerLeft").style.visibility =
-                "visible";
-            }
+            showCard(card);
           } else if (
             card.children[2].children[1].textContent.toLowerCase() == title
           ) {
-            card.style.display = "flex";
-            card.parentElement.previousElementSibling.style.display = "flex";
-            if (
-              document.querySelector(".header") ==
-              card.parentElement.previousElementSibling
-            ) {
-              document.querySelector(".headerLeft").style.visibility =
-                "visible";
-            }
+            showCard(card);
           } else if (
             card.children[3].children[1].textContent.toLowerCase() == title
           ) {
-            card.style.display = "flex";
-            card.parentElement.previousElementSibling.style.display = "flex";
-            if (
-              document.querySelector(".header") ==
-              card.parentElement.previousElementSibling
-            ) {
-              document.querySelector(".headerLeft").style.visibility =
-                "visible";
-            }
+            showCard(card);
           }
         }
       }
