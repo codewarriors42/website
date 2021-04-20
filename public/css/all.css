@@ -1,26 +1,44 @@
 @font-face {
   font-family: reg;
   src: url(../fonts/AirbnbCerealBook.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: light;
   src: url(../fonts/AirbnbCerealLight.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: med;
   src: url(../fonts/AirbnbCerealMedium.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: bold;
   src: url(../fonts/AirbnbCerealBold.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: ebold;
   src: url(../fonts/AirbnbCerealExtraBold.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: bl;
   src: url(../fonts/AirbnbCerealBlack.ttf);
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
 }
 @font-face {
   font-family: logo;
