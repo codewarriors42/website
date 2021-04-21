@@ -192,7 +192,7 @@
 }
 .card h3 {
   font-family: light;
-  font-size: 2.3vh;
+  font-size: 2vh;
   margin-top: 0.7vh;
 }
 .card p {
@@ -202,10 +202,13 @@
   margin: 3vh 0;
 }
 .social {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3vh;
   font-size: 2.6vh;
 }
 .social a {
-  margin-right: 0.7vw;
+  margin-left: 1vw;
 }
 
 #all {
@@ -326,6 +329,9 @@
   .cardRight {
     padding-left: 4vw;
   }
+  .social a {
+    margin-left: 2vw;
+  }
 }
 @media (max-width: 570px) {
   .heroContent {
@@ -374,7 +380,7 @@
     font-family: med;
   }
   .card h3 {
-    font-size: 1.8vh;
+    font-size: 1.4vh;
   }
   .card p {
     font-size: 1.3vh;
