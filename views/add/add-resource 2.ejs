@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CW - Admin - Add Resource</title>
+</head>
+<body>
+    <h1>Add Resource</h1>
+    <form action="/admin/resources/add" enctype="multipart/form-data" method="POST">
+        <input required type="text" name="name" placeholder="event-name">
+        <input required type="text" name="link" placeholder="Link">
+        <br>
+        <h2>IMAGES ONLY IN SVG</h2>
+        <label>Dark Image</label>
+        <input type="file" required name="img" accept="image/*">
+        <br>
+        <label>Light Image</label>
+        <input type="file" required name="img" accept="image/*">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
