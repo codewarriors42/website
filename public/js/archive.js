@@ -47,7 +47,7 @@ search.addEventListener("keyup", () => {
   document.querySelector(".cards").style.paddingBottom = "10vh";
   let usrInp = search.value.trim();
   let matches = getMatches(usrInp);
-  if (usrInp == "") {
+  if (usrInp === "") {
     document.querySelector(".cards").style.paddingTop = "4vh";
     document.querySelector(".cards").style.paddingBottom = "4vh";
     for (let card of cards) {
