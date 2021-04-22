@@ -9,7 +9,6 @@ let charIndex = 0;
 
 const textArray = [
   "The code even killed the experts",
-  "soBig wasn't so big this year",
   "We build cool stuff and pwn at events",
   "Once a warrior, Always a Warrior",
 ];
