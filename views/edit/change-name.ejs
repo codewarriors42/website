@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CW - Admin - Change Name</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Change Name</title>
+  </head>
+  <body>
     <h1>Change Name</h1>
     <form action="/admin/change-name?_method=PUT" method="POST">
-        <input type="text" name="name" value="<%= user.name %>">
-        <button type="submit">Submit</button>
+      <input type="text" name="name" value="<%= user.name %>" />
+      <button type="submit">Submit</button>
     </form>
-</body>
+  </body>
 </html>

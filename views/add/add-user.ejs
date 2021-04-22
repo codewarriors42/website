@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CW - Admin - Add User</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Add User</title>
+  </head>
+  <body>
     <h1>Add User</h1>
     <% if (message) { %>
-        <h3 style="color: red;"><%= message %></h3>
+    <h3 style="color: red"><%= message %></h3>
     <% } %>
     <form action="/admin/add-user" method="POST">
-        <input required type="text" name="username" placeholder="username">
-        <input required type="text" name="name" placeholder="name">
-        <input required type="password" name="password" placeholder="password">
-        <button required type="submit">Submit</button>
+      <input required type="text" name="username" placeholder="username" />
+      <input required type="text" name="name" placeholder="name" />
+      <input required type="password" name="password" placeholder="password" />
+      <button required type="submit">Submit</button>
     </form>
-</body>
+  </body>
 </html>
