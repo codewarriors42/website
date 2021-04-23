@@ -104,6 +104,6 @@ let units = document.querySelectorAll(".unit i");
 
 for (let unit of units) {
   unit.addEventListener("click", () => {
-    unit.classList.toggle("unitActive");
+    unit.parentElement.parentElement.classList.toggle("unitActive");
   });
 }

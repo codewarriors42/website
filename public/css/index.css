@@ -258,7 +258,6 @@
   background: var(--unit);
   padding: 1.2vh 3.4vw;
   font-size: 1.8vh;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   margin-bottom: 2vh;
@@ -278,6 +277,8 @@
   position: absolute;
   right: 0;
   top: 2vh;
+  cursor: pointer;
+  padding: 10px;
   font-size: 2.4vh;
   transition: all 0.4s;
 }
