@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // UNITS
 
-let units = document.querySelectorAll(".unit");
+let units = document.querySelectorAll(".unit i");
 
 for (let unit of units) {
   unit.addEventListener("click", () => {
