@@ -51,6 +51,10 @@ router.get("/resources", async (req, res) => {
   res.render("client/resources", { resources: resources });
 });
 
+router.get("/archives", async (req, res) => {
+  return res.redirect("/archives/Creative%20Work")
+});
+
 router.get("/archives/:category", async (req, res) => {
   let allArchives = await Archive.find({ category: req.params.category }).sort({
     year: -1,
