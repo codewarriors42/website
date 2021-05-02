@@ -60,6 +60,10 @@ router.get("/archives/:category", async (req, res) => {
     year: -1,
   });
 
+  if (allArchives.length === 0) {
+    return res.redirect("/404");
+  }
+
   let allEvents = [];
   let prEvents = [];
   let getEvents = await Events.find();
