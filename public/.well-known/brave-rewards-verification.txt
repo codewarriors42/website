@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: code-warriors.org
-Token: dbac7ef70e3f706663ce4fac2ebf96a03a3e8bb0f0fca2dded088b782c2805a6
