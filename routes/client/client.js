@@ -52,7 +52,7 @@ router.get("/resources", async (req, res) => {
 });
 
 router.get("/archives", async (req, res) => {
-  return res.redirect("/archives/Creative%20Work");
+  return res.redirect("/archives/creative");
 });
 
 router.get("/archives/:category", async (req, res) => {
