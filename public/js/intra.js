@@ -85,9 +85,9 @@ const cardContainer= document.querySelector(".cards-container")
 
 noticeBtn.addEventListener("click", () => {
   cardContainer.classList.toggle("hidden");
-  if (noticeBtn.innerHTML === "Show Event Details") {
+  if (noticeBtn.innerHTML === "I understand, show event details") {
     noticeBtn.innerHTML = "Hide Event Details";
   } else {
-    noticeBtn.innerHTML = "Show Event Details";
+    noticeBtn.innerHTML = "I understand, show event details";
   }
 })
