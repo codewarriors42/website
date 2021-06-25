@@ -71,6 +71,11 @@ app.use(
   require("./routes/admin/archive")
 );
 
+// Intra redirect
+app.get("/intra_verification",(_,res) => {
+  res.redirect("https://cwbotverification.herokuapp.com/");
+});
+
 // ERRORS
 app.get("/err", (req, res) => {
   res.send("<h2 style='font-family: Helvetica'>Some Error has occured</h2>");
