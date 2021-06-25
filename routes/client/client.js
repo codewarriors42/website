@@ -52,7 +52,7 @@ router.get("/resources", async (req, res) => {
 });
 
 router.get("/archives", async (req, res) => {
-  return res.redirect("/archives/creative");
+  return res.redirect("/archives/Creative%20Work");
 });
 
 router.get("/archives/:category", async (req, res) => {
@@ -96,72 +96,72 @@ router.get("/archives/:category", async (req, res) => {
   });
 });
 
-router.get("/blog/:id", async (req, res) => {
-  let blog = await Blog.findById(req.params.id);
-  let allBlogs = await Blog.find();
+// router.get("/blog/:id", async (req, res) => {
+//   let blog = await Blog.findById(req.params.id);
+//   let allBlogs = await Blog.find();
 
-  let titles = {};
-  for (let blog of allBlogs) {
-    titles[blog.title] = blog.id;
-  }
+//   let titles = {};
+//   for (let blog of allBlogs) {
+//     titles[blog.title] = blog.id;
+//   }
 
-  let years = [];
-  for (let blog of allBlogs) {
-    if (!years.includes(blog.updatedAt.getFullYear())) {
-      years.push(blog.updatedAt.getFullYear());
-    }
-  }
+//   let years = [];
+//   for (let blog of allBlogs) {
+//     if (!years.includes(blog.updatedAt.getFullYear())) {
+//       years.push(blog.updatedAt.getFullYear());
+//     }
+//   }
 
-  res.render("client/blo", {
-    blog: blog,
-    titles: titles,
-    years: years,
-  });
-});
+//   res.render("client/blo", {
+//     blog: blog,
+//     titles: titles,
+//     years: years,
+//   });
+// });
 
-router.get("/blogs", async (req, res) => {
-  let allBlogs = await Blog.find();
-  let noBlog = false;
-  if (allBlogs.length == 0) {
-    noBlog = true;
-  }
-  let blogs;
-  let titles = {};
-  for (let blog of allBlogs) {
-    titles[blog.title] = blog.id;
-  }
+// router.get("/blogs", async (req, res) => {
+//   let allBlogs = await Blog.find();
+//   let noBlog = false;
+//   if (allBlogs.length == 0) {
+//     noBlog = true;
+//   }
+//   let blogs;
+//   let titles = {};
+//   for (let blog of allBlogs) {
+//     titles[blog.title] = blog.id;
+//   }
 
-  let pages = Math.ceil(Object.keys(titles).length / 6);
+//   let pages = Math.ceil(Object.keys(titles).length / 6);
 
-  if (req.query.page) {
-    if (parseInt(req.query.page)) {
-      blogPage = parseInt(req.query.page);
-    }
-  } else {
-    blogPage = 1;
-  }
+//   if (req.query.page) {
+//     if (parseInt(req.query.page)) {
+//       blogPage = parseInt(req.query.page);
+//     }
+//   } else {
+//     blogPage = 1;
+//   }
 
-  blogs = await Blog.find()
-    .sort({ createdAt: -1 })
-    .skip(6 * blogPage - 6)
-    .limit(6);
+//   blogs = await Blog.find()
+//     .sort({ createdAt: -1 })
+//     .skip(6 * blogPage - 6)
+//     .limit(6);
 
-  let years = [];
-  for (let blog of blogs) {
-    if (!years.includes(blog.updatedAt.getFullYear())) {
-      years.push(blog.updatedAt.getFullYear());
-    }
-  }
+//   let years = [];
+//   for (let blog of blogs) {
+//     if (!years.includes(blog.updatedAt.getFullYear())) {
+//       years.push(blog.updatedAt.getFullYear());
+//     }
+//   }
 
-  res.render("client/blog", {
-    blogs: blogs,
-    titles: titles,
-    pages: pages,
-    activePage: blogPage,
-    years: years,
-    noBlog: noBlog,
-  });
-});
+//   res.render("client/blog", {
+//     blogs: blogs,
+//     titles: titles,
+//     pages: pages,
+//     activePage: blogPage,
+//     years: years,
+//     noBlog: noBlog,
+//   });
+// });
 
 router.get("/contacts", async (req, res) => {
   let contacts = await Contact.find();
@@ -184,6 +184,11 @@ router.get("/alumni", async (req, res) => {
   let sortedKeys = Object.keys(alumniByYear).sort((a, b) => b - a);
 
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
+});
+
+router.get("/intra", async (req, res) => {
+  let resources = await Resource.find();
+  res.render("client/intra", { resources: resources });
 });
 
 // EXPORT

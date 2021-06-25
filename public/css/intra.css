@@ -1,0 +1,414 @@
+.hero h3,
+.write p,
+.soBig p {
+  font-family: light;
+  line-height: var(--lh);
+}
+.hero {
+  width: 100%;
+  padding: 18vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 7.7vh;
+}
+.heroContent {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 90%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.hero h1 {
+  font-size: 5vh;
+  font-family: bold;
+  /* margin-bottom: 2vh; */
+  width: 110%;
+  height: 10vh;
+}
+.hero h3 {
+  font-weight: 100;
+  font-family: light;
+  letter-spacing: 0.5px;
+  font-size: var(--text);
+}
+.hero .btn {
+  margin-top: 3.8vh;
+}
+main {
+  transition: all 0.3s;
+}
+/* Video ---------------------------------------- */
+.vid {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12vh;
+}
+.vid iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.segCont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12vh;
+}
+.seg {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.segLeft,
+.segRight {
+  width: 40%;
+  height: 1px;
+  background: var(--white);
+  border-radius: 50px;
+}
+.segCross {
+  width: 20%;
+  height: 3vh;
+  position: relative;
+}
+.crossLine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25%;
+  height: 1px;
+  border-radius: 50px;
+  background: var(--white);
+}
+.crossLine:nth-child(even) {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.crossLine:nth-child(odd) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Notice */
+
+.notice {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12vh;
+}
+
+.notice-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 60%;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.notice h2 {
+  font-size: 5vh;
+  font-family: bold;
+}
+
+.notice p {
+  margin: 5vh 0;
+  font-weight: 100;
+  font-family: light;
+  letter-spacing: 0.5px;
+  font-size: var(--text);
+  line-height: var(--lh);
+}
+
+/******** CARDS ********/
+
+.hidden {
+  display: none !important;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cards-container h1 {
+  font-size: 5vh;
+  font-family: bold;
+  margin-bottom: 2vh;
+  /* margin-top: 10vh; */
+  height: 10vh;
+  text-align: center;
+}
+.cards {
+  margin-top: 0;
+  margin-bottom: 10vh;
+  padding: 0 7vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.card {
+  width: 26%;
+  height: 28vh;
+  margin-top: 5vh;
+  padding: 5vh 0;
+  background: var(--sBlack);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transition: all 0.2s;
+  text-align: center;
+  cursor: pointer;
+}
+.card:hover {
+  background: var(--hColor);
+}
+.card h2 {
+  font-family: bold;
+  font-size: 2.5vh;
+  margin-bottom: 4vh;
+  padding: 0 1vw;
+}
+.card img {
+  height: 68%;
+  object-fit: scale-down;
+}
+
+/* Pop Up */
+
+.bgcolor {
+  background-color: grey;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--black);
+  height: 45vh;
+  width: 35%;
+  padding: 0 3vw;
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  border-radius: 10px;
+  z-index: 10;
+  transition: all 0.3s;
+  box-shadow: 0 0 1000px rgba(0, 0, 0, 0.226);
+}
+
+.popup h2 {
+  font-size: 1.9vw;
+  font-family: bold;
+}
+
+.popup p {
+  font-size: var(--text);
+  line-height: var(--lh);
+}
+
+.popup .links {
+  display: flex;
+  justify-content: space-around;
+}
+
+.links a {
+  margin: 0 2vw;
+  font-size: 1vw;
+  padding: 2vh 2.5vw;
+}
+#prom {
+  cursor: not-allowed;
+  filter: brightness(0.7);
+}
+#prom:hover {
+  color: var(--white);
+  background: transparent;
+}
+
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.blur {
+  filter: brightness(0.5);
+}
+.rem {
+  display: none;
+}
+.popup i {
+  position: fixed;
+  top: 1.2vw;
+  right: 1.2vw;
+  cursor: pointer;
+  font-size: 1.8vw;
+}
+.notice-btn {
+  cursor: pointer;
+}
+
+/* MEDIAS */
+
+@media (max-width: 1400px) {
+  .heroContent {
+    width: 50%;
+    padding: 0 5vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .heroContent {
+    width: 68%;
+    padding: 0;
+    height: 50%;
+  }
+  .hero {
+    height: 80vh;
+    margin-bottom: 0;
+    padding: 7vh 0;
+  }
+  .hero h3 {
+    margin-top: 1.5vh;
+  }
+  .hero .btn {
+    margin-top: 5vh;
+  }
+  .vid {
+    height: 50vh;
+    margin-bottom: 6vh;
+  }
+  .popup {
+    width: 45%;
+  }
+  .popup h2 {
+    font-size: 2.4vw;
+  }
+  .popup .links a {
+    font-size: 1.4vw;
+  }
+}
+
+@media (max-width: 1025px) {
+  .card {
+    width: 42%;
+    margin-top: 6vh;
+  }
+  .cards {
+    padding: 0;
+  }
+  .card img {
+    width: 63%;
+  }
+
+  .cards-container h1 {
+    height: 8vh;
+  }
+  .popup {
+    width: 70%;
+    height: 35vh;
+  }
+  .popup h2 {
+    font-size: 3.5vw;
+  }
+  .popup .links a {
+    font-size: 2.4vw;
+    padding: 1.3vh 3.4vw;
+  }
+  .popup i {
+    font-size: 3.6vw;
+    top: 2.3vw;
+    right: 2.3vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .heroContent {
+    width: 90%;
+    padding: 0;
+    height: 50%;
+  }
+  .hero .btn {
+    margin-top: 5vh;
+    padding: 2vh 8vw;
+  }
+  .hero h1 {
+    font-size: 4vh;
+    width: 80%;
+    min-height: 6vh;
+    margin-bottom: 2vh;
+  }
+  .hero h3 {
+    margin-top: 1vh;
+    padding: 0 8vw;
+  }
+  .hero {
+    height: 65vh;
+    padding-top: 5vh;
+    margin-bottom: 10vh;
+  }
+  .vid {
+    height: 35vh;
+  }
+  main {
+    padding: 0 6vw;
+  }
+  .card h2 {
+    font-size: 2.4vh;
+  }
+  .popup i {
+    font-size: 4.4vw;
+    top: 4.5vw;
+    right: 4.4vw;
+  }
+}
+
+@media (max-width: 460px) {
+  .card {
+    width: 76%;
+    margin-top: 4.5vh;
+    padding: 6.2vh 0;
+  }
+  .card h2 {
+    font-size: 2.7vh;
+  }
+  .card img {
+    height: 75%;
+  }
+  .popup {
+    width: 80%;
+    height: 35vh;
+  }
+  .popup h2 {
+    font-size: 4.8vw;
+  }
+  .popup .links a {
+    font-size: 3.4vw;
+    padding: 1vh 6vw;
+  }
+  .popup i {
+    font-size: 5vw;
+    top: 6.7vw;
+    right: 4.5vw;
+  }
+  .notice {
+    margin-bottom: 8vh;
+  }
+}

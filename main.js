@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
