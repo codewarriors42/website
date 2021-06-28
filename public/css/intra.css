@@ -256,6 +256,10 @@ main {
 .notice-btn {
   cursor: pointer;
 }
+.blurBtn {
+  filter: brightness(0.5);
+  pointer-events: none;
+}
 
 /* MEDIAS */
 
