@@ -10,16 +10,17 @@ for (let card of cards) {
 
       // DO NOT REMOVE THESE COMMENTS ----------------------------------------------------------------
 
-      // popup.children[2].children[0].setAttribute(
-      //   "href",
-      //   card.children[2].textContent
-      // );
+      popup.children[2].children[0].setAttribute(
+        "href",
+        card.children[2].textContent
+      );
       popup.children[2].children[1].setAttribute(
         "href",
         card.children[3].textContent
       );
 
       popup.children[2].children[0].classList.remove("rem");
+      popup.children[2].children[0].classList.remove("blurBtn");
       popup.children[2].children[0].textContent = "Prompts";
 
       if (popup.children[0].textContent === "Crossword") {
@@ -39,15 +40,18 @@ for (let card of cards) {
           "href",
           card.children[3].textContent
         );
-        popup.children[2].children[0].classList.add("rem");
+        popup.children[2].children[0].textContent = "Start";
       } else if (popup.children[0].textContent === "Crypt Wars") {
-        // popup.children[2].children[0].setAttribute(
-        //   "href",
-        //   "https://intracw.ml"
-        // );
-        popup.children[2].children[0].textContent = "Play";
-      }
+        popup.children[2].children[0].setAttribute("href", "");
 
+        // TEMPORARY
+        popup.children[2].children[0].classList.add("rem");
+        // TEMPORARY END
+
+        popup.children[2].children[0].textContent = "Start";
+      } else if (popup.children[0].textContent === "Hardware") {
+        popup.children[2].children[0].classList.add("blurBtn");
+      }
       document.querySelector("main").classList.add("blur");
       popup.classList.remove("hide");
       document.querySelector(".cards-container").style.pointerEvents = "none";
@@ -81,7 +85,7 @@ for (let card of cards) {
 // Notice
 
 const noticeBtn = document.querySelector(".notice-btn");
-const cardContainer= document.querySelector(".cards-container")
+const cardContainer = document.querySelector(".cards-container");
 
 noticeBtn.addEventListener("click", () => {
   cardContainer.classList.toggle("hidden");
@@ -90,4 +94,4 @@ noticeBtn.addEventListener("click", () => {
   } else {
     noticeBtn.innerHTML = "I understand, show event details";
   }
-})
+});
