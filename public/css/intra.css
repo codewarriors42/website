@@ -235,14 +235,6 @@ main {
   font-size: 1vw;
   padding: 2vh 2.5vw;
 }
-#prom {
-  cursor: not-allowed;
-  filter: brightness(0.7);
-}
-#prom:hover {
-  color: var(--white);
-  background: transparent;
-}
 
 .hide {
   opacity: 0;

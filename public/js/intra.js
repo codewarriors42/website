@@ -10,10 +10,10 @@ for (let card of cards) {
 
       // DO NOT REMOVE THESE COMMENTS ----------------------------------------------------------------
 
-      // popup.children[2].children[0].setAttribute(
-      //   "href",
-      //   card.children[2].textContent
-      // );
+      popup.children[2].children[0].setAttribute(
+        "href",
+        card.children[2].textContent
+      );
       popup.children[2].children[1].setAttribute(
         "href",
         card.children[3].textContent
@@ -41,10 +41,10 @@ for (let card of cards) {
         );
         popup.children[2].children[0].classList.add("rem");
       } else if (popup.children[0].textContent === "Crypt Wars") {
-        // popup.children[2].children[0].setAttribute(
-        //   "href",
-        //   "https://intracw.ml"
-        // );
+        popup.children[2].children[0].setAttribute(
+          "href",
+          "https://intracw.ml"
+        );
         popup.children[2].children[0].textContent = "Play";
       }
 
