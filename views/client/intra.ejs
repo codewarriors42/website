@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Intra 2021</title>
+
+    <link
+      rel="preload"
+      as="font"
+      href="../fonts/AirbnbCerealBold.ttf"
+      type="font/ttf"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      @font-face {
+        font-family: reg;
+        src: url(../fonts/AirbnbCerealBook.ttf);
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: light;
+        src: url(../fonts/AirbnbCerealLight.ttf);
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: med;
+        src: url(../fonts/AirbnbCerealMedium.ttf);
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: bold;
+        src: url(../fonts/AirbnbCerealBold.ttf);
+        font-weight: normal;
+      }
+      @font-face {
+        font-family: logo;
+        src: url(../fonts/Jokerman-Regular.ttf);
+        font-weight: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="../css/all.css" />
+    <link rel="stylesheet" href="../css/intra.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="icon" href="../assets/cw-logo.png" />
+    <meta
+      name="description"
+      content="We are the Code Warriors, the computer club of DPS Vasant Kunj. We're a team of technology addicts, our skills ranging from gaming to designing"
+    />
+    <meta name="author" content="Kevin" />
+    <meta
+      name="keywords"
+      content="code, code warriors, code warrior, cw, code wars, dpsvk"
+    />
+  </head>
+  <body class="dark">
+    <!-- <div class="bgcolor"></div> -->
+    <script>
+      let theme = localStorage.getItem("theme");
+
+      if (theme == "light") {
+        document.body.classList.add("light");
+        theme = localStorage.setItem("theme", "light");
+      } else {
+        document.body.classList.remove("light");
+        theme = localStorage.setItem("theme", "dark");
+      }
+    </script>
+
+    <main>
+      <nav>
+        <div class="navLeft">
+          <a class="navBtn" target="_blank" href="https://discord.gg/aztyaceuY2"
+            >Join Discord</a
+          >
+          <a class="navLink active" href="/intra">Intra</a>
+          <a class="navLink" href="/archives/creative">Archive</a>
+          <a class="navLink" href="/resources">Resources</a>
+          <div class="ham">
+            <div class="hamLine"></div>
+          </div>
+        </div>
+        <a href="/" class="navMid">CW</a>
+        <div class="navRight">
+          <a class="navLink" href="/">Home</a>
+          <a class="navLink" href="/members">Members</a>
+          <a class="navLink" href="/contacts">Contact</a>
+          <a class="navLink" href="/alumni">Alumni</a>
+          <i class="fas fa-lightbulb"></i>
+        </div>
+      </nav>
+
+      <div class="side">
+        <a
+          style="--navD: 0.4s"
+          class="navBtn"
+          href="https://discord.gg/aztyaceuY2"
+          target="_blank"
+          >Join Discord</a
+        >
+        <a style="--navD: 0.44s" class="navLink active" href="/">Home</a>
+        <a style="--navD: 0.48s" class="navLink" href="/intra">Intra</a>
+        <a style="--navD: 0.52s" class="navLink" href="/archives/creative"
+          >Archive</a
+        >
+        <a style="--navD: 0.56s" class="navLink" href="/resources">Resources</a>
+        <a style="--navD: 0.6s" class="navLink" href="/members">Members</a>
+        <a style="--navD: 0.64s" class="navLink" href="/contacts">Contact</a>
+        <a style="--navD: 0.68s" class="navLink" href="/alumni">Alumni</a>
+      </div>
+
+      <!-- Hero ------------------------------------------------------------------ -->
+      <section class="hero">
+        <div class="heroContent">
+          <h1>Intra 2021</h1>
+          <h3 class="upAOSin">
+            We, the Code Warriors, are organising our annual Intra-school
+            competition in the coming week, from 28th June to 25th July.
+          </h3>
+          <a
+            class="btn upAOSin upAOSinD"
+            target="_blank"
+            href="https://forms.gle/gDBU857Qbf65Jfgq7"
+            >Register</a
+          >
+          <div class="transparent">
+            <div data-depth="0.2" class="dShapes">
+              <div class="l1">
+                <img
+                  class="inMob"
+                  data-speed="2"
+                  data-layer="1"
+                  style="--t: 13%; --l: 6%; --r: 0"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="inMob"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 15%; --l: 90%; --r: 1deg"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.7" class="dShapes">
+              <div class="l2">
+                <img
+                  class="inMob"
+                  data-speed="3"
+                  data-layer="2"
+                  style="--t: 0%; --l: 70%; --r: 0"
+                  src="../assets/shapes/square.svg"
+                  alt=""
+                />
+                <img
+                  class="inMob"
+                  data-speed="2"
+                  data-layer="2"
+                  style="--t: -5%; --l: 25%; --r: 20deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-invert-y="false" data-depth="0.3" class="dShapes">
+              <div class="l1">
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 30%; --l: 6%; --r: 0"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="4"
+                  data-layer="1"
+                  style="--t: 75%; --l: 64%; --r: 1deg"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="fortab"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 77%; --l: 17%; --r: 80deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="1"
+                  style="--t: 70%; --l: 1%; --r: 0"
+                  src="../assets/shapes/square.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.6" class="dShapes">
+              <div class="l2">
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="2"
+                  style="--t: 16%; --l: 32%; --r: 0"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="2"
+                  style="--t: 20%; --l: 20%; --r: 20deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="4"
+                  data-layer="2"
+                  style="--t: 27%; --l: 97%; --r: 40deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="5"
+                  data-layer="2"
+                  style="--t: 18%; --l: 76%; --r: 1deg"
+                  src="../assets/shapes/square.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-invert-x="true" data-depth="0.4" class="dShapes">
+              <div class="l3">
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="3"
+                  style="--t: 33%; --l: 85%; --r: 1deg"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="3"
+                  style="--t: 45%; --l: 13%; --r: 50deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="fortab"
+                  data-speed="2"
+                  data-layer="3"
+                  style="--t: 48%; --l: 92%; --r: 90deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="3"
+                  data-layer="3"
+                  style="--t: 72%; --l: 79%; --r: 1deg"
+                  src="../assets/shapes/square.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.6" class="dShapes">
+              <div class="l4">
+                <img
+                  class="mob"
+                  data-speed="4"
+                  data-layer="4"
+                  style="--t: 55%; --l: 78%; --r: 1deg"
+                  src="../assets/shapes/circ.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="4"
+                  style="--t: 60%; --l: 26%; --r: 20deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="5"
+                  data-layer="4"
+                  style="--t: 67%; --l: 92%; --r: 1deg"
+                  src="../assets/shapes/triangle.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+
+            <div data-depth="0.2" class="lShapes">
+              <div class="l1">
+                <img
+                  class="inMob"
+                  data-speed="2"
+                  data-layer="1"
+                  style="--t: 13%; --l: 6%; --r: 0"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="inMob"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 15%; --l: 90%; --r: 1deg"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.7" class="lShapes">
+              <div class="l2">
+                <img
+                  class="inMob"
+                  data-speed="3"
+                  data-layer="2"
+                  style="--t: 0%; --l: 70%; --r: 0"
+                  src="../assets/shapes/square2.svg"
+                  alt=""
+                />
+                <img
+                  class="inMob"
+                  data-speed="2"
+                  data-layer="2"
+                  style="--t: -5%; --l: 25%; --r: 20deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-invert-y="false" data-depth="0.3" class="lShapes">
+              <div class="l1">
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 30%; --l: 6%; --r: 0"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="4"
+                  data-layer="1"
+                  style="--t: 75%; --l: 64%; --r: 1deg"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="fortab"
+                  data-speed="3"
+                  data-layer="1"
+                  style="--t: 77%; --l: 17%; --r: 80deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="1"
+                  style="--t: 70%; --l: 1%; --r: 0"
+                  src="../assets/shapes/square2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.6" class="lShapes">
+              <div class="l2">
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="2"
+                  style="--t: 16%; --l: 32%; --r: 0"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="2"
+                  style="--t: 20%; --l: 20%; --r: 20deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="4"
+                  data-layer="2"
+                  style="--t: 27%; --l: 97%; --r: 40deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="5"
+                  data-layer="2"
+                  style="--t: 18%; --l: 76%; --r: 1deg"
+                  src="../assets/shapes/square2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-invert-x="true" data-depth="0.4" class="lShapes">
+              <div class="l3">
+                <img
+                  class="forstab"
+                  data-speed="3"
+                  data-layer="3"
+                  style="--t: 33%; --l: 85%; --r: 1deg"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="3"
+                  style="--t: 45%; --l: 13%; --r: 50deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="fortab"
+                  data-speed="2"
+                  data-layer="3"
+                  style="--t: 48%; --l: 92%; --r: 90deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="3"
+                  data-layer="3"
+                  style="--t: 72%; --l: 79%; --r: 1deg"
+                  src="../assets/shapes/square2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div data-depth="0.6" class="lShapes">
+              <div class="l4">
+                <img
+                  class="mob"
+                  data-speed="4"
+                  data-layer="4"
+                  style="--t: 55%; --l: 78%; --r: 1deg"
+                  src="../assets/shapes/circ2.svg"
+                  alt=""
+                />
+                <img
+                  class="mob"
+                  data-speed="2"
+                  data-layer="4"
+                  style="--t: 60%; --l: 26%; --r: 20deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+                <img
+                  class="forstab"
+                  data-speed="5"
+                  data-layer="4"
+                  style="--t: 67%; --l: 92%; --r: 1deg"
+                  src="../assets/shapes/triangle2.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="vid">
+        <iframe
+          src="https://www.youtube.com/embed/fdCx9_DxpwM"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </section>
+
+      <div class="segCont">
+        <div class="seg">
+          <div class="segLeft"></div>
+          <div class="segCross">
+            <div class="crossLine"></div>
+            <div class="crossLine"></div>
+          </div>
+          <div class="segRight"></div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <div class="notice-wrap">
+          <h2>Notice</h2>
+          <p>
+            You must understand the fact that the time limit, which is
+            <i>roughly</i> a month for submission based entries, has been kept
+            as long as it is in order to allow you to learn new skills of your
+            preference during the time interval itself, using the resources
+            provided by us. Thus, you have a chance of getting inducted even if
+            you have <i>no previous knowledge</i> in any of the given fields. A
+            long duration also makes it easier for you to participate in
+            multiple events.<br />
+          </p>
+          <a class="btn notice-btn">I understand, show event details</a>
+        </div>
+      </div>
+
+      <section class="cards-container hidden">
+        <h1>Events</h1>
+
+        <div class="cards">
+          <div class="card">
+            <h2>Design</h2>
+            <p style="display: none">
+              Put your creativity to the test by designing functional and
+              aesthetic products and digital artwork. You will be required to
+              complete a number of design tasks based on the prompt.
+            </p>
+            <div style="display: none" class="promLink"></div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1YBOoBhD_AM1sW1dZsqNq_r37jsYP8jdDD5CKdKcHToQ/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/design.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/design.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Web Development</h2>
+            <p style="display: none">
+              Code and build unique and functional websites and web-apps. You
+              will be required to make a website/web-app based on the creative
+              prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompts/webdev</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1nPu8hJE2V_yg3ZcaNPq5epWA-lGBC2hRsP_5rRk8LZo/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/webdev.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/webdev.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Motion Design</h2>
+            <p style="display: none">
+              Use your creativity in harmony with animation and editing skills
+              to create engaging videos. Your task will be to create a short
+              promo video based on the creative prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompts/motion</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1-yZSmU8gf0zjaEVjii0awDXHzPpnhTHJP3Sp6qh73WA/edit?usp=sharing
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/motioning.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/motioning.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Photography</h2>
+            <p style="display: none">
+              In photography there is a reality so subtle that it becomes more
+              real than reality. Your task will be to capture and tell a story
+              through photographs based on the given prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompts/photo</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1HNSgPyeefUjaNhvEA1HmgIXyucEWXnOacJIRqkR986w/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/photo.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/photo.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Audio Editing</h2>
+            <p style="display: none">
+              Test your sound creativity by making amazing beats and editing
+              audio using a DAW of your choice. You must complete and submit the task given in the prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompts/audio</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1BJdHca_qnhEG7FqF3X7KA_eEacuY7ZnjStyESAK8GPI/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/audio.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/audio.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Filmmaking</h2>
+            <p style="display: none">
+              If it can be written or thought it can be filmed. Your task will
+              be to ideate a concept for a short film based on the prompt and
+              shoot and edit it.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1XWi_9dV1t1yzFb6c1Hqf4rYCPCU0pFEDqAusY4G1cp4/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/foto.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/foto.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Game Development</h2>
+            <p style="display: none">
+              Design fun, interactive and engaging gaming experiences. Your task
+              will be to create a PC or mobile game based on the creative
+              prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1n3j8u1iaksujfr9cNth-GRqT87waoqxnoCNov3tm-aQ/edit?usp=sharing
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/gamedev.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/gamedev.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Mobile Development</h2>
+            <p style="display: none">
+              Code and build unique and functional mobile applications for iOs,
+              android or both. You will be required to build an android, iOs, or
+              hybrid application based on the creative prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1EfOLjnSfy7hMziUhWO9HV-NqiQ9oEQotRmyyNIwACAM/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/androiddev.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/androiddev.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>3D Design</h2>
+            <p style="display: none">
+              Craft lifelike and beautiful 3D representations of the real world.
+              Your task will be to create 3D model(s) based on the creative
+              prompt.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1Uvui60jWukbiXJ8pFG61EEYku9eW3A9eRiVtdxUPg4c/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/3d.svg" alt="" />
+            <img class="lightR" src="../../assets/intra/light/3d.svg" alt="" />
+          </div>
+
+          <div class="card">
+            <h2>Idea Pitching</h2>
+            <p style="display: none">
+              Think Different. Your task will be to innovate and conceptualize a
+              product which solves a real-world problem. You must come up with a
+              feasible idea and explain its different aspects.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1DejiLH2_r6q8QplNOGUok_OKnQe9LxtNwQs9ENt8deI/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/ideapich.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/ideapich.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Competitive Programming</h2>
+            <p style="display: none">
+              Cracking open a code one. 00110000 01111000 00110010 01000001.
+              Solve some problems and put your mind & wpm to the test.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1Bif0DINE-igV4YsXDGKpS0xq50ZPe1elh_njpP0azqs/edit?usp=sharing
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/prog.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/prog.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Crossword</h2>
+            <p style="display: none">
+              Let's have some pun. From newspapers to competition— it's a game
+              everybody knows but only the sharpest can win.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/11EKrcsl_JK-_ndrkgkTEEgLflx1QNg3KuBv52RCDj_Y/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/crossword.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/crossword.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Quiz</h2>
+            <p style="display: none">
+              A dramatic duel of wits and knowledge. The intra will have just
+              two rounds. Only the sharpest minds will make it to the end.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1_dK1vGENv_G31LG6Kl1rcm-qc9bo9tD4r-CiLRXHiiE/edit?usp=sharing
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/quiz.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/quiz.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Crypt Wars</h2>
+            <p style="display: none">
+              Crypt Wars— the cryptic hunt of DPS Vasant Kunj. The answer is
+              always right there on your screen but may never be found. The
+              dates for the same will be announced soon. RE9OJ1QgUEFOSUMu.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/16DuaeqYwreO055yUb03jOiw5hdL7m2jOWmYOONt1zV4/edit?usp=sharing
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/kriptik.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/kriptik.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Hardware</h2>
+            <p style="display: none">
+              Solder on, comrade. Where irl turns 3D, innate knowledge of real 
+              materials and building blocks will pave the way to victory.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1FilpLijoINiVTNRc4b-BHXrWeFFhd1voFZzG_aXJShE/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/cpu.svg" alt="" />
+            <img class="lightR" src="../../assets/intra/light/cpu.svg" alt="" />
+          </div>
+
+          <div class="card">
+            <h2>Group Discussion</h2>
+            <p style="display: none">
+              Where eloquent discourse meets technological aptitude. The group
+              discussion event will take place on MS Teams, date and time to be
+              decided.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/16g2ho33FRnUSr-X7IU34Gca--UbCb6LdDm5hWzcns5g/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/gd.svg" alt="" />
+            <img class="lightR" src="../../assets/intra/light/gd.svg" alt="" />
+          </div>
+
+          <div class="card">
+            <h2>Robotics</h2>
+            <p style="display: none">
+              Get your gears turning for an innovative modern solution to
+              traditional problems, one robot at a time. You will be tasked with
+              making a presentation for your bot, including design and code.
+            </p>
+            <div style="display: none" class="promLink">/prompt/design</div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1dyjppXF8vf3TAbUHBVgKadjXG3tyd6Eh3XdcXodMGdU/edit
+            </div>
+            <img class="darkR" src="../../assets/intra/dark/robot.svg" alt="" />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/robot.svg"
+              alt=""
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="popup hide">
+      <h2>Event Name</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae labore
+        eius assumenda iure accusantium veritatis pariatur nisi non doloribus
+        soluta, tenetur optio perspiciatis eligendi autem!
+      </p>
+      <div class="links">
+        <!-- DO NOT REMOVE COMMENTS -->
+        <!-- <a class="btn" target="_blank" id="prom" href="#">Prompts</a>
+        <a class="btn" target="_blank" id="rsc" href="#">Resources</a> -->
+        <a class="btn" target="_blank" id="prom" href="javascript: void(0)"
+          >Prompts</a
+        >
+        <a class="btn" target="_blank" id="rsc" href="#">Resources</a>
+      </div>
+      <i class="fas fa-times"></i>
+    </div>
+
+    <footer>
+      <p>
+        <span id="titleF"></span
+        ><span id="cursorF" class="cursor footcur"></span>
+      </p>
+      <div class="footSocial">
+        <a href="https://www.facebook.com/codewarriors/">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="https://www.instagram.com/codewarriors42/?hl=en">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://github.com/codewarriors42">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.behance.net/codewarriors">
+          <i class="fab fa-behance"></i>
+        </a>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="/js/mode.js"></script>
+    <script src="/js/intra.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

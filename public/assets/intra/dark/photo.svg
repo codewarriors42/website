@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="362.181" height="266.486" viewBox="0 0 362.181 266.486">
+  <g id="Group_136" data-name="Group 136" transform="translate(-2071.302 -481.514)">
+    <g id="Group_5" data-name="Group 5">
+      <path id="Path_8" data-name="Path 8" d="M2125.133,518.794H2139.7c5.287,0,9.737,2.277,11.04,7.29h269.321a11.583,11.583,0,0,1,11.426,11.741V726.067a11.583,11.583,0,0,1-11.426,11.741h-269.8c-1.712,4.259-2.9,8.192-10.56,8.192h-54.765c-8.133,0-11.426-6.2-11.426-12.682V531.8s-2.273-13,10.471-13Z" fill="none" stroke="#e2e2e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_9" data-name="Path 9" d="M2348.509,525.759s-13.693-42.245-19.808-42.245H2281.19l.47.091h-27.754c-6.115,0-19.807,42.245-19.807,42.245" fill="none" stroke="#e2e2e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <path id="Path_10" data-name="Path 10" d="M2291.3,557.838a77.852,77.852,0,1,0,77.852,77.852A77.851,77.851,0,0,0,2291.3,557.838Zm0,147.652a69.8,69.8,0,1,1,69.8-69.8A69.8,69.8,0,0,1,2291.3,705.49Z" fill="#e2e2e2"/>
+      <circle id="Ellipse_2" data-name="Ellipse 2" cx="47.515" cy="47.515" r="47.515" transform="translate(2243.788 588.175)" fill="none" stroke="#e2e2e2" stroke-miterlimit="10" stroke-width="3"/>
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="20.103" cy="20.103" r="20.103" transform="translate(2271.201 615.587)" fill="none" stroke="#e2e2e2" stroke-miterlimit="10" stroke-width="3"/>
+      <line id="Line_10" data-name="Line 10" x2="25.032" transform="translate(2279.443 504.215)" fill="#e2e2e2" stroke="#e2e2e2" stroke-linecap="round" stroke-miterlimit="10" stroke-width="7"/>
+      <line id="Line_11" data-name="Line 11" y2="142.374" transform="translate(2147.125 561.21)" fill="none" stroke="#e2e2e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+      <circle id="Ellipse_4" data-name="Ellipse 4" cx="7.955" cy="7.955" r="7.955" transform="translate(2104.19 549.98)" fill="#e2e2e2"/>
+      <line id="Line_12" data-name="Line 12" x2="25.032" transform="translate(2098.573 512.883)" fill="#e2e2e2" stroke="#e2e2e2" stroke-linecap="round" stroke-miterlimit="10" stroke-width="7"/>
+    </g>
+    <rect id="Rectangle_7" data-name="Rectangle 7" width="26" height="13.357" rx="6.679" transform="translate(2380.5 549.5)" fill="none" stroke="#e2e2e2" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>
