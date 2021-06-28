@@ -41,10 +41,12 @@ for (let card of cards) {
         );
         popup.children[2].children[0].classList.add("rem");
       } else if (popup.children[0].textContent === "Crypt Wars") {
-        popup.children[2].children[0].setAttribute(
-          "href",
-          "https://intracw.ml"
-        );
+        popup.children[2].children[0].setAttribute("href", "");
+
+        // TEMPORARY
+        popup.children[2].children[0].style.display = "none";
+        // TEMPORARY END
+
         popup.children[2].children[0].textContent = "Play";
       }
 
@@ -81,7 +83,7 @@ for (let card of cards) {
 // Notice
 
 const noticeBtn = document.querySelector(".notice-btn");
-const cardContainer= document.querySelector(".cards-container")
+const cardContainer = document.querySelector(".cards-container");
 
 noticeBtn.addEventListener("click", () => {
   cardContainer.classList.toggle("hidden");
@@ -90,4 +92,4 @@ noticeBtn.addEventListener("click", () => {
   } else {
     noticeBtn.innerHTML = "I understand, show event details";
   }
-})
+});
