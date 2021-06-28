@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Events</title>
+  </head>
+  <body>
+    <h1>Events</h1>
+    <p>This is for grouping archives</p>
+    <% for (let event of events) { %>
+    <h3><%= event.name %></h3>
+    <% if (user.isSupreme) { %>
+    <a href="/admin/edit-event/<%= event._id %>">Edit</a>
+    <a href="/admin/delete-event/<%= event._id %>">Delete</a>
+    <% } %> <% } %>
+    <hr />
+    <% if (user.isSupreme) { %>
+    <a href="/admin/add-event">Add a new Event</a>
+    <% } %>
+  </body>
+</html>

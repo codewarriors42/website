@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Edit Contact</title>
+  </head>
+  <body>
+    <h1>Edit Contact</h1>
+    <form
+      action="/admin/edit-contact/<%= contact._id %>?_method=PUT"
+      method="POST"
+    >
+      <input type="text" name="post" value="<%= contact.post %>" />
+      <input type="email" name="mail" value="<%= contact.mail %>" />
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>

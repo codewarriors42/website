@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Add Member</title>
+  </head>
+  <body>
+    <h1>Add Member</h1>
+    <form
+      action="/admin/add-member"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <input required type="text" name="name" placeholder="name" />
+      <input required type="text" name="event" placeholder="event" />
+      <div class="socials">
+        <div class="social">
+          <input
+            placeholder="Social Platform"
+            type="text"
+            name="socialPlatform"
+          />
+          <input placeholder="Social URL" type="text" name="socialURL" />
+        </div>
+      </div>
+      <input required type="file" accept="image/*" name="img" />
+      <h3 style="cursor: pointer" id="addSocial">Add Social</h3>
+      <h3 style="cursor: pointer" id="remSocial">Remove Social</h3>
+      <button type="submit">Done</button>
+    </form>
+
+    <script>
+      let btn = document.querySelector("#addSocial");
+      let socials = document.querySelector(".socials");
+
+      btn.addEventListener("click", () => {
+        let social = document.createElement("DIV");
+        social.classList.add("social");
+
+        let sPlatform = document.createElement("INPUT");
+        sPlatform.setAttribute("placeholder", "Social Platform");
+        sPlatform.setAttribute("type", "text");
+        sPlatform.setAttribute("name", "socialPlatform");
+
+        let sURL = document.createElement("INPUT");
+        sURL.setAttribute("placeholder", "Social URL");
+        sURL.setAttribute("type", "text");
+        sURL.setAttribute("name", "socialURL");
+
+        social.appendChild(sPlatform);
+        social.appendChild(sURL);
+
+        socials.appendChild(social);
+      });
+
+      let rem = document.querySelector("#remSocial");
+      rem.addEventListener("click", () => {
+        document.querySelector(".social:last-of-type").remove();
+      });
+    </script>
+  </body>
+</html>

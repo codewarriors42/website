@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Warriors - Admin - Edit Profile</title>
+</head>
+<body>
+    <h1>Edit Profile</h1>
+    <% if (message) { %>
+        <h3 style="color: red;"><%= message %></h3>
+    <% } %>
+    <form action="/admin/edit-profile?_method=PUT" method="POST">
+        <input type="text" name="username" value="<%= user.username %>">
+        <input required type="password" name="oldPassword" placeholder="Old Password">
+        <input type="password" name="password" placeholder="New Password">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

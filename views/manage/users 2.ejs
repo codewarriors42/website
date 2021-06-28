@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Warriors - Admin - Users</title>
+  </head>
+  <body>
+    <h1>Users</h1>
+    <% for (let user of users) { %>
+    <hr />
+    <h3><%= user.name %></h3>
+    <% if (visitor.isSupreme) { %> <% if (visitor.username !== user.username) {
+    %> <% if (!user.isSupreme) { %>
+    <a href="/admin/delete-user/<%= user.id %>">Delete User</a>
+    <a href="/admin/edit-user/<%= user.id %>">Edit User</a>
+    <% } %> <% } %> <% } %> <% if (user.isSupreme) { %>
+    <h4 style="color: green">Admin</h4>
+    <% } else { %>
+    <h4 style="color: blue">Member</h4>
+    <% } %>
+    <hr />
+    <% } %>
+    <a href="/admin">Admin</a>
+    <hr />
+    <hr />
+    <% if (visitor.isSupreme) { %>
+    <a href="/admin/add-user">Make a new User</a>
+    <% } %>
+  </body>
+</html>
