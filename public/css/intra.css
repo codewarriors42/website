@@ -235,7 +235,6 @@ main {
   font-size: 1vw;
   padding: 2vh 2.5vw;
 }
-<<<<<<< HEAD
 #prom {
   cursor: not-allowed;
   filter: brightness(0.7);
@@ -244,8 +243,6 @@ main {
   color: var(--white);
   background: transparent;
 }
-=======
->>>>>>> afc6475156f4b6802ae80ae1075167cf9102d848
 
 .hide {
   opacity: 0;
