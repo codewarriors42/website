@@ -42,12 +42,10 @@ for (let card of cards) {
         );
         popup.children[2].children[0].textContent = "Start";
       } else if (popup.children[0].textContent === "Crypt Wars") {
-        popup.children[2].children[0].setAttribute("href", "");
-
-        // TEMPORARY
-        popup.children[2].children[0].classList.add("rem");
-        // TEMPORARY END
-
+        popup.children[2].children[0].setAttribute(
+          "href",
+          "https://crypt-wars.code-warriors.org/"
+        );
         popup.children[2].children[0].textContent = "Start";
       }
 
