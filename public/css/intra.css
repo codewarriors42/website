@@ -60,7 +60,7 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 12vh;
+  margin-bottom: 14vh;
 }
 .seg {
   width: 50%;
@@ -106,8 +106,8 @@ main {
 
 .notice-wrap {
   display: flex;
-  flex-direction: column;
-  width: 80%;
+  flex-direction: row;
+  width: 50%;
   height: 60%;
   justify-content: space-between;
   align-items: center;
@@ -242,6 +242,8 @@ main {
 }
 .blur {
   filter: brightness(0.5);
+  pointer-events: none;
+  cursor: not-allowed;
 }
 .rem {
   display: none;
@@ -260,9 +262,34 @@ main {
   filter: brightness(0.5);
   pointer-events: none;
 }
+.btn {
+  cursor: pointer;
+}
 
+/* Schedule */
+.schedule {
+  margin-top: 18vh;
+  margin-bottom: 6vh;
+}
+.schedule table {
+  width: 100%;
+  border: 2px solid var(--white);
+  border-collapse: collapse;
+}
+td,
+th {
+  border-bottom: 1px solid var(--white);
+  border-right: 1px solid var(--white);
+  padding: 1vh 2vw;
+}
+th {
+  font-size: 1.4vw;
+  font-family: med;
+}
+td {
+  font-size: 1.2vw;
+}
 /* MEDIAS */
-
 @media (max-width: 1400px) {
   .heroContent {
     width: 50%;
