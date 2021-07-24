@@ -186,9 +186,9 @@ router.get("/alumni", async (req, res) => {
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
 });
 
-router.get("/soBig", async (req, res) => {
+router.get("/intra", async (req, res) => {
   let resources = await Resource.find();
-  res.render("client/soBig", { resources: resources });
+  res.render("client/intra", { resources: resources });
 });
 
 // EXPORT
