@@ -41,6 +41,10 @@ router.get("/", async (req, res) => {
   res.render("client/index", { faqs: faqs });
 });
 
+router.get('/result', (req,res) => {
+  res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+});
+
 router.get("/members", async (req, res) => {
   let members = await Member.find();
   res.render("client/members.ejs", { members: members });
