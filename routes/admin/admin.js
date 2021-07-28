@@ -56,8 +56,8 @@ router.get("/users", async (req, res) => {
   res.render("manage/users", { users: users, visitor: user });
 });
 router.get("/members", async (req, res) => {
-  let members = await Member.find();
-  let user = await User.findById(req.user.id);
+  let members = await Member.find().sort({ pos: 1 });
+  let user = await User.findOne({ _id: req.user.id });
   res.render("manage/members", { members: members, user: user });
 });
 router.get("/alumnis", async (req, res) => {
@@ -167,6 +167,7 @@ router.post(
         event: body.event,
         socials: socials,
         image: filename,
+        pos: parseInt(body.pos),
       });
 
       await member.save();
@@ -483,6 +484,7 @@ router.put(
                     event: body.event,
                     socials: socials,
                     image: filename,
+                    pos: parseInt(body.pos),
                   },
                 }
               );
@@ -497,6 +499,7 @@ router.put(
               name: body.name,
               event: body.event,
               socials: socials,
+              pos: parseInt(body.pos),
             },
           }
         );

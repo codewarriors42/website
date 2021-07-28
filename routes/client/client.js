@@ -42,7 +42,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/members", async (req, res) => {
-  let members = await Member.find();
+  let members = await Member.find().sort({ pos: 1 });
   res.render("client/members.ejs", { members: members });
 });
 
