@@ -41,6 +41,10 @@ router.get("/", async (req, res) => {
   res.render("client/index", { faqs: faqs });
 });
 
+router.get('/result', (req,res) => {
+  res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+});
+
 router.get("/members", async (req, res) => {
   let members = await Member.find().sort({ pos: 1 });
   res.render("client/members.ejs", { members: members });
@@ -186,9 +190,9 @@ router.get("/alumni", async (req, res) => {
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
 });
 
-router.get("/soBig", async (req, res) => {
+router.get("/intra", async (req, res) => {
   let resources = await Resource.find();
-  res.render("client/soBig", { resources: resources });
+  res.render("client/intra", { resources: resources });
 });
 
 // EXPORT
