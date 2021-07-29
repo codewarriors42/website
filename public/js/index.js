@@ -5,6 +5,7 @@ const textArray = [
   "We are the warriors that built this town",
   "Once a warrior, always a warrior.",
   "We build cool stuff and pwn at events",
+  "Coding is a mindset.",
 ];
 const typingDelay = 60;
 const eraseDelay = 60;
