@@ -334,8 +334,12 @@ td {
   justify-content: center;
   align-items: center;
 }
+/* .row h2 {
+  margin-left: 1vw;
+  font-size: 1.5vw;
+} */
 .row a img {
-  width: 80%;
+  width: 100%;
 }
 
 /* PRIZE */
@@ -378,6 +382,9 @@ td {
 .vid img {
   width: 100%;
 }
+/* #geek {
+  width: 30%;
+} */
 
 /* MEDIAS */
 
