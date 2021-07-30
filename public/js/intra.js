@@ -49,7 +49,7 @@ for (let card of cards) {
           "https://crypt-wars.code-warriors.org/"
         );
         popup.children[2].children[0].textContent = "Start";
-      } else if (popup.children[0].textContent === "PC Gaming") {
+      } else if (popup.children[0].textContent === "Gaming") {
         popup.children[2].children[0].setAttribute("href", "");
         popup.children[2].children[1].classList.add("hide-res");
       } else if (popup.children[0].textContent === "Sci-Napse") {
