@@ -388,7 +388,7 @@ td {
 
 /* MEDIAS */
 
-@media (max-width: 1200px) {
+@media (max-width: 1280px) {
   .heroContent {
     width: 80%;
     padding: 0;
@@ -518,7 +518,7 @@ td {
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 530px) {
   .card {
     width: 76%;
     margin-top: 4.5vh;

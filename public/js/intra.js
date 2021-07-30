@@ -47,6 +47,15 @@ for (let card of cards) {
           "https://crypt-wars.code-warriors.org/"
         );
         popup.children[2].children[0].textContent = "Start";
+      } else if (popup.children[0].textContent === "PC Gaming") {
+        popup.children[2].children[0].setAttribute("href", "");
+        popup.children[2].children[1].classList.add("blur");
+      } else if (popup.children[0].textContent === "Sci-Napse") {
+        popup.children[2].children[0].setAttribute("href", "");
+        popup.children[2].children[1].classList.add("blur");
+      } else if (popup.children[0].textContent === "Digital Art") {
+        popup.children[2].children[0].setAttribute("href", "");
+        popup.children[2].children[1].classList.add("blur");
       }
 
       document.querySelector("main").classList.add("blur");
@@ -84,3 +93,7 @@ for (let card of cards) {
 
 const noticeBtn = document.querySelector(".notice-btn");
 const cardContainer = document.querySelector(".cards-container");
+
+setInterval(() => {
+  document.querySelector(".btn.blur").style.pointerEvents = "none";
+}, 100);
