@@ -7,6 +7,7 @@
 .hero {
   width: 100%;
   padding: 18vh 0;
+  padding-top: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,27 +17,29 @@
 .heroContent {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 70%;
   height: 90%;
   justify-content: space-between;
   align-items: center;
   text-align: center;
 }
 .hero h1 {
-  font-size: 5vh;
+  font-size: 12vh;
   font-family: bold;
   /* margin-bottom: 2vh; */
   width: 110%;
-  height: 10vh;
+  height: 14vh;
 }
 .hero h3 {
   font-weight: 100;
   font-family: light;
   letter-spacing: 0.5px;
   font-size: var(--text);
+  padding: 0 20%;
+  margin-bottom: 4vh;
 }
 .hero .btn {
-  margin-top: 3.8vh;
+  margin: 0 2vw;
 }
 main {
   transition: all 0.3s;
@@ -44,7 +47,7 @@ main {
 /* Video ---------------------------------------- */
 .vid {
   width: 100%;
-  height: 80vh;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -60,7 +63,7 @@ main {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: 12vh;
+  margin-bottom: 14vh;
 }
 .seg {
   width: 50%;
@@ -106,8 +109,8 @@ main {
 
 .notice-wrap {
   display: flex;
-  flex-direction: column;
-  width: 80%;
+  flex-direction: row;
+  width: 50%;
   height: 60%;
   justify-content: space-between;
   align-items: center;
@@ -243,6 +246,11 @@ main {
 .blur {
   filter: brightness(0.5);
 }
+.custBlur {
+  filter: brightness(0.5);
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .rem {
   display: none;
 }
@@ -260,36 +268,144 @@ main {
   filter: brightness(0.5);
   pointer-events: none;
 }
+.btn {
+  cursor: pointer;
+}
+
+/* Schedule */
+.schedule {
+  margin-top: 18vh;
+  margin-bottom: 6vh;
+}
+.schedule table {
+  width: 100%;
+  border: 2px solid var(--white);
+  border-collapse: collapse;
+}
+td,
+th {
+  border-bottom: 1px solid var(--white);
+  border-right: 1px solid var(--white);
+  padding: 1vh 2vw;
+}
+th {
+  font-size: 1.4vw;
+  font-family: med;
+}
+td {
+  font-size: 1.2vw;
+}
+
+/* Sponsors */
+.sponsors {
+  margin-top: 16vh;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sponsors h1 {
+  display: inline-block;
+  width: auto;
+  font-size: 3vw;
+  text-align: center;
+  margin-bottom: 10vh;
+  position: relative;
+  font-family: bold;
+}
+.sponsors h1::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  border-radius: 50px;
+  background: #fff;
+}
+.row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.row a {
+  width: 24%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row a img {
+  width: 80%;
+}
+
+/* PRIZE */
+.herobtns {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.prize {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 2vh 0;
+}
+.prize.cards {
+  margin-bottom: 3vh;
+}
+.prize a {
+  font-family: reg;
+  font-size: 2.6vh;
+}
+.prize a span {
+  font-size: 4vh;
+  font-family: bold;
+}
+.strike {
+  font-family: light;
+}
+.prize .card {
+  width: 10vw;
+  height: 10vw;
+}
+/* .prize .card:hover {
+  cursor: default;
+  background: var(--sBlack);
+} */
+
+.vid img {
+  width: 100%;
+}
 
 /* MEDIAS */
 
-@media (max-width: 1400px) {
-  .heroContent {
-    width: 50%;
-    padding: 0 5vw;
-  }
-}
-
 @media (max-width: 1200px) {
   .heroContent {
-    width: 68%;
+    width: 80%;
     padding: 0;
     height: 50%;
   }
   .hero {
-    height: 80vh;
+    height: 20vh;
     margin-bottom: 0;
-    padding: 7vh 0;
+    padding: 0 0;
+    margin-bottom: 40vh;
+  }
+  .hero h1 {
+    font-size: 8vh;
+    height: 9vh;
   }
   .hero h3 {
     margin-top: 1.5vh;
   }
   .hero .btn {
-    margin-top: 5vh;
+    margin-top: 1vh;
   }
   .vid {
-    height: 50vh;
-    margin-bottom: 6vh;
+    height: 40vh;
+    margin-bottom: 2vh;
   }
   .popup {
     width: 45%;
@@ -299,6 +415,30 @@ main {
   }
   .popup .links a {
     font-size: 1.4vw;
+  }
+  .prize .card {
+    width: 18vw;
+    height: 18vw;
+    margin-top: 4vh;
+  }
+  .prize a {
+    font-size: 2vh;
+  }
+  .prize a span {
+    font-size: 3vh;
+  }
+  .sponsors h1 {
+    font-size: 5vh;
+  }
+  .row {
+    flex-wrap: wrap;
+  }
+  .row a {
+    width: 40%;
+    margin-bottom: 7vh;
+  }
+  .row a img {
+    width: 100%;
   }
 }
 
@@ -342,11 +482,11 @@ main {
     height: 50%;
   }
   .hero .btn {
-    margin-top: 5vh;
+    margin-top: 2vh;
     padding: 2vh 8vw;
   }
   .hero h1 {
-    font-size: 4vh;
+    font-size: 7vh;
     width: 80%;
     min-height: 6vh;
     margin-bottom: 2vh;
@@ -354,11 +494,6 @@ main {
   .hero h3 {
     margin-top: 1vh;
     padding: 0 8vw;
-  }
-  .hero {
-    height: 65vh;
-    padding-top: 5vh;
-    margin-bottom: 10vh;
   }
   .vid {
     height: 35vh;
@@ -406,5 +541,28 @@ main {
   }
   .notice {
     margin-bottom: 8vh;
+  }
+  .hero .card {
+    width: 11vh;
+    height: 11vh;
+  }
+  .prize a {
+    font-size: 1.6vh;
+  }
+  .prize a span {
+    font-size: 2.4vh;
+  }
+  .vid {
+    height: 20vh;
+  }
+  .sponsors h1 {
+    font-size: 4vh;
+  }
+  .sponsors a {
+    width: 100%;
+    margin-bottom: 14vh;
+  }
+  .sponsors a img {
+    width: 70%;
   }
 }

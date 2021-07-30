@@ -42,7 +42,7 @@
     </style>
 
     <link rel="stylesheet" href="/css/all.css" />
-    <link rel="stylesheet" href="/css/intra.css" />
+    <link rel="stylesheet" href="/css/soBig.css" />
 
     <link
       rel="stylesheet"
@@ -79,7 +79,7 @@
           <a class="navBtn" target="_blank" href="https://discord.gg/aztyaceuY2"
             >Join Discord</a
           >
-          <a class="navLink active" href="/intra">Intra</a>
+          <a class="navLink active" href="/soBig">soBig</a>
           <a class="navLink" href="/archives/creative">Archive</a>
           <a class="navLink" href="/resources">Resources</a>
           <div class="ham">
@@ -104,8 +104,8 @@
           target="_blank"
           >Join Discord</a
         >
-        <a style="--navD: 0.44s" class="navLink active" href="/">Home</a>
-        <a style="--navD: 0.48s" class="navLink" href="/intra">Intra</a>
+        <a style="--navD: 0.44s" class="navLink" href="/">Home</a>
+        <a style="--navD: 0.48s" class="navLink active" href="/soBig">soBig</a>
         <a style="--navD: 0.52s" class="navLink" href="/archives/creative"
           >Archive</a
         >
@@ -118,17 +118,31 @@
       <!-- Hero ------------------------------------------------------------------ -->
       <section class="hero">
         <div class="heroContent">
-          <h1>Intra 2021</h1>
-          <h3 class="upAOSin">
-            We, the Code Warriors, are organising our annual Intra-school
-            competition in the coming week, from 28th June to 25th July.
+          <h1>soBig.s</h1>
+          <div class="prize cards">
+            <a href="#events" class="card"><span>15</span>&nbsp;Events</a>
+            <a
+              target="_blank"
+              href="https://docs.google.com/document/d/117Y9rNNSYK41df7b5XsPZLNOcmonNTQtMTuECoTP3m0/edit#heading=h.qakg2nd7re8h"
+              class="card"
+              ><span>15</span>&nbsp;Days</a
+            >
+            <a href="#sponsors" class="card"><span>1.5L</span>&nbsp;Prizes</a>
+          </div>
+          <h3>
+            Come not to win, but to survive.<br /><strike class="strike"
+              >Don't</strike
+            >&nbsp;Panic.
           </h3>
-          <a
-            class="btn upAOSin upAOSinD"
-            target="_blank"
-            href="https://forms.gle/gDBU857Qbf65Jfgq7"
-            >Register</a
-          >
+          <div class="herobtns">
+            <a
+              class="btn"
+              target="_blank"
+              href="https://forms.gle/JFMB91VQ2dbAAmwv8"
+              >Register</a
+            >
+            <a href="/sobigsguide" target="_blank" class="btn">Event guide</a>
+          </div>
           <div class="transparent">
             <div data-depth="0.2" class="dShapes">
               <div class="l1">
@@ -488,12 +502,8 @@
       </section>
 
       <section class="vid">
-        <iframe
-          src="https://www.youtube.com/embed/fdCx9_DxpwM"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+        <img src="/assets/banner.png" class="darkR" alt="banner" />
+        <img src="/assets/banner-light.svg" class="lightR" alt="banner" />
       </section>
 
       <div class="segCont">
@@ -507,29 +517,12 @@
         </div>
       </div>
 
-      <div class="notice">
-        <div class="notice-wrap">
-          <h2>Notice</h2>
-          <p>
-            You must understand the fact that the time limit, which is
-            <i>roughly</i> a month for submission based entries, has been kept
-            as long as it is in order to allow you to learn new skills of your
-            preference during the time interval itself, using the resources
-            provided by us. Thus, you have a chance of getting inducted even if
-            you have <i>no previous knowledge</i> in any of the given fields. A
-            long duration also makes it easier for you to participate in
-            multiple events.<br />
-          </p>
-          <a class="btn notice-btn">I understand, show event details</a>
-        </div>
-      </div>
-
-      <section class="cards-container hidden">
+      <section class="cards-container" id="events">
         <h1>Events</h1>
 
         <div class="cards">
           <div class="card">
-            <h2>Design</h2>
+            <h2>Designathon</h2>
             <p style="display: none">
               Put your creativity to the test by designing functional and
               aesthetic products and digital artwork. You will be required to
@@ -554,7 +547,7 @@
           </div>
 
           <div class="card">
-            <h2>Web Development</h2>
+            <h2>Hackathon</h2>
             <p style="display: none">
               Code and build unique and functional websites and web-apps. You
               will be required to make a website/web-app based on the creative
@@ -578,7 +571,7 @@
             />
           </div>
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>Motion Design</h2>
             <p style="display: none">
               Use your creativity in harmony with animation and editing skills
@@ -601,7 +594,7 @@
               src="../../assets/intra/light/motioning.svg"
               alt=""
             />
-          </div>
+          </div> -->
 
           <div class="card">
             <h2>Photography</h2>
@@ -624,7 +617,7 @@
             />
           </div>
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>Audio Editing</h2>
             <p style="display: none">
               Test your sound creativity by making amazing beats and editing
@@ -643,7 +636,7 @@
               src="../../assets/intra/light/audio.svg"
               alt=""
             />
-          </div>
+          </div> -->
 
           <div class="card">
             <h2>Filmmaking</h2>
@@ -691,7 +684,7 @@
             />
           </div>
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>Mobile Development</h2>
             <p style="display: none">
               Code and build unique and functional mobile applications for iOs,
@@ -714,9 +707,9 @@
               src="../../assets/intra/light/androiddev.svg"
               alt=""
             />
-          </div>
+          </div> -->
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>3D Design</h2>
             <p style="display: none">
               Craft lifelike and beautiful 3D representations of the real world.
@@ -731,9 +724,9 @@
             </div>
             <img class="darkR" src="../../assets/intra/dark/3d.svg" alt="" />
             <img class="lightR" src="../../assets/intra/light/3d.svg" alt="" />
-          </div>
+          </div> -->
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>Idea Pitching</h2>
             <p style="display: none">
               Think Different. Your task will be to innovate and conceptualize a
@@ -756,10 +749,10 @@
               src="../../assets/intra/light/ideapich.svg"
               alt=""
             />
-          </div>
+          </div> -->
 
           <div class="card">
-            <h2>Competitive Programming</h2>
+            <h2>Programming</h2>
             <p style="display: none">
               Cracking open a code one. 00110000 01111000 00110010 01000001.
               Solve some problems and put your mind & wpm to the test. The Intra
@@ -801,7 +794,7 @@
             />
           </div>
 
-          <div class="card">
+          <!-- <div class="card">
             <h2>Quiz</h2>
             <p style="display: none">
               A dramatic duel of wits and knowledge. The intra will have just
@@ -817,10 +810,10 @@
               src="../../assets/intra/light/quiz.svg"
               alt=""
             />
-          </div>
+          </div> -->
 
           <div class="card">
-            <h2>Crypt Wars</h2>
+            <h2>Techathlon</h2>
             <p style="display: none">
               Crypt Wars— the cryptic hunt of DPS Vasant Kunj. The answer is
               always right there on your screen but may never be found. The
@@ -895,8 +888,94 @@
               alt=""
             />
           </div>
+
+          <div class="card">
+            <h2>Sci-Napse</h2>
+            <p style="display: none">
+              Get your gears turning for an innovative modern solution to
+              traditional problems, one robot at a time. You will be tasked with
+              making a presentation for your bot, including design and code.
+            </p>
+            <div style="display: none" class="promLink">
+              https://docs.google.com/document/d/1L0mgI91Ko2C9hiusR7ML0jBTWEhWLtcD-xCYhS5qa-M/edit
+            </div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1dyjppXF8vf3TAbUHBVgKadjXG3tyd6Eh3XdcXodMGdU/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/scinapse.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/scinapse-light.svg"
+              alt=""
+            />
+          </div>
+
+          <div class="card">
+            <h2>Digital Art</h2>
+            <p style="display: none">
+              Get your gears turning for an innovative modern solution to
+              traditional problems, one robot at a time. You will be tasked with
+              making a presentation for your bot, including design and code.
+            </p>
+            <div style="display: none" class="promLink">
+              https://docs.google.com/document/d/1L0mgI91Ko2C9hiusR7ML0jBTWEhWLtcD-xCYhS5qa-M/edit
+            </div>
+            <div style="display: none" class="rscLink">
+              https://docs.google.com/document/d/1dyjppXF8vf3TAbUHBVgKadjXG3tyd6Eh3XdcXodMGdU/edit
+            </div>
+            <img
+              class="darkR"
+              src="../../assets/intra/dark/digiart.svg"
+              alt=""
+            />
+            <img
+              class="lightR"
+              src="../../assets/intra/light/digiart-light.svg"
+              alt=""
+            />
+          </div>
         </div>
       </section>
+
+      <section class="sponsors" id="sponsors">
+        <h1>Our Sponsors</h1>
+        <div class="row">
+          <a href="/" target="_blank">
+            <img src="/assets/geeks.png" alt="geeks for geeks" />
+          </a>
+          <a href="/" target="_blank">
+            <img class="darkR" src="/assets/task.png" alt="sponsors" />
+            <img class="lightR" src="/assets/task-light.png" alt="" />
+          </a>
+          <a href="/" target="_blank">
+            <img class="darkR" src="/assets/coden.png" alt="sponsors" />
+            <img class="lightR" src="/assets/codingal-light.svg" alt="" />
+          </a>
+        </div>
+      </section>
+
+      <!-- <section class="schedule">
+        <table>
+          <thead>
+            <tr>
+              <th>Events</th>
+              <th colspan="2">Schedule</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Hack</td>
+              <td>the</td>
+              <td>the</td>
+            </tr>
+          </tbody>
+        </table>
+      </section> -->
     </main>
 
     <div class="popup hide">
@@ -907,7 +986,7 @@
         soluta, tenetur optio perspiciatis eligendi autem!
       </p>
       <div class="links">
-        <a class="btn" target="_blank" id="prom" href="#">Prompts</a>
+        <a class="btn custBlur" target="_blank" id="prom" href="#">Prompt</a>
         <a class="btn" target="_blank" id="rsc" href="#">Resources</a>
       </div>
       <i class="fas fa-times"></i>
@@ -938,6 +1017,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <script src="/js/mode.js"></script>
     <script src="/js/intra.js"></script>
-    <script src="/js/index.js"></script>
+    <!-- <script src="/js/index.js"></script> -->
   </body>
 </html>

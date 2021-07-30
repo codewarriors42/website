@@ -41,8 +41,8 @@ router.get("/", async (req, res) => {
   res.render("client/index", { faqs: faqs });
 });
 
-router.get('/result', (req,res) => {
-  res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+router.get("/result", (req, res) => {
+  res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 });
 
 router.get("/members", async (req, res) => {
@@ -190,9 +190,18 @@ router.get("/alumni", async (req, res) => {
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
 });
 
-router.get("/intra", async (req, res) => {
+router.get("/soBig", async (req, res) => {
   let resources = await Resource.find();
-  res.render("client/intra", { resources: resources });
+  res.render("client/soBig", { resources: resources });
+});
+
+router.get("/sobigsguide", (req, res) => {
+  res.redirect(
+    "https://docs.google.com/document/d/117Y9rNNSYK41df7b5XsPZLNOcmonNTQtMTuECoTP3m0/edit?usp=sharing"
+  );
+});
+router.get("/register", (req, res) => {
+  res.redirect("https://forms.gle/JFMB91VQ2dbAAmwv8");
 });
 
 // EXPORT

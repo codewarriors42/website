@@ -1,4 +1,4 @@
-const cards = document.querySelectorAll(".card");
+const cards = document.querySelectorAll(".cards-container .card");
 const popup = document.querySelector(".popup");
 
 for (let card of cards) {
@@ -20,8 +20,8 @@ for (let card of cards) {
       );
 
       popup.children[2].children[0].classList.remove("rem");
-      popup.children[2].children[0].classList.remove("blurBtn");
-      popup.children[2].children[0].textContent = "Prompts";
+      // popup.children[2].children[0].classList.remove("blurBtn");
+      popup.children[2].children[0].textContent = "Prompt";
 
       if (popup.children[0].textContent === "Crossword") {
         popup.children[2].children[1].setAttribute(
@@ -41,7 +41,7 @@ for (let card of cards) {
           card.children[3].textContent
         );
         popup.children[2].children[0].textContent = "Start";
-      } else if (popup.children[0].textContent === "Crypt Wars") {
+      } else if (popup.children[0].textContent === "Techathlon") {
         popup.children[2].children[0].setAttribute(
           "href",
           "https://crypt-wars.code-warriors.org/"
@@ -56,7 +56,8 @@ for (let card of cards) {
       document.querySelector(".hero").style.pointerEvents = "none";
     }, 10);
     setTimeout(() => {
-      document.querySelector(".blur").addEventListener("click", () => {
+      document.querySelector("main.blur").addEventListener("click", () => {
+        console.log("oye");
         popup.classList.add("hide");
         document.querySelector(".blur")
           ? document.querySelector(".blur").classList.remove("blur")
@@ -83,12 +84,3 @@ for (let card of cards) {
 
 const noticeBtn = document.querySelector(".notice-btn");
 const cardContainer = document.querySelector(".cards-container");
-
-noticeBtn.addEventListener("click", () => {
-  cardContainer.classList.toggle("hidden");
-  if (noticeBtn.innerHTML === "I understand, show event details") {
-    noticeBtn.innerHTML = "Hide Event Details";
-  } else {
-    noticeBtn.innerHTML = "I understand, show event details";
-  }
-});
