@@ -453,7 +453,7 @@ td {
   }
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1090px) {
   .card {
     width: 42%;
     margin-top: 6vh;
@@ -510,7 +510,7 @@ td {
     width: 100%;
   }
   .vid {
-    height: 70vh;
+    height: 76vh;
   }
   .sponsors a {
     width: 30%;
