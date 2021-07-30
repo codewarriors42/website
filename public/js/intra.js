@@ -3,6 +3,8 @@ const popup = document.querySelector(".popup");
 
 for (let card of cards) {
   card.addEventListener("click", () => {
+    if (document.querySelector(".hide-res"))
+      document.querySelector(".hide-res").classList.remove("hide-res");
     setTimeout(() => {
       // Set values
       popup.children[0].textContent = card.children[0].textContent;
@@ -49,13 +51,16 @@ for (let card of cards) {
         popup.children[2].children[0].textContent = "Start";
       } else if (popup.children[0].textContent === "PC Gaming") {
         popup.children[2].children[0].setAttribute("href", "");
-        popup.children[2].children[1].classList.add("blur");
+        popup.children[2].children[1].classList.add("hide-res");
       } else if (popup.children[0].textContent === "Sci-Napse") {
         popup.children[2].children[0].setAttribute("href", "");
-        popup.children[2].children[1].classList.add("blur");
+        popup.children[2].children[1].classList.add("hide-res");
       } else if (popup.children[0].textContent === "Digital Art") {
         popup.children[2].children[0].setAttribute("href", "");
-        popup.children[2].children[1].classList.add("blur");
+        popup.children[2].children[1].classList.add("hide-res");
+      } else if (popup.children[0].textContent === "Surprise") {
+        popup.children[2].children[0].setAttribute("href", "");
+        popup.children[2].children[1].classList.add("hide-res");
       }
 
       document.querySelector("main").classList.add("blur");
@@ -93,7 +98,3 @@ for (let card of cards) {
 
 const noticeBtn = document.querySelector(".notice-btn");
 const cardContainer = document.querySelector(".cards-container");
-
-setInterval(() => {
-  document.querySelector(".btn.blur").style.pointerEvents = "none";
-}, 100);

@@ -386,6 +386,10 @@ td {
   width: 30%;
 } */
 
+.hide-res {
+  display: none;
+}
+
 /* MEDIAS */
 
 @media (max-width: 1280px) {
