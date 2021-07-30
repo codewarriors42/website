@@ -480,6 +480,40 @@ td {
     top: 2.3vw;
     right: 2.3vw;
   }
+
+  .prize .card {
+    width: 16vw;
+    height: 16vw;
+    margin-top: 4vh;
+  }
+  .prize a {
+    font-size: 2.2vw;
+  }
+  .prize a span {
+    font-size: 3.4vw;
+  }
+  .sponsors h1 {
+    font-size: 5vh;
+  }
+  .row {
+    flex-wrap: wrap;
+  }
+  .row a {
+    width: 40%;
+    margin-bottom: 7vh;
+  }
+  .row a img {
+    width: 100%;
+  }
+  .vid {
+    height: 70vh;
+  }
+  .sponsors a {
+    width: 30%;
+  }
+  .sponsors a img {
+    width: 100%;
+  }
 }
 
 @media (max-width: 800px) {
