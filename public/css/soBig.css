@@ -358,6 +358,7 @@ td {
 }
 .prize.cards {
   margin-bottom: 3vh;
+  flex-wrap: nowrap;
 }
 .prize a {
   font-family: reg;
