@@ -47,7 +47,7 @@ main {
 /* Video ---------------------------------------- */
 .vid {
   width: 100%;
-  height: 40vh;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -362,10 +362,10 @@ td {
 }
 .prize a {
   font-family: reg;
-  font-size: 2.6vh;
+  font-size: 1.5vw;
 }
 .prize a span {
-  font-size: 4vh;
+  font-size: 2.2vw;
   font-family: bold;
 }
 .strike {
@@ -416,7 +416,7 @@ td {
     margin-top: 1vh;
   }
   .vid {
-    height: 40vh;
+    height: 60vh;
     margin-bottom: 2vh;
   }
   .popup {
@@ -429,15 +429,15 @@ td {
     font-size: 1.4vw;
   }
   .prize .card {
-    width: 18vw;
-    height: 18vw;
+    width: 14vw;
+    height: 14vw;
     margin-top: 4vh;
   }
   .prize a {
-    font-size: 2vh;
+    font-size: 1.8vw;
   }
   .prize a span {
-    font-size: 3vh;
+    font-size: 2.3vw;
   }
   .sponsors h1 {
     font-size: 5vh;
@@ -492,10 +492,10 @@ td {
     margin-top: 4vh;
   }
   .prize a {
-    font-size: 2.2vw;
+    font-size: 2.1vw;
   }
   .prize a span {
-    font-size: 3.4vw;
+    font-size: 3vw;
   }
   .sponsors h1 {
     font-size: 5vh;
@@ -511,7 +511,7 @@ td {
     width: 100%;
   }
   .vid {
-    height: 76vh;
+    height: 56vh;
   }
   .sponsors a {
     width: 30%;
@@ -542,7 +542,7 @@ td {
     padding: 0 8vw;
   }
   .vid {
-    height: 35vh;
+    height: 50vh;
   }
   main {
     padding: 0 6vw;
@@ -554,6 +554,12 @@ td {
     font-size: 4.4vw;
     top: 4.5vw;
     right: 4.4vw;
+  }
+  .prize a {
+    font-size: 2.6vw;
+  }
+  .prize a span {
+    font-size: 3.4vw;
   }
 }
 
@@ -593,10 +599,10 @@ td {
     height: 11vh;
   }
   .prize a {
-    font-size: 1.6vh;
+    font-size: 3vw;
   }
   .prize a span {
-    font-size: 2.4vh;
+    font-size: 4.4vw;
   }
   .vid {
     height: 20vh;
