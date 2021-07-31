@@ -400,10 +400,9 @@ td {
     height: 50%;
   }
   .hero {
-    height: 20vh;
     margin-bottom: 0;
     padding: 0 0;
-    margin-bottom: 40vh;
+    margin-bottom: 10vh;
   }
   .hero h1 {
     font-size: 8vh;
@@ -451,6 +450,9 @@ td {
   }
   .row a img {
     width: 100%;
+  }
+  .transparent {
+    height: 300%;
   }
 }
 
