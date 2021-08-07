@@ -53,7 +53,6 @@ for (let card of cards) {
         popup.children[2].children[0].setAttribute("href", "");
         popup.children[2].children[1].classList.add("hide-res");
       } else if (popup.children[0].textContent === "Sci-Napse") {
-        popup.children[2].children[0].setAttribute("href", "");
         popup.children[2].children[1].classList.add("hide-res");
       } else if (popup.children[0].textContent === "Digital Art") {
         popup.children[2].children[0].setAttribute("href", "");
