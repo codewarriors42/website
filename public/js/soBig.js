@@ -7,8 +7,8 @@ for (let card of cards) {
       document.querySelector(".hide-res").classList.remove("hide-res");
     setTimeout(() => {
       // Set values
-      popup.children[0].textContent = card.children[0].textContent;
-      popup.children[1].textContent = card.children[1].textContent;
+      popup.children[0].innerHTML = card.children[0].innerHTML;
+      popup.children[1].innerHTML = card.children[1].innerHTML;
 
       // DO NOT REMOVE THESE COMMENTS ----------------------------------------------------------------
 
