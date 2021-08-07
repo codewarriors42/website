@@ -204,5 +204,9 @@ router.get("/register", (req, res) => {
   res.redirect("https://forms.gle/JFMB91VQ2dbAAmwv8");
 });
 
+router.get("/soon", (req, res) => {
+  res.render("client/soon");
+});
+
 // EXPORT
 module.exports = router;
