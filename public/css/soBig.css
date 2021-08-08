@@ -334,10 +334,11 @@ td {
   justify-content: center;
   align-items: center;
 }
-/* .row h2 {
+.row h2 {
   margin-left: 1vw;
-  font-size: 1.5vw;
-} */
+  font-size: 1.8vw;
+  white-space: nowrap;
+}
 .row a img {
   width: 100%;
 }
@@ -383,9 +384,9 @@ td {
 .vid img {
   width: 100%;
 }
-/* #geek {
+#geek {
   width: 30%;
-} */
+}
 
 .hide-res {
   display: none;
