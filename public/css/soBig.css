@@ -301,6 +301,7 @@ td {
   margin-top: 16vh;
   margin-bottom: 10vh;
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
 }
@@ -327,6 +328,7 @@ td {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  width: 110%;
 }
 .row a {
   width: 24%;
@@ -340,7 +342,7 @@ td {
   white-space: nowrap;
 }
 .row a img {
-  width: 100%;
+  width: 80%;
 }
 
 /* PRIZE */
@@ -522,6 +524,9 @@ td {
   .sponsors a img {
     width: 100%;
   }
+  .row h2 {
+    font-size: 2.2vw;
+  }
 }
 
 @media (max-width: 800px) {
@@ -563,6 +568,9 @@ td {
   }
   .prize a span {
     font-size: 3.4vw;
+  }
+  .row h2 {
+    font-size: 3vw;
   }
 }
 
@@ -619,5 +627,12 @@ td {
   }
   .sponsors a img {
     width: 70%;
+  }
+  .row h2 {
+    font-size: 2.8vh;
+    margin-left: 3vw;
+  }
+  .prize.cards {
+    width: 110%;
   }
 }
