@@ -44,7 +44,10 @@ for (let card of cards) {
         );
         popup.children[2].children[0].textContent = "Start";
       } else if (popup.children[0].textContent === "Techathlon") {
-        popup.children[2].children[0].setAttribute("href", "/soon");
+        popup.children[2].children[0].setAttribute(
+          "href",
+          "https://techathlon.code-warriors.org/"
+        );
         popup.children[2].children[0].textContent = "Start";
       } else if (popup.children[0].textContent === "Gaming") {
         popup.children[2].children[0].setAttribute("href", "");
