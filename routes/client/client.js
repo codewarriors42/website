@@ -208,5 +208,11 @@ router.get("/soon", (req, res) => {
   res.render("client/soon");
 });
 
+router.get("/11b31369", (req, res) => {
+  res.render("client/11b31369");
+});
+router.get("/11b31369/stop", (req, res) => {
+  res.render("client/11b31369stop");
+});
 // EXPORT
 module.exports = router;
