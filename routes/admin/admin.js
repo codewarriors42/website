@@ -120,15 +120,19 @@ router.post(
     // Compress
     try {
       let source = tinify.fromFile(req.file.filename);
-      await source.toFile("toConvert.jpg");
+      source.toFile("toConvert.jpg").then(() => {
+        setTimeout(async () => {
+fs.createReadStream(`./toConvert.jpg`).pipe(writeStream).then(() => {
+  fs.unlink("toConvert.jpg", (err) => {
+      if (err) {
+          res.send(err);
+      }
+  });
+});
+        }, 100)
+      });
       let filename = `${uuid.v4()}-${Date.now()}.jpg`;
       const writeStream = gfs.createWriteStream(filename);
-      await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
-      fs.unlink("toConvert.jpg", (err) => {
-        if (err) {
-          res.send(err);
-        }
-      });
       fs.unlink(`${req.file.filename}`, (err) => {
         if (err) {
           res.send(err);

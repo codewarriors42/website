@@ -190,10 +190,10 @@ router.get("/alumni", async (req, res) => {
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
 });
 
-router.get("/soBig", async (req, res) => {
-  let resources = await Resource.find();
-  res.render("client/soBig", { resources: resources });
-});
+// router.get("/soBig", async (req, res) => {
+//   let resources = await Resource.find();
+//   res.render("client/soBig", { resources: resources });
+// });
 
 router.get("/sobigsguide", (req, res) => {
   res.redirect(
@@ -202,6 +202,10 @@ router.get("/sobigsguide", (req, res) => {
 });
 router.get("/register", (req, res) => {
   res.redirect("https://forms.gle/JFMB91VQ2dbAAmwv8");
+});
+
+router.get("/intra", (req, res) => {
+    res.render("client/soon");
 });
 
 router.get("/soon", (req, res) => {

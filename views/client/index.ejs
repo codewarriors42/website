@@ -1,1070 +1,1130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Code Warriors - Home</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Code Warriors - Home</title>
 
-    <link
-      rel="preload"
-      as="font"
-      href="../fonts/AirbnbCerealBold.ttf"
-      type="font/ttf"
-      crossorigin="anonymous"
-    />
+        <link
+            rel="preload"
+            as="font"
+            href="../fonts/AirbnbCerealBold.ttf"
+            type="font/ttf"
+            crossorigin="anonymous"
+        />
 
-    <style>
-      @font-face {
-        font-family: reg;
-        src: url(../fonts/AirbnbCerealBook.ttf);
-        font-weight: normal;
-      }
-      @font-face {
-        font-family: light;
-        src: url(../fonts/AirbnbCerealLight.ttf);
-        font-weight: normal;
-      }
-      @font-face {
-        font-family: med;
-        src: url(../fonts/AirbnbCerealMedium.ttf);
-        font-weight: normal;
-      }
-      @font-face {
-        font-family: bold;
-        src: url(../fonts/AirbnbCerealBold.ttf);
-        font-weight: normal;
-      }
-      @font-face {
-        font-family: logo;
-        src: url(../fonts/Jokerman-Regular.ttf);
-        font-weight: normal;
-      }
-    </style>
+        <style>
+            @font-face {
+                font-family: reg;
+                src: url(../fonts/AirbnbCerealBook.ttf);
+                font-weight: normal;
+            }
+            @font-face {
+                font-family: light;
+                src: url(../fonts/AirbnbCerealLight.ttf);
+                font-weight: normal;
+            }
+            @font-face {
+                font-family: med;
+                src: url(../fonts/AirbnbCerealMedium.ttf);
+                font-weight: normal;
+            }
+            @font-face {
+                font-family: bold;
+                src: url(../fonts/AirbnbCerealBold.ttf);
+                font-weight: normal;
+            }
+            @font-face {
+                font-family: logo;
+                src: url(../fonts/Jokerman-Regular.ttf);
+                font-weight: normal;
+            }
+        </style>
 
-    <link rel="stylesheet" href="../css/all.css" />
-    <link rel="stylesheet" href="../css/index.css" />
+        <link rel="stylesheet" href="../css/all.css" />
+        <link rel="stylesheet" href="../css/index.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="icon" href="../assets/cw-logo.png" />
-    <meta
-      name="description"
-      content="We are the Code Warriors, the computer club of DPS Vasant Kunj. We're a team of technology addicts, our skills ranging from gaming to designing"
-    />
-    <meta name="author" content="Kevin" />
-    <meta
-      name="keywords"
-      content="code, code warriors, code warrior, cw, code wars, dpsvk"
-    />
-  </head>
-  <body class="dark">
-    <script>
-      let theme = localStorage.getItem("theme");
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        />
+        <link rel="icon" href="../assets/cw-logo.png" />
+        <meta
+            name="description"
+            content="We are the Code Warriors, the computer club of DPS Vasant Kunj. We're a team of technology addicts, our skills ranging from gaming to designing"
+        />
+        <meta name="author" content="Kevin" />
+        <meta
+            name="keywords"
+            content="code, code warriors, code warrior, cw, code wars, dpsvk"
+        />
+    </head>
+    <body class="dark">
+        <script>
+            let theme = localStorage.getItem("theme");
 
-      if (theme == "light") {
-        document.body.classList.add("light");
-        theme = localStorage.setItem("theme", "light");
-      } else {
-        document.body.classList.remove("light");
-        theme = localStorage.setItem("theme", "dark");
-      }
-    </script>
+            if (theme == "light") {
+                document.body.classList.add("light");
+                theme = localStorage.setItem("theme", "light");
+            } else {
+                document.body.classList.remove("light");
+                theme = localStorage.setItem("theme", "dark");
+            }
+        </script>
 
-    <main>
-      <nav>
-        <div class="navLeft">
-          <a class="navBtn" target="_blank" href="https://discord.io/soBigs"
-            >Join Discord</a
-          >
-          <a class="navLink" href="/soBig">soBig</a>
-          <a class="navLink" href="/archives/creative">Archive</a>
-          <a class="navLink" href="/resources">Resources</a>
-          <div class="ham">
-            <div class="hamLine"></div>
-          </div>
-        </div>
-        <a href="/" class="navMid">CW</a>
-        <div class="navRight">
-          <a class="navLink active" href="/">Home</a>
-          <a class="navLink" href="/members">Members</a>
-          <a class="navLink" href="/contacts">Contact</a>
-          <a class="navLink" href="/alumni">Alumni</a>
-          <i class="fas fa-lightbulb"></i>
-        </div>
-      </nav>
+        <main>
+            <nav>
+                <div class="navLeft">
+                    <a
+                        class="navBtn"
+                        target="_blank"
+                        href="https://discord.io/soBigs"
+                        >Join Discord</a
+                    >
+                    <a class="navLink" href="/intra">Intra</a>
+                    <a class="navLink" href="/archives/creative">Archive</a>
+                    <a class="navLink" href="/resources">Resources</a>
+                    <div class="ham">
+                        <div class="hamLine"></div>
+                    </div>
+                </div>
+                <a href="/" class="navMid">CW</a>
+                <div class="navRight">
+                    <a class="navLink active" href="/">Home</a>
+                    <a class="navLink" href="/members">Members</a>
+                    <a class="navLink" href="/contacts">Contact</a>
+                    <a class="navLink" href="/alumni">Alumni</a>
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+            </nav>
 
-      <div class="side">
-        <a
-          style="--navD: 0.4s"
-          class="navBtn"
-          href="https://discord.io/soBigs"
-          target="_blank"
-          >Join Discord</a
-        >
-        <a style="--navD: 0.44s" class="navLink active" href="/">Home</a>
-        <a style="--navD: 0.48s" class="navLink" href="/soBig">soBig</a>
-        <a style="--navD: 0.52s" class="navLink" href="/archives/creative"
-          >Archive</a
-        >
-        <a style="--navD: 0.56s" class="navLink" href="/resources">Resources</a>
-        <a style="--navD: 0.6s" class="navLink" href="/members">Members</a>
-        <a style="--navD: 0.64s" class="navLink" href="/contacts">Contact</a>
-        <a style="--navD: 0.68s" class="navLink" href="/alumni">Alumni</a>
-      </div>
-
-      <!-- Hero ------------------------------------------------------------------ -->
-      <section class="hero">
-        <div class="heroContent">
-          <h1>
-            <span id="title"></span>
-            <div id="cursor" class="cursor"></div>
-          </h1>
-          <h3 class="upAOSin">
-            We are the Code Warriors, the computer club of DPS Vasant Kunj.
-            We're a team of technology addicts, our skills ranging from gaming
-            to designing
-          </h3>
-          <a class="btn upAOSin upAOSinD" href="#toBig">Learn More</a>
-          <div class="transparent">
-            <div data-depth="0.2" class="dShapes">
-              <div class="l1">
-                <img
-                  class="inMob"
-                  data-speed="2"
-                  data-layer="1"
-                  style="--t: 13%; --l: 6%; --r: 0"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="inMob"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 15%; --l: 90%; --r: 1deg"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.7" class="dShapes">
-              <div class="l2">
-                <img
-                  class="inMob"
-                  data-speed="3"
-                  data-layer="2"
-                  style="--t: 0%; --l: 70%; --r: 0"
-                  src="../assets/shapes/square.svg"
-                  alt=""
-                />
-                <img
-                  class="inMob"
-                  data-speed="2"
-                  data-layer="2"
-                  style="--t: -5%; --l: 25%; --r: 20deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-invert-y="false" data-depth="0.3" class="dShapes">
-              <div class="l1">
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 30%; --l: 6%; --r: 0"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="4"
-                  data-layer="1"
-                  style="--t: 75%; --l: 64%; --r: 1deg"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="fortab"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 77%; --l: 17%; --r: 80deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="1"
-                  style="--t: 70%; --l: 1%; --r: 0"
-                  src="../assets/shapes/square.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.6" class="dShapes">
-              <div class="l2">
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="2"
-                  style="--t: 16%; --l: 32%; --r: 0"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="2"
-                  style="--t: 20%; --l: 20%; --r: 20deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="4"
-                  data-layer="2"
-                  style="--t: 27%; --l: 97%; --r: 40deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="5"
-                  data-layer="2"
-                  style="--t: 18%; --l: 76%; --r: 1deg"
-                  src="../assets/shapes/square.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-invert-x="true" data-depth="0.4" class="dShapes">
-              <div class="l3">
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="3"
-                  style="--t: 33%; --l: 85%; --r: 1deg"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="3"
-                  style="--t: 45%; --l: 13%; --r: 50deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="fortab"
-                  data-speed="2"
-                  data-layer="3"
-                  style="--t: 48%; --l: 92%; --r: 90deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="3"
-                  data-layer="3"
-                  style="--t: 72%; --l: 79%; --r: 1deg"
-                  src="../assets/shapes/square.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.6" class="dShapes">
-              <div class="l4">
-                <img
-                  class="mob"
-                  data-speed="4"
-                  data-layer="4"
-                  style="--t: 55%; --l: 78%; --r: 1deg"
-                  src="../assets/shapes/circ.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="4"
-                  style="--t: 60%; --l: 26%; --r: 20deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="5"
-                  data-layer="4"
-                  style="--t: 67%; --l: 92%; --r: 1deg"
-                  src="../assets/shapes/triangle.svg"
-                  alt=""
-                />
-              </div>
+            <div class="side">
+                <a
+                    style="--navD: 0.4s"
+                    class="navBtn"
+                    href="https://discord.io/soBigs"
+                    target="_blank"
+                    >Join Discord</a
+                >
+                <a style="--navD: 0.44s" class="navLink active" href="/"
+                    >Home</a
+                >
+                <a style="--navD: 0.48s" class="navLink" href="/soBig">soBig</a>
+                <a
+                    style="--navD: 0.52s"
+                    class="navLink"
+                    href="/archives/creative"
+                    >Archive</a
+                >
+                <a style="--navD: 0.56s" class="navLink" href="/resources"
+                    >Resources</a
+                >
+                <a style="--navD: 0.6s" class="navLink" href="/members"
+                    >Members</a
+                >
+                <a style="--navD: 0.64s" class="navLink" href="/contacts"
+                    >Contact</a
+                >
+                <a style="--navD: 0.68s" class="navLink" href="/alumni"
+                    >Alumni</a
+                >
             </div>
 
-            <div data-depth="0.2" class="lShapes">
-              <div class="l1">
-                <img
-                  class="inMob"
-                  data-speed="2"
-                  data-layer="1"
-                  style="--t: 13%; --l: 6%; --r: 0"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="inMob"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 15%; --l: 90%; --r: 1deg"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.7" class="lShapes">
-              <div class="l2">
-                <img
-                  class="inMob"
-                  data-speed="3"
-                  data-layer="2"
-                  style="--t: 0%; --l: 70%; --r: 0"
-                  src="../assets/shapes/square2.svg"
-                  alt=""
-                />
-                <img
-                  class="inMob"
-                  data-speed="2"
-                  data-layer="2"
-                  style="--t: -5%; --l: 25%; --r: 20deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-invert-y="false" data-depth="0.3" class="lShapes">
-              <div class="l1">
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 30%; --l: 6%; --r: 0"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="4"
-                  data-layer="1"
-                  style="--t: 75%; --l: 64%; --r: 1deg"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="fortab"
-                  data-speed="3"
-                  data-layer="1"
-                  style="--t: 77%; --l: 17%; --r: 80deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="1"
-                  style="--t: 70%; --l: 1%; --r: 0"
-                  src="../assets/shapes/square2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.6" class="lShapes">
-              <div class="l2">
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="2"
-                  style="--t: 16%; --l: 32%; --r: 0"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="2"
-                  style="--t: 20%; --l: 20%; --r: 20deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="4"
-                  data-layer="2"
-                  style="--t: 27%; --l: 97%; --r: 40deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="5"
-                  data-layer="2"
-                  style="--t: 18%; --l: 76%; --r: 1deg"
-                  src="../assets/shapes/square2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-invert-x="true" data-depth="0.4" class="lShapes">
-              <div class="l3">
-                <img
-                  class="forstab"
-                  data-speed="3"
-                  data-layer="3"
-                  style="--t: 33%; --l: 85%; --r: 1deg"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="3"
-                  style="--t: 45%; --l: 13%; --r: 50deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="fortab"
-                  data-speed="2"
-                  data-layer="3"
-                  style="--t: 48%; --l: 92%; --r: 90deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="3"
-                  data-layer="3"
-                  style="--t: 72%; --l: 79%; --r: 1deg"
-                  src="../assets/shapes/square2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div data-depth="0.6" class="lShapes">
-              <div class="l4">
-                <img
-                  class="mob"
-                  data-speed="4"
-                  data-layer="4"
-                  style="--t: 55%; --l: 78%; --r: 1deg"
-                  src="../assets/shapes/circ2.svg"
-                  alt=""
-                />
-                <img
-                  class="mob"
-                  data-speed="2"
-                  data-layer="4"
-                  style="--t: 60%; --l: 26%; --r: 20deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-                <img
-                  class="forstab"
-                  data-speed="5"
-                  data-layer="4"
-                  style="--t: 67%; --l: 92%; --r: 1deg"
-                  src="../assets/shapes/triangle2.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <!-- Hero ------------------------------------------------------------------ -->
+            <section class="hero">
+                <div class="heroContent">
+                    <h1>
+                        <span id="title"></span>
+                        <div id="cursor" class="cursor"></div>
+                    </h1>
+                    <h3 class="upAOSin">
+                        We are the Code Warriors, the computer club of DPS
+                        Vasant Kunj. We're a team of technology addicts, our
+                        skills ranging from gaming to designing
+                    </h3>
+                    <a class="btn upAOSin upAOSinD" href="#toBig">Learn More</a>
+                    <div class="transparent">
+                        <div data-depth="0.2" class="dShapes">
+                            <div class="l1">
+                                <img
+                                    class="inMob"
+                                    data-speed="2"
+                                    data-layer="1"
+                                    style="--t: 13%; --l: 6%; --r: 0"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="inMob"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 15%; --l: 90%; --r: 1deg"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.7" class="dShapes">
+                            <div class="l2">
+                                <img
+                                    class="inMob"
+                                    data-speed="3"
+                                    data-layer="2"
+                                    style="--t: 0%; --l: 70%; --r: 0"
+                                    src="../assets/shapes/square.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="inMob"
+                                    data-speed="2"
+                                    data-layer="2"
+                                    style="--t: -5%; --l: 25%; --r: 20deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div
+                            data-invert-y="false"
+                            data-depth="0.3"
+                            class="dShapes"
+                        >
+                            <div class="l1">
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 30%; --l: 6%; --r: 0"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="4"
+                                    data-layer="1"
+                                    style="--t: 75%; --l: 64%; --r: 1deg"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="fortab"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 77%; --l: 17%; --r: 80deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="1"
+                                    style="--t: 70%; --l: 1%; --r: 0"
+                                    src="../assets/shapes/square.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.6" class="dShapes">
+                            <div class="l2">
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="2"
+                                    style="--t: 16%; --l: 32%; --r: 0"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="2"
+                                    style="--t: 20%; --l: 20%; --r: 20deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="4"
+                                    data-layer="2"
+                                    style="--t: 27%; --l: 97%; --r: 40deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="5"
+                                    data-layer="2"
+                                    style="--t: 18%; --l: 76%; --r: 1deg"
+                                    src="../assets/shapes/square.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div
+                            data-invert-x="true"
+                            data-depth="0.4"
+                            class="dShapes"
+                        >
+                            <div class="l3">
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="3"
+                                    style="--t: 33%; --l: 85%; --r: 1deg"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="3"
+                                    style="--t: 45%; --l: 13%; --r: 50deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="fortab"
+                                    data-speed="2"
+                                    data-layer="3"
+                                    style="--t: 48%; --l: 92%; --r: 90deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="3"
+                                    data-layer="3"
+                                    style="--t: 72%; --l: 79%; --r: 1deg"
+                                    src="../assets/shapes/square.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.6" class="dShapes">
+                            <div class="l4">
+                                <img
+                                    class="mob"
+                                    data-speed="4"
+                                    data-layer="4"
+                                    style="--t: 55%; --l: 78%; --r: 1deg"
+                                    src="../assets/shapes/circ.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="4"
+                                    style="--t: 60%; --l: 26%; --r: 20deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="5"
+                                    data-layer="4"
+                                    style="--t: 67%; --l: 92%; --r: 1deg"
+                                    src="../assets/shapes/triangle.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
 
-      <section class="vid">
-        <iframe
-          src="https://www.youtube.com/embed/VpaRQJQ9yFY"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </section>
+                        <div data-depth="0.2" class="lShapes">
+                            <div class="l1">
+                                <img
+                                    class="inMob"
+                                    data-speed="2"
+                                    data-layer="1"
+                                    style="--t: 13%; --l: 6%; --r: 0"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="inMob"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 15%; --l: 90%; --r: 1deg"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.7" class="lShapes">
+                            <div class="l2">
+                                <img
+                                    class="inMob"
+                                    data-speed="3"
+                                    data-layer="2"
+                                    style="--t: 0%; --l: 70%; --r: 0"
+                                    src="../assets/shapes/square2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="inMob"
+                                    data-speed="2"
+                                    data-layer="2"
+                                    style="--t: -5%; --l: 25%; --r: 20deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div
+                            data-invert-y="false"
+                            data-depth="0.3"
+                            class="lShapes"
+                        >
+                            <div class="l1">
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 30%; --l: 6%; --r: 0"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="4"
+                                    data-layer="1"
+                                    style="--t: 75%; --l: 64%; --r: 1deg"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="fortab"
+                                    data-speed="3"
+                                    data-layer="1"
+                                    style="--t: 77%; --l: 17%; --r: 80deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="1"
+                                    style="--t: 70%; --l: 1%; --r: 0"
+                                    src="../assets/shapes/square2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.6" class="lShapes">
+                            <div class="l2">
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="2"
+                                    style="--t: 16%; --l: 32%; --r: 0"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="2"
+                                    style="--t: 20%; --l: 20%; --r: 20deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="4"
+                                    data-layer="2"
+                                    style="--t: 27%; --l: 97%; --r: 40deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="5"
+                                    data-layer="2"
+                                    style="--t: 18%; --l: 76%; --r: 1deg"
+                                    src="../assets/shapes/square2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div
+                            data-invert-x="true"
+                            data-depth="0.4"
+                            class="lShapes"
+                        >
+                            <div class="l3">
+                                <img
+                                    class="forstab"
+                                    data-speed="3"
+                                    data-layer="3"
+                                    style="--t: 33%; --l: 85%; --r: 1deg"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="3"
+                                    style="--t: 45%; --l: 13%; --r: 50deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="fortab"
+                                    data-speed="2"
+                                    data-layer="3"
+                                    style="--t: 48%; --l: 92%; --r: 90deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="3"
+                                    data-layer="3"
+                                    style="--t: 72%; --l: 79%; --r: 1deg"
+                                    src="../assets/shapes/square2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                        <div data-depth="0.6" class="lShapes">
+                            <div class="l4">
+                                <img
+                                    class="mob"
+                                    data-speed="4"
+                                    data-layer="4"
+                                    style="--t: 55%; --l: 78%; --r: 1deg"
+                                    src="../assets/shapes/circ2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="mob"
+                                    data-speed="2"
+                                    data-layer="4"
+                                    style="--t: 60%; --l: 26%; --r: 20deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                                <img
+                                    class="forstab"
+                                    data-speed="5"
+                                    data-layer="4"
+                                    style="--t: 67%; --l: 92%; --r: 1deg"
+                                    src="../assets/shapes/triangle2.svg"
+                                    alt=""
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <div class="segCont">
-        <div class="seg">
-          <div class="segLeft"></div>
-          <div class="segCross">
-            <div class="crossLine"></div>
-            <div class="crossLine"></div>
-          </div>
-          <div class="segRight"></div>
-        </div>
-      </div>
+            <section class="vid">
+                <iframe
+                    src="https://www.youtube.com/embed/VpaRQJQ9yFY"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </section>
 
-      <section class="big">
-        <div id="toBig" class="write">
-          <div class="writeLeft">
-            <h1>How it began</h1>
-            <img class="tabImg" src="../assets/sample.png" alt="" />
+            <div class="segCont">
+                <div class="seg">
+                    <div class="segLeft"></div>
+                    <div class="segCross">
+                        <div class="crossLine"></div>
+                        <div class="crossLine"></div>
+                    </div>
+                    <div class="segRight"></div>
+                </div>
+            </div>
+
+            <section class="big">
+                <div id="toBig" class="write">
+                    <div class="writeLeft">
+                        <h1>How it began</h1>
+                        <img class="tabImg" src="../assets/sample.png" alt="" />
+                        <p>
+                            The school started its computer club, the Code
+                            Warriors, in the year 1997. Arun Darlie Koshy was
+                            the founder president. The membership, at that time,
+                            was limited. However, these few members gave
+                            excellent competition to other clubs, although still
+                            in the learning process. The Code Warriors not only
+                            participate in contests but also share and develop
+                            technology.
+                        </p>
+                    </div>
+                    <div class="writeRight">
+                        <img
+                            id="diss"
+                            class="mainImg"
+                            src="../assets/sample.png"
+                            alt=""
+                        />
+                        <div class="transparent">
+                            <div data-depth="0.4" class="dShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="dShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.4" class="lShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="lShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="write">
+                    <div class="writeRight" id="rr">
+                        <img
+                            id="diss"
+                            class="mainImg"
+                            src="../assets/sample2.jpeg"
+                            alt=""
+                        />
+                        <img
+                            class="tabImg"
+                            src="../assets/sample2.jpeg"
+                            alt=""
+                        />
+                        <div
+                            style="left: -10%; transform: rotate(180deg)"
+                            class="transparent"
+                        >
+                            <div data-depth="0.4" class="dShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="dShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.4" class="lShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="lShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="writeLeft lef2">
+                        <p id="p2">
+                            Some of the prize-winning software developed by the
+                            Code Warriors are N-crypt It, Map Builder, Canon,
+                            Graphics, and Digital Messenger. Code Warriors have
+                            won more than 950 individual awards in our twenty
+                            glorious years of existence and more than 50 overall
+                            trophies.
+                        </p>
+                    </div>
+                </div>
+                <div id="discW" class="write">
+                    <div class="writeLeft">
+                        <h1>Join our Discord<br />Server</h1>
+                        <p>
+                            Join our discord server to get notified about
+                            upcoming events. We also help and assist dipsites
+                            interested in the fields of expertise covered by our
+                            club.
+                        </p>
+                        <a
+                            class="btn"
+                            target="_blank"
+                            href="https://discord.gg/dtbn2cbgea"
+                            >Join Server</a
+                        >
+                    </div>
+                    <div class="writeRight">
+                        <div class="dD">
+                            <iframe
+                                src="https://discord.com/widget?id=706096517244518460&theme=dark"
+                                width="350"
+                                height="500"
+                                allowtransparency="true"
+                                frameborder="0"
+                                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                            ></iframe>
+                        </div>
+                        <div class="lD">
+                            <iframe
+                                src="https://discord.com/widget?id=706096517244518460&theme=light"
+                                width="350"
+                                height="500"
+                                allowtransparency="true"
+                                frameborder="0"
+                                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+                            ></iframe>
+                        </div>
+                        <div class="transparent">
+                            <div data-depth="0.4" class="dShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="dShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.4" class="lShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="lShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="soBig">
+            <main>
+                <img src="../assets/banner.svg" alt="" />
+                <h1>soBig.r</h1>
+                <p>
+                    Code Wars 2020 aka soBig.r was the first online tech
+                    symposium hosted by Code Warriors, engaging competitors from
+                    schools all over the state in a battle of wits and a mix of
+                    creative and analytical skills across 8 diverse events,
+                    including hackathon, crossword and gaming among others. The
+                    overall was bagged by Amity Sector 46.
+                </p>
+                <a class="btn" id="soBtn" href="/blogs">Learn More</a>
+            </main>
+        </section>
+
+        <main>
+            <section id="big2" class="big">
+                <div style="pointer-events: all" class="write">
+                    <div class="writeLeft">
+                        <h1>The Team</h1>
+                        <img
+                            class="mainImg tabImg"
+                            src="../assets/sample3.jpg"
+                            alt=""
+                        />
+                        <p>
+                            Our team consists of highly skilled tech enthusiasts
+                            who dominate their expertise and consistently win
+                            podiums at prestigious events.
+                        </p>
+                        <a class="btn" href="/members">Members</a>
+                    </div>
+                    <div class="writeRight">
+                        <img
+                            id="diss"
+                            class="mainImg"
+                            src="../assets/sample3.jpg"
+                            alt=""
+                        />
+                        <div class="transparent">
+                            <div data-depth="0.4" class="dShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="dShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.4" class="lShapes">
+                                <div class="l1">
+                                    <img
+                                        data-layer="5"
+                                        data-speed="4"
+                                        style="--t: 86%; --l: 17%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="2"
+                                        style="--t: 40%; --l: 5%; --r: 30deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="5"
+                                        data-speed="3"
+                                        style="--t: 95%; --l: 70%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                            <div data-depth="0.6" class="lShapes">
+                                <div class="l2">
+                                    <img
+                                        data-layer="6"
+                                        data-speed="4"
+                                        style="--t: -5%; --l: 80%; --r: "
+                                        src="../assets/shapes/circ2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="3"
+                                        style="--t: 60%; --l: 93%; --r: 90deg"
+                                        src="../assets/shapes/triangle2.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        data-layer="6"
+                                        data-speed="2"
+                                        style="--t: 5.5%; --l: 40%; --r: "
+                                        src="../assets/shapes/square2.svg"
+                                        alt=""
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq">
+                <h1>FAQs</h1>
+                <div class="units">
+                    <% for (let faq of faqs) { %>
+                    <div class="unit">
+                        <div class="unitTop">
+                            <%= faq.question %><i
+                                class="fas fa-chevron-down"
+                            ></i>
+                        </div>
+                        <div class="unitBot"><%= faq.answer %></div>
+                    </div>
+                    <% } %>
+                </div>
+            </section>
+        </main>
+
+        <footer>
             <p>
-              The school started its computer club, the Code Warriors, in the
-              year 1997. Arun Darlie Koshy was the founder president. The
-              membership, at that time, was limited. However, these few members
-              gave excellent competition to other clubs, although still in the
-              learning process. The Code Warriors not only participate in
-              contests but also share and develop technology.
+                <span id="titleF"></span
+                ><span id="cursorF" class="cursor footcur"></span>
             </p>
-          </div>
-          <div class="writeRight">
-            <img id="diss" class="mainImg" src="../assets/sample.png" alt="" />
-            <div class="transparent">
-              <div data-depth="0.4" class="dShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="dShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.4" class="lShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="lShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
+            <div class="footSocial">
+                <a href="https://www.facebook.com/codewarriors/">
+                    <i class="fab fa-facebook-square"></i>
+                </a>
+                <a href="https://www.instagram.com/codewarriors42/?hl=en">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://github.com/codewarriors42">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.behance.net/codewarriors">
+                    <i class="fab fa-behance"></i>
+                </a>
             </div>
-          </div>
-        </div>
-        <div class="write">
-          <div class="writeRight" id="rr">
-            <img
-              id="diss"
-              class="mainImg"
-              src="../assets/sample2.jpeg"
-              alt=""
-            />
-            <img class="tabImg" src="../assets/sample2.jpeg" alt="" />
-            <div
-              style="left: -10%; transform: rotate(180deg)"
-              class="transparent"
-            >
-              <div data-depth="0.4" class="dShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="dShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.4" class="lShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="lShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="writeLeft lef2">
-            <p id="p2">
-              Some of the prize-winning software developed by the Code Warriors
-              are N-crypt It, Map Builder, Canon, Graphics, and Digital
-              Messenger. Code Warriors have won more than 950 individual awards
-              in our twenty glorious years of existence and more than 50 overall
-              trophies.
-            </p>
-          </div>
-        </div>
-        <div id="discW" class="write">
-          <div class="writeLeft">
-            <h1>Join our Discord<br />Server</h1>
-            <p>
-              Join our discord server to get notified about upcoming events. We
-              also help and assist dipsites interested in the fields of
-              expertise covered by our club.
-            </p>
-            <a class="btn" target="_blank" href="https://discord.gg/dtbn2cbgea"
-              >Join Server</a
-            >
-          </div>
-          <div class="writeRight">
-            <div class="dD">
-              <iframe
-                src="https://discord.com/widget?id=706096517244518460&theme=dark"
-                width="350"
-                height="500"
-                allowtransparency="true"
-                frameborder="0"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              ></iframe>
-            </div>
-            <div class="lD">
-              <iframe
-                src="https://discord.com/widget?id=706096517244518460&theme=light"
-                width="350"
-                height="500"
-                allowtransparency="true"
-                frameborder="0"
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              ></iframe>
-            </div>
-            <div class="transparent">
-              <div data-depth="0.4" class="dShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="dShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.4" class="lShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="lShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        </footer>
 
-    <section class="soBig">
-      <main>
-        <img src="../assets/banner.svg" alt="" />
-        <h1>soBig.r</h1>
-        <p>
-          Code Wars 2020 aka soBig.r was the first online tech symposium hosted
-          by Code Warriors, engaging competitors from schools all over the state
-          in a battle of wits and a mix of creative and analytical skills across
-          8 diverse events, including hackathon, crossword and gaming among
-          others. The overall was bagged by Amity Sector 46.
-        </p>
-        <a class="btn" id="soBtn" href="/blogs">Learn More</a>
-      </main>
-    </section>
-
-    <main>
-      <section id="big2" class="big">
-        <div style="pointer-events: all" class="write">
-          <div class="writeLeft">
-            <h1>The Team</h1>
-            <img class="mainImg tabImg" src="../assets/sample3.jpg" alt="" />
-            <p>
-              Our team consists of highly skilled tech enthusiasts who dominate
-              their expertise and consistently win podiums at prestigious
-              events.
-            </p>
-            <a class="btn" href="/members">Members</a>
-          </div>
-          <div class="writeRight">
-            <img id="diss" class="mainImg" src="../assets/sample3.jpg" alt="" />
-            <div class="transparent">
-              <div data-depth="0.4" class="dShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="dShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.4" class="lShapes">
-                <div class="l1">
-                  <img
-                    data-layer="5"
-                    data-speed="4"
-                    style="--t: 86%; --l: 17%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="2"
-                    style="--t: 40%; --l: 5%; --r: 30deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="5"
-                    data-speed="3"
-                    style="--t: 95%; --l: 70%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div data-depth="0.6" class="lShapes">
-                <div class="l2">
-                  <img
-                    data-layer="6"
-                    data-speed="4"
-                    style="--t: -5%; --l: 80%; --r: "
-                    src="../assets/shapes/circ2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="3"
-                    style="--t: 60%; --l: 93%; --r: 90deg"
-                    src="../assets/shapes/triangle2.svg"
-                    alt=""
-                  />
-                  <img
-                    data-layer="6"
-                    data-speed="2"
-                    style="--t: 5.5%; --l: 40%; --r: "
-                    src="../assets/shapes/square2.svg"
-                    alt=""
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="faq">
-        <h1>FAQs</h1>
-        <div class="units">
-          <% for (let faq of faqs) { %>
-          <div class="unit">
-            <div class="unitTop">
-              <%= faq.question %><i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="unitBot"><%= faq.answer %></div>
-          </div>
-          <% } %>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <p>
-        <span id="titleF"></span
-        ><span id="cursorF" class="cursor footcur"></span>
-      </p>
-      <div class="footSocial">
-        <a href="https://www.facebook.com/codewarriors/">
-          <i class="fab fa-facebook-square"></i>
-        </a>
-        <a href="https://www.instagram.com/codewarriors42/?hl=en">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://github.com/codewarriors42">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://www.behance.net/codewarriors">
-          <i class="fab fa-behance"></i>
-        </a>
-      </div>
-    </footer>
-
-    <script src="../js/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-    <script src="../js/mode.js"></script>
-    <script src="../js/index.js"></script>
-  </body>
+        <script src="../js/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+        <script src="../js/mode.js"></script>
+        <script src="../js/index.js"></script>
+    </body>
 </html>
