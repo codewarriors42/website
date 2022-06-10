@@ -298,6 +298,11 @@
   transform: rotate(180deg);
 }
 
+.hero .soon-title {
+  font-size: 14vh;
+  height: auto;
+}
+
 /* MEDIAS */
 @media (max-width: 1400px) {
   .heroContent {
@@ -306,6 +311,9 @@
   }
   .soBig a {
     width: 20%;
+  }
+  .hero .soon-title {
+    font-size: 12vh;
   }
 }
 @media (max-width: 1200px) {
@@ -377,6 +385,9 @@
     min-height: 6vh;
     margin-bottom: 6vh;
   }
+  .hero .soon-title {
+    font-size: 8vh;
+  }
   .hero h3 {
     margin-top: 1vh;
     padding: 0 8vw;
@@ -422,6 +433,9 @@
   .hero h1 {
     font-size: 3.3vh;
     min-height: 8vh;
+  }
+  .hero .soon-title {
+    font-size: 6vh;
   }
   .hero h3 {
     margin-top: 1vh;
