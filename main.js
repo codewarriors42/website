@@ -41,6 +41,11 @@ app.use(express.static(__dirname + "/public"));
 app.use("/", require("./routes/client/client"));
 
 // Imgs
+app.get(
+    "/img/c3f085fc-5e72-4a00-a5ce-298aefded73d-1617915473562.jpg", async (req, res) => {
+      return res.sendFile(__dirname + "/public/assets/temp.jpg");
+    }
+);
 app.get("/img/:filename", async (req, res) => {
   try {
     let file = await gfs.files.findOne({ filename: req.params.filename });
