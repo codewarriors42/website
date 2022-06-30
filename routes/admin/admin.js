@@ -462,11 +462,11 @@ router.put(
         let filename = `${uuid.v4()}-${Date.now()}.jpg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
-        fs.unlink("toConvert.jpg", (err) => {
-          if (err) {
-            res.send(err);
-          }
-        });
+        setTimeout(() => {fs.unlink("toConvert.jpg", (err) => {
+            if (err) {
+                res.send(err);
+            }
+        })}, 500)
         fs.unlink(`${req.file.filename}`, (err) => {
           if (err) {
             res.send(err);
