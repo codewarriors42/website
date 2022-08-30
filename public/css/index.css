@@ -191,7 +191,7 @@
 }
 /* soBig ------------------------------------------- */
 .soBig {
-  background: var(--sBlack);
+  background: var(--black);
   text-align: center;
   width: 100vw;
   overflow: hidden;
