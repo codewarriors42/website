@@ -200,9 +200,6 @@ router.get("/sobigsguide", (req, res) => {
     "https://docs.google.com/document/d/117Y9rNNSYK41df7b5XsPZLNOcmonNTQtMTuECoTP3m0/edit?usp=sharing"
   );
 });
-router.get("/register", (req, res) => {
-  res.redirect("https://forms.gle/JFMB91VQ2dbAAmwv8");
-});
 
 router.get("/intra", (req, res) => {
     res.render("client/soon");
