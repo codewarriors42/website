@@ -104,6 +104,12 @@ router.get("/discord", async (req, res) => {
   res.redirect("https://discord.com/invite/VcwGawNTR4");
 })
 
+router.get("/guide", async (req, res) => {
+  res.redirect(
+      "https://drive.google.com/file/d/1sr-PidiLxCLoUqJaqSi-IMyg_4IGHT4e/view"
+  );
+})
+
 // router.get("/blog/:id", async (req, res) => {
 //   let blog = await Blog.findById(req.params.id);
 //   let allBlogs = await Blog.find();
