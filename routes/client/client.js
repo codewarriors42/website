@@ -100,6 +100,10 @@ router.get("/archives/:category", async (req, res) => {
   });
 });
 
+router.get("/discord", async (req, res) => {
+  res.redirect("https://discord.com/invite/VcwGawNTR4");
+})
+
 // router.get("/blog/:id", async (req, res) => {
 //   let blog = await Blog.findById(req.params.id);
 //   let allBlogs = await Blog.find();
