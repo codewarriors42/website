@@ -200,10 +200,10 @@ router.get("/alumni", async (req, res) => {
   res.render("client/alumni", { obj: alumniByYear, keys: sortedKeys });
 });
 
-// router.get("/soBig", async (req, res) => {
-//   let resources = await Resource.find();
-//   res.render("client/soBig", { resources: resources });
-// });
+router.get("/soBig", async (req, res) => {
+  let resources = await Resource.find();
+  res.render("client/soBig", { resources: resources });
+});
 
 router.get("/sobigsguide", (req, res) => {
   res.redirect(

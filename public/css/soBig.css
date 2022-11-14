@@ -1,382 +1,383 @@
 .hero h3,
 .write p,
 .soBig p {
-  font-family: light;
-  line-height: var(--lh);
+    font-family: light;
+    line-height: var(--lh);
 }
 .hero {
-  width: 100%;
-  padding: 18vh 0;
-  padding-top: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-bottom: 7.7vh;
+    width: 100%;
+    padding: 18vh 0;
+    padding-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 7.7vh;
 }
 .heroContent {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  height: 90%;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    height: 90%;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
 }
 .hero h1 {
-  font-size: 12vh;
-  font-family: bold;
-  /* margin-bottom: 2vh; */
-  width: 110%;
-  height: 14vh;
+    font-size: 12vh;
+    font-family: bold;
+    /* margin-bottom: 2vh; */
+    width: 110%;
+    height: 14vh;
+    margin-bottom: 6vh;
 }
 .hero h3 {
-  font-weight: 100;
-  font-family: light;
-  letter-spacing: 0.5px;
-  font-size: var(--text);
-  padding: 0 20%;
-  margin-bottom: 4vh;
+    font-weight: 100;
+    font-family: light;
+    letter-spacing: 0.5px;
+    font-size: var(--text);
+    padding: 0 20%;
+    margin-bottom: 2vh;
 }
 .hero .btn {
-  margin: 0 2vw;
+    margin: 0 2vw;
 }
 main {
-  transition: all 0.3s;
+    transition: all 0.3s;
 }
 /* Video ---------------------------------------- */
 .vid {
-  width: 100%;
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 12vh;
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12vh;
 }
 .vid iframe {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
 }
 .segCont {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 14vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 14vh;
 }
 .seg {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .segLeft,
 .segRight {
-  width: 40%;
-  height: 1px;
-  background: var(--white);
-  border-radius: 50px;
+    width: 40%;
+    height: 1px;
+    background: var(--white);
+    border-radius: 50px;
 }
 .segCross {
-  width: 20%;
-  height: 3vh;
-  position: relative;
+    width: 20%;
+    height: 3vh;
+    position: relative;
 }
 .crossLine {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 25%;
-  height: 1px;
-  border-radius: 50px;
-  background: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 25%;
+    height: 1px;
+    border-radius: 50px;
+    background: var(--white);
 }
 .crossLine:nth-child(even) {
-  transform: translate(-50%, -50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
 }
 .crossLine:nth-child(odd) {
-  transform: translate(-50%, -50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 /* Notice */
 
 .notice {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 12vh;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12vh;
 }
 
 .notice-wrap {
-  display: flex;
-  flex-direction: row;
-  width: 50%;
-  height: 60%;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    height: 60%;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
 }
 
 .notice h2 {
-  font-size: 5vh;
-  font-family: bold;
+    font-size: 5vh;
+    font-family: bold;
 }
 
 .notice p {
-  margin: 5vh 0;
-  font-weight: 100;
-  font-family: light;
-  letter-spacing: 0.5px;
-  font-size: var(--text);
-  line-height: var(--lh);
+    margin: 5vh 0;
+    font-weight: 100;
+    font-family: light;
+    letter-spacing: 0.5px;
+    font-size: var(--text);
+    line-height: var(--lh);
 }
 
 /******** CARDS ********/
 
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
 .cards-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .cards-container h1 {
-  font-size: 5vh;
-  font-family: bold;
-  margin-bottom: 2vh;
-  /* margin-top: 10vh; */
-  height: 10vh;
-  text-align: center;
+    font-size: 5vh;
+    font-family: bold;
+    margin-bottom: 2vh;
+    /* margin-top: 10vh; */
+    height: 10vh;
+    text-align: center;
 }
 .cards {
-  margin-top: 0;
-  margin-bottom: 10vh;
-  padding: 0 7vw;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
+    margin-top: 0;
+    margin-bottom: 10vh;
+    padding: 0 7vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 .card {
-  width: 26%;
-  height: 28vh;
-  margin-top: 5vh;
-  padding: 5vh 0;
-  background: var(--sBlack);
-  border-radius: 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  transition: all 0.2s;
-  text-align: center;
-  cursor: pointer;
+    width: 26%;
+    height: 28vh;
+    margin-top: 5vh;
+    padding: 5vh 0;
+    background: var(--sBlack);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    transition: all 0.2s;
+    text-align: center;
+    cursor: pointer;
 }
 .card:hover {
-  background: var(--hColor);
+    background: var(--hColor);
 }
 .card h2 {
-  font-family: bold;
-  font-size: 2.5vh;
-  margin-bottom: 4vh;
-  padding: 0 1vw;
+    font-family: bold;
+    font-size: 2.5vh;
+    margin-bottom: 4vh;
+    padding: 0 1vw;
 }
 .card img {
-  height: 68%;
-  object-fit: scale-down;
+    height: 68%;
+    object-fit: scale-down;
 }
 
 /* Pop Up */
 
 .bgcolor {
-  background-color: grey;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
+    background-color: grey;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
 }
 
 .popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--black);
-  height: 45vh;
-  width: 35%;
-  padding: 0 3vw;
-  text-align: center;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  border-radius: 10px;
-  z-index: 10;
-  transition: all 0.3s;
-  box-shadow: 0 0 1000px rgba(0, 0, 0, 0.226);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--black);
+    height: 45vh;
+    width: 35%;
+    padding: 0 3vw;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 10px;
+    z-index: 10;
+    transition: all 0.3s;
+    box-shadow: 0 0 1000px rgba(0, 0, 0, 0.226);
 }
 
 .popup h2 {
-  font-size: 1.9vw;
-  font-family: bold;
+    font-size: 1.9vw;
+    font-family: bold;
 }
 
 .popup p {
-  font-size: var(--text);
-  line-height: var(--lh);
+    font-size: var(--text);
+    line-height: var(--lh);
 }
 
 .popup .links {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
 }
 
 .links a {
-  margin: 0 2vw;
-  font-size: 1vw;
-  padding: 2vh 2.5vw;
+    margin: 0 2vw;
+    font-size: 1vw;
+    padding: 2vh 2.5vw;
 }
 
 .hide {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 .blur {
-  filter: brightness(0.5);
+    filter: brightness(0.5);
 }
 .custBlur {
-  filter: brightness(0.5);
-  cursor: not-allowed;
-  pointer-events: none;
+    filter: brightness(0.5);
+    cursor: not-allowed;
+    pointer-events: none;
 }
 .rem {
-  display: none;
+    display: none;
 }
 .popup i {
-  position: fixed;
-  top: 1.2vw;
-  right: 1.2vw;
-  cursor: pointer;
-  font-size: 1.8vw;
+    position: fixed;
+    top: 1.2vw;
+    right: 1.2vw;
+    cursor: pointer;
+    font-size: 1.8vw;
 }
 .notice-btn {
-  cursor: pointer;
+    cursor: pointer;
 }
 .blurBtn {
-  filter: brightness(0.5);
-  pointer-events: none;
+    filter: brightness(0.5);
+    pointer-events: none;
 }
 .btn {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* Schedule */
 .schedule {
-  margin-top: 18vh;
-  margin-bottom: 6vh;
+    margin-top: 18vh;
+    margin-bottom: 6vh;
 }
 .schedule table {
-  width: 100%;
-  border: 2px solid var(--white);
-  border-collapse: collapse;
+    width: 100%;
+    border: 2px solid var(--white);
+    border-collapse: collapse;
 }
 td,
 th {
-  border-bottom: 1px solid var(--white);
-  border-right: 1px solid var(--white);
-  padding: 1vh 2vw;
+    border-bottom: 1px solid var(--white);
+    border-right: 1px solid var(--white);
+    padding: 1vh 2vw;
 }
 th {
-  font-size: 1.4vw;
-  font-family: med;
+    font-size: 1.4vw;
+    font-family: med;
 }
 td {
-  font-size: 1.2vw;
+    font-size: 1.2vw;
 }
 
 /* Sponsors */
 .sponsors {
-  margin-top: 16vh;
-  margin-bottom: 10vh;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
+    margin-top: 16vh;
+    margin-bottom: 10vh;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 }
 .sponsors h1 {
-  display: inline-block;
-  width: auto;
-  font-size: 3vw;
-  text-align: center;
-  margin-bottom: 10vh;
-  position: relative;
-  font-family: bold;
+    display: inline-block;
+    width: auto;
+    font-size: 3vw;
+    text-align: center;
+    margin-bottom: 10vh;
+    position: relative;
+    font-family: bold;
 }
 .sponsors h1::after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  border-radius: 50px;
-  background: #fff;
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 50px;
+    background: #fff;
 }
 .row {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 110%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 110%;
 }
 .row a {
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 24%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .row h2 {
-  margin-left: 1vw;
-  font-size: 1.8vw;
-  white-space: nowrap;
+    margin-left: 1vw;
+    font-size: 1.8vw;
+    white-space: nowrap;
 }
 .row a img {
-  width: 80%;
+    width: 80%;
 }
 
 /* PRIZE */
 .herobtns {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 .prize {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 2vh 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2vh 0;
 }
 .prize.cards {
-  margin-bottom: 3vh;
-  flex-wrap: nowrap;
+    margin-bottom: 3vh;
+    flex-wrap: nowrap;
 }
 .prize a {
-  font-family: reg;
-  font-size: 1.5vw;
+    font-family: reg;
+    font-size: 1.5vw;
 }
 .prize a span {
-  font-size: 2.2vw;
-  font-family: bold;
+    font-size: 2.2vw;
+    font-family: bold;
 }
 .strike {
-  font-family: light;
+    font-family: light;
 }
 .prize .card {
-  width: 10vw;
-  height: 10vw;
+    width: 10vw;
+    height: 10vw;
 }
 /* .prize .card:hover {
   cursor: default;
@@ -384,255 +385,255 @@ td {
 } */
 
 .vid img {
-  width: 100%;
+    width: 100%;
 }
 #geek {
-  width: 30%;
+    width: 30%;
 }
 
 .hide-res {
-  display: none;
+    display: none;
 }
 
 /* MEDIAS */
 
 @media (max-width: 1280px) {
-  .heroContent {
-    width: 80%;
-    padding: 0;
-    height: 50%;
-  }
-  .hero {
-    margin-bottom: 0;
-    padding: 0 0;
-    margin-bottom: 10vh;
-  }
-  .hero h1 {
-    font-size: 8vh;
-    height: 9vh;
-  }
-  .hero h3 {
-    margin-top: 1.5vh;
-  }
-  .hero .btn {
-    margin-top: 1vh;
-  }
-  .vid {
-    height: 90vh;
-    margin-bottom: 2vh;
-  }
-  .popup {
-    width: 45%;
-  }
-  .popup h2 {
-    font-size: 2.4vw;
-  }
-  .popup .links a {
-    font-size: 1.4vw;
-  }
-  .prize .card {
-    width: 14vw;
-    height: 14vw;
-    margin-top: 4vh;
-  }
-  .prize a {
-    font-size: 1.8vw;
-  }
-  .prize a span {
-    font-size: 2.3vw;
-  }
-  .sponsors h1 {
-    font-size: 5vh;
-  }
-  .row {
-    flex-wrap: wrap;
-  }
-  .row a {
-    width: 40%;
-    margin-bottom: 7vh;
-  }
-  .row a img {
-    width: 100%;
-  }
-  .transparent {
-    height: 300%;
-  }
+    .heroContent {
+        width: 80%;
+        padding: 0;
+        height: 50%;
+    }
+    .hero {
+        margin-bottom: 0;
+        padding: 0 0;
+        margin-bottom: 10vh;
+    }
+    .hero h1 {
+        font-size: 8vh;
+        height: 9vh;
+    }
+    .hero h3 {
+        margin-top: 1.5vh;
+    }
+    .hero .btn {
+        margin-top: 1vh;
+    }
+    .vid {
+        height: 90vh;
+        margin-bottom: 2vh;
+    }
+    .popup {
+        width: 45%;
+    }
+    .popup h2 {
+        font-size: 2.4vw;
+    }
+    .popup .links a {
+        font-size: 1.4vw;
+    }
+    .prize .card {
+        width: 14vw;
+        height: 14vw;
+        margin-top: 4vh;
+    }
+    .prize a {
+        font-size: 1.8vw;
+    }
+    .prize a span {
+        font-size: 2.3vw;
+    }
+    .sponsors h1 {
+        font-size: 5vh;
+    }
+    .row {
+        flex-wrap: wrap;
+    }
+    .row a {
+        width: 40%;
+        margin-bottom: 7vh;
+    }
+    .row a img {
+        width: 100%;
+    }
+    .transparent {
+        height: 300%;
+    }
 }
 
 @media (max-width: 1090px) {
-  .card {
-    width: 42%;
-    margin-top: 6vh;
-  }
-  .cards {
-    padding: 0;
-  }
-  .card img {
-    width: 63%;
-  }
+    .card {
+        width: 42%;
+        margin-top: 6vh;
+    }
+    .cards {
+        padding: 0;
+    }
+    .card img {
+        width: 63%;
+    }
 
-  .cards-container h1 {
-    height: 8vh;
-  }
-  .popup {
-    width: 70%;
-    height: 35vh;
-  }
-  .popup h2 {
-    font-size: 3.5vw;
-  }
-  .popup .links a {
-    font-size: 2.4vw;
-    padding: 1.3vh 3.4vw;
-  }
-  .popup i {
-    font-size: 3.6vw;
-    top: 2.3vw;
-    right: 2.3vw;
-  }
+    .cards-container h1 {
+        height: 8vh;
+    }
+    .popup {
+        width: 70%;
+        height: 35vh;
+    }
+    .popup h2 {
+        font-size: 3.5vw;
+    }
+    .popup .links a {
+        font-size: 2.4vw;
+        padding: 1.3vh 3.4vw;
+    }
+    .popup i {
+        font-size: 3.6vw;
+        top: 2.3vw;
+        right: 2.3vw;
+    }
 
-  .prize .card {
-    width: 16vw;
-    height: 16vw;
-    margin-top: 4vh;
-  }
-  .prize a {
-    font-size: 2.1vw;
-  }
-  .prize a span {
-    font-size: 3vw;
-  }
-  .sponsors h1 {
-    font-size: 5vh;
-  }
-  .row {
-    flex-wrap: wrap;
-  }
-  .row a {
-    width: 40%;
-    margin-bottom: 7vh;
-  }
-  .row a img {
-    width: 100%;
-  }
-  .vid {
-    height: 56vh;
-  }
-  .sponsors a {
-    width: 30%;
-  }
-  .sponsors a img {
-    width: 100%;
-  }
-  .row h2 {
-    font-size: 2.2vw;
-  }
+    .prize .card {
+        width: 16vw;
+        height: 16vw;
+        margin-top: 4vh;
+    }
+    .prize a {
+        font-size: 2.1vw;
+    }
+    .prize a span {
+        font-size: 3vw;
+    }
+    .sponsors h1 {
+        font-size: 5vh;
+    }
+    .row {
+        flex-wrap: wrap;
+    }
+    .row a {
+        width: 40%;
+        margin-bottom: 7vh;
+    }
+    .row a img {
+        width: 100%;
+    }
+    .vid {
+        height: 56vh;
+    }
+    .sponsors a {
+        width: 30%;
+    }
+    .sponsors a img {
+        width: 100%;
+    }
+    .row h2 {
+        font-size: 2.2vw;
+    }
 }
 
 @media (max-width: 800px) {
-  .heroContent {
-    width: 90%;
-    padding: 0;
-    height: 50%;
-  }
-  .hero .btn {
-    margin-top: 2vh;
-    padding: 2vh 8vw;
-  }
-  .hero h1 {
-    font-size: 7vh;
-    width: 80%;
-    min-height: 6vh;
-    margin-bottom: 2vh;
-  }
-  .hero h3 {
-    margin-top: 1vh;
-    padding: 0 8vw;
-  }
-  .vid {
-    height: 50vh;
-  }
-  main {
-    padding: 0 6vw;
-  }
-  .card h2 {
-    font-size: 2.4vh;
-  }
-  .popup i {
-    font-size: 4.4vw;
-    top: 4.5vw;
-    right: 4.4vw;
-  }
-  .prize a {
-    font-size: 2.6vw;
-  }
-  .prize a span {
-    font-size: 3.4vw;
-  }
-  .row h2 {
-    font-size: 3vw;
-  }
+    .heroContent {
+        width: 90%;
+        padding: 0;
+        height: 50%;
+    }
+    .hero .btn {
+        margin-top: 2vh;
+        padding: 2vh 8vw;
+    }
+    .hero h1 {
+        font-size: 7vh;
+        width: 80%;
+        min-height: 6vh;
+        margin-bottom: 2vh;
+    }
+    .hero h3 {
+        margin-top: 1vh;
+        padding: 0 8vw;
+    }
+    .vid {
+        height: 50vh;
+    }
+    main {
+        padding: 0 6vw;
+    }
+    .card h2 {
+        font-size: 2.4vh;
+    }
+    .popup i {
+        font-size: 4.4vw;
+        top: 4.5vw;
+        right: 4.4vw;
+    }
+    .prize a {
+        font-size: 2.6vw;
+    }
+    .prize a span {
+        font-size: 3.4vw;
+    }
+    .row h2 {
+        font-size: 3vw;
+    }
 }
 
 @media (max-width: 530px) {
-  .card {
-    width: 76%;
-    margin-top: 4.5vh;
-    padding: 6.2vh 0;
-  }
-  .card h2 {
-    font-size: 2.7vh;
-  }
-  .card img {
-    height: 75%;
-  }
-  .popup {
-    width: 80%;
-    height: 35vh;
-  }
-  .popup h2 {
-    font-size: 4.8vw;
-  }
-  .popup .links a {
-    font-size: 3.4vw;
-    padding: 1vh 6vw;
-  }
-  .popup i {
-    font-size: 5vw;
-    top: 6.7vw;
-    right: 4.5vw;
-  }
-  .notice {
-    margin-bottom: 8vh;
-  }
-  .hero .card {
-    width: 11vh;
-    height: 11vh;
-  }
-  .prize a {
-    font-size: 3vw;
-  }
-  .prize a span {
-    font-size: 4.4vw;
-  }
-  .vid {
-    height: 20vh;
-  }
-  .sponsors h1 {
-    font-size: 4vh;
-  }
-  .sponsors a {
-    width: 100%;
-    margin-bottom: 14vh;
-  }
-  .sponsors a img {
-    width: 70%;
-  }
-  .row h2 {
-    font-size: 2.8vh;
-    margin-left: 3vw;
-  }
-  .prize.cards {
-    width: 110%;
-  }
+    .card {
+        width: 76%;
+        margin-top: 4.5vh;
+        padding: 6.2vh 0;
+    }
+    .card h2 {
+        font-size: 2.7vh;
+    }
+    .card img {
+        height: 75%;
+    }
+    .popup {
+        width: 80%;
+        height: 35vh;
+    }
+    .popup h2 {
+        font-size: 4.8vw;
+    }
+    .popup .links a {
+        font-size: 3.4vw;
+        padding: 1vh 6vw;
+    }
+    .popup i {
+        font-size: 5vw;
+        top: 6.7vw;
+        right: 4.5vw;
+    }
+    .notice {
+        margin-bottom: 8vh;
+    }
+    .hero .card {
+        width: 11vh;
+        height: 11vh;
+    }
+    .prize a {
+        font-size: 3vw;
+    }
+    .prize a span {
+        font-size: 4.4vw;
+    }
+    .vid {
+        height: 20vh;
+    }
+    .sponsors h1 {
+        font-size: 4vh;
+    }
+    .sponsors a {
+        width: 100%;
+        margin-bottom: 14vh;
+    }
+    .sponsors a img {
+        width: 70%;
+    }
+    .row h2 {
+        font-size: 2.8vh;
+        margin-left: 3vw;
+    }
+    .prize.cards {
+        width: 110%;
+    }
 }
