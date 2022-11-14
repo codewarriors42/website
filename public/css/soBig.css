@@ -206,7 +206,6 @@ main {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--black);
-    height: 33vh;
     width: 35%;
     padding: 0 3vw;
     text-align: center;
@@ -222,7 +221,7 @@ main {
 .popup h2 {
     font-size: 1.9vw;
     font-family: bold;
-    margin-top: 4vh;
+    margin: 4vh 0;
 }
 
 .popup p {
