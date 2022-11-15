@@ -211,8 +211,8 @@ router.get("/sobigsguide", (req, res) => {
   );
 });
 
-router.get("/intra", (req, res) => {
-    res.render("client/soon");
+router.get("/cw22", (req, res) => {
+    res.redirect("/soBig");
 });
 
 router.get("/soon", (req, res) => {
