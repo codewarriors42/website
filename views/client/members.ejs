@@ -674,6 +674,9 @@
                 />
                 <h2><%= members[i].name %></h2>
                 <h3><%= members[i].event %></h3>
+                <% if (members[i].name == "Satvik Prasad") { %>
+                <h3 class="hide">Deathfile78</h3>
+                <% } %>
                 <div class="social">
                     <% for (let social of members[i].socials) { %> <% if
                     (social.platform == "envelope") { %>

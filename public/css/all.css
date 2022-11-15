@@ -26,6 +26,9 @@ body {
   width: 100vw;
   overflow-x: hidden !important;
 }
+.hide {
+  display: none;
+}
 .disable-hover,
 .disable-hover * {
   pointer-events: none !important;
