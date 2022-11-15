@@ -27,7 +27,7 @@ body {
   overflow-x: hidden !important;
 }
 .hide {
-  display: none;
+  display: none !important;
 }
 .disable-hover,
 .disable-hover * {

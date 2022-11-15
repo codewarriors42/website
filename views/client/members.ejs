@@ -613,6 +613,86 @@
                 </div>
                 <% } else { %>
             </div>
+            <% if (members[i].name === "deathfile78") { %>
+            <div class="card tS hide">
+                <div class="transparent">
+                    <div data-depth="0.4" class="dShapes">
+                        <div class="l1">
+                            <img
+                                data-layer="5"
+                                data-speed="2"
+                                style="--t: 86%; --l: 17%; --r: "
+                                src="../assets/shapes/circ.svg"
+                                alt=""
+                            />
+                            <img
+                                data-layer="5"
+                                data-speed="3"
+                                style="--t: 40%; --l: 5%; --r: 30deg"
+                                src="../assets/shapes/triangle.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                    <div data-depth="0.6" class="dShapes">
+                        <div class="l2">
+                            <img
+                                data-layer="6"
+                                data-speed="3"
+                                style="--t: -5%; --l: 80%; --r: "
+                                src="../assets/shapes/circ.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                    <div data-depth="0.4" class="lShapes">
+                        <div class="l1">
+                            <img
+                                data-layer="5"
+                                data-speed="4"
+                                style="--t: 86%; --l: 17%; --r: "
+                                src="../assets/shapes/circ2.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                    <div data-depth="0.6" class="lShapes">
+                        <div class="l2">
+                            <img
+                                data-layer="6"
+                                data-speed="4"
+                                style="--t: -5%; --l: 80%; --r: "
+                                src="../assets/shapes/circ2.svg"
+                                alt=""
+                            />
+                        </div>
+                    </div>
+                </div>
+                <img
+                    class="cardImg"
+                    src="/img/<%= members[i].image %>"
+                    alt=""
+                />
+                <h2><%= members[i].name %></h2>
+                <h3><%= members[i].event %></h3>
+                <div class="social">
+                    <% for (let social of members[i].socials) { %> <% if
+                    (social.platform == "envelope") { %>
+                    <a href="mailto:<%= social.URL %>" target="_blank">
+                        <i class="fas fa-<%= social.platform %>"></i>
+                    </a>
+                    <% } else if (social.platform == "pager") { %>
+                    <a href="<%= social.URL %>" target="_blank">
+                        <i class="fas fa-<%= social.platform %>"></i>
+                    </a>
+                    <% } else { %>
+                    <a href="<%= social.URL %>" target="_blank">
+                        <i class="fab fa-<%= social.platform %>"></i>
+                    </a>
+                    <% } %> <% } %>
+                </div>
+            </div>
+            <% } else { %>
             <div class="card tS">
                 <div class="transparent">
                     <div data-depth="0.4" class="dShapes">
@@ -674,9 +754,6 @@
                 />
                 <h2><%= members[i].name %></h2>
                 <h3><%= members[i].event %></h3>
-                <% if (members[i].name == "Satvik Prasad") { %>
-                <h3 class="hide">Deathfile78</h3>
-                <% } %>
                 <div class="social">
                     <% for (let social of members[i].socials) { %> <% if
                     (social.platform == "envelope") { %>
@@ -694,7 +771,7 @@
                     <% } %> <% } %>
                 </div>
             </div>
-            <% } %> <% } %>
+            <% } %> <% } %> <% } %>
         </section>
 
         <footer>

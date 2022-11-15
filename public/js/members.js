@@ -1,7 +1,7 @@
 let search = document.querySelector("#searchBar");
 let cards = document.querySelectorAll(".tS");
 
-let titles = ["deathfile78"];
+let titles = [];
 for (let card of cards) {
     let h2 = card.children[2].textContent.toLowerCase();
     let h3 = card.children[3].textContent.toLowerCase();
@@ -22,6 +22,9 @@ search.addEventListener("keyup", (e) => {
         document.querySelector(".cards").style.paddingBottom = "0";
         for (let card of cards) {
             card.style.display = "flex";
+            if (card.children[2].textContent.toLowerCase() === "deathfile78") {
+                card.classList.add("hide");
+            }
         }
     } else {
         for (let card of cards) {
@@ -36,12 +39,16 @@ search.addEventListener("keyup", (e) => {
                 for (let card of cards) {
                     if (card.children[2].textContent.toLowerCase() == title) {
                         card.style.display = "flex";
+                        if (
+                            card.children[2].textContent.toLowerCase() ===
+                                "deathfile78" &&
+                            usrInp !== ""
+                        ) {
+                            console.log("his");
+                            card.classList.remove("hide");
+                        }
                     } else if (
                         card.children[3].textContent.toLowerCase() == title
-                    ) {
-                        card.style.display = "flex";
-                    } else if (
-                        card.children[4].textContent.toLowerCase() == title
                     ) {
                         card.style.display = "flex";
                     }
