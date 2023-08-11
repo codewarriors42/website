@@ -290,8 +290,8 @@ footer p {
 nav {
   display: flex;
   padding: 3vh 0;
-  transform: translateY(-100%);
-  transition: all 0.5s 0.3s;
+  /* transform: translateY(-100%);
+  transition: all 0.5s 0.3s; */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
