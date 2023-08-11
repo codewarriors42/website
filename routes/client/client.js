@@ -111,7 +111,7 @@ router.get("/register", (req, res) => {
 
 router.get("/guide", async (req, res) => {
     res.redirect(
-        "https://drive.google.com/file/d/1sr-PidiLxCLoUqJaqSi-IMyg_4IGHT4e/view"
+        "https://docs.google.com/document/d/1WI4Tz96KFjObiRwz3_ieIIESWzJ-dAYRL3J9bZ-qX6c/edit?usp=sharing"
     );
 });
 
