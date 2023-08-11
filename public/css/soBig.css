@@ -395,8 +395,50 @@ td {
     display: none;
 }
 
-/* MEDIAS */
+/* GLOBE */
+.mesh-hold {
+    height: 40vh;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mesh,
+.globe {
+    height: 100%;
+    width: auto;
+}
+.globe {
+    width: 45%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+}
+.globe-hold {
+    width: 100%;
+    height: 100%;
+}
+.hero {
+    padding: 0;
+    padding-top: 2rem;
+}
+.hero h2 {
+    font-size: 4rem;
+    font-family: bold;
+}
+#light-globe {
+    display: none;
+}
+.light #light-globe {
+    display: inline-block;
+}
+.light #dark-globe {
+    display: none;
+}
 
+/* MEDIAS */
 @media (max-width: 1280px) {
     .heroContent {
         width: 80%;
@@ -572,6 +614,10 @@ td {
     }
     .row h2 {
         font-size: 3vw;
+    }
+    .mesh-hold {
+        height: 25vh;
+        margin-top: 4rem;
     }
 }
 
