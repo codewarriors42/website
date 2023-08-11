@@ -302,6 +302,9 @@
   font-size: 14vh;
   height: auto;
 }
+.flex {
+  display: flex;
+}
 
 /* MEDIAS */
 @media (max-width: 1400px) {
@@ -444,8 +447,8 @@
   }
   .hero .btn {
     margin-top: 5vh;
-    padding: 2vh 16vw;
-    font-size: 2vh;
+    font-size: 1.6vh;
+    padding: 2vh 8vw;
   }
   .segCont {
     transform: scale(1.7);

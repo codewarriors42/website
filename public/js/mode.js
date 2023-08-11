@@ -144,7 +144,7 @@ let theTrans = () => {
 
 let heroStuff = () => {
   let p = document.querySelector(".hero h3");
-  let b = document.querySelector(".hero .btn");
+  let b = document.querySelector(".hero .flex");
   if (p) p.classList.add("upAOS");
   if (b) b.classList.add("upAOS");
 };
