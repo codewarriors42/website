@@ -12,9 +12,9 @@
       enctype="multipart/form-data"
       method="POST"
     >
-      <input type="text" name="name" value="<%= member.name %>" />
-      <input type="text" name="event" value="<%= member.event %>" />
-      <input
+      <input required type="text" name="name" value="<%= member.name %>" />
+      <input required type="text" name="event" value="<%= member.event %>" />
+      <input required
         type="number"
         placeholder="Position on page"
         name="pos"

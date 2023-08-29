@@ -10,8 +10,6 @@ for (let card of cards) {
     titles.push(h3);
 }
 
-console.log(titles);
-
 search.addEventListener("keyup", (e) => {
     document.querySelector(".cards").style.paddingTop = "10vh";
     document.querySelector(".cards").style.paddingBottom = "10vh";
@@ -22,7 +20,10 @@ search.addEventListener("keyup", (e) => {
         document.querySelector(".cards").style.paddingBottom = "0";
         for (let card of cards) {
             card.style.display = "flex";
-            if (card.children[2].textContent.toLowerCase() === "deathfile78") {
+            if (card.children[2].textContent.toLowerCase() === "yajha") {
+                card.classList.add("hide");
+            }
+            if (card.children[2].textContent.toLowerCase() === "pr0coder") {
                 card.classList.add("hide");
             }
         }
@@ -40,11 +41,12 @@ search.addEventListener("keyup", (e) => {
                     if (card.children[2].textContent.toLowerCase() == title) {
                         card.style.display = "flex";
                         if (
-                            card.children[2].textContent.toLowerCase() ===
-                                "deathfile78" &&
+                            (card.children[2].textContent.toLowerCase() ===
+                                "yajha" ||
+                                card.children[2].textContent.toLowerCase() ===
+                                    "pr0coder") &&
                             usrInp !== ""
                         ) {
-                            console.log("his");
                             card.classList.remove("hide");
                         }
                     } else if (

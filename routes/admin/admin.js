@@ -122,13 +122,14 @@ router.post(
       let source = tinify.fromFile(req.file.filename);
       source.toFile("toConvert.jpg").then(() => {
         setTimeout(async () => {
-fs.createReadStream(`./toConvert.jpg`).pipe(writeStream).then(() => {
-  fs.unlink("toConvert.jpg", (err) => {
-      if (err) {
-          res.send(err);
-      }
-  });
-});
+        await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
+
+        await fs.unlink("toConvert.jpg", (err) => {
+            if (err) {
+                res.send(err);
+            }
+        });
+
         }, 100)
       });
       let filename = `${uuid.v4()}-${Date.now()}.jpg`;
