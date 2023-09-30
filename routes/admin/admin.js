@@ -122,15 +122,14 @@ router.post(
       let source = tinify.fromFile(req.file.filename);
       source.toFile("toConvert.jpg").then(() => {
         setTimeout(async () => {
-        await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
+          await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
 
-        await fs.unlink("toConvert.jpg", (err) => {
+          await fs.unlink("toConvert.jpg", (err) => {
             if (err) {
-                res.send(err);
+              res.send(err);
             }
-        });
-
-        }, 100)
+          });
+        }, 100);
       });
       let filename = `${uuid.v4()}-${Date.now()}.jpg`;
       const writeStream = gfs.createWriteStream(filename);
@@ -181,7 +180,7 @@ router.post(
       res.redirect("/err");
       fs.unlink("no file", (err) => {});
     }
-  }
+  },
 );
 
 router.get("/add-alumni", checkSupreme, (req, res) => {
@@ -252,7 +251,7 @@ router.post(
       res.redirect("/err");
       fs.unlink("no file", (err) => {});
     }
-  }
+  },
 );
 
 router.get("/add-contact", checkSupreme, (req, res) => {
@@ -369,7 +368,7 @@ router.put("/edit-profile", async (req, res) => {
             username: username,
             password: password,
           },
-        }
+        },
       );
       res.redirect("/admin");
     } else {
@@ -395,7 +394,7 @@ router.put("/change-name", checkSupreme, async (req, res) => {
         $set: {
           name: req.body.name,
         },
-      }
+      },
     );
   } catch (err) {
     res.send(err);
@@ -415,7 +414,7 @@ router.put("/edit-user/:id", checkSupreme, async (req, res) => {
       $set: {
         name: req.body.name,
       },
-    }
+    },
   );
   res.redirect("/admin/users");
 });
@@ -463,11 +462,13 @@ router.put(
         let filename = `${uuid.v4()}-${Date.now()}.jpg`;
         const writeStream = gfs.createWriteStream(filename);
         await fs.createReadStream(`./toConvert.jpg`).pipe(writeStream);
-        setTimeout(() => {fs.unlink("toConvert.jpg", (err) => {
+        setTimeout(() => {
+          fs.unlink("toConvert.jpg", (err) => {
             if (err) {
-                res.send(err);
+              res.send(err);
             }
-        })}, 500)
+          });
+        }, 500);
         fs.unlink(`${req.file.filename}`, (err) => {
           if (err) {
             res.send(err);
@@ -491,10 +492,10 @@ router.put(
                     image: filename,
                     pos: parseInt(body.pos),
                   },
-                }
+                },
               );
             }
-          }
+          },
         );
       } else {
         await Member.updateOne(
@@ -506,7 +507,7 @@ router.put(
               socials: socials,
               pos: parseInt(body.pos),
             },
-          }
+          },
         );
       }
       res.redirect("/admin/members");
@@ -514,7 +515,7 @@ router.put(
       res.redirect("/err");
       fs.unlink("no file", (err) => {});
     }
-  }
+  },
 );
 
 router.get("/edit-alumni/:id", checkSupreme, async (req, res) => {
@@ -589,10 +590,10 @@ router.put(
                     current: body.current,
                     image: filename,
                   },
-                }
+                },
               );
             }
-          }
+          },
         );
       } else {
         await Alumni.updateOne(
@@ -605,7 +606,7 @@ router.put(
               year: body.year,
               current: body.current,
             },
-          }
+          },
         );
       }
 
@@ -614,8 +615,21 @@ router.put(
       res.redirect("/err");
       fs.unlink("no file", (err) => {});
     }
-  }
+  },
 );
+
+router.put("/move-to-alumni/:id", async (req, res) => {
+    try {
+        const member = await Member.findById(req.params.id);
+
+        const alumnus = new Alumni({name: member.name, post: member.event, socials: member.socials, image: member.image, year: parseInt(req.body.year)});
+        const done = await alumnus.save();
+        await Member.deleteOne({_id: member._id})
+        res.redirect('/admin/members')
+    } catch (err) {
+        res.redirect("/404")
+    }
+});
 
 router.get("/edit-contact/:id", checkSupreme, async (req, res) => {
   let contact = await Contact.findById(req.params.id);
@@ -629,7 +643,7 @@ router.put("/edit-contact/:id", checkSupreme, async (req, res) => {
         post: req.body.post,
         mail: req.body.mail,
       },
-    }
+    },
   );
   res.redirect("/admin/contacts");
 });
@@ -646,7 +660,7 @@ router.put("/edit-faq/:id", checkSupreme, async (req, res) => {
         question: req.body.question,
         answer: req.body.answer,
       },
-    }
+    },
   );
   res.redirect("/admin/faq");
 });
@@ -662,7 +676,7 @@ router.put("/edit-event/:id", checkSupreme, async (req, res) => {
       $set: {
         name: req.body.name,
       },
-    }
+    },
   );
   res.redirect("/admin/events");
 });

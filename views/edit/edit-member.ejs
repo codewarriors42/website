@@ -45,6 +45,11 @@
       <h3 style="cursor: pointer" id="addSocial">Add Social</h3>
       <button type="submit">Done</button>
     </form>
+        <hr>
+    <form action="/admin/move-to-alumni/<%= member._id %>?_method=PUT" method="POST">
+      <input placeholder="year" required type="number" name="year">
+      <button type="submit">Move to Alumni</button>
+    </form>
 
     <script>
       let btn = document.querySelector("#addSocial");

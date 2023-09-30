@@ -732,11 +732,6 @@
     "@aws-sdk/util-buffer-from" "3.208.0"
     tslib "^2.3.1"
 
-"@babylonjs/core@^6.18.0":
-  version "6.18.0"
-  resolved "https://registry.yarnpkg.com/@babylonjs/core/-/core-6.18.0.tgz#1f4d1ed0a48ed4b2b2104ed84bd89c963cc94d89"
-  integrity sha512-Tufbl8S0aNm5Czt6J2l7kPHkU6UYcK6o7zWtS76QDwIHE1yvNq1MwounTSuLc+u9vQR7Ml0HuACmePDmUNUSfw==
-
 "@mapbox/node-pre-gyp@^1.0.10":
   version "1.0.10"
   resolved "https://registry.npmjs.org/@mapbox/node-pre-gyp/-/node-pre-gyp-1.0.10.tgz"
