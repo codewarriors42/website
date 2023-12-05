@@ -115,6 +115,13 @@ router.get("/guide", async (req, res) => {
     );
 });
 
+router.get("/hoodie", async (req, res) => {
+    res.redirect("https://storm1.vercel.app/");
+});
+router.get("/hoodies", async (req, res) => {
+    res.redirect("https://storm1.vercel.app/");
+});
+
 // router.get("/blog/:id", async (req, res) => {
 //   let blog = await Blog.findById(req.params.id);
 //   let allBlogs = await Blog.find();
