@@ -116,10 +116,10 @@ router.get("/guide", async (req, res) => {
 });
 
 router.get("/hoodie", async (req, res) => {
-    res.redirect("https://storm1.vercel.app/");
+    res.redirect("https://i.imgur.com/dIpsRh3.jpg");
 });
 router.get("/hoodies", async (req, res) => {
-    res.redirect("https://storm1.vercel.app/");
+    res.redirect("https://i.imgur.com/dIpsRh3.jpg");
 });
 
 // router.get("/blog/:id", async (req, res) => {
