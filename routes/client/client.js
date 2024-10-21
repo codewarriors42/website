@@ -103,15 +103,15 @@ router.get("/archives/:category", async (req, res) => {
 });
 
 router.get("/discord", async (req, res) => {
-    res.redirect("https://discord.gg/F68CqdVdjw");
-});
+    res.redirect("https://discord.gg/6zpm9fdFzS");
+}); 
 router.get("/register", (req, res) => {
-    res.redirect("https://forms.gle/riJEdEMWNfMUpkgU6");
+    res.redirect("https://forms.gle/C2k4Mt2dtYEYHx8J6");
 });
 
 router.get("/guide", async (req, res) => {
     res.redirect(
-        "https://docs.google.com/document/d/1WI4Tz96KFjObiRwz3_ieIIESWzJ-dAYRL3J9bZ-qX6c/edit?usp=sharing"
+        "https://docs.google.com/document/d/1-i_hwT8BjIUVJt-4Umc1J0WoKZ5a6Z_LqjPXxR9l9uM/edit?usp=sharing"
     );
 });
 
