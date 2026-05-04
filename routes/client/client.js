@@ -41,6 +41,10 @@ router.get("/", async (req, res) => {
     res.render("client/index", { faqs: faqs });
 });
 
+router.get("/intrareg", (req, res) => {
+    res.redirect("https://forms.gle/7yCYsupXATyxAtbb7");
+});
+
 router.get("/result", (req, res) => {
     res.redirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
 });
@@ -104,14 +108,14 @@ router.get("/archives/:category", async (req, res) => {
 
 router.get("/discord", async (req, res) => {
     res.redirect("https://discord.gg/P7xcbgJ6A5");
-}); 
+});
 router.get("/register", (req, res) => {
     res.redirect("https://forms.gle/C2k4Mt2dtYEYHx8J6");
 });
 
 router.get("/guide", async (req, res) => {
     res.redirect(
-        "https://docs.google.com/document/d/1-i_hwT8BjIUVJt-4Umc1J0WoKZ5a6Z_LqjPXxR9l9uM/edit?usp=sharing"
+        "https://docs.google.com/document/d/1-i_hwT8BjIUVJt-4Umc1J0WoKZ5a6Z_LqjPXxR9l9uM/edit?usp=sharing",
     );
 });
 
@@ -219,7 +223,7 @@ router.get("/soBig", async (req, res) => {
 
 router.get("/sobigsguide", (req, res) => {
     res.redirect(
-        "https://docs.google.com/document/d/117Y9rNNSYK41df7b5XsPZLNOcmonNTQtMTuECoTP3m0/edit?usp=sharing"
+        "https://docs.google.com/document/d/117Y9rNNSYK41df7b5XsPZLNOcmonNTQtMTuECoTP3m0/edit?usp=sharing",
     );
 });
 
