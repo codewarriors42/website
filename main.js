@@ -12,11 +12,7 @@ const Grid = require("gridfs-stream");
 
 // DB CONNECTION
 async function connectDB() {
-  await mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-  });
+  await mongoose.connect(dbURI);
   await app.listen(PORT, () => console.log(`Listening on ${PORT}...`));
 }
 connectDB();
@@ -42,9 +38,9 @@ app.use("/", require("./routes/client/client"));
 
 // Imgs
 app.get(
-    "/img/c3f085fc-5e72-4a00-a5ce-298aefded73d-1617915473562.jpg", async (req, res) => {
-      return res.sendFile(__dirname + "/public/assets/temp.jpg");
-    }
+  "/img/c3f085fc-5e72-4a00-a5ce-298aefded73d-1617915473562.jpg", async (req, res) => {
+    return res.sendFile(__dirname + "/public/assets/temp.jpg");
+  }
 );
 app.get("/img/:filename", async (req, res) => {
   try {
@@ -77,7 +73,7 @@ app.use(
 );
 
 // Intra redirect
-app.get("/intra_verification",(_,res) => {
+app.get("/intra_verification", (_, res) => {
   res.redirect("https://cwbotverification.herokuapp.com/");
 });
 

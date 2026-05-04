@@ -103,7 +103,7 @@ router.get("/archives/:category", async (req, res) => {
 });
 
 router.get("/discord", async (req, res) => {
-    res.redirect("https://discord.gg/6zpm9fdFzS");
+    res.redirect("https://discord.gg/P7xcbgJ6A5");
 }); 
 router.get("/register", (req, res) => {
     res.redirect("https://forms.gle/C2k4Mt2dtYEYHx8J6");
