@@ -1,6 +1,4 @@
-import { AppSidebar } from '#/components/app-sidebar'
-import { SidebarProvider } from '#/components/ui/sidebar'
-import { TooltipProvider } from '#/components/ui/tooltip'
+import { SideBarUI } from '#/components/sidebar'
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin')({
@@ -22,11 +20,14 @@ export const Route = createFileRoute('/admin')({
 
 function RouteComponent() {
   return (
-    <SidebarProvider>
-      <TooltipProvider>
-        <AppSidebar />
+    <div className="grid">
+      <div className="border-b bg-background h-14 flex items-center justify-between p-10">
+        <SideBarUI />
+        <h1 className="text-3xl font-logo">CW</h1>
+      </div>
+      <div className="w-full min-h-svh">
         <Outlet />
-      </TooltipProvider>
-    </SidebarProvider>
+      </div>
+    </div>
   )
 }

@@ -7,6 +7,7 @@ import { useForm } from '@tanstack/react-form'
 import { Field, FieldError, FieldGroup } from '#/components/ui/field'
 import { Input } from '#/components/ui/input'
 import { Button } from '#/components/ui/button'
+import { CircleNotchIcon } from '@phosphor-icons/react'
 
 export const Route = createFileRoute('/_auth/add-user')({
   component: RouteComponent,
@@ -161,7 +162,14 @@ function RouteComponent() {
           {/* Buttons */}
           <Field orientation="responsive" className="flex mt-4">
             <Button type="submit" className="p-5">
-              {isPending ? 'Adding user...' : 'Add User'}
+              {isPending ? (
+                <CircleNotchIcon
+                  weight="bold"
+                  className="animate-spin text-background"
+                />
+              ) : (
+                'Add User'
+              )}
             </Button>
           </Field>
         </form>

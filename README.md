@@ -7,5 +7,3 @@ The new Code Warriors website is in development. This repository hosts the front
 - TanStack Start + trpc
 - TypeScript
 - Tailwindcss
-
-

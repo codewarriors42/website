@@ -1,3 +1,4 @@
+import { LogoutBtn } from '#/components/logout-btn'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin/')({
@@ -5,5 +6,9 @@ export const Route = createFileRoute('/admin/')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/admin"!</div>
+  return (
+    <div className="flex items-center justify-center w-full h-full">
+      <LogoutBtn />
+    </div>
+  )
 }
