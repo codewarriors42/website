@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as ApiMediaRouteImport } from './routes/api.media'
 import { Route as AdminResourcesRouteImport } from './routes/admin/resources'
 import { Route as AdminProfileRouteImport } from './routes/admin/profile'
 import { Route as AdminMembersRouteImport } from './routes/admin/members'
@@ -22,7 +23,6 @@ import { Route as AdminBlogsRouteImport } from './routes/admin/blogs'
 import { Route as AdminArchivesRouteImport } from './routes/admin/archives'
 import { Route as AdminAlumnisRouteImport } from './routes/admin/alumnis'
 import { Route as AdminAdminUsersRouteImport } from './routes/admin/admin-users'
-import { Route as AdminLayoutRouteImport } from './routes/admin/_layout'
 import { Route as AuthLoginRouteImport } from './routes/_auth/login'
 import { Route as AuthAddUserRouteImport } from './routes/_auth/add-user'
 import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
@@ -41,6 +41,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRouteRoute,
+} as any)
+const ApiMediaRoute = ApiMediaRouteImport.update({
+  id: '/api/media',
+  path: '/api/media',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminResourcesRoute = AdminResourcesRouteImport.update({
   id: '/resources',
@@ -92,10 +97,6 @@ const AdminAdminUsersRoute = AdminAdminUsersRouteImport.update({
   path: '/admin-users',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminLayoutRoute = AdminLayoutRouteImport.update({
-  id: '/_layout',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
 const AuthLoginRoute = AuthLoginRouteImport.update({
   id: '/_auth/login',
   path: '/login',
@@ -114,7 +115,7 @@ const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminLayoutRoute
+  '/admin': typeof AdminRouteRouteWithChildren
   '/add-user': typeof AuthAddUserRoute
   '/login': typeof AuthLoginRoute
   '/admin/admin-users': typeof AdminAdminUsersRoute
@@ -127,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/admin/members': typeof AdminMembersRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/api/media': typeof ApiMediaRoute
   '/admin/': typeof AdminIndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
@@ -134,7 +136,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/add-user': typeof AuthAddUserRoute
   '/login': typeof AuthLoginRoute
-  '/admin': typeof AdminIndexRoute
   '/admin/admin-users': typeof AdminAdminUsersRoute
   '/admin/alumnis': typeof AdminAlumnisRoute
   '/admin/archives': typeof AdminArchivesRoute
@@ -145,6 +146,8 @@ export interface FileRoutesByTo {
   '/admin/members': typeof AdminMembersRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/api/media': typeof ApiMediaRoute
+  '/admin': typeof AdminIndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
 export interface FileRoutesById {
@@ -153,7 +156,6 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteRouteWithChildren
   '/_auth/add-user': typeof AuthAddUserRoute
   '/_auth/login': typeof AuthLoginRoute
-  '/admin/_layout': typeof AdminLayoutRoute
   '/admin/admin-users': typeof AdminAdminUsersRoute
   '/admin/alumnis': typeof AdminAlumnisRoute
   '/admin/archives': typeof AdminArchivesRoute
@@ -164,6 +166,7 @@ export interface FileRoutesById {
   '/admin/members': typeof AdminMembersRoute
   '/admin/profile': typeof AdminProfileRoute
   '/admin/resources': typeof AdminResourcesRoute
+  '/api/media': typeof ApiMediaRoute
   '/admin/': typeof AdminIndexRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
 }
@@ -184,6 +187,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/profile'
     | '/admin/resources'
+    | '/api/media'
     | '/admin/'
     | '/api/trpc/$'
   fileRoutesByTo: FileRoutesByTo
@@ -191,7 +195,6 @@ export interface FileRouteTypes {
     | '/'
     | '/add-user'
     | '/login'
-    | '/admin'
     | '/admin/admin-users'
     | '/admin/alumnis'
     | '/admin/archives'
@@ -202,6 +205,8 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/profile'
     | '/admin/resources'
+    | '/api/media'
+    | '/admin'
     | '/api/trpc/$'
   id:
     | '__root__'
@@ -209,7 +214,6 @@ export interface FileRouteTypes {
     | '/admin'
     | '/_auth/add-user'
     | '/_auth/login'
-    | '/admin/_layout'
     | '/admin/admin-users'
     | '/admin/alumnis'
     | '/admin/archives'
@@ -220,6 +224,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/profile'
     | '/admin/resources'
+    | '/api/media'
     | '/admin/'
     | '/api/trpc/$'
   fileRoutesById: FileRoutesById
@@ -229,6 +234,7 @@ export interface RootRouteChildren {
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
   AuthAddUserRoute: typeof AuthAddUserRoute
   AuthLoginRoute: typeof AuthLoginRoute
+  ApiMediaRoute: typeof ApiMediaRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
 }
 
@@ -254,6 +260,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
+    }
+    '/api/media': {
+      id: '/api/media'
+      path: '/api/media'
+      fullPath: '/api/media'
+      preLoaderRoute: typeof ApiMediaRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/resources': {
       id: '/admin/resources'
@@ -325,13 +338,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminUsersRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/_layout': {
-      id: '/admin/_layout'
-      path: ''
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminLayoutRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
     '/_auth/login': {
       id: '/_auth/login'
       path: '/login'
@@ -357,7 +363,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AdminRouteRouteChildren {
-  AdminLayoutRoute: typeof AdminLayoutRoute
   AdminAdminUsersRoute: typeof AdminAdminUsersRoute
   AdminAlumnisRoute: typeof AdminAlumnisRoute
   AdminArchivesRoute: typeof AdminArchivesRoute
@@ -372,7 +377,6 @@ interface AdminRouteRouteChildren {
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminLayoutRoute: AdminLayoutRoute,
   AdminAdminUsersRoute: AdminAdminUsersRoute,
   AdminAlumnisRoute: AdminAlumnisRoute,
   AdminArchivesRoute: AdminArchivesRoute,
@@ -395,6 +399,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRouteRoute: AdminRouteRouteWithChildren,
   AuthAddUserRoute: AuthAddUserRoute,
   AuthLoginRoute: AuthLoginRoute,
+  ApiMediaRoute: ApiMediaRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,12 +1,11 @@
 import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
-import { connectDB } from '#/server/db'
-import { addUserSchema, loginSchema } from '#/types/zod/auth.user'
+import { addUserSchema, loginSchema } from '#/types/schemas/auth.schema'
 import { User } from '../db/schemas/user'
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
 import { env } from '#/env'
 import { serialize } from 'cookie'
-import type { jwt_payload } from '#/types/jwt'
+import type { JwtPayload } from '#/types/auth/jwt'
 import { TRPCError } from '@trpc/server'
 
 type AuthResponse = {
@@ -18,8 +17,6 @@ export const authRouter = {
   addUser: publicProcedure
     .input(addUserSchema)
     .mutation(async ({ input }): Promise<AuthResponse> => {
-      await connectDB()
-
       const user_input = addUserSchema.safeParse(input)
       if (!user_input.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
@@ -35,8 +32,10 @@ export const authRouter = {
         })
       }
 
-      const hashed_password = await argon2.hash(password)
-      if (!hashed_password) {
+      let hashed_password: string
+      try {
+        hashed_password = await argon2.hash(password)
+      } catch {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: 'Something went wrong !!',
@@ -54,8 +53,6 @@ export const authRouter = {
   login: publicProcedure
     .input(loginSchema)
     .mutation(async ({ input, ctx }): Promise<AuthResponse> => {
-      await connectDB()
-
       const login_input = loginSchema.safeParse(input)
       if (!login_input.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
@@ -76,16 +73,18 @@ export const authRouter = {
         })
       }
 
-      const jwt_payload: jwt_payload = {
+      const jwtPayload: JwtPayload = {
         userId: get_user._id,
         username: get_user.username,
         name: get_user.name,
       }
 
-      const jwtToken = jwt.sign(jwt_payload, env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '3d',
-      })
-      if (!jwtToken) {
+      let jwtToken: string
+      try {
+        jwtToken = jwt.sign(jwtPayload, env.ACCESS_TOKEN_SECRET, {
+          expiresIn: '3d',
+        })
+      } catch {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: 'Error generating token',
@@ -105,7 +104,6 @@ export const authRouter = {
       return { message: 'Login successful', is_success: true }
     }),
   logout: protectedProcedure.mutation(async ({ ctx }) => {
-    await connectDB()
     const cookie = serialize(env.COOKIE_NAME, '', {
       httpOnly: true,
       path: '/',

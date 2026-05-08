@@ -1,4 +1,4 @@
-import { LogoutBtn } from '#/components/logout-btn'
+import { LogoutBtn } from '#/components/auth/logout-btn'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin/')({

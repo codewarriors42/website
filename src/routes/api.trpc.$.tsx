@@ -5,31 +5,39 @@ import { trpcRouter } from '#/integrations/trpc/routes'
 import { parseCookie } from 'cookie'
 import { env } from '#/env'
 import jwt from 'jsonwebtoken'
-import type { jwt_payload } from '#/types/jwt'
+import type { JwtPayload } from '#/types/auth/jwt'
+import { connectDB } from '#/server/db'
 
 function handler({ request }: { request: Request }) {
   return fetchRequestHandler({
     req: request,
     router: trpcRouter,
     endpoint: '/api/trpc',
-    createContext: ({ req, resHeaders }): TRPCContext => {
+    createContext: async ({ req, resHeaders }): Promise<TRPCContext> => {
       const cookieHeader = req.headers.get('cookie') || ''
       const cookie = parseCookie(cookieHeader)
       const token = cookie[env.COOKIE_NAME]
 
-      let session: jwt_payload | null = null
+      let session: JwtPayload | null = null
       if (token) {
         try {
-          session = jwt.verify(token, env.ACCESS_TOKEN_SECRET) as jwt_payload
+          session = jwt.verify(token, env.ACCESS_TOKEN_SECRET) as JwtPayload
         } catch (err) {
           console.error('Error verifying JWT:', err)
           session = null
         }
       }
+      const connection = await connectDB()
+
+      if (!connection.connection.db) {
+        throw new Error('MongoDB connection is not ready')
+      }
+
       return {
         req,
         resHeaders,
         session,
+        db: connection.connection,
       }
     },
   })

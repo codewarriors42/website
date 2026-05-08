@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from 'react'
+import { createContext, useContext, useRef, useState, useEffect } from 'react'
 import type {
   ComponentPropsWithRef,
   MouseEvent,
@@ -11,58 +11,55 @@ import { gsap } from 'gsap'
 
 gsap.registerPlugin(useGSAP)
 
-interface sidebar_ctx_t {
+interface sheet_ctx_t {
   open: boolean
   onOpen: () => void
   onClose: () => void
   onToggle: () => void
+  side: 'left' | 'bottom'
 }
 
-type SideBarRootProps = { children: ReactNode; defaultOpen?: boolean }
-type SideBarSectionProps = ComponentPropsWithRef<'div'>
-type SideBarButtonProps = ComponentPropsWithRef<'button'>
+type SheetRootProps = {
+  children: ReactNode
+  defaultOpen?: boolean
+  side?: 'left' | 'bottom'
+}
+type SheetSectionProps = ComponentPropsWithRef<'div'>
+type SheetButtonProps = ComponentPropsWithRef<'button'>
 
-type SideBarCompoundComponent = (({
+type SheetCompoundComponent = (({
   children,
-}: SideBarRootProps) => ReactElement) & {
+}: SheetRootProps) => ReactElement) & {
   Trigger: ({
     children,
     className,
     onClick,
     type,
     ...props
-  }: SideBarButtonProps) => ReactElement
+  }: SheetButtonProps) => ReactElement
   Close: ({
     children,
     className,
     onClick,
     type,
     ...props
-  }: SideBarButtonProps) => ReactElement
+  }: SheetButtonProps) => ReactElement
   Container: ({
     children,
     className,
     ...props
-  }: SideBarSectionProps) => ReactElement
-  Header: ({
-    children,
-    className,
-    ...props
-  }: SideBarSectionProps) => ReactElement
-  Body: ({ children, className, ...props }: SideBarSectionProps) => ReactElement
-  Footer: ({
-    children,
-    className,
-    ...props
-  }: SideBarSectionProps) => ReactElement
-  Overlay: ({ className, ...props }: SideBarSectionProps) => ReactElement
-  OverLay: ({ className, ...props }: SideBarSectionProps) => ReactElement
+  }: SheetSectionProps) => ReactElement
+  Header: ({ children, className, ...props }: SheetSectionProps) => ReactElement
+  Body: ({ children, className, ...props }: SheetSectionProps) => ReactElement
+  Footer: ({ children, className, ...props }: SheetSectionProps) => ReactElement
+  Overlay: ({ className, ...props }: SheetSectionProps) => ReactElement
+  OverLay: ({ className, ...props }: SheetSectionProps) => ReactElement
 }
 
-const sidebar_ctx = createContext<sidebar_ctx_t | undefined>(undefined)
+const sheet_ctx = createContext<sheet_ctx_t | undefined>(undefined)
 
-function useSidebarCtx() {
-  const ctx = useContext(sidebar_ctx)
+function useSheetCtx() {
+  const ctx = useContext(sheet_ctx)
   if (!ctx)
     throw new Error(
       '[ContextProvider:Erorr] SideBar context provider is Missing.',
@@ -70,16 +67,55 @@ function useSidebarCtx() {
   return ctx
 }
 
-const SideBarRoot = ({ children, defaultOpen = false }: SideBarRootProps) => {
+const SheetRoot = ({
+  children,
+  defaultOpen = false,
+  side = 'left',
+}: SheetRootProps) => {
   const [open, setOpen] = useState(defaultOpen)
-  const onOpen = () => setOpen(true)
-  const onClose = () => setOpen(false)
-  const onToggle = () => setOpen((prev) => !prev)
+  const lastFocusedRef = useRef<HTMLElement | null>(null)
+
+  const restoreFocus = () => {
+    const last = lastFocusedRef.current
+    if (last && typeof last.focus === 'function') {
+      last.focus()
+    }
+  }
+
+  const onOpen = () => {
+    lastFocusedRef.current = document.activeElement as HTMLElement | null
+    setOpen(true)
+  }
+  const onClose = () => {
+    restoreFocus()
+    setOpen(false)
+  }
+  const onToggle = () =>
+    setOpen((prev) => {
+      if (prev) {
+        restoreFocus()
+        return false
+      }
+      lastFocusedRef.current = document.activeElement as HTMLElement | null
+      return true
+    })
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
-    <sidebar_ctx.Provider value={{ open, onOpen, onClose, onToggle }}>
+    <sheet_ctx.Provider value={{ open, onOpen, onClose, onToggle, side }}>
       <nav className="relative">{children}</nav>
       <Overlay />
-    </sidebar_ctx.Provider>
+    </sheet_ctx.Provider>
   )
 }
 
@@ -89,8 +125,8 @@ function Trigger({
   onClick,
   type,
   ...props
-}: SideBarButtonProps) {
-  const { onToggle } = useSidebarCtx()
+}: SheetButtonProps) {
+  const { onToggle } = useSheetCtx()
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event)
@@ -115,8 +151,8 @@ function Close({
   onClick,
   type,
   ...props
-}: SideBarButtonProps) {
-  const { onClose } = useSidebarCtx()
+}: SheetButtonProps) {
+  const { onClose } = useSheetCtx()
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event)
@@ -135,8 +171,8 @@ function Close({
   )
 }
 
-function Overlay({ className, ...props }: SideBarSectionProps) {
-  const { open, onClose } = useSidebarCtx()
+function Overlay({ className, ...props }: SheetSectionProps) {
+  const { open, onClose } = useSheetCtx()
   const overlayRef = useRef<HTMLDivElement>(null)
   useGSAP(() => {
     const ele = overlayRef.current
@@ -174,16 +210,18 @@ function responsive(classes: Record<string, string>) {
   return Object.values(classes).join(' ')
 }
 
-function Container({ children, className, ...props }: SideBarSectionProps) {
-  const { open } = useSidebarCtx()
+function Container({ children, className, ...props }: SheetSectionProps) {
+  const { open, side } = useSheetCtx()
   const containerRef = useRef<HTMLDivElement>(null)
   useGSAP(
     () => {
       const ele = containerRef.current
       if (!ele) return
       gsap.killTweensOf(ele)
+      const isLeft = side === 'left'
       gsap.to(ele, {
-        x: open ? 0 : '-100%',
+        x: isLeft ? (open ? 0 : '-100%') : 0,
+        y: !isLeft ? (open ? 0 : '100%') : 0,
         pointerEvents: open ? 'auto' : 'none',
         duration: open ? 0.298 : 0.299,
         ease: open ? 'back.out(1.03)' : 'back.in(1.2)',
@@ -191,8 +229,13 @@ function Container({ children, className, ...props }: SideBarSectionProps) {
         force3D: true,
       })
     },
-    { dependencies: [open], scope: containerRef },
+    { dependencies: [open, side], scope: containerRef },
   )
+
+  const sideClasses =
+    side === 'left'
+      ? `left-0 top-0 h-screen -translate-x-full ${responsive(sidebarWidths)}`
+      : 'left-0 bottom-0 w-full h-screen translate-y-full'
 
   return (
     <div
@@ -200,8 +243,8 @@ function Container({ children, className, ...props }: SideBarSectionProps) {
       aria-hidden={!open}
       data-open={open ? 'true' : 'false'}
       className={cn(
-        'sidebar-container fixed left-0 top-0 z-20 overflow-y-auto bg-[#0f0f0f] h-full flex flex-col will-change-transform transform-gpu -translate-x-full',
-        responsive(sidebarWidths),
+        'sidebar-container fixed z-20 overflow-y-auto bg-[#0f0f0f] flex flex-col will-change-transform transform-gpu',
+        sideClasses,
         className,
       )}
       {...props}
@@ -211,7 +254,7 @@ function Container({ children, className, ...props }: SideBarSectionProps) {
   )
 }
 
-function Header({ children, className, ...props }: SideBarSectionProps) {
+function Header({ children, className, ...props }: SheetSectionProps) {
   return (
     <div className={cn(className)} {...props}>
       {children}
@@ -219,7 +262,7 @@ function Header({ children, className, ...props }: SideBarSectionProps) {
   )
 }
 
-function Body({ children, className, ...props }: SideBarSectionProps) {
+function Body({ children, className, ...props }: SheetSectionProps) {
   return (
     <div className={cn(className)} {...props}>
       {children}
@@ -227,7 +270,7 @@ function Body({ children, className, ...props }: SideBarSectionProps) {
   )
 }
 
-function Footer({ children, className, ...props }: SideBarSectionProps) {
+function Footer({ children, className, ...props }: SheetSectionProps) {
   return (
     <div className={cn(className)} {...props}>
       {children}
@@ -235,7 +278,7 @@ function Footer({ children, className, ...props }: SideBarSectionProps) {
   )
 }
 
-const SideBar = Object.assign(SideBarRoot, {
+const Sheet = Object.assign(SheetRoot, {
   Trigger,
   Close,
   Container,
@@ -244,6 +287,6 @@ const SideBar = Object.assign(SideBarRoot, {
   Footer,
   Overlay,
   OverLay: Overlay,
-}) as SideBarCompoundComponent
+}) as SheetCompoundComponent
 
-export default SideBar
+export default Sheet

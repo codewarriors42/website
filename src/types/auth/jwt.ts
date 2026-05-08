@@ -1,6 +1,6 @@
 import type { Types } from 'mongoose'
 
-export type jwt_payload = {
+export type JwtPayload = {
   userId: Types.ObjectId
   username: string
   name: string

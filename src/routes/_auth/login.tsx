@@ -1,6 +1,6 @@
 import { ErrorToast, SuccessToast } from '#/components/toast'
 import { useTRPC } from '#/integrations/trpc/react'
-import { loginSchema } from '#/types/zod/auth.user'
+import { loginSchema } from '#/types/schemas/auth.schema'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'

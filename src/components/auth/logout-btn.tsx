@@ -1,9 +1,9 @@
 import { CircleNotchIcon, SignOutIcon } from '@phosphor-icons/react'
-import { Button } from './ui/button'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
-import { ErrorToast, SuccessToast } from './toast'
 import { useNavigate } from '@tanstack/react-router'
+import { ErrorToast, SuccessToast } from '../toast'
+import { Button } from '../ui/button'
 
 export function LogoutBtn() {
   const navtigate = useNavigate()
