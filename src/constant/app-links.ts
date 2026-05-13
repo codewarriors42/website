@@ -1,7 +1,6 @@
 import {
   ArchiveIcon,
   ChalkboardSimpleIcon,
-  ChatsCircleIcon,
   CodeBlockIcon,
   FileMagnifyingGlassIcon,
   InfoIcon,
@@ -34,11 +33,6 @@ export const nav_links: LinkAttr[] = [
     path: '/admin/alumnis',
     title: 'Alumnis',
     icon: UsersThreeIcon,
-  },
-  {
-    path: '/admin/blogs',
-    title: 'Blogs',
-    icon: ChatsCircleIcon,
   },
   {
     path: '/admin/resources',

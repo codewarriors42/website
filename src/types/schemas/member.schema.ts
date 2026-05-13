@@ -1,8 +1,5 @@
 import { z } from 'zod'
 
-/* ---------------------------------- */
-/* Socials */
-/* ---------------------------------- */
 export const socialPlatformSchema = z.enum([
   'twitter',
   'linkedin',
@@ -21,7 +18,6 @@ export const socialSchema = z
   .object({
     platform: socialPlatformSchema,
 
-    // lowercase "url" is conventional
     url: z.string().trim(),
   })
   .superRefine((value, ctx) => {
@@ -43,10 +39,6 @@ export const socialSchema = z
 
 export type Social = z.infer<typeof socialSchema>
 
-/* ---------------------------------- */
-/* Roles */
-/* ---------------------------------- */
-
 export const memberRoles = [
   'gaming',
   'competitive_programming',
@@ -60,9 +52,16 @@ export const memberRoles = [
   'photography',
   'quiz',
   'crossword',
-  'techathon_cryptic_hunt',
+  'techathlon',
   'group_discussion',
   'motion_design',
+  'vice_president',
+  'president',
+  'creative_head',
+  'quiz_corss_head',
+  'programming_head',
+  'group_discussion_head',
+  'head_developer',
   'undefined',
 ] as const
 
@@ -71,10 +70,6 @@ export const memberRoleSchema = z.enum(memberRoles)
 export type MemberRole = z.infer<typeof memberRoleSchema>
 
 export const DEFAULT_MEMBER_ROLE: MemberRole = 'undefined'
-
-/* ---------------------------------- */
-/* Member */
-/* ---------------------------------- */
 
 export const MemberGrade = [6, 7, 8, 9, 10, 11, 12] as const
 
@@ -99,7 +94,3 @@ export const memberDBSchema = z.object({
 
 export type MemberFormValues = z.infer<typeof memberSchema>
 export type MemberDBValues = z.infer<typeof memberDBSchema>
-
-/* ---------------------------------- */
-/* Defaults */
-/* ---------------------------------- */

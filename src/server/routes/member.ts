@@ -5,16 +5,24 @@ import {
   protectedProcedure,
   publicProcedure,
 } from '../../integrations/trpc/init'
-import { Member } from '../db/schemas/member'
+import { MemberModel } from '../db/schemas/member'
 import { memberDBSchema } from '#/types/schemas/member.schema'
 import z from 'zod'
+import { Alumin } from '../db/schemas/alumni'
 
 export const membersRouter = {
   getAll: publicProcedure.query(async () => {
-    const members = await Member.find()
-    return members
+    try {
+      const members = await MemberModel.find()
+      return members
+    } catch {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to fetch members',
+      })
+    }
   }),
-  addMember: protectedProcedure
+  create: protectedProcedure
     .input(memberDBSchema)
     .mutation(async ({ input }) => {
       const inputData = await memberDBSchema.safeParseAsync(input)
@@ -26,7 +34,7 @@ export const membersRouter = {
         (social) => social.url.trim().length > 0,
       )
       try {
-        await Member.insertOne({
+        await MemberModel.insertOne({
           name,
           grade,
           roles,
@@ -45,7 +53,7 @@ export const membersRouter = {
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       try {
-        const member = await Member.findById(input.id)
+        const member = await MemberModel.findById(input.id)
         if (!member) {
           throw new TRPCError({
             code: 'NOT_FOUND',
@@ -63,7 +71,7 @@ export const membersRouter = {
         })
       }
     }),
-  updateMember: protectedProcedure
+  update: protectedProcedure
     .input(memberDBSchema.merge(z.object({ id: z.string() })))
     .mutation(async ({ input }) => {
       const updateSchema = memberDBSchema.merge(z.object({ id: z.string() }))
@@ -76,7 +84,7 @@ export const membersRouter = {
         (social) => social.url.trim().length > 0,
       )
       try {
-        await Member.updateOne(
+        await MemberModel.updateOne(
           { _id: input.id },
           {
             $set: {
@@ -96,11 +104,11 @@ export const membersRouter = {
       }
       return { message: 'Member updated successfully', is_success: true }
     }),
-  deleteMember: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {
       try {
-        await Member.deleteOne({ _id: input.id })
+        await MemberModel.deleteOne({ _id: input.id })
       } catch {
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
@@ -108,5 +116,39 @@ export const membersRouter = {
         })
       }
       return { message: 'Member deleted successfully', is_success: true }
+    }),
+  moveToAlumni: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input }) => {
+      try {
+        const member = await MemberModel.findById(input.id)
+        if (!member) {
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: 'Member not found',
+          })
+        }
+        await Alumin.insertOne({
+          name: member.name,
+          year: new Date().getFullYear(),
+          post: member.roles,
+          current: '',
+          socials: member.socials,
+          image: member.image,
+        })
+        await MemberModel.deleteOne({ _id: input.id })
+      } catch (err) {
+        if (err instanceof TRPCError) {
+          throw err
+        }
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Failed to move member to alumni',
+        })
+      }
+      return {
+        message: 'Member moved to alumni successfully',
+        is_success: true,
+      }
     }),
 } satisfies TRPCRouterRecord

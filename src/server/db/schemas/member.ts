@@ -25,7 +25,7 @@ const MemberSchema = new Schema<MemberType>(
   { timestamps: true },
 )
 
-export const Member =
+export const MemberModel =
   typeof mongoose.models.Member !== 'undefined'
     ? (mongoose.models.Member as Model<MemberType>)
     : model<MemberType>('Member', MemberSchema)

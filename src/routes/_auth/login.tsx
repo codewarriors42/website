@@ -84,6 +84,12 @@ function RouteComponent() {
                   !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
+                    <label
+                      htmlFor={field.name}
+                      className="text-sm text-muted-foreground"
+                    >
+                      Username
+                    </label>
                     <Input
                       className="p-5"
                       id={field.name}
@@ -93,7 +99,7 @@ function RouteComponent() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       placeholder="Username"
-                      autoComplete="off"
+                      autoComplete="username"
                     />
                     {isInvalid && (
                       <FieldError
@@ -115,6 +121,12 @@ function RouteComponent() {
                   !field.state.meta.isValid
                 return (
                   <Field data-invalid={isInvalid}>
+                    <label
+                      htmlFor={field.name}
+                      className="text-sm text-muted-foreground"
+                    >
+                      Password
+                    </label>
                     <Input
                       className="p-5"
                       id={field.name}
@@ -125,7 +137,7 @@ function RouteComponent() {
                       aria-invalid={isInvalid}
                       placeholder="Password"
                       type="password"
-                      autoComplete="off"
+                      autoComplete="current-password"
                     />
                     {isInvalid && (
                       <FieldError

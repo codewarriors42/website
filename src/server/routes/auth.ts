@@ -1,6 +1,6 @@
 import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
 import { addUserSchema, loginSchema } from '#/types/schemas/auth.schema'
-import { User } from '../db/schemas/user'
+import { UserModel } from '../db/schemas/user'
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
 import { env } from '#/env'
@@ -14,7 +14,7 @@ type AuthResponse = {
 }
 
 export const authRouter = {
-  addUser: publicProcedure
+  create: publicProcedure
     .input(addUserSchema)
     .mutation(async ({ input }): Promise<AuthResponse> => {
       const user_input = addUserSchema.safeParse(input)
@@ -24,7 +24,7 @@ export const authRouter = {
 
       const { username, name, password, isSupreme } = user_input.data
 
-      const get_user = await User.findOne({ username }).exec()
+      const get_user = await UserModel.findOne({ username }).exec()
       if (get_user) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
@@ -41,7 +41,7 @@ export const authRouter = {
           message: 'Something went wrong !!',
         })
       }
-      const new_user = new User({
+      const new_user = new UserModel({
         username,
         name,
         password: hashed_password,
@@ -60,7 +60,7 @@ export const authRouter = {
 
       const { username, password } = login_input.data
 
-      const get_user = await User.findOne({ username }).exec()
+      const get_user = await UserModel.findOne({ username }).exec()
       if (!get_user) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'User not found' })
       }

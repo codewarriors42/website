@@ -1,17 +1,21 @@
-import { UserPlusIcon, XIcon } from '@phosphor-icons/react'
+import type { ContactSchema } from '#/types/schemas/contact.schema'
 import { Button } from '../ui/button'
-import Sheet from '../ui/sheet'
-import { MemberForm } from './member-form'
-import type { MemberFormValues } from '#/types/schemas/member.schema'
-import { uploadMedia } from '#/utils/media-handler'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
+import Sheet from '../ui/sheet'
+import { PencilIcon } from 'lucide-react'
+import { XIcon } from '@phosphor-icons/react'
+import { ContactForm } from './contact-from'
 
-export function AddMember() {
+export function EditContactForm({
+  data,
+}: {
+  data: ContactSchema & { id: string }
+}) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.create.mutationOptions({
+    trpc.contact.update.mutationOptions({
       onSuccess: (res) => {
         SuccessToast(res.message)
       },
@@ -20,30 +24,22 @@ export function AddMember() {
       },
     }),
   )
-  const handleSubmit = async (data: MemberFormValues) => {
-    const avatar_filename =
-      data.image instanceof File
-        ? await uploadMedia(data.image)
-        : data.image && data.image.length > 0
-          ? data.image
-          : '/default-avatar.png'
-    await mutateAsync({
-      ...data,
-      image: avatar_filename,
-    })
+
+  const handleSubmit = async (value: ContactSchema) => {
+    await mutateAsync({ ...value, id: data.id })
   }
   return (
     <Sheet side="bottom">
       <Sheet.Trigger className="btn" asChild>
-        <Button variant="outline" className="w-full h-full px-7 py-3">
-          <UserPlusIcon size={20} />
+        <Button variant="outline">
+          <PencilIcon className="mr-2 text-yellow-500" size={22} />
         </Button>
       </Sheet.Trigger>
-      <Sheet.Container className="grid">
+      <Sheet.Container>
         <Sheet.Header className="flex items-center border-b">
           <div className="p-5 w-full">
-            <h2 className="text-xl font-bold">Add Member</h2>
-            <p>Form to add a new member goes here.</p>
+            <h2 className="text-xl font-bold">Edit Contact</h2>
+            <p>Form to edit the contact message goes here.</p>
           </div>
           <div className="h-full flex items-center justify-center p-5">
             <Sheet.Close className="border p-2 cursor-pointer">
@@ -53,10 +49,11 @@ export function AddMember() {
         </Sheet.Header>
         <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center">
           <div className="max-w-2xl max-auto py-10 w-full">
-            <MemberForm
+            <ContactForm
+              formMode="edit"
+              initialData={{ post: data.post, mail: data.mail }}
+              onSubmit={handleSubmit}
               isPending={isPending}
-              submitLabel="Add Member"
-              onSubmit={(data) => handleSubmit(data)}
             />
           </div>
         </Sheet.Body>

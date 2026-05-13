@@ -5,6 +5,7 @@ import type {
   ReactElement,
   ReactNode,
 } from 'react'
+import { Slot } from 'radix-ui'
 import { cn } from '#/lib/utils.ts'
 import { useGSAP } from '@gsap/react'
 import { gsap } from 'gsap'
@@ -25,7 +26,7 @@ type SheetRootProps = {
   side?: 'left' | 'bottom'
 }
 type SheetSectionProps = ComponentPropsWithRef<'div'>
-type SheetButtonProps = ComponentPropsWithRef<'button'>
+type SheetButtonProps = ComponentPropsWithRef<'button'> & { asChild?: boolean }
 
 type SheetCompoundComponent = (({
   children,
@@ -124,9 +125,11 @@ function Trigger({
   className,
   onClick,
   type,
+  asChild = false,
   ...props
 }: SheetButtonProps) {
   const { onToggle } = useSheetCtx()
+  const Comp = asChild ? Slot.Root : 'button'
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event)
@@ -134,14 +137,14 @@ function Trigger({
   }
 
   return (
-    <button
+    <Comp
       type={type ?? 'button'}
       onClick={handleClick}
       className={cn(className)}
       {...props}
     >
       {children}
-    </button>
+    </Comp>
   )
 }
 
@@ -150,9 +153,11 @@ function Close({
   className,
   onClick,
   type,
+  asChild = false,
   ...props
 }: SheetButtonProps) {
   const { onClose } = useSheetCtx()
+  const Comp = asChild ? Slot.Root : 'button'
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event)
@@ -160,14 +165,14 @@ function Close({
   }
 
   return (
-    <button
+    <Comp
       type={type ?? 'button'}
       onClick={handleClick}
       className={cn(className)}
       {...props}
     >
       {children}
-    </button>
+    </Comp>
   )
 }
 

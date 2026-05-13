@@ -2,15 +2,8 @@ import { Input } from '../ui/input'
 import { useEffect, useState } from 'react'
 import { Button } from '../ui/button'
 import { Badge } from '../ui/badge'
-import {
-  MemberGrade,
-  memberRoles,
-  socialPlatformSchema,
-} from '#/types/schemas/member.schema'
-import type {
-  MemberFormValues,
-  MemberRole,
-} from '#/types/schemas/member.schema'
+import { memberRoles } from '#/types/schemas/member.schema'
+import type { MemberRole } from '#/types/schemas/member.schema'
 import {
   Select,
   SelectContent,
@@ -22,31 +15,29 @@ import {
 } from '../ui/select'
 import { CircleNotchIcon } from '@phosphor-icons/react'
 import { MediaImage } from '../media-image'
-import { MoveMemberToAlumni } from './move-to-alumin'
+import { alumniSocialPlatforms } from '#/types/schemas/alumni.schema'
+import type { Alumni } from '#/types/schemas/alumni.schema'
 
-interface MemberFormProps {
-  initialData?: MemberFormValues
-  onSubmit: (data: MemberFormValues) => void
+interface AlumniFormProps {
+  initialData?: Alumni
+  onSubmit: (data: Alumni) => void
   submitLabel?: string
-  isEditForm?: boolean
-  currentMemberEditingId?: string
   isPending?: boolean
 }
 
-export function MemberForm({
+export function AlumniForm({
   initialData,
   onSubmit,
   submitLabel = 'Save',
-  currentMemberEditingId = '',
   isPending = false,
-  isEditForm = false,
-}: MemberFormProps) {
-  const [roles, setRoles] = useState<MemberRole[]>(initialData?.roles || [])
-  const [inputState, setInputState] = useState<MemberFormValues>(
+}: AlumniFormProps) {
+  const [roles, setRoles] = useState<MemberRole[]>(initialData?.post || [])
+  const [inputState, setInputState] = useState<Alumni>(
     initialData || {
-      roles: [],
+      current: '',
       name: '',
-      grade: '',
+      post: [],
+      year: new Date().getFullYear(),
       socials: [
         { platform: 'email', url: '' },
         { platform: 'github', url: '' },
@@ -82,24 +73,29 @@ export function MemberForm({
   }, [inputState.image])
 
   const handleReset = () => {
-    setRoles(initialData?.roles || [])
+    setRoles(initialData?.post || [])
     setInputState(
       initialData || {
-        roles: [],
+        post: [],
         name: '',
-        grade: '',
+        year: new Date().getFullYear(),
+        current: '',
         socials: [
           { platform: 'email', url: '' },
           { platform: 'github', url: '' },
           { platform: 'linkedin', url: '' },
           { platform: 'twitter', url: '' },
           { platform: 'instagram', url: '' },
+          { platform: 'website', url: '' },
+          { platform: 'youtube', url: '' },
+          { platform: 'dribbble', url: '' },
+          { platform: 'behance', url: '' },
+          { platform: 'discord', url: '' },
         ],
         image: null,
       },
     )
   }
-
   return (
     <form
       className="grid gap-3"
@@ -108,7 +104,7 @@ export function MemberForm({
         const cleanedSocials = inputState.socials.filter(
           (social) => social.url.trim().length > 0,
         )
-        onSubmit({ ...inputState, roles, socials: cleanedSocials })
+        onSubmit({ ...inputState, post: roles, socials: cleanedSocials })
         if (!initialData) handleReset()
         if (e.target instanceof HTMLFormElement) {
           e.target.reset()
@@ -116,15 +112,15 @@ export function MemberForm({
       }}
     >
       <div className="grid gap-2 pb-5">
-        <label htmlFor="member-name" className="text-md text-muted-foreground">
+        <label htmlFor="alumni-name" className="text-md text-muted-foreground">
           Name
         </label>
 
         <Input
-          id="member-name"
+          id="alumni-name"
           name="name"
           className="rounded-none px-3 py-5"
-          placeholder="Member Name"
+          placeholder="Alumni Name"
           autoComplete="name"
           value={inputState.name}
           onChange={(e) =>
@@ -137,34 +133,60 @@ export function MemberForm({
       </div>
 
       <div className="grid gap-2 pb-5">
-        <label htmlFor="member-grade" className="text-md text-muted-foreground">
-          Class
+        <label
+          htmlFor="alumni-current"
+          className="text-md text-muted-foreground"
+        >
+          Currentl Doing / Position
+        </label>
+
+        <Input
+          id="alumni-current"
+          name="current"
+          className="rounded-none px-3 py-5"
+          placeholder="Current Position / Doing"
+          autoComplete="organization-title"
+          value={inputState.current}
+          onChange={(e) =>
+            setInputState({
+              ...inputState,
+              current: e.currentTarget.value,
+            })
+          }
+        />
+      </div>
+
+      <div className="grid gap-2 pb-5">
+        <label htmlFor="alumni-year" className="text-md text-muted-foreground">
+          Year of Graduation
         </label>
         <Select
-          name="grade"
-          value={inputState.grade}
+          name="year"
+          value={inputState.year.toString()}
           onValueChange={(value) =>
-            setInputState((prev) => ({ ...prev, grade: value }))
+            setInputState((prev) => ({ ...prev, year: parseInt(value) }))
           }
         >
           <SelectTrigger
-            id="member-grade"
+            id="alumni-year"
             className="w-full max-w-48 rounded-none"
           >
-            <SelectValue placeholder="Select the grade" />
+            <SelectValue placeholder="Select the year" />
           </SelectTrigger>
           <SelectContent className="rounded-none">
             <SelectGroup>
-              <SelectLabel>Grade</SelectLabel>
-              {MemberGrade.map((g, i) => (
-                <SelectItem
-                  className="rounded-none px-2"
-                  value={`${g}`}
-                  key={i}
-                >
-                  {g}
-                </SelectItem>
-              ))}
+              <SelectLabel>Year</SelectLabel>
+              {Array.from(
+                { length: new Date().getFullYear() - 1997 + 1 },
+                (_, i) => {
+                  const year = 1997 + i
+                  return (
+                    <SelectItem key={year} value={year.toString()}>
+                      {year}
+                    </SelectItem>
+                  )
+                },
+              )}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -172,7 +194,7 @@ export function MemberForm({
 
       <div className="grid gap-3">
         <label
-          htmlFor="member-avatar"
+          htmlFor="alumni-avatar"
           className="text-md text-muted-foreground"
         >
           Avatar
@@ -196,7 +218,7 @@ export function MemberForm({
 
           <Input
             type="file"
-            id="member-avatar"
+            id="alumni-avatar"
             name="avatar"
             accept="image/*,.svg"
             onChange={(e) => {
@@ -234,7 +256,7 @@ export function MemberForm({
       <div className="pt-5 pb-10">
         <p className="text-md text-muted-foreground py-3">Socials</p>
         <div className="grid grid-cols-2 gap-3">
-          {socialPlatformSchema.options.map((s, i) => (
+          {alumniSocialPlatforms.options.map((s, i) => (
             <div key={i} className="grid gap-1">
               <label
                 htmlFor={s}
@@ -308,10 +330,7 @@ export function MemberForm({
         </div>
       </div>
 
-      <div className="pb-12 flex items-center justify-center gap-3 mx-auto">
-        {isEditForm && (
-          <MoveMemberToAlumni info={{ id: currentMemberEditingId }} />
-        )}
+      <div className="pb-12 flex items-center justify-center gap-3">
         <Button
           disabled={isPending}
           type="reset"

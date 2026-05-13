@@ -5,13 +5,13 @@ import { ErrorToast, SuccessToast } from '../toast'
 import { Button } from '../ui/button'
 import { deleteMedia } from '#/utils/media-handler'
 
-type DeleteMemberInput = { id: string; image: string }
-export function RemoveMember({ info }: { info: DeleteMemberInput }) {
+type DeleteResourceInput = { id: string; dark: string; light: string }
+export function DeleteResource({ info }: { info: DeleteResourceInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.delete.mutationOptions({
-      onError: () => {
-        ErrorToast('Something went wrong !!')
+    trpc.resources.delete.mutationOptions({
+      onError: (err) => {
+        ErrorToast(err.message)
       },
       onSuccess: ({ message }) => {
         SuccessToast(message)
@@ -20,7 +20,8 @@ export function RemoveMember({ info }: { info: DeleteMemberInput }) {
   )
 
   const handleDelete = async () => {
-    await deleteMedia(info.image)
+    await deleteMedia(info.dark)
+    await deleteMedia(info.light)
     await mutateAsync({ id: info.id })
   }
   return (

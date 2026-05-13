@@ -3,15 +3,14 @@ import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
 import { Button } from '../ui/button'
-import { deleteMedia } from '#/utils/media-handler'
 
-type DeleteMemberInput = { id: string; image: string }
-export function RemoveMember({ info }: { info: DeleteMemberInput }) {
+type DeleteMemberInput = { id: string }
+export function DeleteContact({ info }: { info: DeleteMemberInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.delete.mutationOptions({
-      onError: () => {
-        ErrorToast('Something went wrong !!')
+    trpc.contact.delete.mutationOptions({
+      onError: (err) => {
+        ErrorToast(err.message)
       },
       onSuccess: ({ message }) => {
         SuccessToast(message)
@@ -20,7 +19,6 @@ export function RemoveMember({ info }: { info: DeleteMemberInput }) {
   )
 
   const handleDelete = async () => {
-    await deleteMedia(info.image)
     await mutateAsync({ id: info.id })
   }
   return (

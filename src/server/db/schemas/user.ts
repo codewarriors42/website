@@ -31,7 +31,7 @@ const UserSchema = new Schema<UserType>(
   { timestamps: true },
 )
 
-export const User =
+export const UserModel =
   typeof mongoose.models.User !== 'undefined'
     ? (mongoose.models.User as Model<UserType>)
     : model<UserType>('User', UserSchema)

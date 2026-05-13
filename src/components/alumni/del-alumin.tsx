@@ -6,10 +6,10 @@ import { Button } from '../ui/button'
 import { deleteMedia } from '#/utils/media-handler'
 
 type DeleteMemberInput = { id: string; image: string }
-export function RemoveMember({ info }: { info: DeleteMemberInput }) {
+export function RemoveAlumni({ info }: { info: DeleteMemberInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.delete.mutationOptions({
+    trpc.alumnis.delete.mutationOptions({
       onError: () => {
         ErrorToast('Something went wrong !!')
       },

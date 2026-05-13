@@ -1,17 +1,20 @@
-import { CircleNotchIcon, TrashIcon } from '@phosphor-icons/react'
+import { CircleNotchIcon } from '@phosphor-icons/react'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
 import { Button } from '../ui/button'
-import { deleteMedia } from '#/utils/media-handler'
 
-type DeleteMemberInput = { id: string; image: string }
-export function RemoveMember({ info }: { info: DeleteMemberInput }) {
+type MoveMemberToAlumniInput = { id: string }
+export function MoveMemberToAlumni({
+  info,
+}: {
+  info: MoveMemberToAlumniInput
+}) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.delete.mutationOptions({
-      onError: () => {
-        ErrorToast('Something went wrong !!')
+    trpc.members.moveToAlumni.mutationOptions({
+      onError: (err) => {
+        ErrorToast(err.message)
       },
       onSuccess: ({ message }) => {
         SuccessToast(message)
@@ -19,22 +22,22 @@ export function RemoveMember({ info }: { info: DeleteMemberInput }) {
     }),
   )
 
-  const handleDelete = async () => {
-    await deleteMedia(info.image)
+  const handleMoveToAlumni = async () => {
     await mutateAsync({ id: info.id })
   }
   return (
     <Button
+      type="button"
       disabled={isPending}
-      onClick={handleDelete}
-      className="flex items-center justify-center py-5 px-7 cursor-pointer"
+      onClick={handleMoveToAlumni}
+      className="flex items-center justify-center py-4 px-7 cursor-pointer rounded-none"
       variant={'outline'}
     >
       {isPending ? (
         <CircleNotchIcon weight="bold" className="animate-spin text-primary" />
       ) : (
         <>
-          <TrashIcon weight="bold" className="mr-1 text-red-500" />
+          <p className="mr-2">Move to Alumni</p>
         </>
       )}
     </Button>

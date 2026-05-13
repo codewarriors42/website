@@ -8,6 +8,7 @@ import { AddMember } from '#/components/member/add-member'
 import { MediaImage } from '#/components/media-image'
 import { EditMember } from '#/components/member/edit-member'
 import { RemoveMember } from '#/components/member/del-member'
+import { UserInfoLoader } from '#/components/user-info-loader'
 
 export const Route = createFileRoute('/admin/members')({
   component: RouteComponent,
@@ -16,7 +17,9 @@ export const Route = createFileRoute('/admin/members')({
 function RouteComponent() {
   const [input, setInput] = useState('')
   const trpc = useTRPC()
-  const { data: results } = useQuery(trpc.members.getAll.queryOptions())
+  const { data: results, isLoading } = useQuery(
+    trpc.members.getAll.queryOptions(),
+  )
   return (
     <SearchBarSheet>
       <SearchBarSheet.Container className="overflow-hidden flex flex-col h-full">
@@ -29,10 +32,13 @@ function RouteComponent() {
             />
 
             <SearchBarSheet.Input
+              id="member-search"
+              name="search"
               autoFocus
               onChange={(e) => setInput(e.currentTarget.value)}
               value={input}
               placeholder="Search members..."
+              autoComplete="off"
               className="bg-transparent border-none outline-none text-white text-[14px] sm:text-[15px] w-full placeholder:text-white/30 truncate"
             />
 
@@ -53,61 +59,63 @@ function RouteComponent() {
         </SearchBarSheet.Head>
         <SearchBarSheet.Body className="p-6 overflow-y-auto flex flex-col gap-10 bg-background/70">
           <div>
-            {results?.map((member) => (
-              <div
-                key={member._id.toString()}
-                className="p-4 border border-white/10 rounded-md"
-              >
-                <div>
-                  <MediaImage
-                    image={member.image!}
-                    name={member.name}
-                    className="w-16 h-16 rounded-full object-cover mb-4"
-                  />
-                </div>
-                <div className="font-bold">{member.name}</div>
-                <div className="text-sm text-white/50">{member.grade}</div>
-                <div>
-                  {member.roles.map((role, i) => (
-                    <span key={i} className="text-xs text-white/50 mr-2">
-                      {role}
-                    </span>
-                  ))}
-                </div>
-                <div>
-                  {member.socials.map((social, i) => (
-                    <a
-                      key={i}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-blue-400 mr-2"
-                    >
-                      {social.platform}
-                    </a>
-                  ))}
-                </div>
-                <div>
-                  <EditMember
-                    memberData={{
-                      id: member._id.toString(),
-                      name: member.name,
-                      grade: member.grade,
-                      roles: member.roles,
-                      image: member.image as string,
-                      socials: member.socials,
-                    }}
-                  />
+            {isLoading && <UserInfoLoader />}
+            {!isLoading &&
+              results?.map((member) => (
+                <div
+                  key={member._id.toString()}
+                  className="p-4 border border-white/10 rounded-md"
+                >
+                  <div>
+                    <MediaImage
+                      image={member.image!}
+                      name={member.name}
+                      className="w-16 h-16 rounded-full object-cover mb-4"
+                    />
+                  </div>
+                  <div className="font-bold">{member.name}</div>
+                  <div className="text-sm text-white/50">{member.grade}</div>
+                  <div>
+                    {member.roles.map((role, i) => (
+                      <span key={i} className="text-xs text-white/50 mr-2">
+                        {role}
+                      </span>
+                    ))}
+                  </div>
+                  <div>
+                    {member.socials.map((social, i) => (
+                      <a
+                        key={i}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-blue-400 mr-2"
+                      >
+                        {social.platform}
+                      </a>
+                    ))}
+                  </div>
+                  <div>
+                    <EditMember
+                      memberData={{
+                        id: member._id.toString(),
+                        name: member.name,
+                        grade: member.grade,
+                        roles: member.roles,
+                        image: member.image as string,
+                        socials: member.socials,
+                      }}
+                    />
 
-                  <RemoveMember
-                    info={{
-                      id: member._id.toString(),
-                      image: member.image as string,
-                    }}
-                  />
+                    <RemoveMember
+                      info={{
+                        id: member._id.toString(),
+                        image: member.image as string,
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </SearchBarSheet.Body>
       </SearchBarSheet.Container>

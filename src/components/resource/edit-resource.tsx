@@ -1,19 +1,23 @@
 import { PencilIcon, XIcon } from '@phosphor-icons/react'
 import { Button } from '../ui/button'
 import Sheet from '../ui/sheet'
-import { MemberForm } from './member-form'
-import type { MemberFormValues } from '#/types/schemas/member.schema'
+import { ResourceForm } from './resource-form'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { deleteMedia, uploadMedia } from '#/utils/media-handler'
 import { ErrorToast, SuccessToast } from '../toast'
+import type { Resource } from '#/types/schemas/resource.schema'
 
-type UpdateMemberInput = MemberFormValues & { id: string }
+type UpdateResourceInput = Resource & { id: string }
 
-export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
+export function EditResource({
+  resourceData,
+}: {
+  resourceData?: UpdateResourceInput
+}) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.update.mutationOptions({
+    trpc.resources.update.mutationOptions({
       onSuccess: (res) => {
         SuccessToast(res.message)
       },
@@ -23,28 +27,40 @@ export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
     }),
   )
 
-  const handleSubmit = async (data: MemberFormValues) => {
-    if (!memberData?.id) {
-      ErrorToast('Missing member id')
-      return
-    }
-    if (data.image == null || typeof data.image === 'string') {
-      await mutateAsync({
-        ...data,
-        id: memberData.id,
-        image: (data.image ?? memberData.image) as string,
-      })
+  const handleSubmit = async (data: Resource) => {
+    if (!resourceData?.id) {
+      ErrorToast('Missing resource id')
       return
     }
 
-    await deleteMedia(memberData.image as string)
-    const avatar_filename = await uploadMedia(data.image)
+    let darkUrl = data.dark
+    let lightUrl = data.light
+
+    // Handle dark image upload/deletion
+    if (data.dark instanceof File) {
+      if (resourceData.dark && typeof resourceData.dark === 'string') {
+        await deleteMedia(resourceData.dark)
+      }
+      darkUrl = await uploadMedia(data.dark)
+    }
+
+    // Handle light image upload/deletion
+    if (data.light instanceof File) {
+      if (resourceData.light && typeof resourceData.light === 'string') {
+        await deleteMedia(resourceData.light)
+      }
+      lightUrl = await uploadMedia(data.light)
+    }
+
     await mutateAsync({
-      ...data,
-      id: memberData.id,
-      image: avatar_filename,
+      id: resourceData.id,
+      event: data.event,
+      link: data.link,
+      dark: darkUrl,
+      light: lightUrl,
     })
   }
+
   return (
     <Sheet side="bottom">
       <Sheet.Trigger className="btn" asChild>
@@ -55,8 +71,8 @@ export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
       <Sheet.Container>
         <Sheet.Header className="flex items-center border-b">
           <div className="p-5 w-full">
-            <h2 className="text-xl font-bold">Edit Member</h2>
-            <p>Form to edit an existing member goes here.</p>
+            <h2 className="text-xl font-bold">Edit Resource</h2>
+            <p>Form to edit the resource goes here.</p>
           </div>
           <div className="h-full flex items-center justify-center p-5">
             <Sheet.Close className="border p-2 cursor-pointer">
@@ -66,11 +82,9 @@ export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
         </Sheet.Header>
         <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center">
           <div className="max-w-2xl max-auto py-10 w-full">
-            <MemberForm
+            <ResourceForm
               isPending={isPending}
-              initialData={memberData}
-              isEditForm={true}
-              currentMemberEditingId={memberData?.id}
+              initialData={resourceData}
               submitLabel="Save Changes"
               onSubmit={(data) => handleSubmit(data)}
             />

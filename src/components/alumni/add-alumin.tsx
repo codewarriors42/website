@@ -1,47 +1,38 @@
 import { PencilIcon, XIcon } from '@phosphor-icons/react'
 import { Button } from '../ui/button'
 import Sheet from '../ui/sheet'
-import { MemberForm } from './member-form'
-import type { MemberFormValues } from '#/types/schemas/member.schema'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
-import { deleteMedia, uploadMedia } from '#/utils/media-handler'
+import { uploadMedia } from '#/utils/media-handler'
 import { ErrorToast, SuccessToast } from '../toast'
+import { AlumniForm } from './alumin-form'
+import type { Alumni } from '#/types/schemas/alumni.schema'
 
-type UpdateMemberInput = MemberFormValues & { id: string }
+type UpdateMemberInput = Alumni & { id: string }
 
-export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
+export function AddAlumni({ memberData }: { memberData?: UpdateMemberInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.update.mutationOptions({
+    trpc.alumnis.create.mutationOptions({
       onSuccess: (res) => {
         SuccessToast(res.message)
       },
       onError: (err) => {
+        console.error(err)
         ErrorToast(err.message)
       },
     }),
   )
 
-  const handleSubmit = async (data: MemberFormValues) => {
-    if (!memberData?.id) {
-      ErrorToast('Missing member id')
-      return
-    }
-    if (data.image == null || typeof data.image === 'string') {
-      await mutateAsync({
-        ...data,
-        id: memberData.id,
-        image: (data.image ?? memberData.image) as string,
-      })
-      return
-    }
-
-    await deleteMedia(memberData.image as string)
-    const avatar_filename = await uploadMedia(data.image)
+  const handleSubmit = async (data: Alumni) => {
+    const avatar_filename =
+      data.image instanceof File
+        ? await uploadMedia(data.image)
+        : data.image && data.image.length > 0
+          ? data.image
+          : '/default-avatar.png'
     await mutateAsync({
       ...data,
-      id: memberData.id,
       image: avatar_filename,
     })
   }
@@ -55,8 +46,8 @@ export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
       <Sheet.Container>
         <Sheet.Header className="flex items-center border-b">
           <div className="p-5 w-full">
-            <h2 className="text-xl font-bold">Edit Member</h2>
-            <p>Form to edit an existing member goes here.</p>
+            <h2 className="text-xl font-bold">Add Alumni</h2>
+            <p>Form to add a new alumni goes here.</p>
           </div>
           <div className="h-full flex items-center justify-center p-5">
             <Sheet.Close className="border p-2 cursor-pointer">
@@ -66,12 +57,10 @@ export function EditMember({ memberData }: { memberData?: UpdateMemberInput }) {
         </Sheet.Header>
         <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center">
           <div className="max-w-2xl max-auto py-10 w-full">
-            <MemberForm
+            <AlumniForm
               isPending={isPending}
               initialData={memberData}
-              isEditForm={true}
-              currentMemberEditingId={memberData?.id}
-              submitLabel="Save Changes"
+              submitLabel="Add Alumni"
               onSubmit={(data) => handleSubmit(data)}
             />
           </div>
