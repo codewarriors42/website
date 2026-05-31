@@ -1,5 +1,6 @@
 import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
 import { addUserSchema, loginSchema } from '#/types/schemas/auth.schema'
+import { z } from 'zod'
 import { UserModel } from '../db/schemas/user'
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
@@ -117,4 +118,93 @@ export const authRouter = {
   getSession: publicProcedure.query(async ({ ctx }) => {
     return { session: ctx.session }
   }),
+  getInfo: protectedProcedure.query(async ({ ctx }) => {
+    const user = await UserModel.findById(ctx.session?.userId).exec()
+    if (!user) {
+      throw new TRPCError({ code: 'NOT_FOUND', message: 'User not found' })
+    }
+    return {
+      username: user.username,
+      name: user.name,
+      isSupreme: user.isSupreme,
+    }
+  }),
+  getAll: protectedProcedure.query(async ({ ctx }) => {
+    const requester = await UserModel.findById(ctx.session?.userId).exec()
+    if (!requester || !requester.isSupreme) {
+      throw new TRPCError({ code: 'FORBIDDEN', message: 'Unauthorized' })
+    }
+
+    const users = await UserModel.find()
+      .select('_id username name isSupreme createdAt')
+      .exec()
+
+    return users
+  }),
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        username: z.string().optional(),
+        name: z.string().optional(),
+        password: z.string().optional(),
+        isSupreme: z.boolean().optional(),
+      }),
+    )
+    .mutation(async ({ input, ctx }): Promise<AuthResponse> => {
+      const requester = await UserModel.findById(ctx.session?.userId).exec()
+      if (!requester || !requester.isSupreme) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Unauthorized' })
+      }
+
+      const { id, username, name, password, isSupreme } = input
+      const user = await UserModel.findById(id).exec()
+      if (!user) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'User not found' })
+      }
+
+      if (username && username !== user.username) {
+        const exists = await UserModel.findOne({ username }).exec()
+        if (exists) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Username already exists',
+          })
+        }
+        user.username = username
+      }
+
+      if (typeof name !== 'undefined') user.name = name
+      if (typeof isSupreme !== 'undefined') user.isSupreme = isSupreme
+
+      if (password) {
+        try {
+          user.password = await argon2.hash(password)
+        } catch {
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Failed to hash password',
+          })
+        }
+      }
+
+      await user.save()
+      return { message: 'User updated successfully', is_success: true }
+    }),
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input, ctx }): Promise<AuthResponse> => {
+      const requester = await UserModel.findById(ctx.session?.userId).exec()
+      if (!requester || !requester.isSupreme) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'Unauthorized' })
+      }
+
+      const user = await UserModel.findById(input.id).exec()
+      if (!user) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'User not found' })
+      }
+
+      await UserModel.deleteOne({ _id: input.id }).exec()
+      return { message: 'User deleted successfully', is_success: true }
+    }),
 }

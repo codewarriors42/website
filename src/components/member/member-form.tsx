@@ -102,7 +102,7 @@ export function MemberForm({
 
   return (
     <form
-      className="grid gap-3"
+      className="grid gap-3 max-w-3xl w-full mx-auto px-4 sm:px-0"
       onSubmit={(e) => {
         e.preventDefault()
         const cleanedSocials = inputState.socials.filter(
@@ -123,16 +123,17 @@ export function MemberForm({
         <Input
           id="member-name"
           name="name"
-          className="rounded-none px-3 py-5"
+          className="rounded-none px-3 py-5 w-full"
           placeholder="Member Name"
           autoComplete="name"
           value={inputState.name}
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = e.currentTarget.value
             setInputState({
               ...inputState,
-              name: e.currentTarget.value,
+              name: val,
             })
-          }
+          }}
         />
       </div>
 
@@ -147,10 +148,7 @@ export function MemberForm({
             setInputState((prev) => ({ ...prev, grade: value }))
           }
         >
-          <SelectTrigger
-            id="member-grade"
-            className="w-full max-w-48 rounded-none"
-          >
+          <SelectTrigger id="member-grade" className="w-full rounded-none">
             <SelectValue placeholder="Select the grade" />
           </SelectTrigger>
           <SelectContent className="rounded-none">
@@ -203,7 +201,7 @@ export function MemberForm({
               const file = e.currentTarget.files?.[0] || null
               setInputState((prev) => ({ ...prev, image: file }))
             }}
-            className="rounded-none max-w-1/2 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
+            className="rounded-none flex-1 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
           />
         </div>
       </div>
@@ -233,7 +231,7 @@ export function MemberForm({
 
       <div className="pt-5 pb-10">
         <p className="text-md text-muted-foreground py-3">Socials</p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {socialPlatformSchema.options.map((s, i) => (
             <div key={i} className="grid gap-1">
               <label
@@ -270,7 +268,7 @@ export function MemberForm({
                   type="email"
                   autoComplete="email"
                   placeholder={`${s}`}
-                  className="placeholder:capitalize rounded-none px-3 py-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                 />
               ) : (
                 <Input
@@ -300,7 +298,7 @@ export function MemberForm({
                   type="url"
                   autoComplete="url"
                   placeholder={`${s} URL`}
-                  className="placeholder:capitalize rounded-none px-3 py-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                 />
               )}
             </div>
@@ -308,7 +306,7 @@ export function MemberForm({
         </div>
       </div>
 
-      <div className="pb-12 flex items-center justify-center gap-3 mx-auto">
+      <div className="mt-6 pb-12 flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto w-full max-w-lg">
         {isEditForm && (
           <MoveMemberToAlumni info={{ id: currentMemberEditingId }} />
         )}
@@ -319,14 +317,14 @@ export function MemberForm({
             handleReset()
           }}
           variant={'outline'}
-          className="rounded-none cursor-pointer w-1/2"
+          className="rounded-none cursor-pointer w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           Reset
         </Button>
         <Button
           disabled={isPending}
           type="submit"
-          className="rounded-none w-1/2"
+          className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           {isPending ? (
             <CircleNotchIcon size={20} className="animate-spin" />

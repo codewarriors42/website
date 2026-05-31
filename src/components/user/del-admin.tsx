@@ -1,20 +1,16 @@
-import { CircleNotchIcon } from '@phosphor-icons/react'
+import { CircleNotchIcon, TrashIcon } from '@phosphor-icons/react'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
 import { Button } from '../ui/button'
 
-type MoveMemberToAlumniInput = { id: string }
-export function MoveMemberToAlumni({
-  info,
-}: {
-  info: MoveMemberToAlumniInput
-}) {
+type DeleteUserInput = { id: string }
+export function RemoveUser({ info }: { info: DeleteUserInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.members.moveToAlumni.mutationOptions({
+    trpc.auth.delete.mutationOptions({
       onError: (err) => {
-        ErrorToast(err.message)
+        ErrorToast(err.message || 'Something went wrong !!')
       },
       onSuccess: ({ message }) => {
         SuccessToast(message)
@@ -22,24 +18,25 @@ export function MoveMemberToAlumni({
     }),
   )
 
-  const handleMoveToAlumni = async () => {
+  const handleDelete = async () => {
+    const ok = window.confirm('Are you sure you want to delete this user?')
+    if (!ok) return
     await mutateAsync({ id: info.id })
   }
   return (
     <Button
-      type="button"
       disabled={isPending}
-      onClick={handleMoveToAlumni}
-      className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm flex items-center justify-center"
+      onClick={handleDelete}
+      className="flex items-center justify-center py-5 px-7 cursor-pointer"
       variant={'outline'}
     >
       {isPending ? (
         <CircleNotchIcon weight="bold" className="animate-spin text-primary" />
       ) : (
-        <>
-          <span className="mx-auto">Move to Alumni</span>
-        </>
+        <TrashIcon weight="bold" className="mr-1 text-red-500" />
       )}
     </Button>
   )
 }
+
+export default RemoveUser

@@ -6,8 +6,15 @@ const platformLinks = z.enum([
   'behance',
   'dribbble',
   'youtube',
-  'goole_drive',
+  'google_drive',
   'figma',
+])
+
+const category = z.enum([
+  'creative_work',
+  'creative_prompt',
+  'quizzes',
+  'crossword',
 ])
 
 const socialLinks = z.object({
@@ -19,7 +26,7 @@ export const archiveSchema = z.object({
   title: z.string(),
   competition: z.string(),
   links: z.array(socialLinks),
-  category: z.string(),
+  category: category,
   event: z.string(),
   contributors: z.string(),
   year: z

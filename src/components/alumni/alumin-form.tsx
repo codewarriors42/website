@@ -98,7 +98,7 @@ export function AlumniForm({
   }
   return (
     <form
-      className="grid gap-3"
+      className="grid gap-3 max-w-3xl w-full mx-auto px-4 sm:px-0"
       onSubmit={(e) => {
         e.preventDefault()
         const cleanedSocials = inputState.socials.filter(
@@ -119,16 +119,17 @@ export function AlumniForm({
         <Input
           id="alumni-name"
           name="name"
-          className="rounded-none px-3 py-5"
+          className="placeholder:capitalize rounded-none px-3 py-5 w-full"
           placeholder="Alumni Name"
           autoComplete="name"
           value={inputState.name}
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = e.currentTarget.value
             setInputState({
               ...inputState,
-              name: e.currentTarget.value,
+              name: val,
             })
-          }
+          }}
         />
       </div>
 
@@ -143,16 +144,17 @@ export function AlumniForm({
         <Input
           id="alumni-current"
           name="current"
-          className="rounded-none px-3 py-5"
+          className="placeholder:capitalize rounded-none px-3 py-5 w-full"
           placeholder="Current Position / Doing"
           autoComplete="organization-title"
           value={inputState.current}
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = e.currentTarget.value
             setInputState({
               ...inputState,
-              current: e.currentTarget.value,
+              current: val,
             })
-          }
+          }}
         />
       </div>
 
@@ -167,10 +169,7 @@ export function AlumniForm({
             setInputState((prev) => ({ ...prev, year: parseInt(value) }))
           }
         >
-          <SelectTrigger
-            id="alumni-year"
-            className="w-full max-w-48 rounded-none"
-          >
+          <SelectTrigger id="alumni-year" className="w-full rounded-none">
             <SelectValue placeholder="Select the year" />
           </SelectTrigger>
           <SelectContent className="rounded-none">
@@ -225,7 +224,7 @@ export function AlumniForm({
               const file = e.currentTarget.files?.[0] || null
               setInputState((prev) => ({ ...prev, image: file }))
             }}
-            className="rounded-none max-w-1/2 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
+            className="rounded-none flex-1 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
           />
         </div>
       </div>
@@ -255,7 +254,7 @@ export function AlumniForm({
 
       <div className="pt-5 pb-10">
         <p className="text-md text-muted-foreground py-3">Socials</p>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {alumniSocialPlatforms.options.map((s, i) => (
             <div key={i} className="grid gap-1">
               <label
@@ -292,7 +291,7 @@ export function AlumniForm({
                   type="email"
                   autoComplete="email"
                   placeholder={`${s}`}
-                  className="placeholder:capitalize rounded-none px-3 py-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                 />
               ) : (
                 <Input
@@ -322,7 +321,7 @@ export function AlumniForm({
                   type="url"
                   autoComplete="url"
                   placeholder={`${s} URL`}
-                  className="placeholder:capitalize rounded-none px-3 py-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                 />
               )}
             </div>
@@ -330,7 +329,7 @@ export function AlumniForm({
         </div>
       </div>
 
-      <div className="pb-12 flex items-center justify-center gap-3">
+      <div className="mt-6 pb-12 flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto w-full max-w-lg">
         <Button
           disabled={isPending}
           type="reset"
@@ -338,14 +337,14 @@ export function AlumniForm({
             handleReset()
           }}
           variant={'outline'}
-          className="rounded-none cursor-pointer w-1/2"
+          className="rounded-none cursor-pointer w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           Reset
         </Button>
         <Button
           disabled={isPending}
           type="submit"
-          className="rounded-none w-1/2"
+          className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           {isPending ? (
             <CircleNotchIcon size={20} className="animate-spin" />

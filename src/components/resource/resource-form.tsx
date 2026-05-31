@@ -129,15 +129,16 @@ export function ResourceForm({
         <Input
           id="resource-event"
           name="event"
-          className="rounded-none px-3 py-5"
+          className="placeholder:capitalize rounded-none px-3 py-5 w-full"
           placeholder="Event Name"
           value={inputState.event}
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = e.currentTarget.value
             setInputState({
               ...inputState,
-              event: e.currentTarget.value,
+              event: val,
             })
-          }
+          }}
         />
       </div>
 
@@ -153,15 +154,16 @@ export function ResourceForm({
           id="resource-link"
           name="link"
           type="url"
-          className="rounded-none px-3 py-5"
+          className="placeholder:capitalize rounded-none px-3 py-5 w-full"
           placeholder="https://example.com"
           value={inputState.link}
-          onChange={(e) =>
+          onChange={(e) => {
+            const val = e.currentTarget.value
             setInputState({
               ...inputState,
-              link: e.currentTarget.value,
+              link: val,
             })
-          }
+          }}
         />
       </div>
 
@@ -200,7 +202,7 @@ export function ResourceForm({
                 setInputState((prev) => ({ ...prev, dark: file }))
               }
             }}
-            className="rounded-none max-w-1/2 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
+            className="rounded-none flex-1 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
           />
         </div>
       </div>
@@ -240,12 +242,12 @@ export function ResourceForm({
                 setInputState((prev) => ({ ...prev, light: file }))
               }
             }}
-            className="rounded-none max-w-1/2 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
+            className="rounded-none flex-1 px-3 py-2.5 h-14 file:mr-3 file:border-0 file:bg-muted file:w-fit file:h-fit file:p-3 file:py-2 file:text-md file:font-medium file:text-foreground"
           />
         </div>
       </div>
 
-      <div className="pb-12 flex items-center justify-center gap-3 mx-auto">
+      <div className="mt-6 pb-12 flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto w-full max-w-lg">
         <Button
           disabled={isPending}
           type="reset"
@@ -253,14 +255,14 @@ export function ResourceForm({
             handleReset()
           }}
           variant={'outline'}
-          className="rounded-none cursor-pointer w-1/2"
+          className="rounded-none cursor-pointer w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           Reset
         </Button>
         <Button
           disabled={isPending}
           type="submit"
-          className="rounded-none w-1/2"
+          className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm"
         >
           {isPending ? (
             <CircleNotchIcon size={20} className="animate-spin" />

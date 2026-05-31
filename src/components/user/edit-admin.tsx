@@ -1,21 +1,23 @@
-import type { ContactSchema } from '#/types/schemas/contact.schema'
+import { PencilIcon, XIcon } from '@phosphor-icons/react'
 import { Button } from '../ui/button'
+import Sheet from '../ui/sheet'
+import AdminUserForm from './adminuser-form'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
-import Sheet from '../ui/sheet'
-import { PencilIcon } from 'lucide-react'
-import { XIcon } from '@phosphor-icons/react'
-import { ContactForm } from './contact-from'
 
-export function EditContactForm({
-  data,
-}: {
-  data: ContactSchema & { id: string }
-}) {
+type UpdateUserInput = {
+  id: string
+  username: string
+  name: string
+  password?: string
+  isSupreme?: boolean
+}
+
+export function EditUser({ userData }: { userData: UpdateUserInput }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.contact.update.mutationOptions({
+    trpc.auth.update.mutationOptions({
       onSuccess: (res) => {
         SuccessToast(res.message)
       },
@@ -25,9 +27,14 @@ export function EditContactForm({
     }),
   )
 
-  const handleSubmit = async (value: ContactSchema) => {
-    await mutateAsync({ ...value, id: data.id })
+  const handleSubmit = async (data: any) => {
+    if (!userData.id) {
+      ErrorToast('Missing user id')
+      return
+    }
+    await mutateAsync({ ...data, id: userData.id })
   }
+
   return (
     <Sheet side="bottom">
       <Sheet.Trigger className="btn" asChild>
@@ -38,8 +45,8 @@ export function EditContactForm({
       <Sheet.Container>
         <Sheet.Header className="flex items-center justify-between border-b">
           <div className="p-5 flex-1">
-            <h2 className="text-xl font-bold text-left">Edit Contact</h2>
-            <p>Form to edit the contact message goes here.</p>
+            <h2 className="text-xl font-bold text-left">Edit User</h2>
+            <p>Modify administrator account details.</p>
           </div>
           <div className="h-full flex items-center justify-center p-5">
             <Sheet.Close className="border p-2 cursor-pointer">
@@ -49,11 +56,17 @@ export function EditContactForm({
         </Sheet.Header>
         <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center px-4 sm:px-0 py-6">
           <div className="max-w-2xl mx-auto py-10 w-full px-4 sm:px-0 my-auto">
-            <ContactForm
-              formMode="edit"
-              initialData={{ post: data.post, mail: data.mail }}
-              onSubmit={handleSubmit}
+            <AdminUserForm
+              initialData={{
+                id: userData.id,
+                username: userData.username,
+                name: userData.name,
+                isSupreme: userData.isSupreme,
+              }}
+              isEditForm={true}
               isPending={isPending}
+              submitLabel="Save Changes"
+              onSubmit={(data) => handleSubmit(data)}
             />
           </div>
         </Sheet.Body>
@@ -61,3 +74,5 @@ export function EditContactForm({
     </Sheet>
   )
 }
+
+export default EditUser

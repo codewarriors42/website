@@ -39,7 +39,7 @@ export function ContactForm({
         form.handleSubmit()
       }}
     >
-      <FieldGroup>
+      <FieldGroup className="mx-auto w-full max-w-xl">
         <form.Field
           name="post"
           children={(field) => {
@@ -56,7 +56,7 @@ export function ContactForm({
                   Post
                 </label>
                 <Input
-                  className="p-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
@@ -94,7 +94,7 @@ export function ContactForm({
                   Mail
                 </label>
                 <Input
-                  className="p-5"
+                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
                   id={field.name}
                   name={field.name}
                   value={field.state.value}
@@ -115,7 +115,14 @@ export function ContactForm({
             )
           }}
         />
-        <Button disabled={pending}>{isEditMode ? 'Save' : 'Create'}</Button>
+        <div className="mt-6 pb-12 flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto w-full max-w-lg">
+          <Button
+            disabled={pending}
+            className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm"
+          >
+            {isEditMode ? 'Save' : 'Create'}
+          </Button>
+        </div>
       </FieldGroup>
     </form>
   )

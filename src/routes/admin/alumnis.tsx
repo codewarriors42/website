@@ -35,7 +35,10 @@ function RouteComponent() {
               id="alumni-search"
               name="search"
               autoFocus
-              onChange={(e) => setInput(e.currentTarget.value)}
+              onChange={(e) => {
+                const val = e.currentTarget.value
+                setInput(val)
+              }}
               value={input}
               placeholder="Search members..."
               autoComplete="off"

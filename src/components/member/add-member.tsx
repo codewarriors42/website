@@ -39,10 +39,10 @@ export function AddMember() {
           <UserPlusIcon size={20} />
         </Button>
       </Sheet.Trigger>
-      <Sheet.Container className="grid">
-        <Sheet.Header className="flex items-center border-b">
-          <div className="p-5 w-full">
-            <h2 className="text-xl font-bold">Add Member</h2>
+      <Sheet.Container>
+        <Sheet.Header className="flex items-center justify-between border-b">
+          <div className="p-5 flex-1">
+            <h2 className="text-xl font-bold text-left">Add Member</h2>
             <p>Form to add a new member goes here.</p>
           </div>
           <div className="h-full flex items-center justify-center p-5">
@@ -51,8 +51,8 @@ export function AddMember() {
             </Sheet.Close>
           </div>
         </Sheet.Header>
-        <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center">
-          <div className="max-w-2xl max-auto py-10 w-full">
+        <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center px-4 sm:px-0 py-6">
+          <div className="max-w-2xl mx-auto py-10 w-full px-4 sm:px-0 my-auto">
             <MemberForm
               isPending={isPending}
               submitLabel="Add Member"

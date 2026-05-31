@@ -2,17 +2,17 @@ import { useForm } from '@tanstack/react-form'
 import { Field, FieldError, FieldGroup } from '../ui/field'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
-import { faqSchema } from '#/types/schemas/faq.schema'
-import type { FAQSchema } from '#/types/schemas/faq.schema'
+import { eventSchema } from '#/types/schemas/event.schema'
+import type { Event } from '#/types/schemas/event.schema'
 
 type ContactFormProps = {
   formMode?: 'edit' | 'add'
-  initialData?: FAQSchema
-  onSubmit: (data: FAQSchema) => Promise<void>
+  initialData?: Event
+  onSubmit: (data: Event) => Promise<void>
   isPending?: boolean
 }
 
-export function FAQForm({
+export function EventForm({
   formMode = 'add',
   initialData,
   onSubmit,
@@ -22,11 +22,10 @@ export function FAQForm({
   const isEditMode = formMode === 'edit'
   const form = useForm({
     defaultValues: {
-      question: isEditMode ? (initialData?.question ?? '') : '',
-      answer: isEditMode ? (initialData?.answer ?? '') : '',
+      name: isEditMode ? (initialData?.name ?? '') : '',
     },
     validators: {
-      onSubmit: faqSchema,
+      onSubmit: eventSchema,
     },
     onSubmit: async ({ value }) => {
       await onSubmit(value)
@@ -41,7 +40,7 @@ export function FAQForm({
     >
       <FieldGroup className="mx-auto w-full max-w-xl">
         <form.Field
-          name="question"
+          name="name"
           children={(field) => {
             const isInvalid =
               (field.state.meta.isTouched ||
@@ -53,7 +52,7 @@ export function FAQForm({
                   htmlFor={field.name}
                   className="text-sm text-muted-foreground"
                 >
-                  Question
+                  Name
                 </label>
                 <Input
                   className="placeholder:capitalize rounded-none px-3 py-5 w-full"
@@ -63,47 +62,9 @@ export function FAQForm({
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   aria-invalid={isInvalid}
-                  placeholder="Question"
+                  placeholder="Event name"
                   type="text"
                   autoComplete="organization-title"
-                />
-                {isInvalid && (
-                  <FieldError
-                    className="px-2"
-                    errors={field.state.meta.errors}
-                  />
-                )}
-              </Field>
-            )
-          }}
-        />
-
-        <form.Field
-          name="answer"
-          children={(field) => {
-            const isInvalid =
-              (field.state.meta.isTouched ||
-                form.state.submissionAttempts > 0) &&
-              !field.state.meta.isValid
-            return (
-              <Field data-invalid={isInvalid}>
-                <label
-                  htmlFor={field.name}
-                  className="text-sm text-muted-foreground"
-                >
-                  Answer
-                </label>
-                <Input
-                  className="placeholder:capitalize rounded-none px-3 py-5 w-full"
-                  id={field.name}
-                  name={field.name}
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
-                  aria-invalid={isInvalid}
-                  placeholder="Answer"
-                  type="text"
-                  autoComplete="answer"
                 />
                 {isInvalid && (
                   <FieldError
