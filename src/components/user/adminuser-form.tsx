@@ -1,140 +1,211 @@
-import { Input } from '#/components/ui/input'
-import { Button } from '#/components/ui/button'
-import { useState } from 'react'
-import { CircleNotchIcon } from '@phosphor-icons/react'
+import { z } from 'zod'
+import { useForm } from '@tanstack/react-form'
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@/components/ui/field'
+import { Input } from '../ui/input'
+import { Button } from '../ui/button'
 
-export interface AdminUserFormValues {
-  id?: string
-  username: string
-  name: string
-  password?: string
-  isSupreme?: boolean
+type Mode = 'create_admin_user' | 'edit_admin_user' | 'admin_login'
+
+const createSchema = (mode: Mode) =>
+  z
+    .object({
+      username: z
+        .string()
+        .min(1, 'Username is required.')
+        .max(50, 'Username is too long.'),
+      password: z.string().optional(),
+      isSuperme: z.boolean(),
+      name: z.string().optional(),
+      id: z.string().optional(),
+    })
+    .superRefine((data, ctx) => {
+      if (mode !== 'edit_admin_user') {
+        if (!data.password || data.password.length < 1) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Password is required.',
+            path: ['password'],
+          })
+        }
+        if (data.password && data.password.length > 50) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Password is too long.',
+            path: ['password'],
+          })
+        }
+      }
+
+      if (mode === 'create_admin_user' || mode === 'edit_admin_user') {
+        if (!data.name || data.name.length < 1) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Name is required.',
+            path: ['name'],
+          })
+        }
+        if (data.name && data.name.length > 50) {
+          ctx.addIssue({
+            code: 'custom',
+            message: 'Name len is too long.',
+            path: ['name'],
+          })
+        }
+      }
+    })
+
+export type FormSchema = z.infer<ReturnType<typeof createSchema>>
+
+interface AuthFromProps {
+  mode: Mode
+  initaldata?: FormSchema
+  isLoading?: boolean
+  handler: (data: FormSchema) => Promise<void>
 }
 
-interface AdminUserFormProps {
-  initialData?: AdminUserFormValues
-  onSubmit: (data: any) => void | Promise<void>
-  submitLabel?: string
-  isEditForm?: boolean
-  isPending?: boolean
-}
+export function AuthForm({
+  handler,
+  mode,
+  initaldata,
+  isLoading,
+}: AuthFromProps) {
+  const schema = createSchema(mode)
 
-export function AdminUserForm({
-  initialData,
-  onSubmit,
-  submitLabel = 'Save',
-  isEditForm = false,
-  isPending = false,
-}: AdminUserFormProps) {
-  const [inputState, setInputState] = useState<AdminUserFormValues>(
-    initialData || {
-      username: '',
-      name: '',
-      password: '',
-      isSupreme: true,
+  const form = useForm({
+    defaultValues: {
+      username: initaldata?.username ?? '',
+      password: initaldata?.password ?? '',
+      isSuperme: initaldata?.isSuperme ?? true,
+      name:
+        mode === 'edit_admin_user' || mode === 'create_admin_user'
+          ? (initaldata?.name ?? '')
+          : '',
     },
-  )
-
-  const handleReset = () => {
-    setInputState(
-      initialData || { username: '', name: '', password: '', isSupreme: true },
-    )
-  }
+    validators: {
+      onSubmit: schema,
+    },
+    onSubmit: async ({ value }) => {
+      await handler(value)
+    },
+  })
 
   return (
-    <form
-      className="grid gap-3 max-w-md w-full mx-auto px-4 sm:px-0"
-      onSubmit={(e) => {
-        e.preventDefault()
-        onSubmit(inputState)
-        if (!initialData) handleReset()
-      }}
-    >
-      <div className="grid gap-2 pb-4">
-        <label htmlFor="admin-name" className="text-md text-muted-foreground">
-          Name
-        </label>
-        <Input
-          id="admin-name"
-          name="name"
-          placeholder="Full name"
-          value={inputState.name}
-          onChange={(e) => {
-            const val = e.currentTarget.value
-            setInputState((prev) => ({ ...prev, name: val }))
-          }}
-          className="rounded-none px-3 py-4 w-full"
-        />
-      </div>
-
-      <div className="grid gap-2 pb-4">
-        <label
-          htmlFor="admin-username"
-          className="text-md text-muted-foreground"
-        >
-          Username
-        </label>
-        <Input
-          id="admin-username"
-          name="username"
-          placeholder="username"
-          value={inputState.username}
-          onChange={(e) => {
-            const val = e.currentTarget.value
-            setInputState((prev) => ({ ...prev, username: val }))
-          }}
-          className="rounded-none px-3 py-4 w-full"
-        />
-      </div>
-
-      <div className="grid gap-2 pb-4">
-        <label
-          htmlFor="admin-password"
-          className="text-md text-muted-foreground"
-        >
-          Password
-        </label>
-        <Input
-          id="admin-password"
-          name="password"
-          type="password"
-          placeholder={
-            isEditForm ? 'Leave blank to keep current password' : 'Password'
-          }
-          value={inputState.password || ''}
-          onChange={(e) => {
-            const val = e.currentTarget.value
-            setInputState((prev) => ({ ...prev, password: val }))
-          }}
-          className="rounded-none px-3 py-4 w-full"
-        />
-      </div>
-
-      {/* isSupreme is set to true by default and not editable via form */}
-
-      <div className="mt-4 pb-6 flex flex-col sm:flex-row items-center justify-center gap-4 mx-auto w-full max-w-lg">
-        <Button
-          type="button"
-          onClick={() => handleReset()}
-          variant="outline"
-          className="rounded-none cursor-pointer w-full sm:w-1/2 h-10 py-2 text-sm"
-        >
-          Reset
-        </Button>
-        <Button
-          type="submit"
-          disabled={isPending}
-          className="rounded-none w-full sm:w-1/2 h-10 py-2 text-sm"
-        >
-          {isPending ? (
-            <CircleNotchIcon size={20} className="animate-spin" />
-          ) : (
-            submitLabel
+    <div>
+      <form
+        id={mode}
+        onSubmit={(e) => {
+          e.preventDefault()
+          form.handleSubmit()
+        }}
+      >
+        <FieldGroup>
+          {mode !== 'admin_login' && (
+            <form.Field
+              name="name"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="Name"
+                      autoComplete="off"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                )
+              }}
+            />
           )}
-        </Button>
-      </div>
-    </form>
+
+          <form.Field
+            name="username"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name} className="text-sm">
+                    Username
+                  </FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="Username"
+                    autoComplete="off"
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          />
+
+          <form.Field
+            name="password"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name} className="text-sm">
+                    {mode === 'edit_admin_user'
+                      ? 'Change Password'
+                      : 'Password'}
+                  </FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder={
+                      mode === 'edit_admin_user'
+                        ? 'Change Password'
+                        : 'Password'
+                    }
+                    autoComplete="off"
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          />
+        </FieldGroup>
+
+        <div className="w-full grid grid-cols-2 gap-3 mt-7">
+          <Button type="button" variant="outline" onClick={() => form.reset()}>
+            Reset
+          </Button>
+          <Button type="submit" form={mode}>
+            {isLoading
+              ? 'Loading...'
+              : mode === 'edit_admin_user'
+                ? 'Save'
+                : mode === 'create_admin_user'
+                  ? 'Submit'
+                  : 'Login'}
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }
-
-export default AdminUserForm

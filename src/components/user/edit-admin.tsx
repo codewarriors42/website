@@ -1,20 +1,13 @@
 import { PencilIcon, XIcon } from '@phosphor-icons/react'
 import { Button } from '../ui/button'
 import Sheet from '../ui/sheet'
-import AdminUserForm from './adminuser-form'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '../toast'
+import { AuthForm } from './adminuser-form'
+import type { FormSchema } from './adminuser-form'
 
-type UpdateUserInput = {
-  id: string
-  username: string
-  name: string
-  password?: string
-  isSupreme?: boolean
-}
-
-export function EditUser({ userData }: { userData: UpdateUserInput }) {
+export function EditUser({ userData }: { userData: FormSchema }) {
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
     trpc.auth.update.mutationOptions({
@@ -27,7 +20,8 @@ export function EditUser({ userData }: { userData: UpdateUserInput }) {
     }),
   )
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: FormSchema) => {
+    console.log(data)
     if (!userData.id) {
       ErrorToast('Missing user id')
       return
@@ -55,18 +49,12 @@ export function EditUser({ userData }: { userData: UpdateUserInput }) {
           </div>
         </Sheet.Header>
         <Sheet.Body className="w-full h-full overflow-y-auto flex justify-center px-4 sm:px-0 py-6">
-          <div className="max-w-2xl mx-auto py-10 w-full px-4 sm:px-0 my-auto">
-            <AdminUserForm
-              initialData={{
-                id: userData.id,
-                username: userData.username,
-                name: userData.name,
-                isSupreme: userData.isSupreme,
-              }}
-              isEditForm={true}
-              isPending={isPending}
-              submitLabel="Save Changes"
-              onSubmit={(data) => handleSubmit(data)}
+          <div className="max-w-md mx-auto py-10 w-full px-4 sm:px-0 my-auto">
+            <AuthForm
+              initaldata={userData}
+              mode="edit_admin_user"
+              handler={handleSubmit}
+              isLoading={isPending}
             />
           </div>
         </Sheet.Body>

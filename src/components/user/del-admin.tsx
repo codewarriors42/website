@@ -27,7 +27,7 @@ export function RemoveUser({ info }: { info: DeleteUserInput }) {
     <Button
       disabled={isPending}
       onClick={handleDelete}
-      className="flex items-center justify-center py-5 px-7 cursor-pointer"
+      className="flex items-center justify-center py-3 px-5 cursor-pointer"
       variant={'outline'}
     >
       {isPending ? (

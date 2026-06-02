@@ -1,7 +1,6 @@
-import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useQuery } from '@tanstack/react-query'
-import { Button } from '#/components/ui/button'
 import { EditUser } from '#/components/user/edit-admin'
 import { RemoveUser } from '#/components/user/del-admin'
 import { AddAdmin } from '#/components/user/add-admin'
@@ -12,10 +11,7 @@ export const Route = createFileRoute('/admin/admin-users')({
 
 function RouteComponent() {
   const trpc = useTRPC()
-  const navigate = useNavigate()
-  const { data: users = [], isLoading } = useQuery(
-    trpc.auth.getAll.queryOptions(),
-  )
+  const { data: users, isLoading } = useQuery(trpc.auth.getAll.queryOptions())
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -35,9 +31,9 @@ function RouteComponent() {
         <div>Loading...</div>
       ) : (
         <div className="grid gap-4">
-          {users.map((u: any) => (
+          {users?.map((u) => (
             <div
-              key={u._id?.toString()}
+              key={u._id.toString()}
               className="border p-4 rounded flex items-center justify-between"
             >
               <div>
@@ -48,26 +44,18 @@ function RouteComponent() {
                 <div className="text-sm">
                   Role: {u.isSupreme ? 'Admin' : 'User'}
                 </div>
-                <div className="text-sm text-white/60">
-                  Created: {new Date(u.createdAt).toLocaleString()}
-                </div>
               </div>
               <div className="flex items-center gap-2">
                 <EditUser
                   userData={{
-                    id: u._id?.toString() ?? '',
+                    id: u._id.toString(),
                     username: u.username,
                     name: u.name,
-                    isSupreme: u.isSupreme,
+                    isSuperme: u.isSupreme,
+                    password: '',
                   }}
                 />
-                <RemoveUser info={{ id: u._id?.toString() ?? '' }} />
-                <Button
-                  variant="outline"
-                  onClick={() => navigate({ to: '/admin/profile' })}
-                >
-                  View
-                </Button>
+                <RemoveUser info={{ id: u._id.toString() }} />
               </div>
             </div>
           ))}
