@@ -6,15 +6,15 @@ import {
   publicProcedure,
 } from '../../integrations/trpc/init'
 import { MemberModel } from '../db/schemas/member'
-import { memberDBSchema } from '#/types/schemas/member.schema'
 import z from 'zod'
-import { Alumin } from '../db/schemas/alumni'
+import { MemberSchema, MemberWithIdSchema } from '../db/schemas/member/member-type'
+import { connectDB } from '../db'
 
-export const membersRouter = {
+export const memberRouter = {
   getAll: publicProcedure.query(async () => {
+    await connectDB()
     try {
-      const members = await MemberModel.find()
-      return members
+      return await MemberModel.find()
     } catch {
       throw new TRPCError({
         code: 'INTERNAL_SERVER_ERROR',
@@ -23,9 +23,9 @@ export const membersRouter = {
     }
   }),
   create: protectedProcedure
-    .input(memberDBSchema)
+    .input(MemberSchema)
     .mutation(async ({ input }) => {
-      const inputData = await memberDBSchema.safeParseAsync(input)
+      const inputData = await MemberSchema.safeParseAsync(input)
       if (!inputData.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
       }
@@ -72,10 +72,9 @@ export const membersRouter = {
       }
     }),
   update: protectedProcedure
-    .input(memberDBSchema.merge(z.object({ id: z.string() })))
+    .input(MemberWithIdSchema)
     .mutation(async ({ input }) => {
-      const updateSchema = memberDBSchema.merge(z.object({ id: z.string() }))
-      const inputData = await updateSchema.safeParseAsync(input)
+      const inputData = await MemberWithIdSchema.safeParseAsync(input)
       if (!inputData.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
       }
@@ -116,39 +115,5 @@ export const membersRouter = {
         })
       }
       return { message: 'Member deleted successfully', is_success: true }
-    }),
-  moveToAlumni: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .mutation(async ({ input }) => {
-      try {
-        const member = await MemberModel.findById(input.id)
-        if (!member) {
-          throw new TRPCError({
-            code: 'NOT_FOUND',
-            message: 'Member not found',
-          })
-        }
-        await Alumin.insertOne({
-          name: member.name,
-          year: new Date().getFullYear(),
-          post: member.roles,
-          current: '',
-          socials: member.socials,
-          image: member.image,
-        })
-        await MemberModel.deleteOne({ _id: input.id })
-      } catch (err) {
-        if (err instanceof TRPCError) {
-          throw err
-        }
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to move member to alumni',
-        })
-      }
-      return {
-        message: 'Member moved to alumni successfully',
-        is_success: true,
-      }
     }),
 } satisfies TRPCRouterRecord

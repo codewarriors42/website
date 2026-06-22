@@ -1,4 +1,4 @@
-import { LogoutBtn } from '#/components/auth/logout-btn'
+import { SidebarHeader } from '#/components/ui/sidebar'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin/')({
@@ -6,9 +6,7 @@ export const Route = createFileRoute('/admin/')({
 })
 
 function RouteComponent() {
-  return (
-    <div className="flex items-center justify-center w-full h-full">
-      <LogoutBtn />
-    </div>
-  )
+  return <div>
+    hskajs
+  </div>
 }

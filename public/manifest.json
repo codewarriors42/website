@@ -1,6 +1,6 @@
 {
-  "short_name": "cw",
-  "name": "Code Warriors",
+  "short_name": "TanStack App",
+  "name": "Create TanStack App Sample",
   "icons": [
     {
       "src": "favicon.ico",

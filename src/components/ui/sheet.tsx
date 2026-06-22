@@ -1,297 +1,147 @@
-import { createContext, useContext, useRef, useState, useEffect } from 'react'
-import type {
-  ComponentPropsWithRef,
-  MouseEvent,
-  ReactElement,
-  ReactNode,
-} from 'react'
-import { Slot } from 'radix-ui'
-import { cn } from '#/lib/utils.ts'
-import { useGSAP } from '@gsap/react'
-import { gsap } from 'gsap'
+"use client"
 
-gsap.registerPlugin(useGSAP)
+import * as React from "react"
+import { Dialog as SheetPrimitive } from "radix-ui"
 
-interface sheet_ctx_t {
-  open: boolean
-  onOpen: () => void
-  onClose: () => void
-  onToggle: () => void
-  side: 'left' | 'bottom'
+import { cn } from "#/lib/utils.ts"
+import { Button } from "#/components/ui/button.tsx"
+import { XIcon } from "lucide-react"
+
+function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
+  return <SheetPrimitive.Root data-slot="sheet" {...props} />
 }
 
-type SheetRootProps = {
-  children: ReactNode
-  defaultOpen?: boolean
-  side?: 'left' | 'bottom'
-}
-type SheetSectionProps = ComponentPropsWithRef<'div'>
-type SheetButtonProps = ComponentPropsWithRef<'button'> & { asChild?: boolean }
-
-type SheetCompoundComponent = (({
-  children,
-}: SheetRootProps) => ReactElement) & {
-  Trigger: ({
-    children,
-    className,
-    onClick,
-    type,
-    ...props
-  }: SheetButtonProps) => ReactElement
-  Close: ({
-    children,
-    className,
-    onClick,
-    type,
-    ...props
-  }: SheetButtonProps) => ReactElement
-  Container: ({
-    children,
-    className,
-    ...props
-  }: SheetSectionProps) => ReactElement
-  Header: ({ children, className, ...props }: SheetSectionProps) => ReactElement
-  Body: ({ children, className, ...props }: SheetSectionProps) => ReactElement
-  Footer: ({ children, className, ...props }: SheetSectionProps) => ReactElement
-  Overlay: ({ className, ...props }: SheetSectionProps) => ReactElement
-  OverLay: ({ className, ...props }: SheetSectionProps) => ReactElement
-}
-
-const sheet_ctx = createContext<sheet_ctx_t | undefined>(undefined)
-
-function useSheetCtx() {
-  const ctx = useContext(sheet_ctx)
-  if (!ctx)
-    throw new Error(
-      '[ContextProvider:Erorr] SideBar context provider is Missing.',
-    )
-  return ctx
-}
-
-const SheetRoot = ({
-  children,
-  defaultOpen = false,
-  side = 'left',
-}: SheetRootProps) => {
-  const [open, setOpen] = useState(defaultOpen)
-  const lastFocusedRef = useRef<HTMLElement | null>(null)
-
-  const restoreFocus = () => {
-    const last = lastFocusedRef.current
-    if (last && typeof last.focus === 'function') {
-      last.focus()
-    }
-  }
-
-  const onOpen = () => {
-    lastFocusedRef.current = document.activeElement as HTMLElement | null
-    setOpen(true)
-  }
-  const onClose = () => {
-    restoreFocus()
-    setOpen(false)
-  }
-  const onToggle = () =>
-    setOpen((prev) => {
-      if (prev) {
-        restoreFocus()
-        return false
-      }
-      lastFocusedRef.current = document.activeElement as HTMLElement | null
-      return true
-    })
-
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [open])
-
-  return (
-    <sheet_ctx.Provider value={{ open, onOpen, onClose, onToggle, side }}>
-      <nav className="relative">{children}</nav>
-      <Overlay />
-    </sheet_ctx.Provider>
-  )
-}
-
-function Trigger({
-  children,
-  className,
-  onClick,
-  type,
-  asChild = false,
+function SheetTrigger({
   ...props
-}: SheetButtonProps) {
-  const { onToggle } = useSheetCtx()
-  const Comp = asChild ? Slot.Root : 'button'
-
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event)
-    if (!event.defaultPrevented) onToggle()
-  }
-
-  return (
-    <Comp
-      type={type ?? 'button'}
-      onClick={handleClick}
-      className={cn(className)}
-      {...props}
-    >
-      {children}
-    </Comp>
-  )
+}: React.ComponentProps<typeof SheetPrimitive.Trigger>) {
+  return <SheetPrimitive.Trigger data-slot="sheet-trigger" {...props} />
 }
 
-function Close({
-  children,
-  className,
-  onClick,
-  type,
-  asChild = false,
+function SheetClose({
   ...props
-}: SheetButtonProps) {
-  const { onClose } = useSheetCtx()
-  const Comp = asChild ? Slot.Root : 'button'
-
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    onClick?.(event)
-    if (!event.defaultPrevented) onClose()
-  }
-
-  return (
-    <Comp
-      type={type ?? 'button'}
-      onClick={handleClick}
-      className={cn(className)}
-      {...props}
-    >
-      {children}
-    </Comp>
-  )
+}: React.ComponentProps<typeof SheetPrimitive.Close>) {
+  return <SheetPrimitive.Close data-slot="sheet-close" {...props} />
 }
 
-function Overlay({ className, ...props }: SheetSectionProps) {
-  const { open, onClose } = useSheetCtx()
-  const overlayRef = useRef<HTMLDivElement>(null)
-  useGSAP(() => {
-    const ele = overlayRef.current
-    if (!ele) return
-    gsap.to(ele, {
-      opacity: open ? 1 : 0,
-      pointerEvents: open ? 'auto' : 'none',
-      duration: open ? 0.3 : 0.37,
-      ease: open ? 'power2.out' : 'power2.inOut',
-      overwrite: true,
-      force3D: true,
-    })
-  }, [open])
+function SheetPortal({
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Portal>) {
+  return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />
+}
+
+function SheetOverlay({
+  className,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Overlay>) {
   return (
-    <div
-      ref={overlayRef}
-      onClick={onClose}
-      aria-hidden={!open}
+    <SheetPrimitive.Overlay
+      data-slot="sheet-overlay"
       className={cn(
-        'sidebar-overlay fixed inset-0 z-10 bg-overlay opacity-0 pointer-events-none backdrop-blur-[5px] bg-black/30',
-        className,
+        "fixed inset-0 z-50 bg-black/80 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        className
       )}
       {...props}
     />
   )
 }
-const sidebarWidths = {
-  base: 'w-[80vw]',
-  sm: 'sm:w-[min(80vw,22rem)]',
-  md: 'md:w-[clamp(18rem,19vw,22rem)]',
-  lg: 'lg:w-[clamp(20rem,14vw,20rem)]',
-}
 
-function responsive(classes: Record<string, string>) {
-  return Object.values(classes).join(' ')
-}
-
-function Container({ children, className, ...props }: SheetSectionProps) {
-  const { open, side } = useSheetCtx()
-  const containerRef = useRef<HTMLDivElement>(null)
-  useGSAP(
-    () => {
-      const ele = containerRef.current
-      if (!ele) return
-      gsap.killTweensOf(ele)
-      const isLeft = side === 'left'
-      gsap.to(ele, {
-        x: isLeft ? (open ? 0 : '-100%') : 0,
-        y: !isLeft ? (open ? 0 : '100%') : 0,
-        pointerEvents: open ? 'auto' : 'none',
-        duration: open ? 0.298 : 0.299,
-        ease: open ? 'back.out(1.03)' : 'back.in(1.2)',
-        overwrite: true,
-        force3D: true,
-      })
-    },
-    { dependencies: [open, side], scope: containerRef },
+function SheetContent({
+  className,
+  children,
+  side = "right",
+  showCloseButton = true,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Content> & {
+  side?: "top" | "right" | "bottom" | "left"
+  showCloseButton?: boolean
+}) {
+  return (
+    <SheetPortal>
+      <SheetOverlay />
+      <SheetPrimitive.Content
+        data-slot="sheet-content"
+        data-side={side}
+        className={cn(
+          "fixed z-50 flex flex-col bg-popover bg-clip-padding text-xs/relaxed text-popover-foreground shadow-lg transition duration-200 ease-in-out data-[side=bottom]:inset-x-0 data-[side=bottom]:bottom-0 data-[side=bottom]:h-auto data-[side=bottom]:border-t data-[side=left]:inset-y-0 data-[side=left]:left-0 data-[side=left]:h-full data-[side=left]:w-3/4 data-[side=left]:border-r data-[side=right]:inset-y-0 data-[side=right]:right-0 data-[side=right]:h-full data-[side=right]:w-3/4 data-[side=right]:border-l data-[side=top]:inset-x-0 data-[side=top]:top-0 data-[side=top]:h-auto data-[side=top]:border-b data-[side=left]:sm:max-w-sm data-[side=right]:sm:max-w-sm data-open:animate-in data-open:fade-in-0 data-[side=bottom]:data-open:slide-in-from-bottom-10 data-[side=left]:data-open:slide-in-from-left-10 data-[side=right]:data-open:slide-in-from-right-10 data-[side=top]:data-open:slide-in-from-top-10 data-closed:animate-out data-closed:fade-out-0 data-[side=bottom]:data-closed:slide-out-to-bottom-10 data-[side=left]:data-closed:slide-out-to-left-10 data-[side=right]:data-closed:slide-out-to-right-10 data-[side=top]:data-closed:slide-out-to-top-10",
+          className
+        )}
+        {...props}
+      >
+        {children}
+        {showCloseButton && (
+          <SheetPrimitive.Close data-slot="sheet-close" asChild>
+            <Button
+              variant="ghost"
+              className="absolute top-4 right-4"
+              size="icon-sm"
+            >
+              <XIcon
+              />
+              <span className="sr-only">Close</span>
+            </Button>
+          </SheetPrimitive.Close>
+        )}
+      </SheetPrimitive.Content>
+    </SheetPortal>
   )
+}
 
-  const sideClasses =
-    side === 'left'
-      ? `left-0 top-0 h-screen -translate-x-full ${responsive(sidebarWidths)}`
-      : 'left-0 bottom-0 w-full h-screen translate-y-full'
-
+function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      ref={containerRef}
-      aria-hidden={!open}
-      data-open={open ? 'true' : 'false'}
+      data-slot="sheet-header"
+      className={cn("flex flex-col gap-1.5 p-6", className)}
+      {...props}
+    />
+  )
+}
+
+function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="sheet-footer"
+      className={cn("mt-auto flex flex-col gap-2 p-6", className)}
+      {...props}
+    />
+  )
+}
+
+function SheetTitle({
+  className,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Title>) {
+  return (
+    <SheetPrimitive.Title
+      data-slot="sheet-title"
       className={cn(
-        'sidebar-container fixed z-20 overflow-y-auto bg-[#0f0f0f] flex flex-col will-change-transform transform-gpu',
-        sideClasses,
-        className,
+        "font-heading text-sm font-medium text-foreground",
+        className
       )}
       {...props}
-    >
-      {children}
-    </div>
+    />
   )
 }
 
-function Header({ children, className, ...props }: SheetSectionProps) {
+function SheetDescription({
+  className,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Description>) {
   return (
-    <div className={cn(className)} {...props}>
-      {children}
-    </div>
+    <SheetPrimitive.Description
+      data-slot="sheet-description"
+      className={cn("text-xs/relaxed text-muted-foreground", className)}
+      {...props}
+    />
   )
 }
 
-function Body({ children, className, ...props }: SheetSectionProps) {
-  return (
-    <div className={cn(className)} {...props}>
-      {children}
-    </div>
-  )
+export {
+  Sheet,
+  SheetTrigger,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
 }
-
-function Footer({ children, className, ...props }: SheetSectionProps) {
-  return (
-    <div className={cn(className)} {...props}>
-      {children}
-    </div>
-  )
-}
-
-const Sheet = Object.assign(SheetRoot, {
-  Trigger,
-  Close,
-  Container,
-  Header,
-  Body,
-  Footer,
-  Overlay,
-  OverLay: Overlay,
-}) as SheetCompoundComponent
-
-export default Sheet
