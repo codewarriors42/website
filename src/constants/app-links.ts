@@ -1,4 +1,14 @@
-import { Archive, Contact, FileQuestionMark, LayoutDashboard, Library, Network, ScrollText, User, Users, type LucideIcon } from "lucide-react"
+import {
+  Archive,
+  Contact,
+  FileQuestionMark,
+  LayoutDashboard,
+  Library,
+  Network,
+  ScrollText,
+  Users,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
 interface LinkAttr {
   path: string
@@ -6,7 +16,7 @@ interface LinkAttr {
   icon: LucideIcon
 }
 
-export const nav_links: LinkAttr[] = [
+export const navLinks: LinkAttr[] = [
   {
     path: '/admin',
     title: 'Dashboard',
@@ -48,4 +58,3 @@ export const nav_links: LinkAttr[] = [
     icon: Contact,
   },
 ]
-

@@ -1,4 +1,4 @@
-import { env } from '#/env'
+import { env } from '@/env'
 import mongoose from 'mongoose'
 
 const MONGODB_URI = env.DB_URL

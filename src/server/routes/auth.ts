@@ -1,12 +1,12 @@
-import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
-import { connectDB } from '#/server/db'
-import { addUserSchema, loginSchema } from '#/types/zod/auth.user'
+import { protectedProcedure, publicProcedure } from '@/integrations/trpc/init'
+import { connectDB } from '@/server/db'
+import { addUserSchema, loginSchema } from '@/types/zod/auth.user'
 import { User } from '../db/schemas/user'
 import argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
-import { env } from '#/env'
+import { env } from '@/env'
 import { serialize } from 'cookie'
-import type { jwt_payload } from '#/types/jwt'
+import type { jwt_payload } from '@/types/jwt'
 import { TRPCError } from '@trpc/server'
 
 type AuthResponse = {

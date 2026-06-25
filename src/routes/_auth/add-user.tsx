@@ -1,12 +1,12 @@
-import { ErrorToast, SuccessToast } from '#/components/toast'
-import { useTRPC } from '#/integrations/trpc/react'
-import { addUserSchema } from '#/types/zod/auth.user'
+import { ErrorToast, SuccessToast } from '@/components/toast'
+import { useTRPC } from '@/integrations/trpc/react'
+import { addUserSchema } from '@/types/zod/auth.user'
 import { useMutation } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { useForm } from '@tanstack/react-form'
-import { Field, FieldError, FieldGroup } from '#/components/ui/field'
-import { Input } from '#/components/ui/input'
-import { Button } from '#/components/ui/button'
+import { Field, FieldError, FieldGroup } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/_auth/add-user')({
   component: RouteComponent,

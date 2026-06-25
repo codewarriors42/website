@@ -12,7 +12,7 @@ import appCss from '../styles.css?url'
 
 import type { QueryClient } from '@tanstack/react-query'
 
-import type { TRPCRouter } from '#/integrations/trpc/routes'
+import type { TRPCRouter } from '@/integrations/trpc/routes'
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query'
 import { Toaster } from 'sonner'
 

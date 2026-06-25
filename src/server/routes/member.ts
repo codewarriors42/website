@@ -7,7 +7,10 @@ import {
 } from '../../integrations/trpc/init'
 import { MemberModel } from '../db/schemas/member'
 import z from 'zod'
-import { MemberSchema, MemberWithIdSchema } from '../db/schemas/member/member-type'
+import {
+  MemberSchema,
+  MemberWithIdSchema,
+} from '../db/schemas/member/member-type'
 import { connectDB } from '../db'
 
 export const memberRouter = {
@@ -22,33 +25,31 @@ export const memberRouter = {
       })
     }
   }),
-  create: protectedProcedure
-    .input(MemberSchema)
-    .mutation(async ({ input }) => {
-      const inputData = await MemberSchema.safeParseAsync(input)
-      if (!inputData.success) {
-        throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
-      }
-      const { name, grade, roles, image, socials } = inputData.data
-      const cleanedSocials = socials.filter(
-        (social) => social.url.trim().length > 0,
-      )
-      try {
-        await MemberModel.insertOne({
-          name,
-          grade,
-          roles,
-          image,
-          socials: cleanedSocials,
-        })
-      } catch {
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Failed to add member',
-        })
-      }
-      return { message: 'Member added successfully', is_success: true }
-    }),
+  create: publicProcedure.input(MemberSchema).mutation(async ({ input }) => {
+    const inputData = await MemberSchema.safeParseAsync(input)
+    if (!inputData.success) {
+      throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
+    }
+    const { name, grade, roles, image, socials } = inputData.data
+    const cleanedSocials = socials.filter(
+      (social) => social.url.trim().length > 0,
+    )
+    try {
+      await MemberModel.insertOne({
+        name,
+        grade,
+        roles,
+        image,
+        socials: cleanedSocials,
+      })
+    } catch {
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'Failed to add member',
+      })
+    }
+    return { message: 'Member added successfully', is_success: true }
+  }),
   getSingleMemberByID: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
@@ -71,7 +72,7 @@ export const memberRouter = {
         })
       }
     }),
-  update: protectedProcedure
+  update: publicProcedure
     .input(MemberWithIdSchema)
     .mutation(async ({ input }) => {
       const inputData = await MemberWithIdSchema.safeParseAsync(input)
@@ -103,7 +104,7 @@ export const memberRouter = {
       }
       return { message: 'Member updated successfully', is_success: true }
     }),
-  delete: protectedProcedure
+  delete: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {
       try {

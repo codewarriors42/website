@@ -5,8 +5,8 @@ import { createTRPCClient, httpBatchLink } from '@trpc/client'
 import { createIsomorphicFn } from '@tanstack/react-start'
 import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query'
 
-import type { TRPCRouter } from '#/integrations/trpc/routes'
-import { TRPCProvider } from '#/integrations/trpc/react'
+import type { TRPCRouter } from '@/integrations/trpc/routes'
+import { TRPCProvider } from '@/integrations/trpc/react'
 
 function getUrl() {
   const base = (() => {

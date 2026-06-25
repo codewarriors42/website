@@ -1,6 +1,6 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
-import type { jwt_payload } from '#/types/jwt'
+import type { jwt_payload } from '@/types/jwt'
 
 export type TRPCContext = {
   req: Request

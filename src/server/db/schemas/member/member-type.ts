@@ -1,37 +1,44 @@
-import z from "zod";
+import z from 'zod'
 
 export const ROLES = [
-  "gaming",
-  "competitive_programming",
-  "app_development",
-  "web_development",
-  "game_development",
-  "film_making",
-  "audio_editing",
-  "designing",
-  "3d_modeling",
-  "photography",
-  "quiz",
-  "crossword",
-  "techathlon",
-  "group_discussion",
-  "motion_design",
-  "vice_president",
-  "president",
-  "creative_head",
-  "quiz_corss_head",
-  "programming_head",
-  "group_discussion_head",
-  "head_developer",
-] as const;
+  'gaming',
+  'competitive_programming',
+  'app_development',
+  'web_development',
+  'game_development',
+  'film_making',
+  'audio_editing',
+  'designing',
+  '3d_modeling',
+  'photography',
+  'quiz',
+  'crossword',
+  'techathlon',
+  'group_discussion',
+  'motion_design',
+  'vice_president',
+  'president',
+  'creative_head',
+  'quiz_corss_head',
+  'programming_head',
+  'group_discussion_head',
+  'head_developer',
+] as const
 
-export const GRADES = [6, 7, 8, 9, 10, 11, 12] as const;
+export type Role = (typeof ROLES)[number]
+export const GRADES = [6, 7, 8, 9, 10, 11, 12] as const
 
+export type Grade = (typeof GRADES)[number]
 export const SOCIAL_PLATFORMS = [
-  "github",
-  "insta",
-] as const;
+  'twitter',
+  'linkedin',
+  'github',
+  'instagram',
+  'discord',
+  'email',
+] as const
 
+export type MemberSocials = (typeof SOCIAL_PLATFORMS)[number]
 export const MemberSchema = z.object({
   name: z.string(),
   grade: z.union([
@@ -48,15 +55,15 @@ export const MemberSchema = z.object({
     z.object({
       platform: z.enum(SOCIAL_PLATFORMS),
       url: z.url(),
-    })
+    }),
   ),
-  image: z.url(),
-});
+  image: z.string(),
+})
 
-export type MemberType = z.infer<typeof MemberSchema>;
+export type MemberType = z.infer<typeof MemberSchema>
 
 export const MemberWithIdSchema = MemberSchema.extend({
   id: z.string(),
-});
+})
 
-export type MemberWithId = z.infer<typeof MemberWithIdSchema>;
+export type MemberWithId = z.infer<typeof MemberWithIdSchema>

@@ -1,4 +1,3 @@
-import { SidebarHeader } from '#/components/ui/sidebar'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/admin/')({
@@ -6,7 +5,5 @@ export const Route = createFileRoute('/admin/')({
 })
 
 function RouteComponent() {
-  return <div>
-    hskajs
-  </div>
+  return <div>hskajs</div>
 }

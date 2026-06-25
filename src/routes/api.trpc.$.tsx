@@ -1,11 +1,11 @@
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch'
 import { createFileRoute } from '@tanstack/react-router'
-import type { TRPCContext } from '#/integrations/trpc/init'
-import { trpcRouter } from '#/integrations/trpc/routes'
+import type { TRPCContext } from '@/integrations/trpc/init'
+import { trpcRouter } from '@/integrations/trpc/routes'
 import { parseCookie } from 'cookie'
-import { env } from '#/env'
+import { env } from '@/env'
 import jwt from 'jsonwebtoken'
-import type { jwt_payload } from '#/types/jwt'
+import type { jwt_payload } from '@/types/jwt'
 
 function handler({ request }: { request: Request }) {
   return fetchRequestHandler({

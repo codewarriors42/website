@@ -1,5 +1,3 @@
-//  @ts-check
-
 import { tanstackConfig } from '@tanstack/eslint-config'
 
 export default [
@@ -22,6 +20,7 @@ export default [
       '**/build/**',
       '**/node_modules/**',
       '.output/**',
+      '.nitro/**',
     ],
   },
 ]
