@@ -1,3 +1,4 @@
+import { alumniRouter } from '#/server/routes/alumnis'
 import { createTRPCRouter } from './init'
 import { authRouter } from '@/server/routes/auth'
 import { memberRouter } from '@/server/routes/member'
@@ -5,5 +6,6 @@ import { memberRouter } from '@/server/routes/member'
 export const trpcRouter = createTRPCRouter({
   auth: authRouter,
   member: memberRouter,
+  alumni: alumniRouter,
 })
 export type TRPCRouter = typeof trpcRouter

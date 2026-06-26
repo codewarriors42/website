@@ -1,7 +1,7 @@
 import z from 'zod'
 import { ROLES } from '../member/member-type'
 
-export const alumniSocialPlatforms = z.enum([
+export const ALIMUNI_SOCIAL_PLATFORMS = [
   'twitter',
   'linkedin',
   'github',
@@ -12,13 +12,13 @@ export const alumniSocialPlatforms = z.enum([
   'youtube',
   'dribbble',
   'behance',
-])
+] as const
 
-export type AlumniSocialPlatform = z.infer<typeof alumniSocialPlatforms>
+export type AlumniSocialPlatform = z.infer<typeof ALIMUNI_SOCIAL_PLATFORMS>
 
 export const alumniSocialSchema = z
   .object({
-    platform: alumniSocialPlatforms,
+    platform: z.enum(ALIMUNI_SOCIAL_PLATFORMS),
     url: z.string().trim().min(1, 'URL is required'),
   })
   .superRefine((value, ctx) => {
@@ -54,7 +54,7 @@ export const alumniSchema = z.object({
 
   socials: z.array(alumniSocialSchema),
 
-  image: z.union([z.instanceof(File), z.string()]).nullable(),
+  image: z.string(),
 })
 
 export type Alumni = z.infer<typeof alumniSchema>

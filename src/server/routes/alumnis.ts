@@ -1,12 +1,12 @@
-import { protectedProcedure } from '#/integrations/trpc/init'
+import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
 import { TRPCError } from '@trpc/server'
 import type { TRPCRouterRecord } from '@trpc/server'
 import z from 'zod'
 import { AluminModel } from '../db/schemas/alumnis'
 import { alumniSchema } from '../db/schemas/alumnis/alumnis-type'
 
-export const AlumniRouter = {
-  getAll: protectedProcedure.query(async () => {
+export const alumniRouter = {
+  getAll: publicProcedure.query(async () => {
     try {
       const alumnis = await AluminModel.find()
       return alumnis
@@ -17,7 +17,7 @@ export const AlumniRouter = {
       })
     }
   }),
-  create: protectedProcedure.input(alumniSchema).mutation(async ({ input }) => {
+  create: publicProcedure.input(alumniSchema).mutation(async ({ input }) => {
     const inputData = await alumniSchema.safeParseAsync(input)
     if (!inputData.success) {
       throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
@@ -41,7 +41,7 @@ export const AlumniRouter = {
     return { message: 'Alumni added successfully', is_success: true }
   }),
 
-  getSingleAlumniByID: protectedProcedure
+  getSingleAlumniByID: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
       try {
@@ -60,7 +60,7 @@ export const AlumniRouter = {
         })
       }
     }),
-  delete: protectedProcedure
+  delete: publicProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ input }) => {
       try {
@@ -73,7 +73,7 @@ export const AlumniRouter = {
       }
       return { message: 'Alumni deleted successfully', is_success: true }
     }),
-  update: protectedProcedure
+  update: publicProcedure
     .input(z.object({ id: z.string() }).merge(alumniSchema.partial()))
     .mutation(async ({ input }) => {
       const { id, ...updateData } = input

@@ -20,19 +20,19 @@ import { useRouter } from '@tanstack/react-router'
 import { deleteFile } from '#/lib/file-uploads'
 
 type Props = {
+  alumniId: string
   imageId: string
-  memberId: string
 }
-export function DeleteMember({ memberId, imageId }: Props) {
+export function DeleteAlumni({ alumniId, imageId }: Props) {
   const router = useRouter()
   const queryClient = router.options.context.queryClient
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.member.delete.mutationOptions({
+    trpc.alumni.delete.mutationOptions({
       onSuccess: async (d) => {
         SuccessToast(d.message)
         await queryClient.invalidateQueries({
-          queryKey: trpc.member.getAll.queryKey(),
+          queryKey: trpc.alumni.getAll.queryKey(),
         })
       },
       onError: (d) => {
@@ -41,7 +41,7 @@ export function DeleteMember({ memberId, imageId }: Props) {
     }),
   )
   const handleDelete = async () => {
-    await mutateAsync({ id: memberId })
+    await mutateAsync({ id: alumniId })
     await deleteFile(imageId)
   }
   return (
@@ -56,9 +56,9 @@ export function DeleteMember({ memberId, imageId }: Props) {
           <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
             <Trash2Icon />
           </AlertDialogMedia>
-          <AlertDialogTitle>Delete member?</AlertDialogTitle>
+          <AlertDialogTitle>Delete alumni?</AlertDialogTitle>
           <AlertDialogDescription>
-            This will permanently delete this member. Are you sure you want to
+            This will permanently delete this alumni. Are you sure you want to
             continue?
           </AlertDialogDescription>
         </AlertDialogHeader>

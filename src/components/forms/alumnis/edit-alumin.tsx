@@ -1,37 +1,41 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { useMemberForm } from './hooks/ctx'
-import { FileUploadButton } from '@/components/shared/file-upload'
-import { RolesPicker } from './ui/roles-picker'
-import { SelectGradeUI } from './ui/select-grade'
-import { AddSocialsUI } from './ui/socials'
-import { Label } from '@/components/ui/label'
-import { useTRPC } from '@/integrations/trpc/react'
-import { useMutation } from '@tanstack/react-query'
-import { uploadFile } from '@/lib/file-uploads'
-import { ErrorToast, SuccessToast } from '@/components/toast'
-import { Trash2 } from 'lucide-react'
 import { Badge } from '#/components/ui/badge'
+import { Button } from '#/components/ui/button'
+import { Input } from '#/components/ui/input'
+import { Label } from '#/components/ui/label'
+import { Trash2 } from 'lucide-react'
+import { useAlumniForm } from './hooks/ctx'
+import { AddSocialsUI } from './ui/alumin-socials'
+import { RolesPicker } from '../member/ui/roles-picker'
+import { SelectYearUI } from './ui/select-year'
+import { FileUploadButton } from '#/components/shared/file-upload'
+import { deleteFile, getMediaUrl, uploadFile } from '#/lib/file-uploads'
+import { useTRPC } from '#/integrations/trpc/react'
+import { useMutation } from '@tanstack/react-query'
+import { ErrorToast, SuccessToast } from '#/components/toast'
 
-export function AddMemberFormUI() {
+export function EditAlumniFormUI() {
   const {
-    roles,
-    setRoles,
     name,
+    setName,
+    year,
+    setYear,
+    post,
+    setPost,
+    socials,
+    current,
     file,
     setFile,
-    setName,
-    grade,
-    removeSocial,
-    setGrade,
-    socials,
+    setCurrent,
     addSocial,
+    removeSocial,
+    previewUrl,
+    alumniId,
     resetForm,
-  } = useMemberForm()
+  } = useAlumniForm()
 
   const trpc = useTRPC()
   const { mutateAsync, isPending } = useMutation(
-    trpc.member.create.mutationOptions({
+    trpc.alumni.update.mutationOptions({
       onSuccess: (d) => {
         SuccessToast(d.message)
       },
@@ -40,30 +44,47 @@ export function AddMemberFormUI() {
       },
     }),
   )
+
   const handleSubmit = async (e: React.SubmitEvent) => {
     e.preventDefault()
-    if (!file) {
-      alert('provide the file plx')
+    if (!alumniId) {
+      ErrorToast('Alumni ID not found')
       return
     }
-    const data = await uploadFile(file)
-    const payload = {
-      name,
-      grade,
-      roles,
-      socials,
-      image: data.fileId,
+    if (file) {
+      const { fileId } = await uploadFile(file)
+      const payload = {
+        id: alumniId,
+        name,
+        year,
+        post,
+        current,
+        socials,
+        image: fileId,
+      }
+      await mutateAsync(payload)
+      await deleteFile(previewUrl ?? '')
+    } else {
+      const payload = {
+        id: alumniId,
+        name,
+        year,
+        post,
+        current,
+        socials,
+        image: previewUrl,
+      }
+      await mutateAsync(payload)
     }
-    await mutateAsync({ ...payload })
-    resetForm()
   }
+
   return (
     <div className="max-w-md w-full">
       <div>
         <div className="mb-5">
-          <h2 className="text-lg font-semibold">Create Member</h2>
+          <h2 className="text-lg font-semibold">Edit Alumni</h2>
           <p className="text-xs text-muted-foreground">
-            Add member information and social links.
+            Update alumni information and social links.
           </p>
         </div>
 
@@ -76,30 +97,42 @@ export function AddMemberFormUI() {
               type="text"
               value={name}
               onChange={(e) => setName(e.currentTarget.value)}
-              placeholder="Enter member name"
+              placeholder="Enter alumni name"
+            />
+          </div>
+
+          {/* Currently Doing */}
+          <div className="space-y-2">
+            <Label htmlFor="m-current">Currently Doing</Label>
+            <Input
+              id="m-current"
+              type="text"
+              value={current}
+              onChange={(e) => setCurrent(e.currentTarget.value)}
+              placeholder="Currently doing what?"
             />
           </div>
 
           <div className="flex items-center gap-3 justify-between py-2">
-            {/* Grade */}
-            <div className="space-y-2">
-              <Label>Grade</Label>
-              <SelectGradeUI onChange={setGrade} value={grade} />
+            <div className="space-y-2 w-full">
+              <label htmlFor="alumni-year" className="text-xs">
+                Year of Passing Out
+              </label>
+              <SelectYearUI value={year} onChange={setYear} />
             </div>
 
             {/* Roles */}
-            <div className="space-y-2 w-full">
-              <Label>Roles</Label>
-              <RolesPicker value={roles} onChange={setRoles} />
+            <div className="w-full">
+              <Label>Post</Label>
+              <RolesPicker value={post} onChange={setPost} />
             </div>
           </div>
-
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="space-y-1">
                 <Label>Social Links</Label>
                 <p className="text-xs text-muted-foreground">
-                  Add social profiles for this member.
+                  Add social profiles for this alumni.
                 </p>
               </div>
 
@@ -110,7 +143,7 @@ export function AddMemberFormUI() {
               <div className="flex gap-2 border-2 p-2 border-dotted rounded-lg tems-center max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-border scrollbar-track-background">
                 {socials.map((social) => (
                   <Badge
-                    className="py-3 flex items-center justify-center"
+                    className="py-3 flex items-center justify-center "
                     variant={'outline'}
                     key={social.platform}
                   >
@@ -120,7 +153,7 @@ export function AddMemberFormUI() {
                       variant="ghost"
                       size="icon"
                       type="button"
-                      onClick={() => removeSocial(social.platform)}
+                      onClick={() => removeSocial(social)}
                     >
                       <Trash2 className="h-2 w-2 text-destructive" />
                     </Button>
@@ -138,7 +171,11 @@ export function AddMemberFormUI() {
           {/* Upload */}
           <div className="space-y-2">
             <Label>Profile Image</Label>
-            <FileUploadButton onFileSelect={setFile} file={file} />
+            <FileUploadButton
+              onFileSelect={setFile}
+              file={file}
+              previewUrl={getMediaUrl(previewUrl ?? '')}
+            />
           </div>
 
           {/* Actions */}
@@ -148,7 +185,7 @@ export function AddMemberFormUI() {
             </Button>
 
             <Button type="submit">
-              {isPending ? 'Saving...' : 'Create Member'}
+              {isPending ? 'Loading...' : 'Save Changes'}
             </Button>
           </div>
         </form>

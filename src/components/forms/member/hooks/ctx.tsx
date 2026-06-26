@@ -29,6 +29,8 @@ interface MemberFormContextType {
   file: File | null
   setFile: React.Dispatch<React.SetStateAction<File | null>>
 
+  removeSocial: (platform: MemberSocials) => void
+
   resetForm: () => void
   memberId?: string
   previewUrl?: string
@@ -64,6 +66,10 @@ export function MemberFormProvider({
     setFile(null)
   }
 
+  const removeSocial = (platform: MemberSocials) => {
+    setSocials((prev) => prev.filter((s) => s.platform !== platform))
+  }
+
   return (
     <MemberFormContext.Provider
       value={{
@@ -77,6 +83,7 @@ export function MemberFormProvider({
         setSocials,
         addSocial,
         file,
+        removeSocial,
         setFile,
         previewUrl: initialData?.image,
         memberId: initialData?.id,

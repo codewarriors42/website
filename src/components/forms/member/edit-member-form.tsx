@@ -11,14 +11,13 @@ import { AddSocialsUI } from './ui/socials'
 import { useMemberForm } from './hooks/ctx'
 
 import { useTRPC } from '@/integrations/trpc/react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import { deleteFile, getMediaUrl, uploadFile } from '@/lib/file-uploads'
 import { ErrorToast, SuccessToast } from '@/components/toast'
 
 import { Trash2 } from 'lucide-react'
 
-import type { MemberSocials } from '#/server/db/schemas/member/member-type'
 import { useRouter } from '@tanstack/react-router'
 
 export function EditMemberFormUI() {
@@ -35,9 +34,9 @@ export function EditMemberFormUI() {
     grade,
     setGrade,
     socials,
-    setSocials,
     addSocial,
     resetForm,
+    removeSocial,
     memberId,
   } = useMemberForm()
 
@@ -88,10 +87,6 @@ export function EditMemberFormUI() {
       }
       await mutateAsync(payload)
     }
-  }
-
-  const removeSocial = (platform: MemberSocials) => {
-    setSocials((prev) => prev.filter((s) => s.platform !== platform))
   }
 
   return (

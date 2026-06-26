@@ -1,0 +1,161 @@
+import { Badge } from '#/components/ui/badge'
+import { Card, CardContent, CardFooter } from '#/components/ui/card'
+import { Avatar, AvatarFallback, AvatarImage } from '#/components/ui/avatar'
+import { Separator } from '#/components/ui/separator'
+import { getMediaUrl } from '#/lib/file-uploads'
+import type { Alumni } from '#/server/db/schemas/alumnis/alumnis-type'
+import { Button } from '#/components/ui/button'
+import { Link } from '@tanstack/react-router'
+import { Pencil } from 'lucide-react'
+import { DeleteAlumni } from './del-alumni'
+
+const POST_DISPLAY_LIMIT = 3
+
+const SOCIAL_ICONS: Record<string, string> = {
+  twitter: 'ti-brand-x',
+  linkedin: 'ti-brand-linkedin',
+  github: 'ti-brand-github',
+  instagram: 'ti-brand-instagram',
+  discord: 'ti-brand-discord',
+  email: 'ti-mail',
+  website: 'ti-world',
+  youtube: 'ti-brand-youtube',
+  dribbble: 'ti-brand-dribbble',
+  behance: 'ti-brand-behance',
+}
+
+const AVATAR_COLORS = [
+  'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300',
+  'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-300',
+  'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
+  'bg-orange-100 text-orange-700 dark:bg-orange-950 dark:text-orange-300',
+  'bg-pink-100 text-pink-700 dark:bg-pink-950 dark:text-pink-300',
+  'bg-cyan-100 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300',
+]
+
+function getAvatarColor(name: string) {
+  return AVATAR_COLORS[name.charCodeAt(0) % AVATAR_COLORS.length]
+}
+
+export function AlumniCard({ a }: { a: Alumni & { id: string } }) {
+  const visiblePosts = a.post.slice(0, POST_DISPLAY_LIMIT)
+  const overflow = a.post.length - POST_DISPLAY_LIMIT
+  const initials = a.name
+    .split(' ')
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase()
+
+  return (
+    <Card className="flex flex-col overflow-hidden p-0 hover:border-border/70 transition-colors">
+      {/* Banner + floating avatar */}
+      <div className="relative h-14 bg-muted shrink-0">
+        <div className="absolute -bottom-5 left-3">
+          <Avatar className="w-11 h-11 border-2 border-card">
+            <AvatarImage
+              src={
+                a.image && typeof a.image === 'string'
+                  ? (getMediaUrl(a.image) ?? '')
+                  : ''
+              }
+              alt={a.name}
+            />
+            <AvatarFallback className={getAvatarColor(a.name)}>
+              {initials}
+            </AvatarFallback>
+          </Avatar>
+        </div>
+        {/* Year badge — top right */}
+        <div className="absolute top-2 right-2">
+          <Badge variant="secondary" className="text-[10px] font-medium">
+            Class of {a.year}
+          </Badge>
+        </div>
+      </div>
+
+      {/* Body */}
+      <CardContent className="flex flex-col gap-2.5 p-3 pt-7 flex-1">
+        {/* Name + current role */}
+        <div className="min-w-0">
+          <p
+            className="text-[13px] font-medium leading-tight truncate"
+            title={a.name}
+          >
+            {a.name}
+          </p>
+          <p
+            className="text-[11px] text-muted-foreground mt-0.5 truncate"
+            title={a.current}
+          >
+            {a.current}
+          </p>
+        </div>
+
+        <Separator />
+
+        {/* Posts held */}
+        {a.post.length > 0 && (
+          <div className="flex flex-wrap gap-1 items-center">
+            {visiblePosts.map((post) => (
+              <Badge
+                key={post}
+                variant="secondary"
+                className="text-[10px] font-normal rounded-full px-1.5 py-0.5"
+              >
+                {post.replace(/_/g, ' ')}
+              </Badge>
+            ))}
+            {overflow > 0 && (
+              <span
+                className="text-[11px] text-muted-foreground cursor-default px-0.5"
+                title={a.post
+                  .slice(POST_DISPLAY_LIMIT)
+                  .map((p) => p.replace(/_/g, ' '))
+                  .join(', ')}
+              >
+                +{overflow}
+              </span>
+            )}
+          </div>
+        )}
+
+        {/* Socials */}
+        {a.socials.length > 0 && (
+          <div className="flex gap-2.5 flex-wrap">
+            {a.socials.map((s) => (
+              <a
+                key={s.platform}
+                href={s.platform === 'email' ? `mailto:${s.url}` : s.url}
+                target={s.platform === 'email' ? undefined : '_blank'}
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors leading-none"
+                aria-label={s.platform}
+              >
+                <i
+                  className={`ti ${SOCIAL_ICONS[s.platform] ?? 'ti-link'}`}
+                  style={{ fontSize: 14 }}
+                />
+              </a>
+            ))}
+          </div>
+        )}
+      </CardContent>
+
+      {/* Actions */}
+      <CardFooter className="flex gap-1.5 p-2.5 border-t">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex-1 h-7 text-xs"
+          asChild
+        >
+          <Link to="/admin/alumnis/$id" params={{ id: a.id }}>
+            <Pencil size={11} className="mr-1" /> Edit
+          </Link>
+        </Button>
+        <DeleteAlumni alumniId={a.id} imageId={a.image} />
+      </CardFooter>
+    </Card>
+  )
+}
