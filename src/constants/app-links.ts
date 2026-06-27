@@ -5,7 +5,6 @@ import {
   LayoutDashboard,
   Library,
   Network,
-  ScrollText,
   Users,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -36,11 +35,6 @@ export const navLinks: LinkAttr[] = [
     path: '/admin/resources',
     title: 'Resources',
     icon: Library,
-  },
-  {
-    path: '/admin/events',
-    title: 'Events',
-    icon: ScrollText,
   },
   {
     path: '/admin/archives',

@@ -1,7 +1,7 @@
 import type {
   Alumni,
   AlumniSocial,
-} from '#/server/db/schemas/alumnis/alumnis-type'
+} from '#/server/db/schemas/alumni/alumnis-type'
 import type { Role } from '#/server/db/schemas/member/member-type'
 import { createContext, useContext, useState } from 'react'
 

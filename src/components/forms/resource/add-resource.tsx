@@ -1,0 +1,150 @@
+import { useForm } from '@tanstack/react-form'
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '#/components/ui/field'
+import { Input } from '#/components/ui/input'
+import { Button } from '#/components/ui/button'
+import { useTRPC } from '#/integrations/trpc/react'
+import { useMutation } from '@tanstack/react-query'
+import { ErrorToast, SuccessToast } from '#/components/toast'
+import { resourceSchema } from '#/server/db/schemas/resource/resource-type'
+import type { ResourceType } from '#/server/db/schemas/resource/resource-type'
+import { FileUploadButton } from '#/components/shared/file-upload'
+import { Label } from '#/components/ui/label'
+import { useState } from 'react'
+import { uploadFile } from '#/lib/file-uploads'
+
+export function AddResourceUI() {
+  const [fileDark, setFileDark] = useState<File | null>(null)
+  const [fileLight, setFileLight] = useState<File | null>(null)
+  const trpc = useTRPC()
+  const { mutateAsync, isPending } = useMutation(
+    trpc.resource.create.mutationOptions({
+      onSuccess: (d) => {
+        SuccessToast(d.message)
+      },
+      onError: (e) => {
+        ErrorToast(e.message)
+      },
+    }),
+  )
+  const form = useForm({
+    defaultValues: {
+      dark: '',
+      light: '',
+      link: '',
+      event: '',
+    },
+    validators: {
+      onSubmit: resourceSchema,
+    },
+    onSubmit: async ({ value }) => {
+      if (!fileDark || !fileLight) {
+        ErrorToast('Please upload both dark and light images.')
+        return
+      }
+      const darkFile = await uploadFile(fileDark)
+      const lightFile = await uploadFile(fileLight)
+      const resourceData = {
+        ...value,
+        dark: darkFile.fileId,
+        light: lightFile.fileId,
+      }
+      await mutateAsync(resourceData)
+      resetFiles()
+      form.reset()
+    },
+  })
+  const resetFiles = () => {
+    setFileDark(null)
+    setFileLight(null)
+  }
+  return (
+    <div className="max-w-md w-full">
+      <form
+        id="faq_form"
+        onSubmit={(e) => {
+          e.preventDefault()
+          form.handleSubmit()
+        }}
+      >
+        <FieldGroup>
+          <form.Field
+            name="event"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>Event</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="Enter your event"
+                    autoComplete="off"
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          />
+
+          <form.Field
+            name="link"
+            children={(field) => {
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid
+              return (
+                <Field data-invalid={isInvalid}>
+                  <FieldLabel htmlFor={field.name}>Resource Link</FieldLabel>
+                  <Input
+                    id={field.name}
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                    aria-invalid={isInvalid}
+                    placeholder="Enter resource link"
+                    autoComplete="off"
+                  />
+                  {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                </Field>
+              )
+            }}
+          />
+
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="dark">Dark Image</Label>
+            <FileUploadButton file={fileDark} onFileSelect={setFileDark} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="light">Light Image</Label>
+            <FileUploadButton file={fileLight} onFileSelect={setFileLight} />
+          </div>
+        </FieldGroup>
+        <div className="grid grid-cols-2 gap-3 mt-5 w-full">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => {
+              form.reset()
+              resetFiles()
+            }}
+          >
+            Reset
+          </Button>
+          <Button type="submit" form="faq_form">
+            {isPending ? 'Loading...' : 'Submit'}
+          </Button>
+        </div>
+      </form>
+    </div>
+  )
+}

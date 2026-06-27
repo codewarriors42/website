@@ -18,8 +18,6 @@ export const authRouter = {
   addUser: publicProcedure
     .input(addUserSchema)
     .mutation(async ({ input }): Promise<AuthResponse> => {
-      await connectDB()
-
       const user_input = addUserSchema.safeParse(input)
       if (!user_input.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
@@ -54,8 +52,6 @@ export const authRouter = {
   login: publicProcedure
     .input(loginSchema)
     .mutation(async ({ input, ctx }): Promise<AuthResponse> => {
-      await connectDB()
-
       const login_input = loginSchema.safeParse(input)
       if (!login_input.success) {
         throw new TRPCError({ code: 'BAD_REQUEST', message: 'Invalid input' })
@@ -105,7 +101,6 @@ export const authRouter = {
       return { message: 'Login successful', is_success: true }
     }),
   logout: protectedProcedure.mutation(async ({ ctx }) => {
-    await connectDB()
     const cookie = serialize(env.COOKIE_NAME, '', {
       httpOnly: true,
       path: '/',

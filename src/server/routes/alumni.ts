@@ -2,8 +2,8 @@ import { protectedProcedure, publicProcedure } from '#/integrations/trpc/init'
 import { TRPCError } from '@trpc/server'
 import type { TRPCRouterRecord } from '@trpc/server'
 import z from 'zod'
-import { AluminModel } from '../db/schemas/alumnis'
-import { alumniSchema } from '../db/schemas/alumnis/alumnis-type'
+import { AluminModel } from '../db/schemas/alumni'
+import { alumniSchema } from '../db/schemas/alumni/alumnis-type'
 
 export const alumniRouter = {
   getAll: publicProcedure.query(async () => {

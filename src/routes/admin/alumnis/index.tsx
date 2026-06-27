@@ -1,4 +1,4 @@
-import { AlumniCard } from '#/components/forms/alumnis/alumni-card'
+import { AlumniCard } from '#/components/forms/alumni/alumni-card'
 import { Button } from '#/components/ui/button'
 import { useSidebar } from '#/components/ui/sidebar'
 import { useTRPC } from '#/integrations/trpc/react'

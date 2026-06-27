@@ -15,7 +15,6 @@ import { connectDB } from '../db'
 
 export const memberRouter = {
   getAll: publicProcedure.query(async () => {
-    await connectDB()
     try {
       return await MemberModel.find()
     } catch {

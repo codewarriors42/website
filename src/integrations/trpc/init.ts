@@ -1,11 +1,13 @@
 import { initTRPC, TRPCError } from '@trpc/server'
 import superjson from 'superjson'
 import type { jwt_payload } from '@/types/jwt'
+import type { Connection } from 'mongoose'
 
 export type TRPCContext = {
   req: Request
   resHeaders: Headers
   session: jwt_payload | null
+  db: Connection
 }
 
 const t = initTRPC.context<TRPCContext>().create({

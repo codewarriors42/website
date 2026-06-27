@@ -10,7 +10,7 @@ import { SelectYearUI } from './ui/select-year'
 import { FileUploadButton } from '#/components/shared/file-upload'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
-import type { Alumni } from '#/server/db/schemas/alumnis/alumnis-type'
+import type { Alumni } from '#/server/db/schemas/alumni/alumnis-type'
 import { uploadFile } from '#/lib/file-uploads'
 import { ErrorToast, SuccessToast } from '#/components/toast'
 

@@ -1,18 +1,19 @@
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch'
 import { createFileRoute } from '@tanstack/react-router'
-import type { TRPCContext } from '@/integrations/trpc/init'
-import { trpcRouter } from '@/integrations/trpc/routes'
+import type { TRPCContext } from '#/integrations/trpc/init'
+import { trpcRouter } from '#/integrations/trpc/routes'
 import { parseCookie } from 'cookie'
-import { env } from '@/env'
+import { env } from '#/env'
 import jwt from 'jsonwebtoken'
-import type { jwt_payload } from '@/types/jwt'
+import { connectDB } from '#/server/db'
+import type { jwt_payload } from '#/types/jwt'
 
 function handler({ request }: { request: Request }) {
   return fetchRequestHandler({
     req: request,
     router: trpcRouter,
     endpoint: '/api/trpc',
-    createContext: ({ req, resHeaders }): TRPCContext => {
+    createContext: async ({ req, resHeaders }): Promise<TRPCContext> => {
       const cookieHeader = req.headers.get('cookie') || ''
       const cookie = parseCookie(cookieHeader)
       const token = cookie[env.COOKIE_NAME]
@@ -26,10 +27,17 @@ function handler({ request }: { request: Request }) {
           session = null
         }
       }
+      const connection = await connectDB()
+
+      if (!connection.connection.db) {
+        throw new Error('MongoDB connection is not ready')
+      }
+
       return {
         req,
         resHeaders,
         session,
+        db: connection.connection,
       }
     },
   })

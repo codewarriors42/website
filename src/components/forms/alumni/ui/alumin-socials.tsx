@@ -23,8 +23,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-import { ALIMUNI_SOCIAL_PLATFORMS } from '#/server/db/schemas/alumnis/alumnis-type'
-import type { AlumniSocial } from '#/server/db/schemas/alumnis/alumnis-type'
+import { ALIMUNI_SOCIAL_PLATFORMS } from '#/server/db/schemas/alumni/alumnis-type'
+import type { AlumniSocial } from '#/server/db/schemas/alumni/alumnis-type'
 
 type SocialProps = {
   socials: AlumniSocial[]
