@@ -11,7 +11,6 @@ import {
   MemberSchema,
   MemberWithIdSchema,
 } from '../db/schemas/member/member-type'
-import { connectDB } from '../db'
 
 export const memberRouter = {
   getAll: publicProcedure.query(async () => {
@@ -31,7 +30,7 @@ export const memberRouter = {
     }
     const { name, grade, roles, image, socials } = inputData.data
     const cleanedSocials = socials.filter(
-      (social) => social.url.trim().length > 0,
+      (social) => social.URL.trim().length > 0,
     )
     try {
       await MemberModel.insertOne({
@@ -80,7 +79,7 @@ export const memberRouter = {
       }
       const { name, grade, roles, image, socials } = inputData.data
       const cleanedSocials = socials.filter(
-        (social) => social.url.trim().length > 0,
+        (social) => social.URL.trim().length > 0,
       )
       try {
         await MemberModel.updateOne(

@@ -11,7 +11,7 @@ const AlumniSchema = new Schema<Alumni>(
     socials: [
       {
         platform: { type: String, required: true },
-        url: { type: String, required: true },
+        URL: { type: String, required: true },
       },
     ],
     image: { type: String, required: false, default: '/default-avatar.png' },

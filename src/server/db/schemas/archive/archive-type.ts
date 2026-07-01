@@ -1,8 +1,8 @@
+import { ARCHIVE_EVENTS } from '#/constants/events'
 import z from 'zod'
 
-const ARCHIVE_PLATFORMS = [
+export const ARCHIVE_PLATFORMS = [
   'github',
-  'youtube',
   'behance',
   'dribbble',
   'youtube',
@@ -10,9 +10,9 @@ const ARCHIVE_PLATFORMS = [
   'figma',
 ] as const
 
-const ARCHIVE_CATEGORIES = [
-  'creative_work',
-  'creative_prompt',
+export const ARCHIVE_CATEGORIES = [
+  'creative-work',
+  'creative-prompt',
   'quizzes',
   'crossword',
 ] as const
@@ -22,7 +22,7 @@ export type ArchivePlatformType = (typeof ARCHIVE_PLATFORMS)[number]
 
 const socialLinks = z.object({
   platform: z.enum(ARCHIVE_PLATFORMS),
-  url: z.string().url(),
+  URL: z.string().url(),
 })
 
 export const archiveSchema = z.object({
@@ -30,7 +30,7 @@ export const archiveSchema = z.object({
   competition: z.string(),
   links: z.array(socialLinks),
   category: z.enum(ARCHIVE_CATEGORIES),
-  event: z.string(),
+  event: z.enum(ARCHIVE_EVENTS),
   contributors: z.string().array(),
   year: z
     .number()

@@ -19,14 +19,14 @@ export type AlumniSocialPlatform = z.infer<typeof ALIMUNI_SOCIAL_PLATFORMS>
 export const alumniSocialSchema = z
   .object({
     platform: z.enum(ALIMUNI_SOCIAL_PLATFORMS),
-    url: z.string().trim().min(1, 'URL is required'),
+    URL: z.string().trim().min(1, 'URL is required'),
   })
   .superRefine((value, ctx) => {
     const isEmail = value.platform === 'email'
 
     const valid = isEmail
-      ? z.string().email().safeParse(value.url).success
-      : z.string().url().safeParse(value.url).success
+      ? z.string().email().safeParse(value.URL).success
+      : z.string().url().safeParse(value.URL).success
 
     if (!valid) {
       ctx.addIssue({

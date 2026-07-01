@@ -22,34 +22,29 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '#/components/ui/select'
+} from '@/components/ui/select'
 
-import { SOCIAL_PLATFORMS } from '#/server/db/schemas/member/member-type'
-import type { MemberSocials } from '#/server/db/schemas/member/member-type'
+import { ARCHIVE_PLATFORMS } from '#/server/db/schemas/archive/archive-type'
+import type { ArchiveLink } from '#/server/db/schemas/archive/archive-type'
 
-type MemberSocial = {
-  platform: MemberSocials
-  url: string
+type SocialProps = {
+  socials: ArchiveLink[]
+  onChange: (obj: ArchiveLink) => void
 }
 
-type AddSocialDialogProps = {
-  socials: MemberSocial[]
-  onChange: (social: MemberSocial) => void
-}
-
-export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
-  const availablePlatforms = SOCIAL_PLATFORMS.filter(
+export function AddArchiveSocialsUI({ onChange, socials }: SocialProps) {
+  const availablePlatforms = ARCHIVE_PLATFORMS.filter(
     (platform) => !socials.some((social) => social.platform === platform),
   )
 
-  const [newSocial, setNewSocial] = useState<MemberSocial>({
+  const [newSocial, setNewSocial] = useState<ArchiveLink>({
     platform: availablePlatforms[0] ?? 'github',
-    url: '',
+    URL: '',
   })
 
   useEffect(() => {
     if (availablePlatforms.length > 0) {
-      setNewSocial((prev: MemberSocial) => ({
+      setNewSocial((prev: ArchiveLink) => ({
         ...prev,
         platform: availablePlatforms[0],
       }))
@@ -57,13 +52,13 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
   }, [socials])
 
   const handleSubmit = () => {
-    if (!newSocial.url.trim()) return
+    if (!newSocial.URL.trim()) return
 
     onChange(newSocial)
 
     setNewSocial({
       platform: availablePlatforms[0] ?? 'github',
-      url: '',
+      URL: '',
     })
   }
 
@@ -81,7 +76,7 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
         <DialogHeader>
           <DialogTitle>Add Social Link</DialogTitle>
           <DialogDescription>
-            Add a social profile for this member.
+            Add a social profile link for this archive.
           </DialogDescription>
         </DialogHeader>
 
@@ -94,7 +89,7 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
               onValueChange={(value) =>
                 setNewSocial({
                   ...newSocial,
-                  platform: value as MemberSocials,
+                  platform: value as ArchiveLink['platform'],
                 })
               }
             >
@@ -105,7 +100,7 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
               <SelectContent>
                 {availablePlatforms.map((platform) => (
                   <SelectItem key={platform} value={platform}>
-                    {platform.replaceAll('_', ' ')}
+                    {platform}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -122,11 +117,11 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
                 type="url"
                 className="pl-9"
                 placeholder="https://example.com"
-                value={newSocial.url}
+                value={newSocial.URL}
                 onChange={(e) =>
                   setNewSocial({
                     ...newSocial,
-                    url: e.currentTarget.value,
+                    URL: e.currentTarget.value,
                   })
                 }
               />
@@ -139,7 +134,7 @@ export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
             <Button variant="outline">Cancel</Button>
           </DialogClose>
 
-          <Button onClick={handleSubmit} disabled={!newSocial.url.trim()}>
+          <Button onClick={handleSubmit} disabled={!newSocial.URL.trim()}>
             Add Social
           </Button>
         </DialogFooter>

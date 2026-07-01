@@ -1,11 +1,20 @@
-const events = [
-  'web_development',
-  'mobile_development',
-  'design',
-  'motion_design',
-  'graphic_design',
-  'competitive_programming',
-  '3d_modeling',
+export const ARCHIVE_EVENTS = [
+  '3D Modeling',
+  'Quiz',
+  'Motion Design',
+  'Senior Quiz',
+  'Designathon',
+  'Hardware',
+  'Graphic Design',
+  'Hackathon',
+  'Junior Quiz',
+  'Surprise',
+  'Crossword',
+  'Filmmaking',
+  'Photography',
+  'Audio Editing',
+  'Idea Pitching',
+  'Compiled',
 ] as const
 
-export type EventType = (typeof events)[number]
+export type ArchiveEventType = (typeof ARCHIVE_EVENTS)[number]

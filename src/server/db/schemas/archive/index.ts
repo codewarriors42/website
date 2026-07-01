@@ -10,7 +10,7 @@ const ArchiveSchema = new Schema<ArchiveType>(
     links: [
       {
         platform: { type: String, required: true },
-        url: { type: String, required: true },
+        URL: { type: String, required: true },
       },
     ],
     category: { type: String, required: true },

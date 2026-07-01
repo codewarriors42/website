@@ -54,7 +54,7 @@ export const MemberSchema = z.object({
   socials: z.array(
     z.object({
       platform: z.enum(SOCIAL_PLATFORMS),
-      url: z.url(),
+      URL: z.url(),
     }),
   ),
   image: z.string(),

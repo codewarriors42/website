@@ -1,4 +1,5 @@
 import { alumniRouter } from '#/server/routes/alumni'
+import { archiveRouter } from '#/server/routes/archive'
 import { contactRouter } from '#/server/routes/contact-info'
 import { FAQRouter } from '#/server/routes/faq'
 import { resourceRouter } from '#/server/routes/resource'
@@ -13,5 +14,6 @@ export const trpcRouter = createTRPCRouter({
   faq: FAQRouter,
   contact: contactRouter,
   resource: resourceRouter,
+  archive: archiveRouter,
 })
 export type TRPCRouter = typeof trpcRouter

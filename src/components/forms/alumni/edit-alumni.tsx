@@ -1,8 +1,6 @@
-import { Badge } from '#/components/ui/badge'
 import { Button } from '#/components/ui/button'
 import { Input } from '#/components/ui/input'
 import { Label } from '#/components/ui/label'
-import { Trash2 } from 'lucide-react'
 import { useAlumniForm } from './hooks/ctx'
 import { AddSocialsUI } from './ui/alumin-socials'
 import { RolesPicker } from '../member/ui/roles-picker'
@@ -12,6 +10,7 @@ import { deleteFile, getMediaUrl, uploadFile } from '#/lib/file-uploads'
 import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 import { ErrorToast, SuccessToast } from '#/components/toast'
+import { SocialLinksDisplay } from '../shared/social-links-display'
 
 export function EditAlumniFormUI() {
   const {
@@ -139,34 +138,7 @@ export function EditAlumniFormUI() {
               <AddSocialsUI socials={socials} onChange={addSocial} />
             </div>
 
-            {socials.length > 0 ? (
-              <div className="flex gap-2 border-2 p-2 border-dotted rounded-lg tems-center max-w-full overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-border scrollbar-track-background">
-                {socials.map((social) => (
-                  <Badge
-                    className="py-3 flex items-center justify-center "
-                    variant={'outline'}
-                    key={social.platform}
-                  >
-                    <span className="font-medium">{social.platform}</span>
-
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      type="button"
-                      onClick={() => removeSocial(social)}
-                    >
-                      <Trash2 className="h-2 w-2 text-destructive" />
-                    </Button>
-                  </Badge>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-lg border border-dashed p-3 text-center">
-                <p className="text-xs text-muted-foreground">
-                  No social links added yet
-                </p>
-              </div>
-            )}
+            <SocialLinksDisplay socials={socials} onRemove={removeSocial} />
           </div>
           {/* Upload */}
           <div className="space-y-2">

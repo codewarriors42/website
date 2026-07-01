@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Plus, Link2 } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { Button } from '#/components/ui/button'
+import { Input } from '#/components/ui/input'
+import { Label } from '#/components/ui/label'
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
+} from '#/components/ui/dialog'
 
 import {
   Select,
@@ -21,31 +22,29 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '#/components/ui/select'
 
 import { ALIMUNI_SOCIAL_PLATFORMS } from '#/server/db/schemas/alumni/alumnis-type'
 import type { AlumniSocial } from '#/server/db/schemas/alumni/alumnis-type'
 
-type SocialProps = {
+type AddSocialDialogProps = {
   socials: AlumniSocial[]
-  onChange: (obj: AlumniSocial) => void
+  onChange: (social: AlumniSocial) => void
 }
 
-export function AddSocialsUI({ onChange, socials }: SocialProps) {
+export function AddSocialsUI({ onChange, socials }: AddSocialDialogProps) {
   const availablePlatforms = ALIMUNI_SOCIAL_PLATFORMS.filter(
     (platform) => !socials.some((social) => social.platform === platform),
   )
 
-  const [open, setOpen] = useState(false)
-
-  const [obj, setObj] = useState<AlumniSocial>({
+  const [newSocial, setNewSocial] = useState<AlumniSocial>({
     platform: availablePlatforms[0] ?? 'github',
-    url: '',
+    URL: '',
   })
 
   useEffect(() => {
     if (availablePlatforms.length > 0) {
-      setObj((prev) => ({
+      setNewSocial((prev) => ({
         ...prev,
         platform: availablePlatforms[0],
       }))
@@ -53,22 +52,20 @@ export function AddSocialsUI({ onChange, socials }: SocialProps) {
   }, [socials])
 
   const handleSubmit = () => {
-    if (!obj.url.trim()) return
+    if (!newSocial.URL.trim()) return
 
-    onChange(obj)
+    onChange(newSocial)
 
-    setObj({
+    setNewSocial({
       platform: availablePlatforms[0] ?? 'github',
-      url: '',
+      URL: '',
     })
-
-    setOpen(false)
   }
 
   const disabled = availablePlatforms.length === 0
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" disabled={disabled} className="gap-2">
           <Plus className="h-4 w-4" />
@@ -88,10 +85,10 @@ export function AddSocialsUI({ onChange, socials }: SocialProps) {
             <Label className="text-xs font-medium">Platform</Label>
 
             <Select
-              value={obj.platform}
+              value={newSocial.platform}
               onValueChange={(value) =>
-                setObj({
-                  ...obj,
+                setNewSocial({
+                  ...newSocial,
                   platform: value as AlumniSocial['platform'],
                 })
               }
@@ -119,12 +116,12 @@ export function AddSocialsUI({ onChange, socials }: SocialProps) {
               <Input
                 type="url"
                 className="pl-9"
-                placeholder="https://github.com/john-doe"
-                value={obj.url}
+                placeholder="https://example.com"
+                value={newSocial.URL}
                 onChange={(e) =>
-                  setObj({
-                    ...obj,
-                    url: e.currentTarget.value,
+                  setNewSocial({
+                    ...newSocial,
+                    URL: e.currentTarget.value,
                   })
                 }
               />
@@ -133,15 +130,15 @@ export function AddSocialsUI({ onChange, socials }: SocialProps) {
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)}>
-            Cancel
-          </Button>
+          <DialogClose asChild>
+            <Button variant="outline">Cancel</Button>
+          </DialogClose>
 
-          <Button onClick={handleSubmit} disabled={!obj.url.trim()}>
+          <Button onClick={handleSubmit} disabled={!newSocial.URL.trim()}>
             Add Social
           </Button>
         </DialogFooter>
-      </DialogContent>{' '}
+      </DialogContent>
     </Dialog>
   )
 }

@@ -1,24 +1,22 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '#/components/ui/button'
+import { Input } from '#/components/ui/input'
+import { Label } from '#/components/ui/label'
 
-import { FileUploadButton } from '@/components/shared/file-upload'
+import { FileUploadButton } from '#/components/shared/file-upload'
 import { RolesPicker } from './ui/roles-picker'
 import { SelectGradeUI } from './ui/select-grade'
 import { AddSocialsUI } from './ui/socials'
 
 import { useMemberForm } from './hooks/ctx'
 
-import { useTRPC } from '@/integrations/trpc/react'
+import { useTRPC } from '#/integrations/trpc/react'
 import { useMutation } from '@tanstack/react-query'
 
-import { deleteFile, getMediaUrl, uploadFile } from '@/lib/file-uploads'
-import { ErrorToast, SuccessToast } from '@/components/toast'
-
-import { Trash2 } from 'lucide-react'
+import { deleteFile, getMediaUrl, uploadFile } from '#/lib/file-uploads'
+import { ErrorToast, SuccessToast } from '#/components/toast'
 
 import { useRouter } from '@tanstack/react-router'
+import { SocialLinksDisplay } from '../shared/social-links-display'
 
 export function EditMemberFormUI() {
   const router = useRouter()
@@ -143,35 +141,10 @@ export function EditMemberFormUI() {
               <AddSocialsUI socials={socials} onChange={addSocial} />
             </div>
 
-            {socials.length > 0 ? (
-              <div className="flex flex-wrap gap-2 border-2 border-dotted rounded-lg p-2">
-                {socials.map((social) => (
-                  <Badge
-                    key={social.platform}
-                    variant="outline"
-                    className="py-3 flex items-center gap-1"
-                  >
-                    <span className="font-medium">{social.platform}</span>
-
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      type="button"
-                      className="h-5 w-5"
-                      onClick={() => removeSocial(social.platform)}
-                    >
-                      <Trash2 className="h-3 w-3 text-destructive" />
-                    </Button>
-                  </Badge>
-                ))}
-              </div>
-            ) : (
-              <div className="rounded-lg border border-dashed p-3 text-center">
-                <p className="text-xs text-muted-foreground">
-                  No social links added yet
-                </p>
-              </div>
-            )}
+            <SocialLinksDisplay
+              socials={socials}
+              onRemove={(social) => removeSocial(social.platform)}
+            />
           </div>
 
           {/* Image */}

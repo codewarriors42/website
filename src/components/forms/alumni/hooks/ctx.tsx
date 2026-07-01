@@ -5,33 +5,29 @@ import type {
 import type { Role } from '#/server/db/schemas/member/member-type'
 import { createContext, useContext, useState } from 'react'
 
-interface AlumniCtx {
+interface AlumniFormContextType {
   name: string
   setName: React.Dispatch<React.SetStateAction<string>>
   year: number
   setYear: React.Dispatch<React.SetStateAction<number>>
-
   post: Role[]
   setPost: React.Dispatch<React.SetStateAction<Role[]>>
-
   current: string
   setCurrent: React.Dispatch<React.SetStateAction<string>>
-
   socials: AlumniSocial[]
   setSocials: React.Dispatch<React.SetStateAction<AlumniSocial[]>>
   addSocial: (social: AlumniSocial) => void
-
   file: File | null
   setFile: React.Dispatch<React.SetStateAction<File | null>>
-
-  removeSocial: (d: AlumniSocial) => void
-
+  removeSocial: (social: AlumniSocial) => void
   resetForm: () => void
   alumniId?: string
   previewUrl?: string
 }
 
-const AlumniFormContext = createContext<AlumniCtx | undefined>(undefined)
+const AlumniFormContext = createContext<AlumniFormContextType | undefined>(
+  undefined,
+)
 
 export function AlumniFormProvider({
   children,
@@ -40,14 +36,14 @@ export function AlumniFormProvider({
   children: React.ReactNode
   initialData?: Alumni & { id: string }
 }) {
-  const [name, setName] = useState<string>(initialData?.name || '')
-  const [year, setYear] = useState<number>(
-    initialData?.year || new Date().getFullYear(),
+  const [name, setName] = useState(initialData?.name ?? '')
+  const [year, setYear] = useState(
+    initialData?.year ?? new Date().getFullYear(),
   )
-  const [post, setPost] = useState<Role[]>(initialData?.post || [])
-  const [current, setCurrent] = useState<string>(initialData?.current || '')
+  const [post, setPost] = useState<Role[]>(initialData?.post ?? [])
+  const [current, setCurrent] = useState(initialData?.current ?? '')
   const [socials, setSocials] = useState<AlumniSocial[]>(
-    initialData?.socials || [],
+    initialData?.socials ?? [],
   )
   const [file, setFile] = useState<File | null>(null)
 
@@ -56,11 +52,11 @@ export function AlumniFormProvider({
   }
 
   const resetForm = () => {
-    setName(initialData?.name || '')
-    setYear(initialData?.year || new Date().getFullYear())
-    setPost(initialData?.post || [])
-    setCurrent(initialData?.current || '')
-    setSocials(initialData?.socials || [])
+    setName(initialData?.name ?? '')
+    setYear(initialData?.year ?? new Date().getFullYear())
+    setPost(initialData?.post ?? [])
+    setCurrent(initialData?.current ?? '')
+    setSocials(initialData?.socials ?? [])
     setFile(null)
   }
 
@@ -68,7 +64,7 @@ export function AlumniFormProvider({
     setSocials((prev) => prev.filter((s) => s !== social))
   }
 
-  const ctxValue: AlumniCtx = {
+  const ctxValue: AlumniFormContextType = {
     name,
     setName,
     year,
@@ -80,12 +76,12 @@ export function AlumniFormProvider({
     socials,
     setSocials,
     addSocial,
-    alumniId: initialData?.id,
-    previewUrl: initialData?.image,
     file,
     setFile,
     resetForm,
     removeSocial,
+    alumniId: initialData?.id,
+    previewUrl: initialData?.image,
   }
 
   return (
@@ -98,9 +94,7 @@ export function AlumniFormProvider({
 export function useAlumniForm() {
   const context = useContext(AlumniFormContext)
   if (!context) {
-    throw new Error(
-      'useAlumniFormContext must be used within an AlumniFormProvider',
-    )
+    throw new Error('useAlumniForm must be used within AlumniFormProvider')
   }
   return context
 }

@@ -1,6 +1,6 @@
 import type { Alumni } from '#/server/db/schemas/alumni/alumnis-type'
 import { AddAlumniFormUI } from './add-alumni-form'
-import { EditAlumniFormUI } from './edit-alumin'
+import { EditAlumniFormUI } from './edit-alumni'
 import { AlumniFormProvider } from './hooks/ctx'
 
 export function AddAlumniForm() {

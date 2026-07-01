@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { useTRPC } from '@/integrations/trpc/react'
+import { useTRPC } from '#/integrations/trpc/react'
 import { useQuery } from '@tanstack/react-query'
-import { Button } from '@/components/ui/button'
-import { useSidebar } from '@/components/ui/sidebar'
+import { Button } from '#/components/ui/button'
+import { useSidebar } from '#/components/ui/sidebar'
 import { Plus } from 'lucide-react'
 import { MemberCard } from '#/components/forms/member/member-card'
 
