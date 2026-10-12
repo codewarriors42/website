@@ -9,342 +9,232 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as ApiMediaRouteImport } from './routes/api.media'
-import { Route as AuthLoginRouteImport } from './routes/_auth/login'
-import { Route as AuthAddUserRouteImport } from './routes/_auth/add-user'
-import { Route as AdminResourcesIndexRouteImport } from './routes/admin/resources/index'
-import { Route as AdminMembersIndexRouteImport } from './routes/admin/members/index'
-import { Route as AdminFaqsIndexRouteImport } from './routes/admin/faqs/index'
-import { Route as AdminContactInfoIndexRouteImport } from './routes/admin/contact-info/index'
-import { Route as AdminArchivesIndexRouteImport } from './routes/admin/archives/index'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as AdminAlumnisRouteRouteImport } from './routes/admin/alumnis/route'
+import { Route as AdminFaqsRouteRouteImport } from './routes/admin/faqs/route'
+import { Route as AdminMembersRouteRouteImport } from './routes/admin/members/route'
 import { Route as AdminAlumnisIndexRouteImport } from './routes/admin/alumnis/index'
-import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
-import { Route as AdminResourcesAddResourceRouteImport } from './routes/admin/resources/add-resource'
-import { Route as AdminResourcesIdRouteImport } from './routes/admin/resources/$id'
-import { Route as AdminMembersAddMemberRouteImport } from './routes/admin/members/add-member'
-import { Route as AdminMembersIdRouteImport } from './routes/admin/members/$id'
-import { Route as AdminFaqsAddFaqRouteImport } from './routes/admin/faqs/add-faq'
-import { Route as AdminFaqsIdRouteImport } from './routes/admin/faqs/$id'
-import { Route as AdminContactInfoAddContactInfoRouteImport } from './routes/admin/contact-info/add-contact-info'
-import { Route as AdminContactInfoIdRouteImport } from './routes/admin/contact-info/$id'
-import { Route as AdminArchivesAddArchiveRouteImport } from './routes/admin/archives/add-archive'
-import { Route as AdminArchivesIdRouteImport } from './routes/admin/archives/$id'
-import { Route as AdminAlumnisAddAlumniRouteImport } from './routes/admin/alumnis/add-alumni'
 import { Route as AdminAlumnisIdRouteImport } from './routes/admin/alumnis/$id'
+import { Route as AdminAlumnisAddRouteImport } from './routes/admin/alumnis/add'
+import { Route as AdminFaqsIdRouteImport } from './routes/admin/faqs/$id'
+import { Route as AdminFaqsAddRouteImport } from './routes/admin/faqs/add'
+import { Route as AdminMembersIndexRouteImport } from './routes/admin/members/index'
+import { Route as AdminMembersIdRouteImport } from './routes/admin/members/$id'
+import { Route as AdminMembersAddRouteImport } from './routes/admin/members/add'
+import { Route as ApiTrpcSplatRouteImport } from './routes/api.trpc.$'
+import { Route as AdminAlumnisEditIdRouteImport } from './routes/admin/alumnis/edit.$id'
+import { Route as AdminFaqsEditIdRouteImport } from './routes/admin/faqs/edit.$id'
+import { Route as AdminMembersEditIdRouteImport } from './routes/admin/members/edit.$id'
 
-const AdminRouteRoute = AdminRouteRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const ApiMediaRoute = ApiMediaRouteImport.update({
-  id: '/api/media',
-  path: '/api/media',
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/_auth/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthAddUserRoute = AuthAddUserRouteImport.update({
-  id: '/_auth/add-user',
-  path: '/add-user',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminResourcesIndexRoute = AdminResourcesIndexRouteImport.update({
-  id: '/resources/',
-  path: '/resources/',
+const AdminAlumnisRouteRoute = AdminAlumnisRouteRouteImport.update({
+  id: '/alumnis',
+  path: '/alumnis',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminMembersIndexRoute = AdminMembersIndexRouteImport.update({
-  id: '/members/',
-  path: '/members/',
+const AdminFaqsRouteRoute = AdminFaqsRouteRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminFaqsIndexRoute = AdminFaqsIndexRouteImport.update({
-  id: '/faqs/',
-  path: '/faqs/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminContactInfoIndexRoute = AdminContactInfoIndexRouteImport.update({
-  id: '/contact-info/',
-  path: '/contact-info/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminArchivesIndexRoute = AdminArchivesIndexRouteImport.update({
-  id: '/archives/',
-  path: '/archives/',
+const AdminMembersRouteRoute = AdminMembersRouteRouteImport.update({
+  id: '/members',
+  path: '/members',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminAlumnisIndexRoute = AdminAlumnisIndexRouteImport.update({
-  id: '/alumnis/',
-  path: '/alumnis/',
-  getParentRoute: () => AdminRouteRoute,
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminAlumnisRouteRoute,
+} as any)
+const AdminAlumnisIdRoute = AdminAlumnisIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminAlumnisRouteRoute,
+} as any)
+const AdminAlumnisAddRoute = AdminAlumnisAddRouteImport.update({
+  id: '/add',
+  path: '/add',
+  getParentRoute: () => AdminAlumnisRouteRoute,
+} as any)
+const AdminFaqsIdRoute = AdminFaqsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminFaqsRouteRoute,
+} as any)
+const AdminFaqsAddRoute = AdminFaqsAddRouteImport.update({
+  id: '/add',
+  path: '/add',
+  getParentRoute: () => AdminFaqsRouteRoute,
+} as any)
+const AdminMembersIndexRoute = AdminMembersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminMembersRouteRoute,
+} as any)
+const AdminMembersIdRoute = AdminMembersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminMembersRouteRoute,
+} as any)
+const AdminMembersAddRoute = AdminMembersAddRouteImport.update({
+  id: '/add',
+  path: '/add',
+  getParentRoute: () => AdminMembersRouteRoute,
 } as any)
 const ApiTrpcSplatRoute = ApiTrpcSplatRouteImport.update({
   id: '/api/trpc/$',
   path: '/api/trpc/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminResourcesAddResourceRoute =
-  AdminResourcesAddResourceRouteImport.update({
-    id: '/resources/add-resource',
-    path: '/resources/add-resource',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminResourcesIdRoute = AdminResourcesIdRouteImport.update({
-  id: '/resources/$id',
-  path: '/resources/$id',
-  getParentRoute: () => AdminRouteRoute,
+const AdminAlumnisEditIdRoute = AdminAlumnisEditIdRouteImport.update({
+  id: '/edit/$id',
+  path: '/edit/$id',
+  getParentRoute: () => AdminAlumnisRouteRoute,
 } as any)
-const AdminMembersAddMemberRoute = AdminMembersAddMemberRouteImport.update({
-  id: '/members/add-member',
-  path: '/members/add-member',
-  getParentRoute: () => AdminRouteRoute,
+const AdminFaqsEditIdRoute = AdminFaqsEditIdRouteImport.update({
+  id: '/edit/$id',
+  path: '/edit/$id',
+  getParentRoute: () => AdminFaqsRouteRoute,
 } as any)
-const AdminMembersIdRoute = AdminMembersIdRouteImport.update({
-  id: '/members/$id',
-  path: '/members/$id',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminFaqsAddFaqRoute = AdminFaqsAddFaqRouteImport.update({
-  id: '/faqs/add-faq',
-  path: '/faqs/add-faq',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminFaqsIdRoute = AdminFaqsIdRouteImport.update({
-  id: '/faqs/$id',
-  path: '/faqs/$id',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminContactInfoAddContactInfoRoute =
-  AdminContactInfoAddContactInfoRouteImport.update({
-    id: '/contact-info/add-contact-info',
-    path: '/contact-info/add-contact-info',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminContactInfoIdRoute = AdminContactInfoIdRouteImport.update({
-  id: '/contact-info/$id',
-  path: '/contact-info/$id',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminArchivesAddArchiveRoute = AdminArchivesAddArchiveRouteImport.update({
-  id: '/archives/add-archive',
-  path: '/archives/add-archive',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminArchivesIdRoute = AdminArchivesIdRouteImport.update({
-  id: '/archives/$id',
-  path: '/archives/$id',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAlumnisAddAlumniRoute = AdminAlumnisAddAlumniRouteImport.update({
-  id: '/alumnis/add-alumni',
-  path: '/alumnis/add-alumni',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAlumnisIdRoute = AdminAlumnisIdRouteImport.update({
-  id: '/alumnis/$id',
-  path: '/alumnis/$id',
-  getParentRoute: () => AdminRouteRoute,
+const AdminMembersEditIdRoute = AdminMembersEditIdRouteImport.update({
+  id: '/edit/$id',
+  path: '/edit/$id',
+  getParentRoute: () => AdminMembersRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
-  '/add-user': typeof AuthAddUserRoute
-  '/login': typeof AuthLoginRoute
-  '/api/media': typeof ApiMediaRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/alumnis': typeof AdminAlumnisRouteRouteWithChildren
+  '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
+  '/admin/members': typeof AdminMembersRouteRouteWithChildren
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
-  '/admin/alumnis/add-alumni': typeof AdminAlumnisAddAlumniRoute
-  '/admin/archives/$id': typeof AdminArchivesIdRoute
-  '/admin/archives/add-archive': typeof AdminArchivesAddArchiveRoute
-  '/admin/contact-info/$id': typeof AdminContactInfoIdRoute
-  '/admin/contact-info/add-contact-info': typeof AdminContactInfoAddContactInfoRoute
+  '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/faqs/$id': typeof AdminFaqsIdRoute
-  '/admin/faqs/add-faq': typeof AdminFaqsAddFaqRoute
+  '/admin/faqs/add': typeof AdminFaqsAddRoute
   '/admin/members/$id': typeof AdminMembersIdRoute
-  '/admin/members/add-member': typeof AdminMembersAddMemberRoute
-  '/admin/resources/$id': typeof AdminResourcesIdRoute
-  '/admin/resources/add-resource': typeof AdminResourcesAddResourceRoute
+  '/admin/members/add': typeof AdminMembersAddRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/admin/alumnis/': typeof AdminAlumnisIndexRoute
-  '/admin/archives/': typeof AdminArchivesIndexRoute
-  '/admin/contact-info/': typeof AdminContactInfoIndexRoute
-  '/admin/faqs/': typeof AdminFaqsIndexRoute
   '/admin/members/': typeof AdminMembersIndexRoute
-  '/admin/resources/': typeof AdminResourcesIndexRoute
+  '/admin/alumnis/edit/$id': typeof AdminAlumnisEditIdRoute
+  '/admin/faqs/edit/$id': typeof AdminFaqsEditIdRoute
+  '/admin/members/edit/$id': typeof AdminMembersEditIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/add-user': typeof AuthAddUserRoute
-  '/login': typeof AuthLoginRoute
-  '/api/media': typeof ApiMediaRoute
-  '/admin': typeof AdminIndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
-  '/admin/alumnis/add-alumni': typeof AdminAlumnisAddAlumniRoute
-  '/admin/archives/$id': typeof AdminArchivesIdRoute
-  '/admin/archives/add-archive': typeof AdminArchivesAddArchiveRoute
-  '/admin/contact-info/$id': typeof AdminContactInfoIdRoute
-  '/admin/contact-info/add-contact-info': typeof AdminContactInfoAddContactInfoRoute
+  '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/faqs/$id': typeof AdminFaqsIdRoute
-  '/admin/faqs/add-faq': typeof AdminFaqsAddFaqRoute
+  '/admin/faqs/add': typeof AdminFaqsAddRoute
   '/admin/members/$id': typeof AdminMembersIdRoute
-  '/admin/members/add-member': typeof AdminMembersAddMemberRoute
-  '/admin/resources/$id': typeof AdminResourcesIdRoute
-  '/admin/resources/add-resource': typeof AdminResourcesAddResourceRoute
+  '/admin/members/add': typeof AdminMembersAddRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/admin/alumnis': typeof AdminAlumnisIndexRoute
-  '/admin/archives': typeof AdminArchivesIndexRoute
-  '/admin/contact-info': typeof AdminContactInfoIndexRoute
-  '/admin/faqs': typeof AdminFaqsIndexRoute
   '/admin/members': typeof AdminMembersIndexRoute
-  '/admin/resources': typeof AdminResourcesIndexRoute
+  '/admin/alumnis/edit/$id': typeof AdminAlumnisEditIdRoute
+  '/admin/faqs/edit/$id': typeof AdminFaqsEditIdRoute
+  '/admin/members/edit/$id': typeof AdminMembersEditIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
-  '/_auth/add-user': typeof AuthAddUserRoute
-  '/_auth/login': typeof AuthLoginRoute
-  '/api/media': typeof ApiMediaRoute
-  '/admin/': typeof AdminIndexRoute
+  '/admin/alumnis': typeof AdminAlumnisRouteRouteWithChildren
+  '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
+  '/admin/members': typeof AdminMembersRouteRouteWithChildren
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
-  '/admin/alumnis/add-alumni': typeof AdminAlumnisAddAlumniRoute
-  '/admin/archives/$id': typeof AdminArchivesIdRoute
-  '/admin/archives/add-archive': typeof AdminArchivesAddArchiveRoute
-  '/admin/contact-info/$id': typeof AdminContactInfoIdRoute
-  '/admin/contact-info/add-contact-info': typeof AdminContactInfoAddContactInfoRoute
+  '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/faqs/$id': typeof AdminFaqsIdRoute
-  '/admin/faqs/add-faq': typeof AdminFaqsAddFaqRoute
+  '/admin/faqs/add': typeof AdminFaqsAddRoute
   '/admin/members/$id': typeof AdminMembersIdRoute
-  '/admin/members/add-member': typeof AdminMembersAddMemberRoute
-  '/admin/resources/$id': typeof AdminResourcesIdRoute
-  '/admin/resources/add-resource': typeof AdminResourcesAddResourceRoute
+  '/admin/members/add': typeof AdminMembersAddRoute
   '/api/trpc/$': typeof ApiTrpcSplatRoute
   '/admin/alumnis/': typeof AdminAlumnisIndexRoute
-  '/admin/archives/': typeof AdminArchivesIndexRoute
-  '/admin/contact-info/': typeof AdminContactInfoIndexRoute
-  '/admin/faqs/': typeof AdminFaqsIndexRoute
   '/admin/members/': typeof AdminMembersIndexRoute
-  '/admin/resources/': typeof AdminResourcesIndexRoute
+  '/admin/alumnis/edit/$id': typeof AdminAlumnisEditIdRoute
+  '/admin/faqs/edit/$id': typeof AdminFaqsEditIdRoute
+  '/admin/members/edit/$id': typeof AdminMembersEditIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/admin'
-    | '/add-user'
-    | '/login'
-    | '/api/media'
-    | '/admin/'
+    | '/admin/alumnis'
+    | '/admin/faqs'
+    | '/admin/members'
     | '/admin/alumnis/$id'
-    | '/admin/alumnis/add-alumni'
-    | '/admin/archives/$id'
-    | '/admin/archives/add-archive'
-    | '/admin/contact-info/$id'
-    | '/admin/contact-info/add-contact-info'
+    | '/admin/alumnis/add'
     | '/admin/faqs/$id'
-    | '/admin/faqs/add-faq'
+    | '/admin/faqs/add'
     | '/admin/members/$id'
-    | '/admin/members/add-member'
-    | '/admin/resources/$id'
-    | '/admin/resources/add-resource'
+    | '/admin/members/add'
     | '/api/trpc/$'
     | '/admin/alumnis/'
-    | '/admin/archives/'
-    | '/admin/contact-info/'
-    | '/admin/faqs/'
     | '/admin/members/'
-    | '/admin/resources/'
+    | '/admin/alumnis/edit/$id'
+    | '/admin/faqs/edit/$id'
+    | '/admin/members/edit/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/add-user'
-    | '/login'
-    | '/api/media'
     | '/admin'
+    | '/admin/faqs'
     | '/admin/alumnis/$id'
-    | '/admin/alumnis/add-alumni'
-    | '/admin/archives/$id'
-    | '/admin/archives/add-archive'
-    | '/admin/contact-info/$id'
-    | '/admin/contact-info/add-contact-info'
+    | '/admin/alumnis/add'
     | '/admin/faqs/$id'
-    | '/admin/faqs/add-faq'
+    | '/admin/faqs/add'
     | '/admin/members/$id'
-    | '/admin/members/add-member'
-    | '/admin/resources/$id'
-    | '/admin/resources/add-resource'
+    | '/admin/members/add'
     | '/api/trpc/$'
     | '/admin/alumnis'
-    | '/admin/archives'
-    | '/admin/contact-info'
-    | '/admin/faqs'
     | '/admin/members'
-    | '/admin/resources'
+    | '/admin/alumnis/edit/$id'
+    | '/admin/faqs/edit/$id'
+    | '/admin/members/edit/$id'
   id:
     | '__root__'
     | '/'
     | '/admin'
-    | '/_auth/add-user'
-    | '/_auth/login'
-    | '/api/media'
-    | '/admin/'
+    | '/admin/alumnis'
+    | '/admin/faqs'
+    | '/admin/members'
     | '/admin/alumnis/$id'
-    | '/admin/alumnis/add-alumni'
-    | '/admin/archives/$id'
-    | '/admin/archives/add-archive'
-    | '/admin/contact-info/$id'
-    | '/admin/contact-info/add-contact-info'
+    | '/admin/alumnis/add'
     | '/admin/faqs/$id'
-    | '/admin/faqs/add-faq'
+    | '/admin/faqs/add'
     | '/admin/members/$id'
-    | '/admin/members/add-member'
-    | '/admin/resources/$id'
-    | '/admin/resources/add-resource'
+    | '/admin/members/add'
     | '/api/trpc/$'
     | '/admin/alumnis/'
-    | '/admin/archives/'
-    | '/admin/contact-info/'
-    | '/admin/faqs/'
     | '/admin/members/'
-    | '/admin/resources/'
+    | '/admin/alumnis/edit/$id'
+    | '/admin/faqs/edit/$id'
+    | '/admin/members/edit/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
-  AuthAddUserRoute: typeof AuthAddUserRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  ApiMediaRoute: typeof ApiMediaRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -352,75 +242,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/api/media': {
-      id: '/api/media'
-      path: '/api/media'
-      fullPath: '/api/media'
-      preLoaderRoute: typeof ApiMediaRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_auth/login': {
-      id: '/_auth/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_auth/add-user': {
-      id: '/_auth/add-user'
-      path: '/add-user'
-      fullPath: '/add-user'
-      preLoaderRoute: typeof AuthAddUserRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/resources/': {
-      id: '/admin/resources/'
-      path: '/resources'
-      fullPath: '/admin/resources/'
-      preLoaderRoute: typeof AdminResourcesIndexRouteImport
+    '/admin/alumnis': {
+      id: '/admin/alumnis'
+      path: '/alumnis'
+      fullPath: '/admin/alumnis'
+      preLoaderRoute: typeof AdminAlumnisRouteRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/members/': {
-      id: '/admin/members/'
-      path: '/members'
-      fullPath: '/admin/members/'
-      preLoaderRoute: typeof AdminMembersIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/faqs/': {
-      id: '/admin/faqs/'
+    '/admin/faqs': {
+      id: '/admin/faqs'
       path: '/faqs'
-      fullPath: '/admin/faqs/'
-      preLoaderRoute: typeof AdminFaqsIndexRouteImport
+      fullPath: '/admin/faqs'
+      preLoaderRoute: typeof AdminFaqsRouteRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/contact-info/': {
-      id: '/admin/contact-info/'
-      path: '/contact-info'
-      fullPath: '/admin/contact-info/'
-      preLoaderRoute: typeof AdminContactInfoIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/archives/': {
-      id: '/admin/archives/'
-      path: '/archives'
-      fullPath: '/admin/archives/'
-      preLoaderRoute: typeof AdminArchivesIndexRouteImport
+    '/admin/members': {
+      id: '/admin/members'
+      path: '/members'
+      fullPath: '/admin/members'
+      preLoaderRoute: typeof AdminMembersRouteRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/alumnis/': {
       id: '/admin/alumnis/'
-      path: '/alumnis'
+      path: '/'
       fullPath: '/admin/alumnis/'
       preLoaderRoute: typeof AdminAlumnisIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
+      parentRoute: typeof AdminAlumnisRouteRoute
+    }
+    '/admin/alumnis/$id': {
+      id: '/admin/alumnis/$id'
+      path: '/$id'
+      fullPath: '/admin/alumnis/$id'
+      preLoaderRoute: typeof AdminAlumnisIdRouteImport
+      parentRoute: typeof AdminAlumnisRouteRoute
+    }
+    '/admin/alumnis/add': {
+      id: '/admin/alumnis/add'
+      path: '/add'
+      fullPath: '/admin/alumnis/add'
+      preLoaderRoute: typeof AdminAlumnisAddRouteImport
+      parentRoute: typeof AdminAlumnisRouteRoute
+    }
+    '/admin/faqs/$id': {
+      id: '/admin/faqs/$id'
+      path: '/$id'
+      fullPath: '/admin/faqs/$id'
+      preLoaderRoute: typeof AdminFaqsIdRouteImport
+      parentRoute: typeof AdminFaqsRouteRoute
+    }
+    '/admin/faqs/add': {
+      id: '/admin/faqs/add'
+      path: '/add'
+      fullPath: '/admin/faqs/add'
+      preLoaderRoute: typeof AdminFaqsAddRouteImport
+      parentRoute: typeof AdminFaqsRouteRoute
+    }
+    '/admin/members/': {
+      id: '/admin/members/'
+      path: '/'
+      fullPath: '/admin/members/'
+      preLoaderRoute: typeof AdminMembersIndexRouteImport
+      parentRoute: typeof AdminMembersRouteRoute
+    }
+    '/admin/members/$id': {
+      id: '/admin/members/$id'
+      path: '/$id'
+      fullPath: '/admin/members/$id'
+      preLoaderRoute: typeof AdminMembersIdRouteImport
+      parentRoute: typeof AdminMembersRouteRoute
+    }
+    '/admin/members/add': {
+      id: '/admin/members/add'
+      path: '/add'
+      fullPath: '/admin/members/add'
+      preLoaderRoute: typeof AdminMembersAddRouteImport
+      parentRoute: typeof AdminMembersRouteRoute
     }
     '/api/trpc/$': {
       id: '/api/trpc/$'
@@ -429,135 +333,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiTrpcSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/resources/add-resource': {
-      id: '/admin/resources/add-resource'
-      path: '/resources/add-resource'
-      fullPath: '/admin/resources/add-resource'
-      preLoaderRoute: typeof AdminResourcesAddResourceRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/admin/alumnis/edit/$id': {
+      id: '/admin/alumnis/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/admin/alumnis/edit/$id'
+      preLoaderRoute: typeof AdminAlumnisEditIdRouteImport
+      parentRoute: typeof AdminAlumnisRouteRoute
     }
-    '/admin/resources/$id': {
-      id: '/admin/resources/$id'
-      path: '/resources/$id'
-      fullPath: '/admin/resources/$id'
-      preLoaderRoute: typeof AdminResourcesIdRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/admin/faqs/edit/$id': {
+      id: '/admin/faqs/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/admin/faqs/edit/$id'
+      preLoaderRoute: typeof AdminFaqsEditIdRouteImport
+      parentRoute: typeof AdminFaqsRouteRoute
     }
-    '/admin/members/add-member': {
-      id: '/admin/members/add-member'
-      path: '/members/add-member'
-      fullPath: '/admin/members/add-member'
-      preLoaderRoute: typeof AdminMembersAddMemberRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/members/$id': {
-      id: '/admin/members/$id'
-      path: '/members/$id'
-      fullPath: '/admin/members/$id'
-      preLoaderRoute: typeof AdminMembersIdRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/faqs/add-faq': {
-      id: '/admin/faqs/add-faq'
-      path: '/faqs/add-faq'
-      fullPath: '/admin/faqs/add-faq'
-      preLoaderRoute: typeof AdminFaqsAddFaqRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/faqs/$id': {
-      id: '/admin/faqs/$id'
-      path: '/faqs/$id'
-      fullPath: '/admin/faqs/$id'
-      preLoaderRoute: typeof AdminFaqsIdRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/contact-info/add-contact-info': {
-      id: '/admin/contact-info/add-contact-info'
-      path: '/contact-info/add-contact-info'
-      fullPath: '/admin/contact-info/add-contact-info'
-      preLoaderRoute: typeof AdminContactInfoAddContactInfoRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/contact-info/$id': {
-      id: '/admin/contact-info/$id'
-      path: '/contact-info/$id'
-      fullPath: '/admin/contact-info/$id'
-      preLoaderRoute: typeof AdminContactInfoIdRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/archives/add-archive': {
-      id: '/admin/archives/add-archive'
-      path: '/archives/add-archive'
-      fullPath: '/admin/archives/add-archive'
-      preLoaderRoute: typeof AdminArchivesAddArchiveRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/archives/$id': {
-      id: '/admin/archives/$id'
-      path: '/archives/$id'
-      fullPath: '/admin/archives/$id'
-      preLoaderRoute: typeof AdminArchivesIdRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/alumnis/add-alumni': {
-      id: '/admin/alumnis/add-alumni'
-      path: '/alumnis/add-alumni'
-      fullPath: '/admin/alumnis/add-alumni'
-      preLoaderRoute: typeof AdminAlumnisAddAlumniRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/admin/alumnis/$id': {
-      id: '/admin/alumnis/$id'
-      path: '/alumnis/$id'
-      fullPath: '/admin/alumnis/$id'
-      preLoaderRoute: typeof AdminAlumnisIdRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/admin/members/edit/$id': {
+      id: '/admin/members/edit/$id'
+      path: '/edit/$id'
+      fullPath: '/admin/members/edit/$id'
+      preLoaderRoute: typeof AdminMembersEditIdRouteImport
+      parentRoute: typeof AdminMembersRouteRoute
     }
   }
 }
 
-interface AdminRouteRouteChildren {
-  AdminIndexRoute: typeof AdminIndexRoute
+interface AdminAlumnisRouteRouteChildren {
   AdminAlumnisIdRoute: typeof AdminAlumnisIdRoute
-  AdminAlumnisAddAlumniRoute: typeof AdminAlumnisAddAlumniRoute
-  AdminArchivesIdRoute: typeof AdminArchivesIdRoute
-  AdminArchivesAddArchiveRoute: typeof AdminArchivesAddArchiveRoute
-  AdminContactInfoIdRoute: typeof AdminContactInfoIdRoute
-  AdminContactInfoAddContactInfoRoute: typeof AdminContactInfoAddContactInfoRoute
-  AdminFaqsIdRoute: typeof AdminFaqsIdRoute
-  AdminFaqsAddFaqRoute: typeof AdminFaqsAddFaqRoute
-  AdminMembersIdRoute: typeof AdminMembersIdRoute
-  AdminMembersAddMemberRoute: typeof AdminMembersAddMemberRoute
-  AdminResourcesIdRoute: typeof AdminResourcesIdRoute
-  AdminResourcesAddResourceRoute: typeof AdminResourcesAddResourceRoute
+  AdminAlumnisAddRoute: typeof AdminAlumnisAddRoute
   AdminAlumnisIndexRoute: typeof AdminAlumnisIndexRoute
-  AdminArchivesIndexRoute: typeof AdminArchivesIndexRoute
-  AdminContactInfoIndexRoute: typeof AdminContactInfoIndexRoute
-  AdminFaqsIndexRoute: typeof AdminFaqsIndexRoute
+  AdminAlumnisEditIdRoute: typeof AdminAlumnisEditIdRoute
+}
+
+const AdminAlumnisRouteRouteChildren: AdminAlumnisRouteRouteChildren = {
+  AdminAlumnisIdRoute: AdminAlumnisIdRoute,
+  AdminAlumnisAddRoute: AdminAlumnisAddRoute,
+  AdminAlumnisIndexRoute: AdminAlumnisIndexRoute,
+  AdminAlumnisEditIdRoute: AdminAlumnisEditIdRoute,
+}
+
+const AdminAlumnisRouteRouteWithChildren =
+  AdminAlumnisRouteRoute._addFileChildren(AdminAlumnisRouteRouteChildren)
+
+interface AdminFaqsRouteRouteChildren {
+  AdminFaqsIdRoute: typeof AdminFaqsIdRoute
+  AdminFaqsAddRoute: typeof AdminFaqsAddRoute
+  AdminFaqsEditIdRoute: typeof AdminFaqsEditIdRoute
+}
+
+const AdminFaqsRouteRouteChildren: AdminFaqsRouteRouteChildren = {
+  AdminFaqsIdRoute: AdminFaqsIdRoute,
+  AdminFaqsAddRoute: AdminFaqsAddRoute,
+  AdminFaqsEditIdRoute: AdminFaqsEditIdRoute,
+}
+
+const AdminFaqsRouteRouteWithChildren = AdminFaqsRouteRoute._addFileChildren(
+  AdminFaqsRouteRouteChildren,
+)
+
+interface AdminMembersRouteRouteChildren {
+  AdminMembersIdRoute: typeof AdminMembersIdRoute
+  AdminMembersAddRoute: typeof AdminMembersAddRoute
   AdminMembersIndexRoute: typeof AdminMembersIndexRoute
-  AdminResourcesIndexRoute: typeof AdminResourcesIndexRoute
+  AdminMembersEditIdRoute: typeof AdminMembersEditIdRoute
+}
+
+const AdminMembersRouteRouteChildren: AdminMembersRouteRouteChildren = {
+  AdminMembersIdRoute: AdminMembersIdRoute,
+  AdminMembersAddRoute: AdminMembersAddRoute,
+  AdminMembersIndexRoute: AdminMembersIndexRoute,
+  AdminMembersEditIdRoute: AdminMembersEditIdRoute,
+}
+
+const AdminMembersRouteRouteWithChildren =
+  AdminMembersRouteRoute._addFileChildren(AdminMembersRouteRouteChildren)
+
+interface AdminRouteRouteChildren {
+  AdminAlumnisRouteRoute: typeof AdminAlumnisRouteRouteWithChildren
+  AdminFaqsRouteRoute: typeof AdminFaqsRouteRouteWithChildren
+  AdminMembersRouteRoute: typeof AdminMembersRouteRouteWithChildren
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminIndexRoute: AdminIndexRoute,
-  AdminAlumnisIdRoute: AdminAlumnisIdRoute,
-  AdminAlumnisAddAlumniRoute: AdminAlumnisAddAlumniRoute,
-  AdminArchivesIdRoute: AdminArchivesIdRoute,
-  AdminArchivesAddArchiveRoute: AdminArchivesAddArchiveRoute,
-  AdminContactInfoIdRoute: AdminContactInfoIdRoute,
-  AdminContactInfoAddContactInfoRoute: AdminContactInfoAddContactInfoRoute,
-  AdminFaqsIdRoute: AdminFaqsIdRoute,
-  AdminFaqsAddFaqRoute: AdminFaqsAddFaqRoute,
-  AdminMembersIdRoute: AdminMembersIdRoute,
-  AdminMembersAddMemberRoute: AdminMembersAddMemberRoute,
-  AdminResourcesIdRoute: AdminResourcesIdRoute,
-  AdminResourcesAddResourceRoute: AdminResourcesAddResourceRoute,
-  AdminAlumnisIndexRoute: AdminAlumnisIndexRoute,
-  AdminArchivesIndexRoute: AdminArchivesIndexRoute,
-  AdminContactInfoIndexRoute: AdminContactInfoIndexRoute,
-  AdminFaqsIndexRoute: AdminFaqsIndexRoute,
-  AdminMembersIndexRoute: AdminMembersIndexRoute,
-  AdminResourcesIndexRoute: AdminResourcesIndexRoute,
+  AdminAlumnisRouteRoute: AdminAlumnisRouteRouteWithChildren,
+  AdminFaqsRouteRoute: AdminFaqsRouteRouteWithChildren,
+  AdminMembersRouteRoute: AdminMembersRouteRouteWithChildren,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
@@ -567,9 +426,6 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
-  AuthAddUserRoute: AuthAddUserRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  ApiMediaRoute: ApiMediaRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,
 }
 export const routeTree = rootRouteImport

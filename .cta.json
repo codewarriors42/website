@@ -1,16 +1,23 @@
 {
-  "projectName": "cw-site",
+  "projectName": "cw-rpc",
   "mode": "file-router",
   "typescript": true,
   "packageManager": "bun",
   "includeExamples": false,
   "tailwind": true,
+  "projectPreset": "default",
   "addOnOptions": {},
-  "envVarValues": {},
   "git": false,
   "install": true,
+  "intent": true,
   "routerOnly": false,
   "version": 1,
   "framework": "react",
-  "chosenAddOns": ["eslint", "nitro", "form", "t3env", "tRPC", "tanstack-query"]
+  "chosenAddOns": [
+    "biome",
+    "nitro",
+    "tRPC",
+    "t3env",
+    "tanstack-query"
+  ]
 }

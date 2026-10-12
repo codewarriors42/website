@@ -17,14 +17,6 @@ To build this application for production:
 bun --bun run build
 ```
 
-## Testing
-
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
-
-```bash
-bun --bun run test
-```
-
 ## Styling
 
 This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
@@ -36,17 +28,33 @@ If you prefer not to use Tailwind CSS:
 1. Remove the demo pages in `src/routes/demo/`
 2. Replace the Tailwind import in `src/styles.css` with your own styles
 3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
+4. Remove `@tailwindcss/vite` and `tailwindcss` from `package.json`
 
 ## Linting & Formatting
 
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
+
 
 ```bash
 bun --bun run lint
 bun --bun run format
 bun --bun run check
 ```
+
+
+## Deploy with Nitro
+
+This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
+
+```bash
+npm run build
+node dist/server/index.mjs
+```
+
+The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+
+For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
+
 
 ## T3Env
 
@@ -57,10 +65,15 @@ bun --bun run check
 ### Usage
 
 ```ts
-import { env } from '#/env'
+import { env } from "#/env";
 
-console.log(env.VITE_APP_TITLE)
+console.log(env.VITE_APP_TITLE);
 ```
+
+
+
+
+
 
 ## Routing
 
@@ -79,7 +92,7 @@ Now that you have two routes you can use a `Link` component to navigate between 
 To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
 
 ```tsx
-import { Link } from '@tanstack/react-router'
+import { Link } from "@tanstack/react-router";
 ```
 
 Then anywhere in your JSX you can use it like so:
@@ -147,11 +160,11 @@ const getServerTime = createServerFn({
 // Use in a component
 function MyComponent() {
   const [time, setTime] = useState('')
-
+  
   useEffect(() => {
     getServerTime().then(setTime)
   }, [])
-
+  
   return <div>Server time: {time}</div>
 }
 ```
@@ -204,9 +217,7 @@ function PeopleComponent() {
 
 Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
 
-# Demo files
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
 
 # Learn More
 

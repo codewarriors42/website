@@ -1,0 +1,72 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight } from "lucide-react";
+import type { AlumniWithId } from "#/server/db/schema/alumni.db.type.ts";
+import type { FaqTypeWithId } from "#/server/db/schema/faq.db.type.ts";
+import type { MemberWithId } from "#/server/db/schema/member.db.type.ts";
+
+/** Shared look for every sidebar link. Each link below only decides WHERE it goes and WHAT it shows. */
+export const listLinkClass = `
+	group flex items-center justify-between gap-4 rounded-lg border border-transparent px-3 py-2.5
+	text-sm text-muted-foreground outline-none transition-colors
+	hover:bg-accent/50 hover:text-foreground
+	focus-visible:ring-2 focus-visible:ring-ring
+	data-[status=active]:border-border data-[status=active]:bg-accent data-[status=active]:text-accent-foreground
+`;
+
+function Arrow() {
+	return (
+		<ArrowUpRight className="size-4 shrink-0 opacity-50 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+	);
+}
+
+type LinkProps<T> = { item: T; onClick?: () => void };
+
+export function FaqLink({ item, onClick }: LinkProps<FaqTypeWithId>) {
+	return (
+		<Link
+			to="/admin/faqs/$id"
+			params={{ id: item.id }}
+			onClick={onClick}
+			className={listLinkClass}
+		>
+			<span className="line-clamp-2 min-w-0 font-medium">{item.question}</span>
+			<Arrow />
+		</Link>
+	);
+}
+
+export function MemberLink({ item, onClick }: LinkProps<MemberWithId>) {
+	return (
+		<Link
+			to="/admin/members/$id"
+			params={{ id: item.id }}
+			onClick={onClick}
+			className={listLinkClass}
+		>
+			<span className="min-w-0">
+				<span className="block truncate font-medium">{item.name}</span>
+				<span className="block text-xs opacity-70">Grade {item.grade}</span>
+			</span>
+			<Arrow />
+		</Link>
+	);
+}
+
+export function AlumniLink({ item, onClick }: LinkProps<AlumniWithId>) {
+	return (
+		<Link
+			to="/admin/alumnis/$id"
+			params={{ id: item.id }}
+			onClick={onClick}
+			className={listLinkClass}
+		>
+			<span className="min-w-0">
+				<span className="block truncate font-medium">{item.name}</span>
+				<span className="block text-xs opacity-70">
+					Pass out year {item.year}
+				</span>
+			</span>
+			<Arrow />
+		</Link>
+	);
+}
