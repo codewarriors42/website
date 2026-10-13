@@ -3,8 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import type { AlumniWithId } from "#/server/db/schema/alumni.db.type.ts";
 import type { FaqTypeWithId } from "#/server/db/schema/faq.db.type.ts";
 import type { MemberWithId } from "#/server/db/schema/member.db.type.ts";
+import type { ArchiveTypeWithId } from "#/server/db/schema/archive.db.type.ts";
 
-/** Shared look for every sidebar link. Each link below only decides WHERE it goes and WHAT it shows. */
 export const listLinkClass = `
 	group flex items-center justify-between gap-4 rounded-lg border border-transparent px-3 py-2.5
 	text-sm text-muted-foreground outline-none transition-colors
@@ -65,6 +65,23 @@ export function AlumniLink({ item, onClick }: LinkProps<AlumniWithId>) {
 				<span className="block text-xs opacity-70">
 					Pass out year {item.year}
 				</span>
+			</span>
+			<Arrow />
+		</Link>
+	);
+}
+
+export function ArchiveLink({ item, onClick }: LinkProps<ArchiveTypeWithId>) {
+	return (
+		<Link
+			to="/admin/archives/$id"
+			params={{ id: item.id }}
+			onClick={onClick}
+			className={listLinkClass}
+		>
+			<span className="min-w-0">
+				<span className="block truncate font-medium">{item.title}</span>
+				<span className="block text-xs opacity-70">{item.event}</span>
 			</span>
 			<Arrow />
 		</Link>

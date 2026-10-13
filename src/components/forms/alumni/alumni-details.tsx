@@ -1,4 +1,4 @@
-import { ExternalLink, Link2, Mail, Pencil, Trash2 } from "lucide-react";
+import { Link2, Mail, Pencil, Trash2 } from "lucide-react";
 import type { ComponentType } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button.tsx";
@@ -11,26 +11,13 @@ import {
 } from "#/server/db/schema/alumni.db.type.ts";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Badge } from "#/components/ui/badge.tsx";
+import { SocialLinks } from "#/components/social-links.tsx";
 
 type AlumniDetailProps = {
 	alumni: AlumniWithId;
 	onEdit?: () => void;
 	onDelete?: () => void;
 };
-
-const SOCIAL_LABELS: Record<AlumniSocial["platform"], string> = {
-	twitter: "Twitter",
-	linkedin: "LinkedIn",
-	github: "GitHub",
-	instagram: "Instagram",
-	discord: "Discord",
-	email: "Email",
-	website: "Website",
-	youtube: "YouTube",
-	dribbble: "Dribbble",
-	behance: "Behance",
-};
-
 const SOCIAL_ICONS: Partial<
 	Record<AlumniSocial["platform"], ComponentType<{ className?: string }>>
 > = { email: Mail };
@@ -136,46 +123,9 @@ export function AlumniDetail({ alumni, onEdit, onDelete }: AlumniDetailProps) {
 					)}
 				</section>
 
-				<section className="mt-5">
+				<section className="mt-8">
 					<p className="text-sm font-medium text-zinc-400">Socials</p>
-					{socials.length > 0 ? (
-						<ul className="mt-3 grid grid-cols-2 overflow-clip rounded-lg border border-white/10">
-							{socials.map((social) => {
-								const Icon = SOCIAL_ICONS[social.platform] ?? ExternalLink;
-								const content = (
-									<>
-										<span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-zinc-400">
-											<Icon className="size-4" />
-										</span>
-										<span className="text-sm font-medium text-zinc-200">
-											{SOCIAL_LABELS[social.platform]}
-										</span>
-										<span className="ml-auto min-w-0 truncate text-sm text-zinc-500">
-											{social.URL}
-										</span>
-										<ExternalLink className="size-4 shrink-0 text-zinc-600" />
-									</>
-								);
-
-								return (
-									<li key={social.platform}>
-										<a
-											href={social.URL}
-											target={
-												social.platform === "email" ? undefined : "_blank"
-											}
-											rel="noopener noreferrer"
-											className="group flex items-center gap-3 px-5 py-2 hover:bg-white/5"
-										>
-											{content}
-										</a>
-									</li>
-								);
-							})}
-						</ul>
-					) : (
-						<p className="mt-3 text-sm text-zinc-500">No links added.</p>
-					)}
+					<SocialLinks socials={socials} />
 				</section>
 			</div>
 

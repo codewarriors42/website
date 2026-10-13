@@ -20,22 +20,19 @@ import {
 	GRADES,
 	type Grade,
 	MemberSchema,
-	type MemberType,
-} from "#/server/db/schema/member.db.type.ts";
-import {
 	SOCIAL_PLATFORMS,
+	type MemberType,
 	SocialSchema,
 } from "#/server/db/schema/member.db.type.ts";
 import { PhotoUpload, validatePhoto } from "../file-upload";
 import { RolesPicker } from "../select-roles";
-import { AddSocials } from "../add-social";
+import { AddSocial } from "../add-social";
 
-/** Saved members store "mailto:x@y.com"; show just the address while editing. */
 function toFormValues(initial?: MemberType): MemberType {
 	if (!initial) {
 		return {
 			name: "",
-			grade: undefined as unknown as Grade, // nothing selected, so "required" works
+			grade: undefined as unknown as Grade,
 			roles: [],
 			socials: [],
 			image: "",
@@ -247,11 +244,11 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 											(optional)
 										</span>
 									</FieldLabel>
-									<AddSocials
+									<AddSocial
 										allSocials={field.state.value}
 										updateSocials={(v) => field.handleChange(v)}
+										validationSchema={SocialSchema}
 										platforms={SOCIAL_PLATFORMS}
-										schema={SocialSchema}
 									/>
 									{invalid && <FieldError errors={field.state.meta.errors} />}
 								</Field>

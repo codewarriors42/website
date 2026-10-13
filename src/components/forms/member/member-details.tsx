@@ -1,40 +1,19 @@
-import { ExternalLink, Link2, Mail, Pencil, Trash2 } from "lucide-react";
-import type { ComponentType } from "react";
+import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "#/components/ui/button.tsx";
 import {
 	MemberWithIdSchema,
 	type MemberWithId,
-	type SocialPlatform,
 } from "#/server/db/schema/member.db.type.ts";
 import { cn } from "#/lib/utils.ts";
 import { Link } from "@tanstack/react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import type { Role } from "#/constant/roles.ts";
+import { SocialLinks } from "#/components/social-links.tsx";
 
 type MemberDetailProps = {
 	member: MemberWithId;
 	onEdit?: () => void;
 	onDelete?: () => void;
-};
-
-const SOCIAL_LABELS: Record<SocialPlatform["platform"], string> = {
-	twitter: "Twitter",
-	linkedin: "LinkedIn",
-	github: "GitHub",
-	instagram: "Instagram",
-	discord: "Discord",
-	email: "Email",
-};
-
-const SOCIAL_ICONS: Partial<
-	Record<SocialPlatform["platform"], ComponentType<{ className?: string }>>
-> = {
-	twitter: Link2,
-	linkedin: Link2,
-	github: Link2,
-	instagram: Link2,
-	discord: Link2,
-	email: Mail,
 };
 
 const LEADERSHIP_ROLES = new Set<Role>([
@@ -58,21 +37,6 @@ function initials(name: string) {
 		.slice(0, 2)
 		.map((part) => part[0]?.toUpperCase())
 		.join("");
-}
-
-function socialHref(social: SocialPlatform) {
-	if (social.platform === "email") {
-		const email = social.URL.replace(/^mailto:/i, "");
-		return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? `mailto:${email}` : null;
-	}
-
-	return /^https?:\/\/\S+$/i.test(social.URL) ? social.URL : null;
-}
-
-function displayUrl(social: SocialPlatform) {
-	return social.platform === "email"
-		? social.URL.replace(/^mailto:/i, "")
-		: social.URL.replace(/^https?:\/\//i, "").replace(/\/$/, "");
 }
 
 export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
@@ -126,55 +90,9 @@ export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
 					)}
 				</section>
 
-				<section className="mt-5">
-					<p className="font-medium text-zinc-400 text-sm">Socials</p>
-					{socials.length > 0 ? (
-						<ul className="mt-3 border-white/10 grid grid-cols-2 border rounded-lg overflow-clip">
-							{socials.map((social) => {
-								const href = socialHref(social);
-								const Icon = SOCIAL_ICONS[social.platform] ?? ExternalLink;
-								const content = (
-									<>
-										<span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/5 text-zinc-400">
-											<Icon className="size-4" />
-										</span>
-										<span className="text-sm font-medium text-zinc-200">
-											{SOCIAL_LABELS[social.platform]}
-										</span>
-										<span className="ml-auto min-w-0 truncate text-sm text-zinc-500">
-											{href ? displayUrl(social) : "Invalid link"}
-										</span>
-										{href && (
-											<ExternalLink className="size-4 shrink-0 text-zinc-600" />
-										)}
-									</>
-								);
-
-								return (
-									<li key={social.platform} className="">
-										{href ? (
-											<a
-												href={href}
-												target={
-													social.platform === "email" ? undefined : "_blank"
-												}
-												rel="noopener noreferrer"
-												className="group flex items-center gap-3 px-5 py-2 transition-colors hover:bg-white/3"
-											>
-												{content}
-											</a>
-										) : (
-											<div className="flex items-center gap-3 px-1 py-3 opacity-60">
-												{content}
-											</div>
-										)}
-									</li>
-								);
-							})}
-						</ul>
-					) : (
-						<p className="mt-3 text-sm text-zinc-500">No links added.</p>
-					)}
+				<section className="mt-8">
+					<p className="text-sm font-medium text-zinc-400">Social Links</p>
+					<SocialLinks socials={socials} />
 				</section>
 			</div>
 

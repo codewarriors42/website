@@ -23,7 +23,7 @@ import {
 	type Alumni,
 } from "#/server/db/schema/alumni.db.type.ts";
 import { PhotoUpload, validatePhoto } from "../file-upload";
-import { AddSocials } from "../add-social";
+import { AddSocial } from "../add-social";
 import { RolesPicker } from "../select-roles";
 import { Badge } from "#/components/ui/badge.tsx";
 
@@ -297,11 +297,11 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 											(optional)
 										</span>
 									</FieldLabel>
-									<AddSocials
+									<AddSocial
 										allSocials={field.state.value}
-										updateSocials={(value) => field.handleChange(value)}
+										updateSocials={(v) => field.handleChange(v)}
+										validationSchema={alumniSocialSchema}
 										platforms={ALUMNI_SOCIAL_PLATFORMS}
-										schema={alumniSocialSchema}
 									/>
 									{invalid && <FieldError errors={field.state.meta.errors} />}
 								</Field>

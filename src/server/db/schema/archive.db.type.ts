@@ -20,17 +20,17 @@ export const ARCHIVE_CATEGORIES = [
 export type ArchiveCategory = (typeof ARCHIVE_CATEGORIES)[number];
 export type ArchivePlatformType = (typeof ARCHIVE_PLATFORMS)[number];
 
-const socialLinks = z.object({
+export const archiveSocialPlatform = z.object({
 	platform: z.enum(ARCHIVE_PLATFORMS),
 	URL: z.string().url(),
 });
 
 export const archiveSchema = z.object({
-	title: z.string(),
-	competition: z.string(),
-	links: z.array(socialLinks),
-	category: z.enum(ARCHIVE_CATEGORIES),
-	event: z.enum(ARCHIVE_EVENTS),
+	title: z.string().trim().min(1, "Enter a title"),
+	competition: z.string().trim().min(1, "Enter a competition name"),
+	links: z.array(archiveSocialPlatform, { error: "Add at least one link" }),
+	category: z.enum(ARCHIVE_CATEGORIES, { error: "Select a category" }),
+	event: z.enum(ARCHIVE_EVENTS, { error: "Select an event" }),
 	contributors: z.union([z.string(), z.array(z.string())]).optional(),
 	year: z
 		.number()
@@ -46,4 +46,4 @@ export const archiveSchemaWithId = archiveSchema.extend({
 
 export type ArchiveType = z.infer<typeof archiveSchema>;
 export type ArchiveTypeWithId = z.infer<typeof archiveSchemaWithId>;
-export type ArchiveLink = z.infer<typeof socialLinks>;
+export type ArchiveLink = z.infer<typeof archiveSocialPlatform>;

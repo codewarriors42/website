@@ -1,10 +1,7 @@
-import { MemberDetail } from "#/components/forms/member/member-details.tsx";
-import { DeleteConfirmationDialog } from "#/components/forms/member/del-alert.tsx";
+import { ArchiveDetails } from "#/components/forms/archive/archive-details.tsx";
 import { useTRPC } from "#/integrations/trpc/react.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArchiveDetails } from "#/components/forms/archive/archive-details.tsx";
 
 export const Route = createFileRoute("/admin/archives/$id")({
 	component: RouteComponent,
@@ -13,13 +10,12 @@ export const Route = createFileRoute("/admin/archives/$id")({
 function RouteComponent() {
 	const { id } = Route.useParams();
 	const navigate = useNavigate();
-	const [deleteOpen, setDeleteOpen] = useState(false);
 	const trpc = useTRPC();
 	const queryClient = useQueryClient();
 	const listQuery = trpc.archives.getAll.queryOptions();
 	const detailQuery = trpc.archives.getById.queryOptions({ id });
 	const {
-		data: archive,
+		data: archives,
 		isPending,
 		isFetching,
 		error,
@@ -42,10 +38,10 @@ function RouteComponent() {
 		}),
 	);
 
-	if (isPending) return <p className="p-8">Loading archive...</p>;
-	if (error && !archive)
+	if (isPending) return <p className="p-8">Loading archives...</p>;
+	if (error && !archives)
 		return <p className="p-8 text-destructive">{error.message}</p>;
-	if (!archive) return <p className="p-8">Archive not found.</p>;
+	if (!archives) return <p className="p-8">Archives not found.</p>;
 
 	return (
 		<div className="relative h-full">
@@ -55,20 +51,12 @@ function RouteComponent() {
 				</span>
 			)}
 			<ArchiveDetails
-				archive={archive}
+				archive={archives}
 				onEdit={() => undefined}
-				onDelete={() => setDeleteOpen(true)}
-			/>
-			{/* <DeleteConfirmationDialog
-				isOpen={deleteOpen}
-				memberName={member.name}
-				deleting={deleteMember.isPending}
-				onClose={() => setDeleteOpen(false)}
-				onConfirm={async () => {
-					await deleteMember.mutateAsync({ id });
-					setDeleteOpen(false);
+				onDelete={async () => {
+					deleteArchive.mutate({ id });
 				}}
-			/> */}
+			/>
 		</div>
 	);
 }

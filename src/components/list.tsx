@@ -58,7 +58,6 @@ export function List<T extends { id: string }>({
 						{isAdding ? `Add ${singular}` : `Edit ${singular}`}
 					</h2>
 
-					{/* `as never`: TanStack's typed `to` can't take a variable string */}
 					<Button
 						type="button"
 						variant="outline"
@@ -93,7 +92,6 @@ export function List<T extends { id: string }>({
 							<Plus className="size-4" />
 						</Link>
 
-						{/* Phone only (hidden on lg+) */}
 						<SearchSheet
 							title={searchTitle}
 							placeholder={`${searchTitle}…`}
