@@ -4,6 +4,7 @@ import type { AlumniWithId } from "#/server/db/schema/alumni.db.type.ts";
 import type { FaqTypeWithId } from "#/server/db/schema/faq.db.type.ts";
 import type { MemberWithId } from "#/server/db/schema/member.db.type.ts";
 import type { ArchiveTypeWithId } from "#/server/db/schema/archive.db.type.ts";
+import type { ResourceTypeWithId } from "#/server/db/schema/resource.db.type.ts";
 
 export const listLinkClass = `
 	group flex items-center justify-between gap-4 rounded-lg border border-transparent px-3 py-2.5
@@ -83,6 +84,20 @@ export function ArchiveLink({ item, onClick }: LinkProps<ArchiveTypeWithId>) {
 				<span className="block truncate font-medium">{item.title}</span>
 				<span className="block text-xs opacity-70">{item.event}</span>
 			</span>
+			<Arrow />
+		</Link>
+	);
+}
+
+export function ResourceLink({ item, onClick }: LinkProps<ResourceTypeWithId>) {
+	return (
+		<Link
+			to="/admin/resources/$id"
+			params={{ id: item.id }}
+			onClick={onClick}
+			className={listLinkClass}
+		>
+			<span className="line-clamp-2 min-w-0 font-medium">{item.name}</span>
 			<Arrow />
 		</Link>
 	);

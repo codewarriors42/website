@@ -4,6 +4,7 @@ import type { AlumniWithId } from "#/server/db/schema/alumni.db.type.ts";
 import type { FaqTypeWithId } from "#/server/db/schema/faq.db.type.ts";
 import type { MemberWithId } from "#/server/db/schema/member.db.type.ts";
 import type { ArchiveTypeWithId } from "#/server/db/schema/archive.db.type.ts";
+import type { ResourceTypeWithId } from "#/server/db/schema/resource.db.type.ts";
 
 const EMPTY: never[] = [];
 
@@ -57,6 +58,8 @@ export const alumniText = (a: AlumniWithId) => [
 	...(a.roles ?? []),
 	a.year,
 ];
+export const resourceText = (r: ResourceTypeWithId) => [r.name];
+
 export const archiveText = (a: ArchiveTypeWithId) => [
 	a.title,
 	a.event,

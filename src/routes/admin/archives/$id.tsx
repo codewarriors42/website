@@ -1,13 +1,16 @@
 import { ArchiveDetails } from "#/components/forms/archive/archive-details.tsx";
+import { DeleteConfirmationDialog } from "#/components/forms/confirmation-alert.tsx";
 import { useTRPC } from "#/integrations/trpc/react.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useState } from "react";
 
 export const Route = createFileRoute("/admin/archives/$id")({
 	component: RouteComponent,
 });
 
 function RouteComponent() {
+	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 	const { id } = Route.useParams();
 	const navigate = useNavigate();
 	const trpc = useTRPC();
@@ -53,9 +56,16 @@ function RouteComponent() {
 			<ArchiveDetails
 				archive={archives}
 				onEdit={() => undefined}
-				onDelete={async () => {
-					deleteArchive.mutate({ id });
+				onDelete={() => setIsDeleteDialogOpen(true)}
+			/>
+			<DeleteConfirmationDialog
+				deleteTile={archives.title}
+				isOpen={isDeleteDialogOpen}
+				onConfirm={async () => {
+					await deleteArchive.mutateAsync({ id: archives.id });
+					setIsDeleteDialogOpen(false);
 				}}
+				onClose={() => setIsDeleteDialogOpen(false)}
 			/>
 		</div>
 	);

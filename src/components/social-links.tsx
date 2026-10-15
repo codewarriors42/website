@@ -55,7 +55,7 @@ export function SocialLinks<T extends SocialLinksTypes>({
 			{socials.length === 0 ? (
 				<p className="mt-3 text-sm text-muted-foreground">No links added.</p>
 			) : (
-				<ul className="grid gap-2 sm:grid-cols-2">
+				<ul className="grid gap-2 sm:grid-cols-3">
 					{socials.map((social) => {
 						const href = displayURL(social.URL, social.platform);
 						const tile = (
@@ -83,7 +83,7 @@ export function SocialLinks<T extends SocialLinksTypes>({
 						return (
 							<li key={social.platform}>
 								{href ? (
-									<div className="flex p-3 items-center gap-2 border border-border rounded-lg hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring utline-none transition-colors">
+									<div className="max-w-xs flex p-3 items-center gap-2 border border-border rounded-lg hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring utline-none transition-colors">
 										<a
 											href={href}
 											target="_blank"

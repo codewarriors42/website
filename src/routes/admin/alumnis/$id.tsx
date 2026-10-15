@@ -1,5 +1,5 @@
 import { AlumniDetail } from "#/components/forms/alumni/alumni-details.tsx";
-import { DeleteConfirmationDialog } from "#/components/forms/member/del-alert.tsx";
+import { DeleteConfirmationDialog } from "#/components/forms/confirmation-alert.tsx";
 import { useTRPC } from "#/integrations/trpc/react.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -60,7 +60,7 @@ function RouteComponent() {
 			/>
 			<DeleteConfirmationDialog
 				isOpen={deleteOpen}
-				memberName={alumni.name}
+				deleteTile={alumni.name}
 				entityLabel="alumni"
 				deleting={deleteAlumni.isPending}
 				onClose={() => setDeleteOpen(false)}

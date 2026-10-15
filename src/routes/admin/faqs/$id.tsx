@@ -1,5 +1,5 @@
+import { DeleteConfirmationDialog } from "#/components/forms/confirmation-alert.tsx";
 import { FaqDetails } from "#/components/forms/faq/faq-details.tsx";
-import { DeleteConfirmationDialog } from "#/components/forms/faq/del-alert.tsx";
 import { useTRPC } from "#/integrations/trpc/react.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -60,7 +60,7 @@ function RouteComponent() {
 			/>
 			<DeleteConfirmationDialog
 				isOpen={deleteOpen}
-				question={faqs.question}
+				deleteTile={faqs.question}
 				deleting={deleteFaq.isPending}
 				onClose={() => setDeleteOpen(false)}
 				onConfirm={async () => {

@@ -10,7 +10,8 @@ import { Button } from "#/components/ui/button.tsx";
 
 type DeleteConfirmationDialogProps = {
 	isOpen: boolean;
-	memberName: string;
+	deleteTile: string;
+	entityLabel?: string;
 	deleting?: boolean;
 	onClose: () => void;
 	onConfirm: () => void | Promise<void>;
@@ -18,7 +19,8 @@ type DeleteConfirmationDialogProps = {
 
 export function DeleteConfirmationDialog({
 	isOpen,
-	memberName,
+	deleteTile,
+	entityLabel = "item",
 	deleting = false,
 	onClose,
 	onConfirm,
@@ -30,9 +32,12 @@ export function DeleteConfirmationDialog({
 		>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Delete {memberName}?</AlertDialogTitle>
+					<AlertDialogTitle className={"line-clamp-1"}>
+						Delete {deleteTile}?
+					</AlertDialogTitle>
 					<AlertDialogDescription>
-						This removes the member permanently. You cannot undo this action.
+						This removes the {entityLabel} permanently. You cannot undo this
+						action.
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
@@ -50,7 +55,7 @@ export function DeleteConfirmationDialog({
 						disabled={deleting}
 						onClick={() => void onConfirm()}
 					>
-						{deleting ? "Deleting..." : "Delete member"}
+						{deleting ? "Deleting..." : `Delete ${entityLabel}`}
 					</Button>
 				</AlertDialogFooter>
 			</AlertDialogContent>

@@ -2,15 +2,30 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-const MAX_PHOTO_MB = 5;
-const PHOTO_TYPES = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+const MAX_PHOTO_SIZE = 5 * 1024 * 1024;
 
-export const validatePhoto = (file: File): string | null => {
-	if (!PHOTO_TYPES.includes(file.type)) return "Use a JPG, PNG or WebP image.";
-	if (file.size > MAX_PHOTO_MB * 1024 * 1024)
-		return `Image must be under ${MAX_PHOTO_MB} MB.`;
+const ALLOWED_PHOTO_TYPES = [
+	"image/jpeg",
+	"image/png",
+	"image/webp",
+	"image/svg+xml",
+];
+
+export function validatePhoto(file: File): string | null {
+	if (!ALLOWED_PHOTO_TYPES.includes(file.type)) {
+		return "Please select a JPG, PNG, or WebP image.";
+	}
+
+	if (file.size > MAX_PHOTO_SIZE) {
+		return "Image size must not exceed 5 MB.";
+	}
+
+	if (file.size === 0) {
+		return "The selected image is empty.";
+	}
+
 	return null;
-};
+}
 
 export const initials = (name: string) =>
 	name
@@ -63,7 +78,7 @@ export function PhotoUpload({
 				<input
 					ref={inputRef}
 					type="file"
-					accept={PHOTO_TYPES.join(",")}
+					accept={ALLOWED_PHOTO_TYPES.join(",")}
 					className="sr-only"
 					tabIndex={-1}
 					aria-label="Upload profile photo"

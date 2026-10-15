@@ -21,19 +21,16 @@ export function ArchiveDetails({
 	onEdit,
 	onDelete,
 }: ArchiveDetailsProps) {
-	const [confirming, setConfirming] = useState(false);
-	const [deleting, setDeleting] = useState(false);
 	const [failedSrc, setFailedSrc] = useState<string | null>(null);
 
 	const imageUrl = typeof archive.image === "string" ? archive.image : "";
 	const showImage = !!imageUrl && failedSrc !== imageUrl;
 
 	async function handleDelete() {
-		setDeleting(true);
 		try {
 			await onDelete();
 		} finally {
-			setDeleting(false);
+			// nothing to do
 		}
 	}
 
@@ -101,49 +98,21 @@ export function ArchiveDetails({
 
 			{/* Actions */}
 			<footer className="flex shrink-0 flex-wrap items-center gap-2 border-t border-border px-4 py-4 sm:px-7">
-				{confirming ? (
-					<>
-						<p className="basis-full text-sm text-muted-foreground sm:mr-auto sm:basis-auto">
-							Delete this archive? This can't be undone.
-						</p>
-						<Button
-							type="button"
-							variant="ghost"
-							disabled={deleting}
-							onClick={() => setConfirming(false)}
-							className="flex-1 sm:flex-none"
-						>
-							Cancel
-						</Button>
-						<Button
-							type="button"
-							variant="destructive"
-							disabled={deleting}
-							onClick={handleDelete}
-							className="flex-1 sm:flex-none"
-						>
-							{deleting ? "Deleting…" : "Delete"}
-						</Button>
-					</>
-				) : (
-					<>
-						<Link to="/admin/archives/edit/$id" params={{ id: archive.id }}>
-							<Button type="button" onClick={onEdit}>
-								<Pencil className="size-4" />
-								Edit
-							</Button>
-						</Link>
-						<Button
-							type="button"
-							variant="outline"
-							onClick={() => setConfirming(true)}
-							className="flex-1 border-destructive/30 bg-transparent text-destructive hover:bg-destructive/10 hover:text-destructive sm:flex-none"
-						>
-							<Trash2 className="size-4" />
-							Delete
-						</Button>
-					</>
-				)}
+				<Link to="/admin/archives/edit/$id" params={{ id: archive.id }}>
+					<Button type="button" onClick={onEdit}>
+						<Pencil className="size-4" />
+						Edit
+					</Button>
+				</Link>
+				<Button
+					type="button"
+					variant="outline"
+					onClick={() => void handleDelete()}
+					className="flex-1 border-destructive/30 bg-transparent text-destructive hover:bg-destructive/10 hover:text-destructive sm:flex-none"
+				>
+					<Trash2 className="size-4" />
+					Delete
+				</Button>
 			</footer>
 		</div>
 	);
