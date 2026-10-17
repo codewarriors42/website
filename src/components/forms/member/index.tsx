@@ -12,7 +12,9 @@ import { Input } from "#/components/ui/input.tsx";
 import {
 	Select,
 	SelectContent,
+	SelectGroup,
 	SelectItem,
+	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from "#/components/ui/select.tsx";
@@ -70,22 +72,15 @@ interface MemberFormProps {
 export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 	const [photoError, setPhotoError] = useState<string | null>(null);
 	const [submitAttempted, setSubmitAttempted] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const form = useForm({
 		defaultValues: toFormValues(initialValues),
-		validators: { onChange: MemberSchema },
+		validators: { onChange: MemberSchema, onSubmit: MemberSchema },
 		onSubmit: async ({ value }) => {
-			setSubmitError(null);
 			try {
-				// parse() applies trimming; awaiting keeps isSubmitting accurate
-				await onSubmit(toMember(MemberSchema.parse(value)));
+				await onSubmit(toMember({ ...value, image: "testImg.png" }));
 			} catch (err) {
-				setSubmitError(
-					err instanceof Error
-						? err.message
-						: "Something went wrong. Try again.",
-				);
+				console.error("Error submitting member form:", err);
 			}
 		},
 	});
@@ -94,7 +89,6 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 		form.reset(toFormValues(initialValues));
 		setPhotoError(null);
 		setSubmitAttempted(false);
-		setSubmitError(null);
 	}, [form, initialValues]);
 
 	const isInvalid = (meta: { isTouched: boolean; isValid: boolean }) =>
@@ -112,19 +106,19 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 	}
 
 	return (
-		<>
-			<form
-				id="member-form"
-				noValidate
-				className="mx-auto w-full overflow-y-auto px-5"
-				onSubmit={(e) => {
-					e.preventDefault();
-					e.stopPropagation();
-					setSubmitAttempted(true);
-					void form.handleSubmit();
-				}}
-			>
-				<FieldGroup className="gap-4">
+		<form
+			id="member-form"
+			noValidate
+			onSubmit={(e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				setSubmitAttempted(true);
+				void form.handleSubmit();
+			}}
+			className="h-full"
+		>
+			<div className="flex h-full justify-between flex-1 flex-col">
+				<FieldGroup className="px-3 py-5 overflow-y-auto mask-b-from-95% scroll-smooth">
 					{/* Photo (optional) */}
 					<form.Subscribe
 						selector={(s) => [s.values.name, s.values.image] as const}
@@ -186,7 +180,11 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 									<Field data-invalid={invalid}>
 										<FieldLabel htmlFor={field.name}>Grade</FieldLabel>
 										<Select
-											value={field.state.value ? String(field.state.value) : ""}
+											value={
+												field.state.value
+													? String(`Grade ${field.state.value}`)
+													: ""
+											}
 											onValueChange={(v) => {
 												field.handleChange(Number(v) as Grade);
 												field.handleBlur();
@@ -200,11 +198,14 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 												<SelectValue placeholder="Select grade" />
 											</SelectTrigger>
 											<SelectContent>
-												{GRADES.map((g) => (
-													<SelectItem key={g} value={String(g)}>
-														Grade {g}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Grade</SelectLabel>
+													{GRADES.map((g) => (
+														<SelectItem key={g} value={String(g)}>
+															Grade {g}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -256,40 +257,43 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 						}}
 					</form.Field>
 				</FieldGroup>
-			</form>
+				{/* Actions */}
+				<form.Subscribe
+					selector={(state) => [state.isDirty, state.isSubmitting]}
+				>
+					{([isDirty, isSubmitting]) => (
+						<footer className="flex items-center gap-2 md:max-w-sm p-5">
+							<Button
+								disabled={isSubmitting}
+								type="reset"
+								className="flex-1"
+								variant="secondary"
+								onClick={() => {
+									form.reset();
+									setSubmitAttempted(false);
+								}}
+							>
+								Reset
+							</Button>
 
-			{/* Actions */}
-			<form.Subscribe selector={(s) => s.isSubmitting}>
-				{(isSubmitting) => (
-					<div className="flex mt-7 gap-3 px-4">
-						{submitError && (
-							<p role="alert" className="text-sm text-destructive sm:mr-auto">
-								{submitError}
-							</p>
-						)}
-						<Button
-							type="button"
-							variant="outline"
-							disabled={isSubmitting}
-							onClick={() => {
-								form.reset();
-								setPhotoError(null);
-								setSubmitError(null);
-								setSubmitAttempted(false);
-							}}
-						>
-							Reset
-						</Button>
-						<Button type="submit" form="member-form" disabled={isSubmitting}>
-							{isSubmitting
-								? "Saving…"
-								: initialValues
-									? "Update member"
-									: "Add member"}
-						</Button>
-					</div>
-				)}
-			</form.Subscribe>
-		</>
+							<Button
+								className="flex-1"
+								type="submit"
+								disabled={isSubmitting || !isDirty}
+								variant="default"
+							>
+								{isSubmitting && initialValues
+									? "Saving…"
+									: initialValues
+										? "Save Changes"
+										: isSubmitting
+											? "Creating…"
+											: "Create Member"}
+							</Button>
+						</footer>
+					)}
+				</form.Subscribe>
+			</div>
+		</form>
 	);
 }

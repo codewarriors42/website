@@ -1,4 +1,3 @@
-import { Pencil, Trash2 } from "lucide-react";
 import { type ReactNode, useState } from "react";
 import { Button } from "#/components/ui/button.tsx";
 import type { FaqTypeWithId } from "#/server/db/schema/faq.db.type.ts";
@@ -23,50 +22,57 @@ export function FaqDetails({ faq, onEdit, onDelete }: FaqDetailsProps) {
 	}
 
 	return (
-		<div className="flex h-full min-h-0 flex-col overflow-hidden bg-background text-foreground">
-			{/* Content */}
-			<div className="min-h-0 flex-1 overflow-y-auto">
-				{/* Question */}
-				<section className="w-full border-b border-border px-5 py-5 sm:px-7">
-					<Eyebrow>Question</Eyebrow>
-					<h2 className="mt-2 text-2xl font-medium leading-tight text-foreground">
-						{faq.question}
-					</h2>
-				</section>
+		<div className="flex h-full overflow-hidden bg-background text-foreground">
+			<div className="w-full flex flex-col justify-between">
+				{/* Content */}
+				<div className="flex-1 overflow-y-auto mask-b-from-95% scroll-smooth">
+					{/* Question */}
+					<section className="w-full border-b border-border p-5">
+						<Eyebrow>Question</Eyebrow>
+						<h2 className="mt-2 text-2xl font-semibold leading-tight text-foreground">
+							{faq.question}
+						</h2>
+					</section>
 
-				{/* Answer */}
-				<section className="px-5 py-6 sm:px-7">
-					<Eyebrow>Answer</Eyebrow>
-					<p className="mt-3 max-w-prose whitespace-pre-line wrap-break-word text-[15px] leading-7 text-muted-foreground">
-						{faq.answer}
-					</p>
-				</section>
-			</div>
+					{/* Answer */}
+					<section className="p-5">
+						<Eyebrow>Answer</Eyebrow>
+						<p className="mt-2 max-w-prose whitespace-pre-line wrap-break-word text-base leading-7 text-muted-foreground">
+							{faq.answer}
+						</p>
+					</section>
+				</div>
 
-			{/* Actions */}
-			<footer className="flex items-center gap-2 px-5 py-10 sm:px-7">
-				<Button type="button" onClick={onEdit} className={"flex gap-2"}>
-					<Pencil className="size-4" />
-					<Link to="/admin/faqs/edit/$id" params={{ id: faq.id }}>
-						Edit
+				{/* Actions */}
+				<footer className="flex items-center gap-2 p-5 md:max-w-sm">
+					<Link
+						to="/admin/faqs/edit/$id"
+						params={{ id: faq.id }}
+						className="flex-1 h-full"
+					>
+						<Button type="button" onClick={onEdit} className={"size-full"}>
+							Edit
+						</Button>
 					</Link>
-				</Button>
 
-				<Button
-					type="button"
-					variant="destructive"
-					onClick={() => void handleDelete()}
-				>
-					<Trash2 className="size-4" />
-					{deleting ? "Deleting..." : "Delete"}
-				</Button>
-			</footer>
+					<Button
+						className="flex-1"
+						type="button"
+						variant="destructive"
+						onClick={() => void handleDelete()}
+					>
+						{deleting ? "Deleting..." : "Delete"}
+					</Button>
+				</footer>
+			</div>
 		</div>
 	);
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
 	return (
-		<p className="text-sm font-medium text-muted-foreground">{children}</p>
+		<p className="text-[1rem] font-semibold text-muted-foreground">
+			{children}
+		</p>
 	);
 }

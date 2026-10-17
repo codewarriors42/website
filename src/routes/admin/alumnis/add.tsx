@@ -24,16 +24,14 @@ function RouteComponent() {
 	);
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
-			<AlumniForm
-				onSubmit={async (values) => {
-					const alumni: Alumni = {
-						...values,
-						image: typeof values.image === "string" ? values.image : "",
-					};
-					await createAlumni.mutateAsync(alumni);
-				}}
-			/>
-		</main>
+		<AlumniForm
+			onSubmit={async (values) => {
+				const alumni: Alumni = {
+					...values,
+					image: typeof values.image === "string" ? values.image : "",
+				};
+				await createAlumni.mutateAsync(alumni);
+			}}
+		/>
 	);
 }

@@ -1,4 +1,3 @@
-import { Search } from "lucide-react";
 import { type ReactNode, useEffect, useState } from "react";
 import { Button } from "#/components/ui/button.tsx";
 import { Input } from "#/components/ui/input.tsx";
@@ -11,6 +10,8 @@ import {
 	SheetTrigger,
 } from "#/components/ui/sheet.tsx";
 import { useListSearch } from "#/hooks/search.tsx";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Search01Icon } from "@hugeicons/core-free-icons";
 
 type SearchSheetProps<T> = {
 	data: T[] | undefined;
@@ -93,12 +94,17 @@ export function SearchSheet<T>({
 				render={
 					<Button
 						variant="outline"
-						size="sm"
-						className="size-8 p-0 lg:hidden"
+						size="lg"
+						className="size-10 p-0 lg:hidden"
 						aria-label={title}
 						title={title}
 					>
-						<Search className="size-4" />
+						<HugeiconsIcon
+							icon={Search01Icon}
+							size={25}
+							color="currentColor"
+							strokeWidth={2}
+						/>
 					</Button>
 				}
 			/>
@@ -114,14 +120,20 @@ export function SearchSheet<T>({
 
 				<div className="px-4 pt-4">
 					<div className="relative">
-						<Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+						<HugeiconsIcon
+							className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+							icon={Search01Icon}
+							size={20}
+							color="currentColor"
+							strokeWidth={2}
+						/>
 						<Input
 							autoFocus
 							value={search} // the raw text, so spaces and capitals work
 							onChange={(event) => setSearch(event.target.value)}
 							placeholder={placeholder}
 							aria-label={title}
-							className="h-10 pl-9"
+							className="h-10 pl-10"
 						/>
 					</div>
 
@@ -132,7 +144,9 @@ export function SearchSheet<T>({
 					)}
 				</div>
 
-				<div className="min-h-0 flex-1 overflow-y-auto p-3">{content}</div>
+				<div className="min-h-0 flex-1 overflow-y-auto px-5 mt-3">
+					{content}
+				</div>
 			</SheetContent>
 		</Sheet>
 	);

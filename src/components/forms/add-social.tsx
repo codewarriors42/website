@@ -8,9 +8,16 @@ import {
 	type SocialLinksTypes,
 } from "../social-links";
 import { Button } from "../ui/button";
-import { Field, FieldError, FieldLabel } from "../ui/field";
+import { Field, FieldError } from "../ui/field";
 import { Input } from "../ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+} from "../ui/select";
 
 type AddSocialProps<T extends SocialLinksTypes> = {
 	allSocials: Social<T>[];
@@ -89,7 +96,7 @@ export function AddSocial<T extends SocialLinksTypes>({
 	}) => meta.isTouched && meta.isDirty && !meta.isValid;
 
 	return (
-		<div className="space-y-3">
+		<div className="space-y-4">
 			<SocialLinks
 				socials={allSocials}
 				isInForm={true}
@@ -99,7 +106,7 @@ export function AddSocial<T extends SocialLinksTypes>({
 			{showForm && availablePlatforms.length > 0 ? (
 				<fieldset
 					aria-label="Add a social link"
-					className="space-y-4 rounded-lg border border-border p-4 max-w-sm"
+					className="space-y-3 border bg-card p-5 rounded-lg"
 				>
 					<div className="flex flex-col gap-3">
 						{/* Platform */}
@@ -107,13 +114,7 @@ export function AddSocial<T extends SocialLinksTypes>({
 							{(field) => {
 								const invalid = isInvalid(field.state.meta);
 								return (
-									<Field data-invalid={invalid} className="gap-1.5">
-										<FieldLabel
-											htmlFor={platformId}
-											className="text-xs text-muted-foreground"
-										>
-											Platform
-										</FieldLabel>
+									<Field data-invalid={invalid}>
 										<Select
 											value={field.state.value}
 											onValueChange={(value) => {
@@ -137,11 +138,14 @@ export function AddSocial<T extends SocialLinksTypes>({
 												)}
 											</SelectTrigger>
 											<SelectContent>
-												{availablePlatforms.map((platform) => (
-													<SelectItem key={platform} value={platform}>
-														{platformLabel(platform)}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Social Platforms</SelectLabel>
+													{availablePlatforms.map((platform) => (
+														<SelectItem key={platform} value={platform}>
+															{platformLabel(platform)}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -158,13 +162,7 @@ export function AddSocial<T extends SocialLinksTypes>({
 										const invalid = isInvalid(field.state.meta);
 										const isEmail = platform === "email";
 										return (
-											<Field data-invalid={invalid} className="gap-1.5">
-												<FieldLabel
-													htmlFor={urlId}
-													className="text-xs text-muted-foreground"
-												>
-													{isEmail ? "Email address" : "Link"}
-												</FieldLabel>
+											<Field data-invalid={invalid}>
 												<Input
 													id={urlId}
 													ref={urlRef}
@@ -182,9 +180,10 @@ export function AddSocial<T extends SocialLinksTypes>({
 													type={isEmail ? "email" : "url"}
 													autoComplete="off"
 													placeholder={
-														isEmail ? "name@example.com" : "https://"
+														isEmail ? "name@example.com" : "Enter the URL"
 													}
 													aria-invalid={invalid}
+													className="placeholder:text-sm text-sm"
 												/>
 												{invalid && (
 													<FieldError errors={field.state.meta.errors} />
@@ -205,24 +204,24 @@ export function AddSocial<T extends SocialLinksTypes>({
 						})}
 					>
 						{({ platform, URL }) => (
-							<div className="flex items-center justify-end gap-2">
+							<div className="flex-1 flex gap-2">
 								<Button
 									type="button"
 									size="sm"
 									variant="destructive"
 									onClick={close}
+									className="flex-1"
 								>
 									Cancel
 								</Button>
 								<Button
 									type="button"
 									size="sm"
-									variant="outline"
+									className="flex-1"
 									onClick={() => void form.handleSubmit()}
 									disabled={!platform || !URL.trim()}
 								>
-									<Plus className="size-4" />
-									Add link
+									{platform === "email" ? "Add email" : "Add link"}
 								</Button>
 							</div>
 						)}

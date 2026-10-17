@@ -1,5 +1,5 @@
 import { useForm } from "@tanstack/react-form";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Button } from "#/components/ui/button";
 import {
 	Field,
@@ -21,9 +21,16 @@ interface FaqFormProps {
 	onSubmit: (values: FaqType) => void | Promise<void>;
 }
 
+function Eyebrow({ children }: { children: ReactNode }) {
+	return (
+		<p className="text-[1rem] font-semibold text-muted-foreground">
+			{children}
+		</p>
+	);
+}
+
 export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 	const [submitAttempted, setSubmitAttempted] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	// Errors show once a field was touched, or after the first submit attempt
 	const isInvalid = (meta: { isTouched: boolean; isValid: boolean }) =>
@@ -35,15 +42,10 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 		defaultValues,
 		validators: { onChange: faqTypeSchema },
 		onSubmit: async ({ value }) => {
-			setSubmitError(null);
 			try {
 				await onSubmit(value);
 			} catch (error) {
-				setSubmitError(
-					error instanceof Error
-						? error.message
-						: "Something went wrong. Please try again.",
-				);
+				console.error("Error submitting form:", error);
 			}
 		},
 	});
@@ -51,7 +53,7 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 	return (
 		<form
 			noValidate
-			className="flex h-full min-h-0 w-full flex-col"
+			className="w-full h-full flex flex-col justify-between overflow-hidden"
 			onSubmit={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
@@ -59,16 +61,17 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 				void form.handleSubmit();
 			}}
 		>
-			{/* Fields (scrolls if the screen is short, e.g. with the phone keyboard open) */}
-			<div className="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-7 sm:py-6">
-				<FieldGroup className="w-full max-w-2xl">
+			<div className="md:max-w-xl md:px-3 py-5 overflow-y-auto mask-b-from-95% p-5">
+				<FieldGroup className="w-full">
 					<form.Field name="question">
 						{(field) => {
 							const invalid = isInvalid(field.state.meta);
 							return (
 								<Field data-invalid={invalid}>
-									<FieldLabel htmlFor={field.name}>Question</FieldLabel>
-									<InputGroup className="max-w-sm">
+									<FieldLabel htmlFor={field.name}>
+										<Eyebrow>Question</Eyebrow>
+									</FieldLabel>
+									<InputGroup className="max-w-sm p-1 border-2 border-border bg-background">
 										<InputGroupTextarea
 											id={field.name}
 											name={field.name}
@@ -78,7 +81,7 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 											aria-invalid={invalid}
 											placeholder="Enter your question"
 											rows={6}
-											className="px-4 py-3 min-h-20 max-h-24 sm:min-h-24 sm:max-h-32"
+											className="max-h-20"
 										/>
 										<InputGroupAddon align="block-end">
 											<InputGroupText className="text-xs tabular-nums">
@@ -89,7 +92,9 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 									{invalid ? (
 										<FieldError errors={field.state.meta.errors} />
 									) : (
-										<FieldDescription>Type the question.</FieldDescription>
+										<FieldDescription className="text-xs px-2">
+											Type the question
+										</FieldDescription>
 									)}
 								</Field>
 							);
@@ -101,8 +106,10 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 							const invalid = isInvalid(field.state.meta);
 							return (
 								<Field data-invalid={invalid}>
-									<FieldLabel htmlFor={field.name}>Answer</FieldLabel>
-									<InputGroup className="max-w-sm">
+									<FieldLabel htmlFor={field.name}>
+										<Eyebrow>Answer</Eyebrow>
+									</FieldLabel>
+									<InputGroup className="p-2 border-2 border-border bg-background">
 										<InputGroupTextarea
 											id={field.name}
 											name={field.name}
@@ -112,7 +119,7 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 											aria-invalid={invalid}
 											placeholder="Enter your answer"
 											rows={6}
-											className="px-4 py-3 min-h-32 max-h-40 sm:min-h-32"
+											className="max-h-68 min-h-68 md:max-h-36 md:min-h-36"
 										/>
 										<InputGroupAddon align="block-end">
 											<InputGroupText className="text-xs tabular-nums">
@@ -123,7 +130,7 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 									{invalid ? (
 										<FieldError errors={field.state.meta.errors} />
 									) : (
-										<FieldDescription>
+										<FieldDescription className="text-xs px-2">
 											Give a detailed answer to the question.
 										</FieldDescription>
 									)}
@@ -135,42 +142,37 @@ export function FaqForm({ onSubmit, initialValues }: FaqFormProps) {
 			</div>
 
 			{/* Actions */}
-			<form.Subscribe selector={(state) => state.isSubmitting}>
-				{(isSubmitting) => (
-					<div className="flex shrink-0 flex-wrap gap-3 px-4 py-4 items-center sm:px-7">
-						{submitError && (
-							<p
-								role="alert"
-								className="w-full text-sm text-destructive sm:mr-auto sm:w-auto"
-							>
-								{submitError}
-							</p>
-						)}
+			<form.Subscribe selector={(state) => [state.isDirty, state.isSubmitting]}>
+				{([isDirty, isSubmitting]) => (
+					<footer className="flex items-center gap-2 md:max-w-sm p-5">
 						<Button
-							type="button"
-							variant="outline"
 							disabled={isSubmitting}
-							className="flex-1 sm:flex-none"
+							type="reset"
+							className="flex-1"
+							variant="secondary"
 							onClick={() => {
 								form.reset();
-								setSubmitError(null);
 								setSubmitAttempted(false);
 							}}
 						>
 							Reset
 						</Button>
+
 						<Button
+							className="flex-1"
 							type="submit"
-							disabled={isSubmitting}
-							className="flex-1 sm:flex-none"
+							disabled={isSubmitting || !isDirty}
+							variant="default"
 						>
-							{isSubmitting
+							{isSubmitting && initialValues
 								? "Saving…"
 								: initialValues
-									? "Update FAQ"
-									: "Add FAQ"}
+									? "Save Changes"
+									: isSubmitting
+										? "Creating…"
+										: "Create FAQ"}
 						</Button>
-					</div>
+					</footer>
 				)}
 			</form.Subscribe>
 		</form>

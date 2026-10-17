@@ -23,15 +23,13 @@ function RouteComponent() {
 	);
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
-			<MemberForm
-				onSubmit={async (values) => {
-					await createMember.mutateAsync({
-						...values,
-						image: typeof values.image === "string" ? values.image : "",
-					});
-				}}
-			/>
-		</main>
+		<MemberForm
+			onSubmit={async (values) => {
+				await createMember.mutateAsync({
+					...values,
+					image: typeof values.image === "string" ? values.image : "",
+				});
+			}}
+		/>
 	);
 }

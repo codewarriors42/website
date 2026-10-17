@@ -1,8 +1,7 @@
-import { Link2, Mail, Pencil, Trash2 } from "lucide-react";
-import type { ComponentType } from "react";
+import { Link2, Mail } from "lucide-react";
+import { useState, type ComponentType, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button.tsx";
-import { cn } from "#/lib/utils.ts";
 import type { Role } from "#/constant/roles.ts";
 import {
 	ALUMNI_SOCIAL_PLATFORMS,
@@ -40,112 +39,126 @@ function formatRole(role: Role) {
 }
 
 export function AlumniDetail({ alumni, onEdit, onDelete }: AlumniDetailProps) {
+	const [deleting, setDeleting] = useState(false);
+
 	const socials = alumni.socials ?? [];
 	const roles = alumni.roles ?? [];
 
+	async function handleDelete() {
+		setDeleting(true);
+		try {
+			await onDelete?.();
+		} finally {
+			setDeleting(false);
+		}
+	}
 	return (
-		<article className="flex h-full min-h-0 scale-95 flex-col overflow-hidden text-zinc-100">
-			<div className="min-h-0 flex-1 overflow-y-auto p-5">
-				<header className="flex items-center gap-2">
-					<Avatar className="size-20">
-						<AvatarImage
-							src={typeof alumni.image === "string" ? alumni.image : undefined}
-							alt={`${alumni.name} profile`}
-							className="object-cover"
-						/>
-						<AvatarFallback className="text-xl font-semibold">
-							{initials(alumni.name) || "?"}
-						</AvatarFallback>
-					</Avatar>
-					<div className="min-w-0">
-						<h1 className="truncate text-2xl font-semibold tracking-tight">
-							{alumni.name}
-						</h1>
-						<p className="mt-1 text-sm text-zinc-400">
-							Graduated {alumni.year}
-						</p>
-					</div>
-				</header>
+		<div className="flex h-full overflow-hidden bg-background text-foreground">
+			<div className="w-full flex flex-col justify-between">
+				<div className="min-h-0 flex-1 overflow-y-auto p-5 space-y-7">
+					<header className="flex items-center gap-2">
+						<Avatar className="size-20">
+							<AvatarImage
+								src={
+									typeof alumni.image === "string" ? alumni.image : undefined
+								}
+								alt={`${alumni.name} profile`}
+								className="object-cover"
+							/>
+							<AvatarFallback className="text-xl font-semibold">
+								{initials(alumni.name) || "?"}
+							</AvatarFallback>
+						</Avatar>
+						<div className="min-w-0">
+							<h1 className="truncate text-2xl font-semibold tracking-tight">
+								{alumni.name}
+							</h1>
+							<p className="mt-1 text-sm text-zinc-400">
+								Graduated {alumni.year}
+							</p>
+						</div>
+					</header>
 
-				<section className="mt-5">
-					<p className="text-sm font-medium text-zinc-400">Current position</p>
-					{alumni.current ? (
-						<p className="mt-3 text-sm text-zinc-200">{alumni.current}</p>
-					) : (
-						<p className="mt-3 text-sm text-zinc-500">Undefine</p>
-					)}
-				</section>
+					<section className="mt-5">
+						<Eyebrow>Current Position</Eyebrow>
+						{alumni.current ? (
+							<p className="mt-2 px-2 text-sm">{alumni.current}</p>
+						) : (
+							<p className="mt-2 px-2 text-sm text-zinc-500">Undefined</p>
+						)}
+					</section>
 
-				<section className="mt-5">
-					{alumni.post && (
-						<>
-							<p className="text-sm font-medium text-zinc-400">Posts</p>
+					<section>
+						{alumni.post && !alumni.roles?.length && (
+							<>
+								<Eyebrow>Posts</Eyebrow>
+								<ul className="mt-3 flex flex-wrap gap-2">
+									<Badge
+										key={alumni.post}
+										variant="secondary"
+										className="capitalize"
+									>
+										{alumni.post}
+									</Badge>
+								</ul>
+							</>
+						)}
+					</section>
+
+					<section>
+						<Eyebrow>Roles</Eyebrow>
+						{roles.length > 0 ? (
 							<ul className="mt-3 flex flex-wrap gap-2">
-								<li
-									className={cn(
-										"rounded-md px-2.5 py-1 text-xs font-medium capitalize ring-1 ring-inset",
-										"bg-white/5 text-zinc-300 ring-white/10",
-									)}
-								>
-									{alumni.post}
-								</li>
+								{roles.map((role) => (
+									<Badge key={role} variant="secondary" className="capitalize">
+										{formatRole(role)}
+									</Badge>
+								))}
 							</ul>
-						</>
-					)}
-				</section>
+						) : (
+							<p className="mt-1 px-2 text-sm text-zinc-500">
+								No roles assigned.
+							</p>
+						)}
+					</section>
 
-				<section className="mt-5">
-					<p className="text-sm font-medium text-zinc-400">
-						Role
-						<Badge
-							variant={"secondary"}
-							className="rounded-md m-1 text-[10px] font-medium"
-						>
-							New
-						</Badge>
-					</p>
-					{roles.length > 0 ? (
-						<ul className="mt-3 flex flex-wrap gap-2">
-							{roles.map((role) => (
-								<li
-									key={role}
-									className={cn(
-										"rounded-md px-2.5 py-1 text-xs font-medium capitalize ring-1 ring-inset",
-										"bg-white/5 text-zinc-300 ring-white/10",
-									)}
-								>
-									{formatRole(role)}
-								</li>
-							))}
-						</ul>
-					) : (
-						<p className="mt-3 text-sm text-zinc-500">No posts assigned.</p>
-					)}
-				</section>
+					<section>
+						<Eyebrow>Social Links</Eyebrow>
+						<div className="py-3">
+							<SocialLinks socials={socials} />
+						</div>
+					</section>
+				</div>
 
-				<section className="mt-8">
-					<p className="text-sm font-medium text-zinc-400">Socials</p>
-					<SocialLinks socials={socials} />
-				</section>
-			</div>
+				<footer className="flex items-center gap-2 p-5 md:max-w-sm">
+					<Link
+						to="/admin/alumnis/edit/$id"
+						params={{ id: alumni.id }}
+						className="flex-1 h-full"
+					>
+						<Button type="button" onClick={onEdit} className={"size-full"}>
+							Edit
+						</Button>
+					</Link>
 
-			<footer className="flex shrink-0 items-start gap-4 px-5 py-7 sm:px-7">
-				<Link to="/admin/alumnis/edit/$id" params={{ id: alumni.id }}>
-					<Button type="button" onClick={onEdit}>
-						<Pencil className="size-4" />
-						Edit
+					<Button
+						className="flex-1"
+						type="button"
+						variant="destructive"
+						onClick={() => void handleDelete()}
+					>
+						{deleting ? "Deleting..." : "Delete"}
 					</Button>
-				</Link>
-				<Button
-					type="button"
-					variant="outline"
-					onClick={onDelete}
-					className="border-red-500/30 bg-transparent text-red-400 hover:bg-red-500/10 hover:text-red-300"
-				>
-					<Trash2 className="size-4" />
-					Delete
-				</Button>
-			</footer>
-		</article>
+				</footer>
+			</div>
+		</div>
+	);
+}
+
+function Eyebrow({ children }: { children: ReactNode }) {
+	return (
+		<p className="text-[0.9rem] font-medium text-muted-foreground">
+			{children}
+		</p>
 	);
 }

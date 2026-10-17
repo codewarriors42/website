@@ -3,7 +3,6 @@ import {
 	ChatQuestion01Icon,
 	DashboardSquare01Icon,
 	GraduationCapIcon,
-	LibraryIcon,
 	UserListIcon,
 } from "@hugeicons/core-free-icons";
 import type { IconSvgObject } from "@hugeicons/core-free-icons/types";
@@ -29,11 +28,6 @@ export const navLinks: LinkAttr[] = [
 		path: "/admin/alumnis",
 		title: "Alumnis",
 		icon: GraduationCapIcon,
-	},
-	{
-		path: "/admin/resources",
-		title: "Resources",
-		icon: LibraryIcon,
 	},
 	{
 		path: "/admin/archives",

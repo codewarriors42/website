@@ -1,14 +1,14 @@
-import { Pencil, Trash2 } from "lucide-react";
 import { Button } from "#/components/ui/button.tsx";
 import {
 	MemberWithIdSchema,
 	type MemberWithId,
 } from "#/server/db/schema/member.db.type.ts";
-import { cn } from "#/lib/utils.ts";
 import { Link } from "@tanstack/react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import type { Role } from "#/constant/roles.ts";
 import { SocialLinks } from "#/components/social-links.tsx";
+import { useState, type ReactNode } from "react";
+import { Badge } from "#/components/ui/badge.tsx";
 
 type MemberDetailProps = {
 	member: MemberWithId;
@@ -40,6 +40,8 @@ function initials(name: string) {
 }
 
 export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
+	const [deleting, setDeleting] = useState(false);
+
 	const roles = [...(member.roles ?? [])].sort(
 		(first, second) =>
 			Number(LEADERSHIP_ROLES.has(second)) -
@@ -47,73 +49,82 @@ export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
 	);
 	const socials = member.socials ?? [];
 
+	async function handleDelete() {
+		setDeleting(true);
+		try {
+			await onDelete?.();
+		} finally {
+			setDeleting(false);
+		}
+	}
+
 	return (
-		<article className="flex h-full min-h-0 flex-col text-zinc-100 scale-95 overflow-hidden">
-			<div className="min-h-0 flex-1 overflow-y-auto p-5">
-				<header className="flex items-center gap-2">
-					<Avatar className="size-20">
-						<AvatarImage
-							src={member.image as string}
-							alt="Photo preview"
-							className="object-cover"
-						/>
-						<AvatarFallback className="text-xl font-semibold">
-							{initials(member.name) || "?"}
-						</AvatarFallback>
-					</Avatar>
-					<div className="min-w-0">
-						<h1 className="truncate text-2xl font-semibold tracking-tight">
-							{member.name}
-						</h1>
-						<p className="mt-1 text-sm text-zinc-400">Grade {member.grade}</p>
-					</div>
-				</header>
+		<div className="flex h-full overflow-hidden bg-background text-foreground">
+			<div className="w-full flex flex-col justify-between">
+				<div className="flex-1 overflow-y-auto mask-b-from-95% scroll-smooth p-5 space-y-7">
+					<header className="flex items-center gap-3">
+						<Avatar className="size-20">
+							<AvatarImage
+								src={member.image as string}
+								alt="Photo preview"
+								className="object-cover"
+							/>
+							<AvatarFallback className="text-xl font-semibold">
+								{initials(member.name) || "?"}
+							</AvatarFallback>
+						</Avatar>
+						<div className="min-w-0">
+							<h1 className="truncate text-2xl font-semibold tracking-tight">
+								{member.name}
+							</h1>
+							<p className="text-sm text-zinc-400">Grade {member.grade}</p>
+						</div>
+					</header>
 
-				<section className="mt-5">
-					<p className="text-sm font-medium text-zinc-400">Roles</p>
-					{roles.length > 0 ? (
-						<ul className="mt-3 flex flex-wrap gap-2">
-							{roles.map((role) => (
-								<li
-									key={role}
-									className={cn(
-										"rounded-md px-2.5 py-1 text-xs font-medium capitalize ring-1 ring-inset",
-										"bg-white/5 text-zinc-300 ring-white/10",
-									)}
-								>
-									{formatRole(role)}
-								</li>
-							))}
-						</ul>
-					) : (
-						<p className="mt-3 text-sm text-zinc-500">No roles assigned.</p>
-					)}
-				</section>
+					<section>
+						<Eyebrow>Roles</Eyebrow>
+						{roles.length > 0 ? (
+							<ul className="mt-3 flex flex-wrap gap-2">
+								{roles.map((role) => (
+									<Badge key={role} variant="secondary" className="capitalize">
+										{formatRole(role)}
+									</Badge>
+								))}
+							</ul>
+						) : (
+							<p className="mt-3 text-sm text-zinc-500">No roles assigned.</p>
+						)}
+					</section>
 
-				<section className="mt-8">
-					<p className="text-sm font-medium text-zinc-400">Social Links</p>
-					<SocialLinks socials={socials} />
-				</section>
-			</div>
+					<section>
+						<Eyebrow>Social Links</Eyebrow>
+						<div className="py-3">
+							<SocialLinks socials={socials} />
+						</div>
+					</section>
+				</div>
+				<footer className="flex items-center gap-2 p-5 md:max-w-sm">
+					<Link
+						to="/admin/members/edit/$id"
+						params={{ id: member.id }}
+						className="flex-1 h-full"
+					>
+						<Button type="button" onClick={onEdit} className={"size-full"}>
+							Edit
+						</Button>
+					</Link>
 
-			<footer className="flex  shrink-0 items-start gap-4 px-5 py-7 sm:px-7">
-				<Link to="/admin/members/edit/$id" params={{ id: member.id }}>
-					<Button type="button" onClick={onEdit}>
-						<Pencil className="size-4" />
-						Edit
+					<Button
+						className="flex-1"
+						type="button"
+						variant="destructive"
+						onClick={() => void handleDelete()}
+					>
+						{deleting ? "Deleting..." : "Delete"}
 					</Button>
-				</Link>
-				<Button
-					type="button"
-					variant="outline"
-					onClick={onDelete}
-					className="border-red-500/30 bg-transparent text-red-400 hover:bg-red-500/10 hover:text-red-300"
-				>
-					<Trash2 className="size-4" />
-					Delete
-				</Button>
-			</footer>
-		</article>
+				</footer>
+			</div>
+		</div>
 	);
 }
 
@@ -123,4 +134,12 @@ export function MemberDetailFromUnknown(
 	const parsed = MemberWithIdSchema.safeParse(props.member);
 	if (!parsed.success) return null;
 	return <MemberDetail {...props} member={parsed.data} />;
+}
+
+function Eyebrow({ children }: { children: ReactNode }) {
+	return (
+		<p className="text-[0.9rem] font-medium text-muted-foreground">
+			{children}
+		</p>
+	);
 }

@@ -43,17 +43,15 @@ function RouteComponent() {
 	if (!archive) return <p className="p-5 text-zinc-500">Archive not found.</p>;
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
-			<ArchiveForm
-				initialValues={archive}
-				onSubmit={async (values) => {
-					await updateArchive.mutateAsync({
-						...values,
-						image: typeof values.image === "string" ? values.image : "",
-						id,
-					});
-				}}
-			/>
-		</main>
+		<ArchiveForm
+			initialValues={archive}
+			onSubmit={async (values) => {
+				await updateArchive.mutateAsync({
+					...values,
+					image: typeof values.image === "string" ? values.image : "",
+					id,
+				});
+			}}
+		/>
 	);
 }

@@ -7,7 +7,7 @@ import type { ArchiveTypeWithId } from "#/server/db/schema/archive.db.type.ts";
 import type { ResourceTypeWithId } from "#/server/db/schema/resource.db.type.ts";
 
 export const listLinkClass = `
-	group flex items-center justify-between gap-4 rounded-lg border border-transparent px-3 py-2.5
+	group flex items-center justify-between gap-4 rounded-2xl border border-transparent px-4 py-2.5
 	text-sm text-muted-foreground outline-none transition-colors
 	hover:bg-accent/50 hover:text-foreground
 	focus-visible:ring-2 focus-visible:ring-ring

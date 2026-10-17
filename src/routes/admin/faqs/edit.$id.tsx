@@ -40,7 +40,7 @@ function RouteComponent() {
 	if (!faq) return <p className="p-5 text-zinc-500">FAQ not found.</p>;
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
+		<main className="flex flex-col h-full w-full overflow-hidden">
 			<FaqForm
 				initialValues={faq}
 				onSubmit={async (values) => {

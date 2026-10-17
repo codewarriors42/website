@@ -20,7 +20,6 @@ function RouteComponent() {
 	const {
 		data: faqs,
 		isPending,
-		isFetching,
 		error,
 	} = useQuery({
 		...detailQuery,
@@ -47,12 +46,7 @@ function RouteComponent() {
 	if (!faqs) return <p className="p-8">FAQ not found.</p>;
 
 	return (
-		<div className="relative h-full">
-			{isFetching && (
-				<span className="absolute right-0 top-0 text-xs text-zinc-500">
-					Refreshing...
-				</span>
-			)}
+		<div className="relative h-full bg-red-400">
 			<FaqDetails
 				faq={faqs}
 				onEdit={() => undefined}

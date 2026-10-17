@@ -42,17 +42,15 @@ function RouteComponent() {
 	if (!member) return <p className="p-5 text-zinc-500">Member not found.</p>;
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
-			<MemberForm
-				initialValues={member}
-				onSubmit={async (values) => {
-					await updateMember.mutateAsync({
-						...values,
-						image: typeof values.image === "string" ? values.image : "",
-						id,
-					});
-				}}
-			/>
-		</main>
+		<MemberForm
+			initialValues={member}
+			onSubmit={async (values) => {
+				await updateMember.mutateAsync({
+					...values,
+					image: typeof values.image === "string" ? values.image : "",
+					id,
+				});
+			}}
+		/>
 	);
 }

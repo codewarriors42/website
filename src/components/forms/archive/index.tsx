@@ -12,7 +12,9 @@ import { Input } from "#/components/ui/input.tsx";
 import {
 	Select,
 	SelectContent,
+	SelectGroup,
 	SelectItem,
+	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from "#/components/ui/select.tsx";
@@ -51,7 +53,7 @@ function toFormValues(initial?: ArchiveType): ArchiveType {
 			contributors: [],
 			year: CURRENT_YEAR,
 			links: [],
-			image: "",
+			image: undefined as unknown as ArchiveType["image"],
 		};
 	}
 	return {
@@ -73,21 +75,15 @@ interface ArchiveFormProps {
 export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 	const [photoError, setPhotoError] = useState<string | null>(null);
 	const [submitAttempted, setSubmitAttempted] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const form = useForm({
 		defaultValues: toFormValues(initialValues),
-		validators: { onChange: archiveSchema },
+		validators: { onChange: archiveSchema, onSubmit: archiveSchema },
 		onSubmit: async ({ value }) => {
-			setSubmitError(null);
 			try {
-				await onSubmit(archiveSchema.parse(value));
+				await onSubmit({ ...value, image: "mainTest.png" });
 			} catch (err) {
-				setSubmitError(
-					err instanceof Error
-						? err.message
-						: "Something went wrong. Try again.",
-				);
+				console.error("Error submitting form:", err);
 			}
 		},
 	});
@@ -109,17 +105,16 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 	return (
 		<form
 			noValidate
-			className="flex h-full min-h-0 w-full flex-col"
 			onSubmit={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
 				setSubmitAttempted(true);
 				void form.handleSubmit();
 			}}
+			className="h-full"
 		>
-			{/* Fields: this part scrolls, the buttons below stay pinned */}
-			<div className="min-h-0 flex-1 overflow-y-auto px-4 py-5 sm:px-7 sm:py-6">
-				<FieldGroup className="w-full max-w-2xl gap-5">
+			<div className="flex h-full justify-between flex-1 flex-col">
+				<FieldGroup className="p-5 overflow-y-auto mask-b-from-95%">
 					{/* Cover image (optional) */}
 					<form.Subscribe
 						selector={(s) => [s.values.title, s.values.image] as const}
@@ -219,11 +214,14 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 												<SelectValue placeholder="Select year" />
 											</SelectTrigger>
 											<SelectContent>
-												{ARCHIVE_YEARS.map((year) => (
-													<SelectItem key={year} value={String(year)}>
-														{year}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Year</SelectLabel>
+													{ARCHIVE_YEARS.map((year) => (
+														<SelectItem key={year} value={String(year)}>
+															{year}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -253,11 +251,14 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 												<SelectValue placeholder="Select category" />
 											</SelectTrigger>
 											<SelectContent>
-												{ARCHIVE_CATEGORIES.map((c) => (
-													<SelectItem key={c} value={String(c)}>
-														{formatLabel(String(c))}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Category</SelectLabel>
+													{ARCHIVE_CATEGORIES.map((c) => (
+														<SelectItem key={c} value={String(c)}>
+															{formatLabel(String(c))}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -287,11 +288,14 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 												<SelectValue placeholder="Select event" />
 											</SelectTrigger>
 											<SelectContent>
-												{ARCHIVE_EVENTS.map((e) => (
-													<SelectItem key={e} value={String(e)}>
-														{formatLabel(String(e))}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Event</SelectLabel>
+													{ARCHIVE_EVENTS.map((e) => (
+														<SelectItem key={e} value={String(e)}>
+															{formatLabel(String(e))}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -323,8 +327,8 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 						{(field) => {
 							const invalid = isInvalid(field.state.meta);
 							return (
-								<Field data-invalid={invalid} className="px-4">
-									<FieldLabel htmlFor={field.name} className="py-1">
+								<Field data-invalid={invalid}>
+									<FieldLabel htmlFor={field.name}>
 										Social links{" "}
 										<span className="font-normal text-muted-foreground">
 											(optional)
@@ -342,48 +346,44 @@ export function ArchiveForm({ initialValues, onSubmit }: ArchiveFormProps) {
 						}}
 					</form.Field>
 				</FieldGroup>
-			</div>
 
-			{/* Actions */}
-			<form.Subscribe selector={(s) => s.isSubmitting}>
-				{(isSubmitting) => (
-					<div className="flex shrink-0 flex-wrap items-center gap-3 border-t border-border px-4 py-4 sm:px-7">
-						{submitError && (
-							<p
-								role="alert"
-								className="w-full text-sm text-destructive sm:mr-auto sm:w-auto"
+				{/* Actions */}
+				<form.Subscribe
+					selector={(state) => [state.isDirty, state.isSubmitting]}
+				>
+					{([isDirty, isSubmitting]) => (
+						<footer className="flex items-center gap-2 md:max-w-sm p-5">
+							<Button
+								disabled={isSubmitting}
+								type="reset"
+								className="flex-1"
+								variant="secondary"
+								onClick={() => {
+									form.reset();
+									setSubmitAttempted(false);
+								}}
 							>
-								{submitError}
-							</p>
-						)}
-						<Button
-							type="button"
-							variant="outline"
-							disabled={isSubmitting}
-							className="flex-1 sm:flex-none"
-							onClick={() => {
-								form.reset();
-								setPhotoError(null);
-								setSubmitError(null);
-								setSubmitAttempted(false);
-							}}
-						>
-							Reset
-						</Button>
-						<Button
-							type="submit"
-							disabled={isSubmitting}
-							className="flex-1 sm:flex-none"
-						>
-							{isSubmitting
-								? "Saving…"
-								: initialValues
-									? "Update archive"
-									: "Add archive"}
-						</Button>
-					</div>
-				)}
-			</form.Subscribe>
+								Reset
+							</Button>
+
+							<Button
+								className="flex-1"
+								type="submit"
+								disabled={isSubmitting || !isDirty}
+								variant="default"
+							>
+								{isSubmitting && initialValues
+									? "Saving…"
+									: initialValues
+										? "Save Changes"
+										: isSubmitting
+											? "Creating…"
+											: "Create FAQ"}
+							</Button>
+						</footer>
+					)}
+				</form.Subscribe>
+			</div>
 		</form>
 	);
 }

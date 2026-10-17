@@ -42,17 +42,15 @@ function RouteComponent() {
 	if (!alumni) return <p className="p-5 text-zinc-500">Alumni not found.</p>;
 
 	return (
-		<main className="flex flex-col h-full w-full overflow-hidden py-10">
-			<AlumniForm
-				initialValues={alumni}
-				onSubmit={async (values) => {
-					await updateAlumni.mutateAsync({
-						...values,
-						image: typeof values.image === "string" ? values.image : "",
-						id,
-					});
-				}}
-			/>
-		</main>
+		<AlumniForm
+			initialValues={alumni}
+			onSubmit={async (values) => {
+				await updateAlumni.mutateAsync({
+					...values,
+					image: typeof values.image === "string" ? values.image : "",
+					id,
+				});
+			}}
+		/>
 	);
 }

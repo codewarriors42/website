@@ -12,7 +12,9 @@ import { Input } from "#/components/ui/input.tsx";
 import {
 	Select,
 	SelectContent,
+	SelectGroup,
 	SelectItem,
+	SelectLabel,
 	SelectTrigger,
 	SelectValue,
 } from "#/components/ui/select.tsx";
@@ -26,6 +28,12 @@ import { PhotoUpload, validatePhoto } from "../file-upload";
 import { AddSocial } from "../add-social";
 import { RolesPicker } from "../select-roles";
 import { Badge } from "#/components/ui/badge.tsx";
+import {
+	InputGroup,
+	InputGroupAddon,
+	InputGroupText,
+	InputGroupTextarea,
+} from "#/components/ui/input-group.tsx";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const GRADUATION_YEARS = Array.from(
@@ -88,21 +96,15 @@ interface AlumniFormProps {
 export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 	const [photoError, setPhotoError] = useState<string | null>(null);
 	const [submitAttempted, setSubmitAttempted] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	const form = useForm({
 		defaultValues: toFormValues(initialValues),
-		validators: { onChange: alumniSchema },
+		validators: { onChange: alumniSchema, onSubmit: alumniSchema },
 		onSubmit: async ({ value }) => {
-			setSubmitError(null);
 			try {
-				await onSubmit(toAlumni(alumniSchema.parse(value)));
+				await onSubmit(toAlumni({ ...value, image: "textIMage.png" }));
 			} catch (error) {
-				setSubmitError(
-					error instanceof Error
-						? error.message
-						: "Something went wrong. Try again.",
-				);
+				console.error("Error submitting alumni form:", error);
 			}
 		},
 	});
@@ -111,7 +113,6 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 		form.reset(toFormValues(initialValues));
 		setPhotoError(null);
 		setSubmitAttempted(false);
-		setSubmitError(null);
 	}, [form, initialValues]);
 
 	const isInvalid = (meta: { isTouched: boolean; isValid: boolean }) =>
@@ -129,26 +130,26 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 	}
 
 	return (
-		<>
-			<form
-				id="alumni-form"
-				noValidate
-				className="mx-auto h-full w-full overflow-y-auto px-5"
-				onSubmit={(event) => {
-					event.preventDefault();
-					event.stopPropagation();
-					setSubmitAttempted(true);
-					void form.handleSubmit();
-				}}
-			>
-				<FieldGroup className="gap-4">
+		<form
+			id="alumni-form"
+			noValidate
+			onSubmit={(event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				setSubmitAttempted(true);
+				void form.handleSubmit();
+			}}
+			className="h-full"
+		>
+			<div className="flex pl-3 h-full justify-between flex-1 flex-col">
+				<FieldGroup className="px-3 py-5 overflow-y-auto mask-b-from-95% scroll-smooth">
 					<form.Subscribe
 						selector={(state) =>
 							[state.values.name, state.values.image] as const
 						}
 					>
 						{([name, image]) => (
-							<Field data-invalid={!!photoError} className="px-4">
+							<Field data-invalid={!!photoError}>
 								<FieldLabel>
 									Profile photo{" "}
 									<span className="font-normal text-muted-foreground">
@@ -173,7 +174,7 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 						)}
 					</form.Subscribe>
 
-					<div className="grid max-w-sm gap-3 px-4">
+					<div className="grid max-w-sm gap-5">
 						<form.Field name="name">
 							{(field) => {
 								const invalid = isInvalid(field.state.meta);
@@ -217,11 +218,14 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 												<SelectValue placeholder="Select graduation year" />
 											</SelectTrigger>
 											<SelectContent>
-												{GRADUATION_YEARS.map((year) => (
-													<SelectItem key={year} value={String(year)}>
-														{year}
-													</SelectItem>
-												))}
+												<SelectGroup>
+													<SelectLabel>Graduation Year</SelectLabel>
+													{GRADUATION_YEARS.map((year) => (
+														<SelectItem key={year} value={String(year)}>
+															{year}
+														</SelectItem>
+													))}
+												</SelectGroup>
 											</SelectContent>
 										</Select>
 										{invalid && <FieldError errors={field.state.meta.errors} />}
@@ -236,23 +240,33 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 								return (
 									<Field data-invalid={invalid}>
 										<FieldLabel htmlFor={field.name}>
-											Current position
-											<span className="font-normal text-muted-foreground">
-												(optional)
-											</span>
+											Current position{" "}
 										</FieldLabel>
-										<Input
-											id={field.name}
-											name={field.name}
-											value={field.state.value}
-											onChange={(event) =>
-												field.handleChange(event.target.value)
-											}
-											onBlur={field.handleBlur}
-											placeholder="Company or position"
-											aria-invalid={invalid}
-										/>
-										{invalid && <FieldError errors={field.state.meta.errors} />}
+										<InputGroup className="max-w-sm p-1 border-2 border-border bg-background">
+											<InputGroupTextarea
+												id={field.name}
+												name={field.name}
+												value={field.state.value}
+												onBlur={field.handleBlur}
+												onChange={(e) => field.handleChange(e.target.value)}
+												aria-invalid={invalid}
+												placeholder="Enter your current position"
+												rows={6}
+												className="max-h-20"
+											/>
+											<InputGroupAddon align="block-end">
+												<InputGroupText className="text-xs tabular-nums">
+													{field.state.value?.length || 0} characters
+												</InputGroupText>
+											</InputGroupAddon>
+										</InputGroup>
+										{invalid ? (
+											<FieldError errors={field.state.meta.errors} />
+										) : (
+											<FieldDescription className="text-xs px-2">
+												Enter your current position
+											</FieldDescription>
+										)}
 									</Field>
 								);
 							}}
@@ -263,12 +277,12 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 						{(field) => {
 							const invalid = isInvalid(field.state.meta);
 							return (
-								<Field data-invalid={invalid} className="px-4">
+								<Field data-invalid={invalid}>
 									<FieldLabel htmlFor="alumni-roles">
 										Roles
 										<Badge
 											variant={"secondary"}
-											className="rounded-md py-0 my-1 text-[10px]"
+											className="rounded-md h-5 my-1 text-xs"
 										>
 											New
 										</Badge>
@@ -290,7 +304,7 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 						{(field) => {
 							const invalid = isInvalid(field.state.meta);
 							return (
-								<Field data-invalid={invalid} className="px-4">
+								<Field data-invalid={invalid}>
 									<FieldLabel htmlFor={field.name} className="py-1">
 										Social links{" "}
 										<span className="font-normal text-muted-foreground">
@@ -309,39 +323,43 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 						}}
 					</form.Field>
 				</FieldGroup>
-			</form>
 
-			<form.Subscribe selector={(state) => state.isSubmitting}>
-				{(isSubmitting) => (
-					<div className="mt-7 flex items-center gap-3 px-4">
-						{submitError && (
-							<p role="alert" className="text-sm text-destructive sm:mr-auto">
-								{submitError}
-							</p>
-						)}
-						<Button
-							type="button"
-							variant="outline"
-							disabled={isSubmitting}
-							onClick={() => {
-								form.reset();
-								setPhotoError(null);
-								setSubmitError(null);
-								setSubmitAttempted(false);
-							}}
-						>
-							Reset
-						</Button>
-						<Button type="submit" form="alumni-form" disabled={isSubmitting}>
-							{isSubmitting
-								? "Saving..."
-								: initialValues
-									? "Update alumni"
-									: "Add alumni"}
-						</Button>
-					</div>
-				)}
-			</form.Subscribe>
-		</>
+				<form.Subscribe
+					selector={(state) => [state.isDirty, state.isSubmitting]}
+				>
+					{([isDirty, isSubmitting]) => (
+						<footer className="flex items-center gap-2 md:max-w-sm p-5">
+							<Button
+								disabled={isSubmitting}
+								type="reset"
+								className="flex-1"
+								variant="secondary"
+								onClick={() => {
+									form.reset();
+									setSubmitAttempted(false);
+								}}
+							>
+								Reset
+							</Button>
+
+							<Button
+								className="flex-1"
+								type="submit"
+								disabled={isSubmitting || !isDirty}
+								variant="default"
+							>
+								{isSubmitting && initialValues
+									? "Saving…"
+									: initialValues
+										? "Save Changes"
+										: isSubmitting
+											? "Creating…"
+											: "Create Alumni"}
+							</Button>
+						</footer>
+					)}
+				</form.Subscribe>
+			</div>
+		</form>
 	);
 }

@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Plus, Search } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button, buttonVariants } from "#/components/ui/button.tsx";
 import { Badge } from "#/components/ui/badge.tsx";
@@ -8,6 +7,8 @@ import { useListSearch } from "#/hooks/search.tsx";
 import { cn } from "#/lib/utils.ts";
 import { ListItems } from "./list-items.tsx";
 import { SearchSheet } from "./search-sheet.tsx";
+import { Add01Icon, Search01Icon } from "@hugeicons/core-free-icons";
+import { HugeiconsIcon } from "@hugeicons/react";
 
 type ListProps<T> = {
 	data: T[] | undefined;
@@ -70,31 +71,35 @@ export function List<T extends { id: string }>({
 			) : (
 				<header className="flex items-center justify-between gap-3 lg:pb-4">
 					<div>
-						<h2 className="font-semibold">
+						<h2 className="font-semibold text-lg">
 							{label}
 							<Badge variant="secondary" className="ml-2 text-xs">
 								{data?.length ?? 0}
 							</Badge>
 						</h2>
-						<p className="text-xs text-muted-foreground">Directory</p>
 					</div>
 
-					<div className="flex items-center gap-2">
+					<div className="flex items-center gap-3">
 						<Link
 							to={addTo as never}
 							aria-label={`Add ${singular}`}
 							title={`Add ${singular}`}
 							className={cn(
-								buttonVariants({ variant: "outline", size: "sm" }),
-								"size-8 p-0",
+								buttonVariants({ variant: "outline", size: "lg" }),
+								"size-10 p-0",
 							)}
 						>
-							<Plus className="size-4" />
+							<HugeiconsIcon
+								icon={Add01Icon}
+								size={25}
+								color="currentColor"
+								strokeWidth={2}
+							/>
 						</Link>
 
 						<SearchSheet
 							title={searchTitle}
-							placeholder={`${searchTitle}…`}
+							placeholder={`${searchTitle}`}
 							data={data}
 							getText={getText}
 							getId={(item) => item.id}
@@ -109,11 +114,19 @@ export function List<T extends { id: string }>({
 			{/* Desktop search */}
 			<div className="hidden pb-3 lg:block">
 				<div className="relative">
-					<Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+					<div className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground">
+						<HugeiconsIcon
+							icon={Search01Icon}
+							size={16}
+							color="currentColor"
+							strokeWidth={2}
+						/>
+					</div>
+
 					<Input
 						value={search} // raw text, so spaces and capitals work
 						onChange={(event) => setSearch(event.target.value)}
-						placeholder={`${searchTitle}…`}
+						placeholder={`${searchTitle}`}
 						aria-label={searchTitle}
 						className="h-10 pl-9"
 					/>

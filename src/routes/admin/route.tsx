@@ -11,7 +11,7 @@ function AdminLayout() {
 		<div className="flex h-dvh w-full flex-col-reverse overflow-hidden bg-background text-foreground sm:flex-row">
 			<aside
 				className="
-					shrink-0 border-t border-sidebar-border bg-sidebar text-sidebar-foreground pb-[env(safe-area-inset-bottom)]
+					shrink-0 border-t border-sidebar-border text-sidebar-foreground pb-[env(safe-area-inset-bottom)]
 					sm:flex sm:w-16 sm:flex-col sm:border-r sm:border-t-0 sm:pb-0
 				"
 			>
@@ -41,7 +41,7 @@ function AdminLayout() {
 							activeOptions={{ exact: link.path === "/admin" }}
 							className="
 								flex min-h-16 w-full flex-col items-center justify-center gap-1
-								text-sidebar-foreground/60 transition-colors
+								text-sidebar-foreground/50 transition-colors
 								hover:bg-sidebar-accent/50 hover:text-sidebar-foreground
 								data-[status=active]:text-sidebar-accent-foreground
 								outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring

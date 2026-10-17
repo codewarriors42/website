@@ -51,11 +51,11 @@ export function SocialLinks<T extends SocialLinksTypes>({
 	removeSocial,
 }: SocialLinksProps<T>) {
 	return (
-		<section>
+		<section className="flex flex-col w-full">
 			{socials.length === 0 ? (
-				<p className="mt-3 text-sm text-muted-foreground">No links added.</p>
+				<p className="text-sm text-muted-foreground px-3">No links added.</p>
 			) : (
-				<ul className="grid gap-2 sm:grid-cols-3">
+				<ul className="grid gap-2 sm:grid-cols-3 max-h-68 overflow-y-auto">
 					{socials.map((social) => {
 						const href = displayURL(social.URL, social.platform);
 						const tile = (
@@ -68,7 +68,7 @@ export function SocialLinks<T extends SocialLinksTypes>({
 										{SOCIAL_LABELS[social.platform] ??
 											formatLabel(social.platform)}
 									</span>
-									<span className="block truncate text-xs text-muted-foreground">
+									<span className="block  text-xs text-muted-foreground truncate line-clamp-1">
 										{href
 											? displayURL(social.URL, social.platform)
 											: "Invalid link"}
@@ -81,9 +81,9 @@ export function SocialLinks<T extends SocialLinksTypes>({
 						);
 
 						return (
-							<li key={social.platform}>
+							<li key={social.platform} className="min-w-full">
 								{href ? (
-									<div className="max-w-xs flex p-3 items-center gap-2 border border-border rounded-lg hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring utline-none transition-colors">
+									<div className="flex p-3 items-center gap-2 border border-border rounded-2xl hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring utline-none transition-colors">
 										<a
 											href={href}
 											target="_blank"

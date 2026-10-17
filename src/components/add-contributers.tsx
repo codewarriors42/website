@@ -58,9 +58,7 @@ export function AddContributors({
 					<ul className="flex flex-wrap gap-1.5">
 						{contributorList.map((name) => (
 							<li key={name}>
-								<span className="rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20">
-									{name}
-								</span>
+								<Badge variant="outline">{name}</Badge>
 							</li>
 						))}
 					</ul>
@@ -94,7 +92,7 @@ export function AddContributors({
 
 					<Input
 						id={id}
-						className="max-w-55 px-4 outline-none border-2 focus-visible:ring-0 focus-visible:ring-offset-0"
+						className="min-w-fit max-w-fit h-8 text-sm outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
 						value={value}
 						onChange={(e) => setValue(e.target.value)}
 						onKeyDown={(e) => {
@@ -104,7 +102,7 @@ export function AddContributors({
 							}
 						}}
 						onBlur={add}
-						placeholder="Enter name and press Enter"
+						placeholder="Name"
 						autoComplete="off"
 					/>
 				</div>
