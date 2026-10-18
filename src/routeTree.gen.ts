@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminAddUserRouteImport } from './routes/admin/add-user'
 import { Route as AdminAlumnisRouteRouteImport } from './routes/admin/alumnis/route'
 import { Route as AdminArchivesRouteRouteImport } from './routes/admin/archives/route'
 import { Route as AdminFaqsRouteRouteImport } from './routes/admin/faqs/route'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMembersRouteRouteImport } from './routes/admin/members/route'
 import { Route as AdminAlumnisIndexRouteImport } from './routes/admin/alumnis/index'
 import { Route as AdminAlumnisIdRouteImport } from './routes/admin/alumnis/$id'
@@ -41,6 +44,16 @@ const AdminRouteRoute = AdminRouteRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAddUserRoute = AdminAddUserRouteImport.update({
+  id: '/add-user',
+  path: '/add-user',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminAlumnisRouteRoute = AdminAlumnisRouteRouteImport.update({
   id: '/alumnis',
   path: '/alumnis',
@@ -54,6 +67,11 @@ const AdminArchivesRouteRoute = AdminArchivesRouteRouteImport.update({
 const AdminFaqsRouteRoute = AdminFaqsRouteRouteImport.update({
   id: '/faqs',
   path: '/faqs',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminMembersRouteRoute = AdminMembersRouteRouteImport.update({
@@ -144,6 +162,9 @@ export interface FileRoutesByFullPath {
   '/admin/archives': typeof AdminArchivesRouteRouteWithChildren
   '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
   '/admin/members': typeof AdminMembersRouteRouteWithChildren
+  '/admin/add-user': typeof AdminAddUserRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/archives/$id': typeof AdminArchivesIdRoute
@@ -162,9 +183,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteRouteWithChildren
   '/admin/archives': typeof AdminArchivesRouteRouteWithChildren
   '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
+  '/admin/add-user': typeof AdminAddUserRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/archives/$id': typeof AdminArchivesIdRoute
@@ -189,6 +212,9 @@ export interface FileRoutesById {
   '/admin/archives': typeof AdminArchivesRouteRouteWithChildren
   '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
   '/admin/members': typeof AdminMembersRouteRouteWithChildren
+  '/admin/add-user': typeof AdminAddUserRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
   '/admin/archives/$id': typeof AdminArchivesIdRoute
@@ -214,6 +240,9 @@ export interface FileRouteTypes {
     | '/admin/archives'
     | '/admin/faqs'
     | '/admin/members'
+    | '/admin/add-user'
+    | '/admin/login'
+    | '/admin/'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
     | '/admin/archives/$id'
@@ -232,9 +261,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/admin/archives'
     | '/admin/faqs'
+    | '/admin/add-user'
+    | '/admin/login'
+    | '/admin'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
     | '/admin/archives/$id'
@@ -258,6 +289,9 @@ export interface FileRouteTypes {
     | '/admin/archives'
     | '/admin/faqs'
     | '/admin/members'
+    | '/admin/add-user'
+    | '/admin/login'
+    | '/admin/'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
     | '/admin/archives/$id'
@@ -297,6 +331,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/add-user': {
+      id: '/admin/add-user'
+      path: '/add-user'
+      fullPath: '/admin/add-user'
+      preLoaderRoute: typeof AdminAddUserRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/alumnis': {
       id: '/admin/alumnis'
       path: '/alumnis'
@@ -316,6 +364,13 @@ declare module '@tanstack/react-router' {
       path: '/faqs'
       fullPath: '/admin/faqs'
       preLoaderRoute: typeof AdminFaqsRouteRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/members': {
@@ -503,6 +558,9 @@ interface AdminRouteRouteChildren {
   AdminArchivesRouteRoute: typeof AdminArchivesRouteRouteWithChildren
   AdminFaqsRouteRoute: typeof AdminFaqsRouteRouteWithChildren
   AdminMembersRouteRoute: typeof AdminMembersRouteRouteWithChildren
+  AdminAddUserRoute: typeof AdminAddUserRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
@@ -510,6 +568,9 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminArchivesRouteRoute: AdminArchivesRouteRouteWithChildren,
   AdminFaqsRouteRoute: AdminFaqsRouteRouteWithChildren,
   AdminMembersRouteRoute: AdminMembersRouteRouteWithChildren,
+  AdminAddUserRoute: AdminAddUserRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
