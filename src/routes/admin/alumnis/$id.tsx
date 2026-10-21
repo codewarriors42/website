@@ -1,5 +1,6 @@
 import { AlumniDetail } from "#/components/forms/alumni/alumni-details.tsx";
 import { DeleteConfirmationDialog } from "#/components/forms/confirmation-alert.tsx";
+import { useFileDelete } from "#/hooks/use-file-url.tsx";
 import { useTRPC } from "#/integrations/trpc/react.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -17,6 +18,7 @@ function RouteComponent() {
 	const queryClient = useQueryClient();
 	const listQuery = trpc.alumnis.getAll.queryOptions();
 	const detailQuery = trpc.alumnis.getById.queryOptions({ id });
+	const { deleteFile } = useFileDelete();
 	const {
 		data: alumni,
 		isPending,
@@ -33,6 +35,7 @@ function RouteComponent() {
 	const deleteAlumni = useMutation(
 		trpc.alumnis.delete.mutationOptions({
 			onSuccess: async () => {
+				await deleteFile(alumni?.image as string);
 				await queryClient.invalidateQueries({
 					queryKey: trpc.alumnis.getAll.queryKey(),
 				});

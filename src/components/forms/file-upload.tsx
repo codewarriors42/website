@@ -40,18 +40,15 @@ export function PhotoUpload({
 	savedUrl,
 	name,
 	onPick,
-	onRemove,
 }: {
 	file: File | null;
 	savedUrl: string;
 	name: string;
 	onPick: (file: File) => void;
-	onRemove: () => void;
 }) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
-	// Create a temporary preview for the picked file and free it afterwards.
 	useEffect(() => {
 		if (!file) {
 			setPreviewUrl(null);
@@ -97,7 +94,7 @@ export function PhotoUpload({
 					>
 						{hasPhoto ? "Change photo" : "Upload photo"}
 					</Button>
-					{hasPhoto && (
+					{/* {hasPhoto && (
 						<Button
 							type="button"
 							variant="destructive"
@@ -106,7 +103,7 @@ export function PhotoUpload({
 						>
 							Remove
 						</Button>
-					)}
+					)} */}
 					{/* {file && (
 						<span className="max-w-48 truncate text-xs text-muted-foreground">
 							{file.name}

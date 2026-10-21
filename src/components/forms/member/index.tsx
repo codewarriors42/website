@@ -29,6 +29,11 @@ import {
 import { PhotoUpload, validatePhoto } from "../file-upload";
 import { RolesPicker } from "../select-roles";
 import { AddSocial } from "../add-social";
+import {
+	useFileDelete,
+	useFileUpload,
+	useImageUrl,
+} from "#/hooks/use-file-url.tsx";
 
 function toFormValues(initial?: MemberType): MemberType {
 	if (!initial) {
@@ -45,19 +50,18 @@ function toFormValues(initial?: MemberType): MemberType {
 		roles: initial.roles ?? [],
 		socials: (initial.socials ?? []).map((s) => ({
 			...s,
-			URL: s.platform === "email" ? s.URL.replace(/^mailto:/i, "") : s.URL,
+			URL: s.platform === "envelope" ? s.URL.replace(/^mailto:/i, "") : s.URL,
 		})),
 	};
 }
 
-/** Clean the validated values before sending them to the API. */
 function toMember(values: MemberType): MemberType {
 	return {
 		...values,
 		socials: values.socials.map((s) => ({
 			platform: s.platform,
 			URL:
-				s.platform === "email" && !/^mailto:/i.test(s.URL)
+				s.platform === "envelope" && !/^mailto:/i.test(s.URL)
 					? `mailto:${s.URL}`
 					: s.URL,
 		})),
@@ -72,13 +76,27 @@ interface MemberFormProps {
 export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 	const [photoError, setPhotoError] = useState<string | null>(null);
 	const [submitAttempted, setSubmitAttempted] = useState(false);
-
+	const { uploadFile, isUploading } = useFileUpload();
+	const { deleteFile, isDeleting } = useFileDelete();
+	const { imgUrl } = useImageUrl(initialValues?.image as string);
 	const form = useForm({
 		defaultValues: toFormValues(initialValues),
 		validators: { onChange: MemberSchema, onSubmit: MemberSchema },
 		onSubmit: async ({ value }) => {
 			try {
-				await onSubmit(toMember({ ...value, image: "testImg.png" }));
+				if (value.image instanceof File) {
+					const imageUrl = await uploadFile(value.image);
+					if (!imageUrl) {
+						setPhotoError("Failed to upload image. Please try again.");
+						return;
+					}
+					if (initialValues?.image && typeof initialValues.image === "string") {
+						await deleteFile(initialValues.image);
+					}
+					await onSubmit(toMember({ ...value, image: imageUrl }));
+				} else {
+					await onSubmit(toMember(value));
+				}
 			} catch (err) {
 				console.error("Error submitting member form:", err);
 			}
@@ -99,12 +117,6 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 		setPhotoError(error);
 		if (!error) form.setFieldValue("image", file);
 	}
-
-	function handleRemove() {
-		setPhotoError(null);
-		form.setFieldValue("image", "");
-	}
-
 	return (
 		<form
 			id="member-form"
@@ -133,16 +145,19 @@ export function MemberForm({ initialValues, onSubmit }: MemberFormProps) {
 								</FieldLabel>
 								<PhotoUpload
 									file={image instanceof File ? image : null}
-									savedUrl={typeof image === "string" ? image : ""}
+									savedUrl={image instanceof File ? "" : (imgUrl ?? "")}
 									name={name}
 									onPick={handlePick}
-									onRemove={handleRemove}
 								/>
 								{photoError ? (
 									<FieldError errors={[{ message: photoError }]} />
 								) : (
 									<FieldDescription className="text-xs pt-1">
-										JPG, PNG or WebP, up to 5 MB.
+										{isUploading
+											? "Uploading…"
+											: isDeleting
+												? "Deleting…"
+												: "JPG, PNG or WebP, up to 5 MB."}
 									</FieldDescription>
 								)}
 							</Field>

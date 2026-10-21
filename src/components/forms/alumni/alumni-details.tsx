@@ -11,6 +11,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Badge } from "#/components/ui/badge.tsx";
 import { SocialLinks } from "#/components/social-links.tsx";
+import { useImageUrl } from "#/hooks/use-file-url.tsx";
 
 type AlumniDetailProps = {
 	alumni: AlumniWithId;
@@ -19,10 +20,10 @@ type AlumniDetailProps = {
 };
 const SOCIAL_ICONS: Partial<
 	Record<AlumniSocial["platform"], ComponentType<{ className?: string }>>
-> = { email: Mail };
+> = { envelope: Mail };
 
 for (const platform of ALUMNI_SOCIAL_PLATFORMS) {
-	if (platform !== "email") SOCIAL_ICONS[platform] = Link2;
+	if (platform !== "envelope") SOCIAL_ICONS[platform] = Link2;
 }
 
 function initials(name: string) {
@@ -40,6 +41,7 @@ function formatRole(role: Role) {
 
 export function AlumniDetail({ alumni, onEdit, onDelete }: AlumniDetailProps) {
 	const [deleting, setDeleting] = useState(false);
+	const { imgUrl } = useImageUrl(alumni.image as string);
 
 	const socials = alumni.socials ?? [];
 	const roles = alumni.roles ?? [];
@@ -59,9 +61,7 @@ export function AlumniDetail({ alumni, onEdit, onDelete }: AlumniDetailProps) {
 					<header className="flex items-center gap-2">
 						<Avatar className="size-20">
 							<AvatarImage
-								src={
-									typeof alumni.image === "string" ? alumni.image : undefined
-								}
+								src={imgUrl}
 								alt={`${alumni.name} profile`}
 								className="object-cover"
 							/>

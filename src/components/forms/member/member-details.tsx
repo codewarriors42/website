@@ -9,6 +9,7 @@ import type { Role } from "#/constant/roles.ts";
 import { SocialLinks } from "#/components/social-links.tsx";
 import { useState, type ReactNode } from "react";
 import { Badge } from "#/components/ui/badge.tsx";
+import { useImageUrl } from "#/hooks/use-file-url.tsx";
 
 type MemberDetailProps = {
 	member: MemberWithId;
@@ -41,6 +42,7 @@ function initials(name: string) {
 
 export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
 	const [deleting, setDeleting] = useState(false);
+	const { imgUrl } = useImageUrl(member.image as string);
 
 	const roles = [...(member.roles ?? [])].sort(
 		(first, second) =>
@@ -65,7 +67,7 @@ export function MemberDetail({ member, onEdit, onDelete }: MemberDetailProps) {
 					<header className="flex items-center gap-3">
 						<Avatar className="size-20">
 							<AvatarImage
-								src={member.image as string}
+								src={imgUrl}
 								alt="Photo preview"
 								className="object-cover"
 							/>

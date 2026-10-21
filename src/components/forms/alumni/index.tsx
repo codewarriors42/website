@@ -34,6 +34,11 @@ import {
 	InputGroupText,
 	InputGroupTextarea,
 } from "#/components/ui/input-group.tsx";
+import {
+	useFileDelete,
+	useFileUpload,
+	useImageUrl,
+} from "#/hooks/use-file-url.tsx";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const GRADUATION_YEARS = Array.from(
@@ -68,7 +73,7 @@ function toFormValues(initial?: Alumni): Alumni {
 		socials: (initial.socials ?? []).map((social) => ({
 			...social,
 			URL:
-				social.platform === "email"
+				social.platform === "envelope"
 					? social.URL.replace(/^mailto:/i, "")
 					: social.URL,
 		})),
@@ -81,7 +86,7 @@ function toAlumni(values: Alumni): Alumni {
 		socials: values.socials.map((social) => ({
 			platform: social.platform,
 			URL:
-				social.platform === "email" && !/^mailto:/i.test(social.URL)
+				social.platform === "envelope" && !/^mailto:/i.test(social.URL)
 					? `mailto:${social.URL}`
 					: social.URL,
 		})),
@@ -96,13 +101,28 @@ interface AlumniFormProps {
 export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 	const [photoError, setPhotoError] = useState<string | null>(null);
 	const [submitAttempted, setSubmitAttempted] = useState(false);
+	const { uploadFile } = useFileUpload();
+	const { deleteFile } = useFileDelete();
+	const { imgUrl } = useImageUrl(initialValues?.image as string);
 
 	const form = useForm({
 		defaultValues: toFormValues(initialValues),
 		validators: { onChange: alumniSchema, onSubmit: alumniSchema },
 		onSubmit: async ({ value }) => {
 			try {
-				await onSubmit(toAlumni({ ...value, image: "textIMage.png" }));
+				if (value.image instanceof File) {
+					const imageUrl = await uploadFile(value.image);
+					if (!imageUrl) {
+						setPhotoError("Failed to upload image. Please try again.");
+						return;
+					}
+					if (initialValues?.image && typeof initialValues.image === "string") {
+						await deleteFile(initialValues.image);
+					}
+					await onSubmit(toAlumni({ ...value, image: imageUrl }));
+				} else {
+					await onSubmit(toAlumni(value));
+				}
 			} catch (error) {
 				console.error("Error submitting alumni form:", error);
 			}
@@ -122,11 +142,6 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 		const error = validatePhoto(file);
 		setPhotoError(error);
 		if (!error) form.setFieldValue("image", file);
-	}
-
-	function handleRemove() {
-		setPhotoError(null);
-		form.setFieldValue("image", "");
 	}
 
 	return (
@@ -158,10 +173,9 @@ export function AlumniForm({ initialValues, onSubmit }: AlumniFormProps) {
 								</FieldLabel>
 								<PhotoUpload
 									file={image instanceof File ? image : null}
-									savedUrl={typeof image === "string" ? image : ""}
+									savedUrl={image instanceof File ? "" : (imgUrl ?? "")}
 									name={name}
 									onPick={handlePick}
-									onRemove={handleRemove}
 								/>
 								{photoError ? (
 									<FieldError errors={[{ message: photoError }]} />

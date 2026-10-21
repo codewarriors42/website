@@ -18,6 +18,7 @@ import { Route as AdminArchivesRouteRouteImport } from './routes/admin/archives/
 import { Route as AdminFaqsRouteRouteImport } from './routes/admin/faqs/route'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMembersRouteRouteImport } from './routes/admin/members/route'
+import { Route as ApiFileRouteImport } from './routes/api.file'
 import { Route as AdminAlumnisIndexRouteImport } from './routes/admin/alumnis/index'
 import { Route as AdminAlumnisIdRouteImport } from './routes/admin/alumnis/$id'
 import { Route as AdminAlumnisAddRouteImport } from './routes/admin/alumnis/add'
@@ -78,6 +79,11 @@ const AdminMembersRouteRoute = AdminMembersRouteRouteImport.update({
   id: '/members',
   path: '/members',
   getParentRoute: () => AdminRouteRoute,
+} as any)
+const ApiFileRoute = ApiFileRouteImport.update({
+  id: '/api/file',
+  path: '/api/file',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAlumnisIndexRoute = AdminAlumnisIndexRouteImport.update({
   id: '/',
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/admin/members': typeof AdminMembersRouteRouteWithChildren
   '/admin/add-user': typeof AdminAddUserRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/file': typeof ApiFileRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByTo {
   '/admin/faqs': typeof AdminFaqsRouteRouteWithChildren
   '/admin/add-user': typeof AdminAddUserRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/file': typeof ApiFileRoute
   '/admin': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/admin/members': typeof AdminMembersRouteRouteWithChildren
   '/admin/add-user': typeof AdminAddUserRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/file': typeof ApiFileRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/alumnis/$id': typeof AdminAlumnisIdRoute
   '/admin/alumnis/add': typeof AdminAlumnisAddRoute
@@ -242,6 +251,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/add-user'
     | '/admin/login'
+    | '/api/file'
     | '/admin/'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/admin/faqs'
     | '/admin/add-user'
     | '/admin/login'
+    | '/api/file'
     | '/admin'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
@@ -291,6 +302,7 @@ export interface FileRouteTypes {
     | '/admin/members'
     | '/admin/add-user'
     | '/admin/login'
+    | '/api/file'
     | '/admin/'
     | '/admin/alumnis/$id'
     | '/admin/alumnis/add'
@@ -312,6 +324,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  ApiFileRoute: typeof ApiFileRoute
   ApiTrpcSplatRoute: typeof ApiTrpcSplatRoute
 }
 
@@ -379,6 +392,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/members'
       preLoaderRoute: typeof AdminMembersRouteRouteImport
       parentRoute: typeof AdminRouteRoute
+    }
+    '/api/file': {
+      id: '/api/file'
+      path: '/api/file'
+      fullPath: '/api/file'
+      preLoaderRoute: typeof ApiFileRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/alumnis/': {
       id: '/admin/alumnis/'
@@ -580,6 +600,7 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
+  ApiFileRoute: ApiFileRoute,
   ApiTrpcSplatRoute: ApiTrpcSplatRoute,
 }
 export const routeTree = rootRouteImport

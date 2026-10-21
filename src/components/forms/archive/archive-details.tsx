@@ -8,6 +8,7 @@ import { AddContributors } from "#/components/add-contributers.tsx";
 import { TrophyIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Badge } from "#/components/ui/badge.tsx";
+import { useImageUrl } from "#/hooks/use-file-url.tsx";
 interface ArchiveDetailsProps {
 	archive: ArchiveTypeWithId;
 	onEdit: () => void;
@@ -24,11 +25,8 @@ export function ArchiveDetails({
 	onEdit,
 	onDelete,
 }: ArchiveDetailsProps) {
-	const [failedSrc, setFailedSrc] = useState<string | null>(null);
 	const [deleting, setDeleting] = useState(false);
-
-	const imageUrl = typeof archive.image === "string" ? archive.image : "";
-	const showImage = !!imageUrl && failedSrc !== imageUrl;
+	const { imgUrl } = useImageUrl(archive.image as string);
 
 	async function handleDelete() {
 		setDeleting(true);
@@ -45,11 +43,10 @@ export function ArchiveDetails({
 				<div className="flex-1 overflow-y-auto mask-b-from-95% scroll-smooth p-5">
 					{/* Cover */}
 					<div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-muted/40 sm:aspect-10/3">
-						{showImage ? (
+						{imgUrl ? (
 							<img
-								src={imageUrl}
+								src={imgUrl}
 								alt={archive.title}
-								onError={() => setFailedSrc(imageUrl)}
 								className="size-full object-cover"
 							/>
 						) : (

@@ -7,7 +7,7 @@ export const ALUMNI_SOCIAL_PLATFORMS = [
 	"github",
 	"instagram",
 	"discord",
-	"email",
+	"envelope",
 	"website",
 	"youtube",
 	"dribbble",
@@ -22,7 +22,7 @@ export const alumniSocialSchema = z
 		URL: z.string().trim().min(1, "URL is required"),
 	})
 	.superRefine((value, ctx) => {
-		const isEmail = value.platform === "email";
+		const isEmail = value.platform === "envelope";
 
 		const valid = isEmail
 			? z.string().email().safeParse(value.URL).success

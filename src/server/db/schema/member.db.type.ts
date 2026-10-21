@@ -9,7 +9,7 @@ export const SOCIAL_PLATFORMS = [
 	"github",
 	"instagram",
 	"discord",
-	"email",
+	"envelope",
 ] as const;
 
 export type MemberSocials = (typeof SOCIAL_PLATFORMS)[number];
@@ -25,7 +25,7 @@ export const SocialSchema = z
 		if (!s.URL) return;
 		// Email accepts "name@x.com" or "mailto:name@x.com"; everything else must be an http(s) URL.
 		const ok =
-			s.platform === "email"
+			s.platform === "envelope"
 				? EMAIL_RE.test(s.URL.replace(/^mailto:/i, ""))
 				: /^https?:\/\/\S+$/i.test(s.URL) && z.url().safeParse(s.URL).success;
 		if (!ok) {
@@ -33,7 +33,7 @@ export const SocialSchema = z
 				code: "custom",
 				path: ["URL"],
 				message:
-					s.platform === "email"
+					s.platform === "envelope"
 						? "Enter a valid email address"
 						: "Enter a valid URL starting with https://",
 			});
